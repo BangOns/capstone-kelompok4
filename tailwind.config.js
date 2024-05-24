@@ -9,6 +9,9 @@ module.exports = {
   theme: {
     fontFamily: {
       poppins: ["Poppins", "sans-serif"],
+      nunito: ["nunito", "sans-serif"],
+      "nunito-light": ["nunito-light", "sans-serif"],
+      "nunito-bold": ["nunito-bold", "sans-serif"],
     },
   },
   plugins: [],
