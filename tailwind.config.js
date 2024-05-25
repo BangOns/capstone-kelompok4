@@ -14,5 +14,5 @@ module.exports = {
       "nunito-bold": ["nunito-bold", "sans-serif"],
     },
   },
-  plugins: [],
+  plugins: [require("daisyui")],
 };
