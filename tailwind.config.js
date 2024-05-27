@@ -12,6 +12,7 @@ module.exports = {
       nunito: ["nunito", "sans-serif"],
       "nunito-light": ["nunito-light", "sans-serif"],
       "nunito-bold": ["nunito-bold", "sans-serif"],
+      "nuniyo-italic" : ['nunito-italic', 'sans-serif']
     },
   },
   plugins: [require("daisyui")],
