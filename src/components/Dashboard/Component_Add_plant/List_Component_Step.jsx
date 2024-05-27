@@ -12,8 +12,8 @@ export default function List_Component_Step({ pages }) {
       {pages === 4 && <Plant_Caring />}
       {/* Lanjutkan di bawah */}
       {/* Contoh 
-  {pages === 2 && <Component />}
-  */}
+        {pages === 2 && <Component />}
+      */}
     </>
   );
 }
