@@ -16,11 +16,11 @@ export default function Answer({ name }) {
       </div>
       <div className="w-[439.5px] h-[188px]" >
         <ReactQuill
-          className="w-full h-[148px] text-neutral-950 text-left text-[14px]"
+          className="w-full h-[148px] text-neutral-950 border border-neutral-400 text-[14px] flex-col-reverse flex overflow-hidden"
           value={value}
           onChange={setValue}
           placeholder={`${name}...`}
-          style={{border: 'none !important'}}
+          
         />
       </div>
     </div>
