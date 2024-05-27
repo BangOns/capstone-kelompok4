@@ -1,11 +1,11 @@
 import Header_add_plant from "./Component_Add_plant/Component_Header/header_add_plant";
-import Planting_Instructions from "./Component_Add_plant/Planting_Instructions";
+import List_Component_Step from "./Component_Add_plant/List_Component_Step";
 
 export default function AddPlant() {
   return (
-    <div>
+    <>
       <Header_add_plant pages={3} />
-      <Planting_Instructions />
+      <List_Component_Step pages={3} />
       <div className="flex mt-10">
         <div className="w-full">
           <button className="text-[#10B981]">Cancel</button>
@@ -19,6 +19,6 @@ export default function AddPlant() {
           </button>
         </div>
       </div>
-    </div>
+    </>
   );
 }

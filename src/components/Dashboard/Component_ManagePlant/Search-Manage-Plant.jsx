@@ -1,6 +1,7 @@
 "use client";
 import { IconsImport } from "@/utils/IconsImport";
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 
 export default function SearchManagePlant() {
@@ -16,10 +17,13 @@ export default function SearchManagePlant() {
             className="w-full border-0 focus:ring-0 outline-none text-sm font-poppins"
           />
         </div>
-        <button className="rounded-[14px] bg-emerald-500 text-white font-nunito-bold p-[14px] flex items-center gap-4 hover:bg-emerald-700 transition">
+        <Link
+          href={"/dashboard/manage-plant/add-plant"}
+          className="rounded-[14px] bg-emerald-500 text-white font-nunito-bold p-[14px] flex items-center gap-4 hover:bg-emerald-700 transition"
+        >
           <Image src={IconsImport.IconsAddPlant} alt="add plant" />
           <p>Add New Plant</p>
-        </button>
+        </Link>
       </div>
     </header>
   );
