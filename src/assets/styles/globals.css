@@ -18,3 +18,7 @@
   font-family: "nunito-bold";
   src: url("../fonts/Nunito-Bold.ttf");
 }
+
+.roundedcol {
+  border-radius: 0.5rem !important;
+}

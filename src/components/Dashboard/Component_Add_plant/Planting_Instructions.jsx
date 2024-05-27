@@ -1,6 +1,11 @@
+"use client";
 import IconsAddPlant from "@/utils/Component-Icons-Add-plant/IconsAddPlant";
+import { useState } from "react";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
 
 export default function Planting_Instructions() {
+  const [value, setValue] = useState("");
   return (
     <div className="rounded-lg border-2 mt-10">
       <div className="flex  m-[16px]">
@@ -17,6 +22,21 @@ export default function Planting_Instructions() {
           <span className="text-green-500"> autosave </span> when you minimize
           the box
         </p>
+      </div>
+      <div>
+        <ReactQuill
+          className="flex-col-reverse flex m-5"
+          theme="snow"
+          value={value}
+          onChange={setValue}
+        >
+          {" "}
+          <div
+            key="editor"
+            ref="editor"
+            className=""
+          />
+        </ReactQuill>
       </div>
     </div>
   );
