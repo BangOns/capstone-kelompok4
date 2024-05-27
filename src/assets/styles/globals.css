@@ -1,0 +1,20 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "Poppins";
+  src: url("../fonts/Poppins-Regular.ttf");
+}
+@font-face {
+  font-family: "nunito";
+  src: url("../fonts/Nunito-Regular.ttf");
+}
+@font-face {
+  font-family: "nunito-light";
+  src: url("../fonts/Nunito-Light.ttf");
+}
+@font-face {
+  font-family: "nunito-bold";
+  src: url("../fonts/Nunito-Bold.ttf");
+}
