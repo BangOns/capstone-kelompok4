@@ -18,3 +18,7 @@
   font-family: "nunito-bold";
   src: url("../fonts/Nunito-Bold.ttf");
 }
+@font-face {
+  font-family: "nunito-italic";
+  src: url("../fonts/Nunito-Regular-Italic.ttf");
+}
