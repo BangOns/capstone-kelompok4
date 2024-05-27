@@ -23,3 +23,10 @@
   font-family: "nunito-italic";
   src: url("../fonts/Nunito-Regular-Italic.ttf");
 }
+.ql-toolbar {
+  border-width: 0px !important;
+  border-top-width: 1px !important;
+}
+.ql-container {
+  border-width: 0px !important;
+}
