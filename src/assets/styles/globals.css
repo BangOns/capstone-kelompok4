@@ -19,6 +19,7 @@
   src: url("../fonts/Nunito-Bold.ttf");
 }
 
-.roundedcol {
-  border-radius: 0.5rem !important;
+@font-face {
+  font-family: "nunito-italic";
+  src: url("../fonts/Nunito-Regular-Italic.ttf");
 }
