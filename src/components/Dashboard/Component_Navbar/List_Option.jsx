@@ -5,7 +5,7 @@ import IconsSettings from "@/utils/Component-Icons-Navbar/IconsSettings";
 import IconsSignOut from "@/utils/Component-Icons-Navbar/IconsSignOut";
 import React, { useState } from "react";
 
-export default function List_Option() {
+export default function List_Option({isMinimized, toggleMinimize }) {
   const [linkHover, linkHoverSet] = useState("");
 
   return (
@@ -13,19 +13,22 @@ export default function List_Option() {
       <li className="p-4">
         <button
           className="w-full flex gap-2 items-start"
+          onClick={toggleMinimize}
           onMouseMove={() => linkHoverSet("minimize")}
           onMouseLeave={() => linkHoverSet("")}
         >
           <IconsMinimize active={linkHover.includes("minimize")} />
-          <p
-            className={`text-base font-nunito ${
-              linkHover.includes("minimize")
-                ? "text-emerald-500 font-nunito-bold"
-                : "text-gray-400 font-nunito"
-            }`}
-          >
-            Minimize
-          </p>
+          {!isMinimized && (
+            <p
+              className={`text-base font-nunito ${
+                linkHover.includes("minimize")
+                  ? "text-emerald-500 font-nunito-bold"
+                  : "text-gray-400 font-nunito"
+              }`}
+            >
+              Minimize
+            </p>
+          )}
         </button>
       </li>
       <li className="p-4">
@@ -35,15 +38,17 @@ export default function List_Option() {
           onMouseLeave={() => linkHoverSet("")}
         >
           <IconsSettings active={linkHover.includes("settings")} />
-          <p
-            className={`text-base font-nunito ${
-              linkHover.includes("settings")
-                ? "text-emerald-500 font-nunito-bold"
-                : "text-gray-400 font-nunito"
-            }`}
-          >
-            Settings
-          </p>
+          {!isMinimized && (
+            <p
+              className={`text-base font-nunito ${
+                linkHover.includes("settings")
+                  ? "text-emerald-500 font-nunito-bold"
+                  : "text-gray-400 font-nunito"
+              }`}
+            >
+              Settings
+            </p>
+          )}
         </button>
       </li>
       <li className="p-4">
@@ -53,15 +58,17 @@ export default function List_Option() {
           onMouseLeave={() => linkHoverSet("")}
         >
           <IconsSignOut active={linkHover.includes("signout")} />
-          <p
-            className={`text-base font-nunito ${
-              linkHover.includes("signout")
-                ? "text-red-500 font-nunito-bold"
-                : "text-gray-400 font-nunito"
-            }`}
-          >
-            Sign Out
-          </p>
+          {!isMinimized && (
+            <p
+              className={`text-base font-nunito ${
+                linkHover.includes("signout")
+                  ? "text-red-500 font-nunito-bold"
+                  : "text-gray-400 font-nunito"
+              }`}
+            >
+              Sign Out
+            </p>
+          )}
         </button>
       </li>
     </ul>
