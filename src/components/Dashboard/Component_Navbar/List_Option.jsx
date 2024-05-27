@@ -30,7 +30,7 @@ export default function List_Option() {
       </li>
       <li className="p-4">
         <button
-          className="w-full flex gap-2 items-start"
+          className="w-full flex gap-2 items-start "
           onMouseMove={() => linkHoverSet("settings")}
           onMouseLeave={() => linkHoverSet("")}
         >
