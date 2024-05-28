@@ -4,8 +4,9 @@ import { ImageImport } from "@/utils/ImageImport";
 import { IconsImport } from "@/utils/IconsImport";
 import Image from "next/image";
 import { useState } from "react";
-import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
+import dynamic from "next/dynamic";
+const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 
 export default function Planting_Instructions() {
   const [value, setValue] = useState("");
