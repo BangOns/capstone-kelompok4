@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function IconsPlus({ active = false }) {
+export default function IconsMinus({ active = false }) {
   return (
     <svg
       width="24"
