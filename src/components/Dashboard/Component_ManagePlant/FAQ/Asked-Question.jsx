@@ -1,6 +1,6 @@
 import Image from "next/image"
 import { IconsImport } from "@/utils/IconsImport";
-import Answer from "./Answer";
+import Answer from "./AnswerQuestion";
 
 export default function AskedQuestion(){
     return(

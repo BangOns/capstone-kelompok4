@@ -1,6 +1,6 @@
 import Image from "next/image"
 import AskedQuestion from "@/components/Dashboard/Component_ManagePlant/FAQ/Asked-Question";
-import IconsAdd from "@/utils/Components-Icon-FAQ/IconAdd";
+import IconsAdd from "@/utils/Component-Icons-FAQ/IconAdd";
 
 export default function Page (){
     return(

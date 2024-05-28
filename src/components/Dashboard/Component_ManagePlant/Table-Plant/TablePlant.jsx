@@ -18,13 +18,15 @@ export default function TablePlant() {
               className="cursor-pointer"
             />
           </th>
-          <th className="flex gap-1 justify-center">
-            Added Date
-            <Image
-              src={IconsImport.IconsDropdown}
-              alt="dropdown"
-              className="cursor-pointer"
-            />
+          <th>
+            <div className="flex gap-1 justify-center">
+              Added Date
+              <Image
+                src={IconsImport.IconsDropdown}
+                alt="dropdown"
+                className="cursor-pointer"
+              />
+            </div>
           </th>
 
           <th className="">
@@ -43,8 +45,6 @@ export default function TablePlant() {
         </tr>
       </thead>
       <tbody>
-        <PlantInformation />
-        <PlantInformation />
         <PlantInformation />
         <PlantInformation />
       </tbody>
