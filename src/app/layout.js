@@ -1,5 +1,6 @@
 import { Inter } from "next/font/google";
 import "@/assets/styles/globals.css";
+import "react-quill/dist/quill.snow.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
