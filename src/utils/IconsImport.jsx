@@ -8,6 +8,7 @@ import IconsMenuTable from "@/assets/icons/Icons-Menu-Table.svg";
 import IconsViewDetails from "@/assets/icons/Icons-View-Details.svg";
 import IconsDeletePlants from "@/assets/icons/Icons-Delete-Plant.svg";
 import IconsDropdown from "@/assets/icons/Icons-Dropdown.svg";
+import IconsDeletePlant from "@/assets/icons/Icons-Delete-Plant.svg";
 
 export const IconsImport = {
   // masukkan icon di sini
@@ -21,4 +22,5 @@ export const IconsImport = {
   IconsViewDetails,
   IconsDeletePlants,
   IconsDropdown,
+  IconsDeletePlant,
 };

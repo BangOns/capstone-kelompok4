@@ -1,6 +1,7 @@
 "use client";
 import IconsAddPlant from "@/utils/Component-Icons-Add-plant/IconsAddPlant";
 import { ImageImport } from "@/utils/ImageImport";
+import { IconsImport } from "@/utils/IconsImport";
 import Image from "next/image";
 import { useState } from "react";
 import ReactQuill from "react-quill";
@@ -26,8 +27,20 @@ export default function Planting_Instructions() {
         </p>
       </div>
       <div className=" border-2 rounded-lg mx-10 mb-10">
-        <div>
-          <p className="mx-10 my-5 font-bold">Step 1</p>
+        <div className="flex">
+          <p className="mx-[16px] my-5 font-bold">Step 1</p>
+          <div className="flex ml-auto">
+            <Image
+              className="m-[16px]"
+              src={IconsImport.IconsDeletePlant}
+              alt="image"
+            />
+            <Image
+              className="m-[16px]"
+              src={IconsImport.IconsDropdown}
+              alt="image"
+            />
+          </div>
         </div>
         <div className="flex">
           <Image src={ImageImport.ImageTest} alt="profile" />
@@ -37,6 +50,35 @@ export default function Planting_Instructions() {
             value={value}
             onChange={setValue}
           ></ReactQuill>
+        </div>
+      </div>
+      <div className=" border-2 rounded-lg mx-10 mb-10">
+        <div className="flex">
+          <div className="grid justify-items-end mx-5">
+            <Image
+              className="m-auto"
+              src={ImageImport.ImageTest}
+              width={56}
+              height={56}
+              alt="image"
+            />
+          </div>
+          <div className="mx-[16px] my-5 text-[14px] ">
+            <p className=" font-bold ">Step 2</p>
+            <p className="text-[#6B7280]">Choose Planting Location</p>
+          </div>
+          <div className="flex ml-auto">
+            <Image
+              className="m-[16px]"
+              src={IconsImport.IconsDeletePlant}
+              alt="delet"
+            />
+            <Image
+              className="m-[16px]"
+              src={IconsImport.IconsDropdown}
+              alt="dropdown"
+            />
+          </div>
         </div>
       </div>
     </div>
