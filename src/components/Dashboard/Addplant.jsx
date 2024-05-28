@@ -4,9 +4,9 @@ import List_Component_Step from "./Component_Add_plant/List_Component_Step";
 export default function AddPlant() {
   return (
     <>
-      <Header_add_plant pages={1} />
+      <Header_add_plant pages={2} />
       <div className="mt-6 p-4 border rounded-[10px]">
-        <List_Component_Step pages={1} />
+        <List_Component_Step pages={2} />
         <div className="flex justify-between mt-10">
           <div className="">
             <button className="text-[#10B981] p-[14px]">Cancel</button>
