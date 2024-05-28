@@ -10,6 +10,7 @@ import IconsDeletePlants from "@/assets/icons/Icons-Delete-Plant.svg";
 import IconsDropdown from "@/assets/icons/Icons-Dropdown.svg";
 import IconsImageUpload from "@/assets/icons/Icons-ImageUpload.svg";
 import IconsImageUploadChildren from "@/assets/icons/Icons-Image-Children-Upload.svg";
+import IconsDeletePlant from "@/assets/icons/Icons-Delete-Plant.svg";
 
 export const IconsImport = {
   // masukkan icon di sini
@@ -25,4 +26,5 @@ export const IconsImport = {
   IconsDropdown,
   IconsImageUpload,
   IconsImageUploadChildren,
+  IconsDeletePlant,
 };
