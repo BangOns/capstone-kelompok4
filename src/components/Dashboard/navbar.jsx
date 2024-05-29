@@ -1,4 +1,3 @@
-// Roni
 "use client";
 import { IconsImport } from "@/utils/IconsImport";
 import Image from "next/image";
