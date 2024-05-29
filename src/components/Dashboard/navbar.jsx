@@ -1,5 +1,5 @@
 // Roni
-"use client"
+"use client";
 import { IconsImport } from "@/utils/IconsImport";
 import Image from "next/image";
 import React, { useState } from "react";
@@ -38,7 +38,10 @@ export default function Navbar() {
         <List_Link_Page isMinimized={isMinimized} />
       </section>
       <section className="w-full h-1/4">
-        <List_Option isMinimized={isMinimized} toggleMinimize={toggleMinimize} />
+        <List_Option
+          isMinimized={isMinimized}
+          toggleMinimize={toggleMinimize}
+        />
       </section>
     </nav>
   );
