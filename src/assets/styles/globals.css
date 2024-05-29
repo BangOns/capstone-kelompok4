@@ -32,3 +32,11 @@ input::-webkit-inner-spin-button {
 input[type="number"] {
   -moz-appearance: textfield;
 }
+
+@layer utilities {
+  .hide-webkit-time-picker-indicator::-webkit-clear-button,
+  .hide-webkit-time-picker-indicator::-webkit-inner-spin-button,
+  .hide-webkit-time-picker-indicator::-webkit-calendar-picker-indicator {
+    opacity: 0;
+  }
+}

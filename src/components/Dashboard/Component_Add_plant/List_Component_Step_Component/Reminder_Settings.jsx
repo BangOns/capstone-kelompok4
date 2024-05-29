@@ -148,13 +148,18 @@ const Reminder_Settings = () => {
               <label className="text-[#030712] font-nunito text-sm font-bold leading-normal">
                 Watering Time<span className="text-[#EF4444]">*</span>
               </label>
-              <input
-                type="time"
-                value={wateringTime}
-                onChange={(e) => setWateringTime(e.target.value)}
-                placeholder="00:00"
-                className="border border-[#D1D5DB] rounded-lg py-3 pl-3 block w-full appearance-none placeholder:text-[#6B7280]"
-              />
+              <div className="relative">
+                <input
+                  type="time"
+                  value={wateringTime}
+                  onChange={(e) => setWateringTime(e.target.value)}
+                  placeholder="00:00"
+                  className="border border-[#D1D5DB] rounded-lg py-3 pl-3 block w-full appearance-none placeholder:text-[#6B7280] hide-webkit-time-picker-indicator"
+                />
+                <div className="absolute right-3 top-1/2 -translate-y-1/2">
+                  <IconsEdit />
+                </div>
+              </div>
             </div>
 
             <p className="text-xs font-nunito leading-normal font-normal">
