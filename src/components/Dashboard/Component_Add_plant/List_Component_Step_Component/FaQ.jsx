@@ -1,7 +1,22 @@
 import IconsAdd from "@/utils/Component-Icons-FAQ/IconAdd";
 import AskedQuestion from "./FAQ/Asked-Question";
+import CancelButtonPlant from "../Component_Buttons/cancel_buton_plant";
+import PreviousButtonPlant from "../Component_Buttons/previous_buton_plant";
+import NextButtonPlant from "../Component_Buttons/next_buton_plant";
+import { useDispatch } from "react-redux";
+import {
+  NextStep,
+  PrevStep,
+} from "../../../../libs/redux/Slice/DashboardSlice";
 
 export default function Faq() {
+  const dispatch = useDispatch();
+  function handleClickPrev() {
+    dispatch(PrevStep());
+  }
+  function handleClickNext() {
+    dispatch(NextStep());
+  }
   return (
     <div className="rounded-lg border-2 mt-10">
       <div className="w-full   p-4">
@@ -22,17 +37,14 @@ export default function Faq() {
         <div className="px-4">
           <AskedQuestion />
         </div>
-        <div className="flex mt-10 items-center px-4">
-          <div className="w-full">
-            <button className="text-[#10B981]">Cancel</button>
-          </div>
-          <div className="w-full flex">
-            <button className="ml-auto rounded-[14px] bg-[#D1FAE5] text-[#10B981]  font-nunito-bold p-[14px] gap-4 w-[158px]">
-              Previous
-            </button>
-            <button className="ml-[16px] rounded-[14px] bg-[#10B981] text-white font-nunito-bold p-[14px] gap-4 w-[158px]">
-              Next
-            </button>
+        <div className="flex justify-between mt-10 pr-4">
+          <CancelButtonPlant />
+          <div className=" flex">
+            <PreviousButtonPlant
+              handleClick={handleClickPrev}
+              disableOn={false}
+            />
+            <NextButtonPlant disabledOn={false} handleClick={handleClickNext} />
           </div>
         </div>
       </div>
