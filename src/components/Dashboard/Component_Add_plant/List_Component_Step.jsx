@@ -5,7 +5,7 @@ import Faq from "./List_Component_Step_Component/FaQ";
 export default function List_Component_Step({ pages }) {
   return (
     <>
-     {pages = 1 && <Faq/>}
+     {pages = 5 && <Faq/>}
     </>
   );
 }
