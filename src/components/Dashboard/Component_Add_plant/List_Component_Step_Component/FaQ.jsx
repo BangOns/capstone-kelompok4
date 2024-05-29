@@ -1,8 +1,7 @@
-import Image from "next/image"
 import AskedQuestion from "@/components/Dashboard/Component_ManagePlant/FAQ/Asked-Question";
 import IconsAdd from "@/utils/Component-Icons-FAQ/IconAdd";
 
-export default function Page (){
+export default function Faq (){
     return(
         <div className="w-[997px] h-[483px] border rounded-xl font-nunito">
             <div className="w-[965px] h-[383px]  mx-4 mt-4">
