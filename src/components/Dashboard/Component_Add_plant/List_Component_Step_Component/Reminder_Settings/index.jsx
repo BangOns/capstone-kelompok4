@@ -26,6 +26,11 @@ const Reminder_Settings = () => {
     setConditions([...conditions, { ifTheWather: "", whatYouNeed: "" }]);
   };
 
+  const handleDeleteCondition = (index) => {
+    const newConditions = conditions.filter((_, i) => i !== index);
+    setConditions(newConditions);
+  };
+
   const handleIncrementFrequency = () => {
     setWateringFrequency((prev) => prev + 1);
   };
@@ -81,6 +86,7 @@ const Reminder_Settings = () => {
                   <CWC_Form
                     index={index}
                     handleConditionChange={handleConditionChange}
+                    handleDeleteCondition={handleDeleteCondition}
                   />
                   {index !== lastIndex && (
                     <div className="h-[1px] w-full bg-neutral-200 mb-2" />

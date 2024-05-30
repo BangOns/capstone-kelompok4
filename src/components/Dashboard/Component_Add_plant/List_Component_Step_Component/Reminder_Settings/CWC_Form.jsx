@@ -2,9 +2,10 @@ import React, { useState } from "react";
 import {
   IconChevronDown,
   IconsEdit,
+  IconsTrash,
 } from "@/utils/Component-Icons-Reminder-settings";
 
-const CWC_Form = ({ index, handleConditionChange }) => {
+const CWC_Form = ({ index, handleConditionChange, handleDeleteCondition }) => {
   const [ifTheWather, setIfTheWather] = useState("");
   const [whatYouNeed, setWhatYouNeed] = useState("");
 
@@ -21,9 +22,17 @@ const CWC_Form = ({ index, handleConditionChange }) => {
   return (
     <div className="flex flex-col gap-4">
       <div className="space-y-1">
-        <label className="text-[#030712] font-nunito text-sm font-bold leading-normal block">
-          If the weather is...
-        </label>
+        <div className="flex justify-between">
+          <label className="text-[#030712] font-nunito text-sm font-bold leading-normal block">
+            If the weather is...
+          </label>
+          <div
+            onClick={() => handleDeleteCondition(index)}
+            className="cursor-pointer"
+          >
+            <IconsTrash />
+          </div>
+        </div>
         <div className="relative">
           <select
             value={ifTheWather}
