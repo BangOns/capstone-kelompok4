@@ -26,10 +26,13 @@ const DashboardSlice = createSlice({
         state.indexStep -= 1;
       }
     },
+    ToIndex: (state, action) => {
+      state.indexStep = action.payload;
+    },
   },
 });
 
-export const { PlantInformationStep2, NextStep, PrevStep } =
+export const { PlantInformationStep2, NextStep, PrevStep, ToIndex } =
   DashboardSlice.actions;
 
 export default DashboardSlice.reducer;
