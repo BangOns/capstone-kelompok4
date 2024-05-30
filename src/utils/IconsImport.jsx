@@ -14,6 +14,7 @@ import IconsDeletePlant from "@/assets/icons/Icons-Delete-Plant.svg";
 import IconsPlus from "@/assets/icons/Icons-Plus.svg";
 import IconsMinus from "@/assets/icons/Icons-Minus.svg";
 import IconsEditFinishing from "@/assets/icons/Icons-Edit-Finishing.svg";
+import IconsHuman from "@/assets/icons/Icons-Human.svg";
 
 export const IconsImport = {
   // masukkan icon di sini
@@ -33,4 +34,5 @@ export const IconsImport = {
   IconsPlus,
   IconsMinus,
   IconsEditFinishing,
+  IconsHuman,
 };
