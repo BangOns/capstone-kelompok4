@@ -19,6 +19,7 @@ import IconsSeePassword from "@/assets/icons/Icons-See-Password.svg";
 import IconsCheck from "@/assets/icons/Icons-Check.svg";
 import IconsUnseePassword from "@/assets/icons/Icons-Unsee-Password.svg";
 import IconsEditFinishing from "@/assets/icons/Icons-Edit-Finishing.svg";
+import IconsHuman from "@/assets/icons/Icons-Human.svg";
 
 export const IconsImport = {
   // masukkan icon di sini
@@ -43,4 +44,5 @@ export const IconsImport = {
   IconsCheck,
   IconsUnseePassword,
   IconsEditFinishing,
+  IconsHuman,
 };

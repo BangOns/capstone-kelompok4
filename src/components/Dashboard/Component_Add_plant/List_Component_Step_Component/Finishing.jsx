@@ -9,7 +9,7 @@ import PreviousButtonPlant from "../Component_Buttons/previous_buton_plant";
 import NextButtonPlant from "../Component_Buttons/next_buton_plant";
 import { useDispatch } from "react-redux";
 import {
-  NextStep,
+  FinishAddPlant,
   PrevStep,
 } from "../../../../libs/redux/Slice/DashboardSlice";
 
@@ -19,7 +19,7 @@ export default function Finishing() {
     dispatch(PrevStep());
   }
   function handleClickNext() {
-    dispatch(NextStep());
+    dispatch(FinishAddPlant(true));
   }
   return (
     <article className="w-full mt-6 ">
