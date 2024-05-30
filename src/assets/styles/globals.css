@@ -26,3 +26,19 @@ body {
   font-family: "nunito-italic";
   src: url("../fonts/Nunito-Regular-Italic.ttf");
 }
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+@layer utilities {
+  .resize-webkit-time-picker-indicator::-webkit-calendar-picker-indicator {
+    transform: scale(1.5);
+  }
+}
