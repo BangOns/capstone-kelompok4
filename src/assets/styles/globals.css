@@ -26,10 +26,21 @@ body {
   font-family: "nunito-italic";
   src: url("../fonts/Nunito-Regular-Italic.ttf");
 }
-.ql-toolbar {
-  border-width: 0px !important;
-  border-top-width: 1px !important;
+
+.checkbox-custom:checked {
+  @apply bg-emerald-500 border-emerald-500;
 }
-.ql-container {
-  border-width: 0px !important;
+
+.checkbox-custom:checked:before {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 100%;
+  background-image: url('../icons/Icons-Check.svg'); 
+  background-position: center;
+  background-repeat: no-repeat;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }

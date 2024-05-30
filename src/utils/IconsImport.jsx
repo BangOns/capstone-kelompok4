@@ -13,6 +13,11 @@ import IconsImageUploadChildren from "@/assets/icons/Icons-Image-Children-Upload
 import IconsDeletePlant from "@/assets/icons/Icons-Delete-Plant.svg";
 import IconsPlus from "@/assets/icons/Icons-Plus.svg";
 import IconsMinus from "@/assets/icons/Icons-Minus.svg";
+import IconsEmail from "@/assets/icons/Icons-Email.svg";
+import IconsPassword from "@/assets/icons/Icons-Password.svg";
+import IconsSeePassword from "@/assets/icons/Icons-See-Password.svg";
+import IconsCheck from "@/assets/icons/Icons-Check.svg"
+import IconsUnseePassword from "@/assets/icons/Icons-Unsee-Password.svg"
 
 export const IconsImport = {
   // masukkan icon di sini
@@ -31,4 +36,9 @@ export const IconsImport = {
   IconsDeletePlant,
   IconsPlus,
   IconsMinus,
+  IconsEmail,
+  IconsPassword,
+  IconsSeePassword,
+  IconsCheck,
+  IconsUnseePassword,
 };
