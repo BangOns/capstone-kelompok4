@@ -18,6 +18,7 @@ import IconsPassword from "@/assets/icons/Icons-Password.svg";
 import IconsSeePassword from "@/assets/icons/Icons-See-Password.svg";
 import IconsCheck from "@/assets/icons/Icons-Check.svg"
 import IconsUnseePassword from "@/assets/icons/Icons-Unsee-Password.svg"
+import IconsGooglePlay from "@/assets/icons/Icons-Google-Play.svg"
 
 export const IconsImport = {
   // masukkan icon di sini
@@ -41,4 +42,5 @@ export const IconsImport = {
   IconsSeePassword,
   IconsCheck,
   IconsUnseePassword,
+  IconsGooglePlay,
 };
