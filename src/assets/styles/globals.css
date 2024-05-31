@@ -2,6 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+  @apply bg-white;
+}
 @font-face {
   font-family: "Poppins";
   src: url("../fonts/Poppins-Regular.ttf");
@@ -18,7 +21,41 @@
   font-family: "nunito-bold";
   src: url("../fonts/Nunito-Bold.ttf");
 }
+
 @font-face {
   font-family: "nunito-italic";
   src: url("../fonts/Nunito-Regular-Italic.ttf");
+}
+
+.checkbox-custom:checked {
+  @apply bg-emerald-500 border-emerald-500;
+}
+
+.checkbox-custom:checked:before {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 100%;
+  background-image: url("../icons/Icons-Check.svg");
+  background-position: center;
+  background-repeat: no-repeat;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+@layer utilities {
+  .resize-webkit-time-picker-indicator::-webkit-calendar-picker-indicator {
+    transform: scale(1.5);
+  }
 }
