@@ -5,11 +5,14 @@ import Image from "next/image";
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import IconsDelete from "@/utils/Component-Icons-Table/IconsDelete";
+import { useDispatch } from "react-redux";
+import { DeletePlant } from "../../../../libs/redux/Slice/DashboardSlice";
 
 export default function MenuOption({ active }) {
   const [viewMenu, viewMenuSet] = useState(false);
   const [editMenu, editMenuSet] = useState(false);
   const [deleteMenu, deleteMenuSet] = useState(false);
+  const dispatch = useDispatch();
   return (
     <motion.div
       variants={{
@@ -52,6 +55,7 @@ export default function MenuOption({ active }) {
         } text-base font-nunito-bold rounded-[5px] flex gap-2 p-2`}
         onMouseMove={() => deleteMenuSet(true)}
         onMouseLeave={() => deleteMenuSet(false)}
+        onClick={() => dispatch(DeletePlant(true))}
       >
         <IconsDelete active={deleteMenu} />
         Delete

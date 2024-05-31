@@ -5,7 +5,7 @@ import IconsSettings from "@/utils/Component-Icons-Navbar/IconsSettings";
 import IconsSignOut from "@/utils/Component-Icons-Navbar/IconsSignOut";
 import React, { useState } from "react";
 
-export default function List_Option({isMinimized, toggleMinimize }) {
+export default function List_Option({ isMinimized, toggleMinimize }) {
   const [linkHover, linkHoverSet] = useState("");
 
   return (

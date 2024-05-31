@@ -10,6 +10,10 @@ import CancelButtonPlant from "../Component_Buttons/cancel_buton_plant";
 import NextButtonPlant from "../Component_Buttons/next_buton_plant";
 import PreviousButtonPlant from "../Component_Buttons/previous_buton_plant";
 import { useDispatch } from "react-redux";
+import {
+  NextStep,
+  PrevStep,
+} from "../../../../libs/redux/Slice/DashboardSlice";
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 
 export default function Planting_Instructions() {
