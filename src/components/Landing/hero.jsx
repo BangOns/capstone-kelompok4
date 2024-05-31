@@ -21,8 +21,8 @@ export default function Hero() {
                 </div>
             </div>
             <div className="w-full md:w-[400px] lg:w-[670px] xl:w-[652px] h-[300px] sm:h-[400px] md:h-[430px] lg:h-[550px] xl:h-[662px] bg-emerald-50 
-                flex items-center justify-center rounded-br-[50px] rounded-bl-[50px] lg:justify-end lg:pr-[80px] xl:justify-end mr-[25px] lg:mr-0 xl:mr-0 xl:pr-[80px] order-1 
-                lg:order-last mb-4 md:mb-5"
+                flex items-center justify-center rounded-br-[50px] lg:rounded-br-none xl:rounded-br-none rounded-bl-[50px] lg:justify-end lg:pr-[80px] 
+                xl:justify-end mr-[25px] lg:mr-0 xl:mr-0 xl:pr-[80px] order-1 lg:order-last mb-4 md:mb-5 lg:mb-0 xl:mb-0"
             >
                 <Image src={ImageImport.ImageHero} alt="Hero Image" layout="intrinsic" className="w-[260px] md:w-[350px] lg:w-[350px] xl:w-[493px]"/>
             </div>
