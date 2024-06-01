@@ -7,6 +7,11 @@ module.exports = {
     "./src/assets/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
+    extend: {
+      screens: {
+        "2xl": "1440px",
+      },
+    },
     fontFamily: {
       poppins: ["Poppins", "sans-serif"],
       nunito: ["nunito", "sans-serif"],
