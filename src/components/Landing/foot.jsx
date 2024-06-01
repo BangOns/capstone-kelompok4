@@ -5,11 +5,11 @@ import { ImageImport } from "../../utils/ImageImport";
 export default function Footer() {
   return (
     <div className="bg-[#ECFDF5] px-10 pt-8  text-center">
-      <p className="font-[700] text-[32px]">Plantopia</p>
-      <p className="font-[400] text-[14px] py-4">
+      <p className="font-[700] text-[32px] font-nunito-bold">Plantopia</p>
+      <p className="font-[400] text-[14px] py-4 font-nunito-light">
         “Cultivate Dreams, Achieve the Inspiration”
       </p>
-      <div>
+      <div className="font-nunito-bold">
         <Link
           className="mx-2 font-[700] text-[12px] hover:text-[#10B981]"
           href={""}
@@ -47,9 +47,9 @@ export default function Footer() {
           </p>
         </div>
         <div className="w-full  flex flex-row justify-start items-center">
-          <p className="font-[700] text-[14px] text-[#4B5563] w-full">
+          <p className="font-[700] text-[14px] text-[#4B5563] w-full font-nunito-bold ">
             ©Plantopia
-            <span className="font-[400] text-[14px] pl-2">
+            <span className="font-[400] text-[14px] pl-2 font-nunito-light">
               All Rights Reserved. Website by Team Agriculture
             </span>
           </p>

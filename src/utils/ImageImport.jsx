@@ -7,6 +7,10 @@ import ImageHero from "@/assets/image/Image-Hero.png";
 import ImageFacebook from "@/assets/image/facebook.png";
 import ImageTwiter from "@/assets/image/twiter.png";
 import ImageIG from "@/assets/image/ig.png";
+import Imagephone1 from "@/assets/image/phone1.png";
+import Imagephone2 from "@/assets/image/phone2.png";
+import Imagephone3 from "@/assets/image/phone3.png";
+import Imagephone4 from "@/assets/image/phone5.png";
 export const ImageImport = {
   // masukkan image disini
   ImageTest,
@@ -18,4 +22,8 @@ export const ImageImport = {
   ImageFacebook,
   ImageTwiter,
   ImageIG,
+  Imagephone1,
+  Imagephone2,
+  Imagephone3,
+  Imagephone4,
 };
