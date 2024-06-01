@@ -47,11 +47,11 @@ export default function FAQ() {
   ];
 
   return (
-    <div className="lg:px-[70px] mt-[65px]">
-      <h3 className="text-black font-nunito-bold text-4xl leading-normal">
+    <div className="px-[25px] lg:px-[70px] mt-[65px]">
+      <h3 className="text-black font-nunito-bold text-xl md:text-2xl lg:text-4xl leading-normal">
         Frequently Asked Questions
       </h3>
-      <div className="mt-[77px]">
+      <div className="mt-4 md:mt-8 lg:mt-[77px]">
         {accordionData.map((item, index) => (
           <Accordion
             key={index}
