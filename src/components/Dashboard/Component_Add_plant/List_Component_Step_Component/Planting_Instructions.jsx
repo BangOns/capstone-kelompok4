@@ -11,19 +11,23 @@ import NextButtonPlant from "../Component_Buttons/next_buton_plant";
 import PreviousButtonPlant from "../Component_Buttons/previous_buton_plant";
 import { useDispatch } from "react-redux";
 import {
-  NextStep,
-  PrevStep,
+  FuncMessagePlantError,
+  FuncNextStep,
+  FuncPrevStep,
 } from "../../../../libs/redux/Slice/DashboardSlice";
+import Message_Error from "../../../Component_Message/Message_Error";
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 
 export default function Planting_Instructions() {
   const [value, setValue] = useState("");
   const dispatch = useDispatch();
+
   function handleClickPrev() {
-    dispatch(PrevStep());
+    dispatch(FuncPrevStep());
   }
   function handleClickNext() {
-    dispatch(NextStep());
+    dispatch(FuncMessagePlantError(true));
+    dispatch(FuncNextStep());
   }
   return (
     <Fragment>
@@ -111,6 +115,11 @@ export default function Planting_Instructions() {
           </div>
         </div>
       </div>
+      <Message_Error
+        message={
+          "Uh oh! You need to fill out the data first before move on to next step~"
+        }
+      />
     </Fragment>
   );
 }

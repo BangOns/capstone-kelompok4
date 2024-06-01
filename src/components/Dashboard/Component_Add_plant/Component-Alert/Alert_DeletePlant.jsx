@@ -4,7 +4,10 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { IconsImport } from "../../../../utils/IconsImport";
 import Image from "next/image";
-import { DeletePlant } from "../../../../libs/redux/Slice/DashboardSlice";
+import {
+  FuncDeletePlant,
+  FuncMessagePlantDelete,
+} from "../../../../libs/redux/Slice/DashboardSlice";
 import { useRouter } from "next/navigation";
 
 const variants = {
@@ -41,14 +44,15 @@ export default function Alert_DeletePlant() {
               </div>
               <div className="mt-8 font-nunito-bold flex w-full gap-2 justify-between">
                 <button
-                  onClick={() => dispatch(DeletePlant(false))}
+                  onClick={() => dispatch(FuncDeletePlant(false))}
                   className="basis-1/2 text-emerald-500 w-full p-[14px] rounded-md bg-white"
                 >
                   Cancel
                 </button>
                 <button
                   onClick={() => {
-                    dispatch(DeletePlant(false));
+                    dispatch(FuncMessagePlantDelete(true));
+                    dispatch(FuncDeletePlant(false));
                   }}
                   className=" text-white basis-1/2 w-full p-[14px] rounded-md bg-red-500"
                 >

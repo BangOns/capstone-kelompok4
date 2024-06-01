@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { CancelAddPlant } from "../../../../libs/redux/Slice/DashboardSlice";
+import { FuncCancelAddPlant } from "../../../../libs/redux/Slice/DashboardSlice";
 
 export default function CancelButtonPlant() {
   const dispatch = useDispatch();
@@ -8,7 +8,9 @@ export default function CancelButtonPlant() {
     <div className="">
       <button
         className="text-emerald-500 hover:text-emerald-600 p-[14px]"
-        onClick={() => dispatch(CancelAddPlant(true))}
+        onClick={() => {
+          dispatch(FuncCancelAddPlant(true));
+        }}
       >
         Cancel
       </button>
