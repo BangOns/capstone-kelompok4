@@ -7,6 +7,7 @@ import ImageHero from "@/assets/image/Image-Hero.png";
 import ImageFacebook from "@/assets/image/facebook.png";
 import ImageTwiter from "@/assets/image/twiter.png";
 import ImageIG from "@/assets/image/ig.png";
+import Imagemitra from "@/assets/image/mitra.png";
 import Imagephone1 from "@/assets/image/phone1.png";
 import Imagephone2 from "@/assets/image/phone2.png";
 import Imagephone3 from "@/assets/image/phone3.png";
@@ -26,4 +27,5 @@ export const ImageImport = {
   Imagephone2,
   Imagephone3,
   Imagephone4,
+  Imagemitra,
 };
