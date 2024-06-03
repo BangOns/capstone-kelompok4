@@ -56,3 +56,23 @@ input[type="number"] {
     transform: scale(1.5);
   }
 }
+
+.text-stroke-3 {
+  background-image: linear-gradient(#10b981, #10b981);
+  background-clip: text;
+  -webkit-text-stroke-width: calc(1em / 16);
+  -webkit-text-stroke-color: transparent;
+  -webkit-background-clip: text;
+  color: white;
+  letter-spacing: 6px;
+}
+
+.text-stroke-white {
+  background-image: linear-gradient(white, white);
+  background-clip: text;
+  -webkit-text-stroke-width: calc(1em / 16);
+  -webkit-text-stroke-color: transparent;
+  -webkit-background-clip: text;
+  color: #10b981;
+  letter-spacing: 6px;
+}

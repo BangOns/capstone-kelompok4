@@ -12,6 +12,11 @@ import Imagephone1 from "@/assets/image/phone1.png";
 import Imagephone2 from "@/assets/image/phone2.png";
 import Imagephone3 from "@/assets/image/phone3.png";
 import Imagephone4 from "@/assets/image/phone5.png";
+import ImageParallax1 from "@/assets/image/Image-Parallax1.png";
+import ImageParallax2 from "@/assets/image/Image-Parallax2.png";
+import ImageParallax3 from "@/assets/image/Image-Parallax3.png";
+import ImageParallax4 from "@/assets/image/Image-Parallax4.png";
+import ImageAbout from "@/assets/image/Image-About.svg";
 export const ImageImport = {
   // masukkan image disini
   ImageTest,
@@ -28,4 +33,9 @@ export const ImageImport = {
   Imagephone3,
   Imagephone4,
   Imagemitra,
+  ImageParallax1,
+  ImageParallax2,
+  ImageParallax3,
+  ImageParallax4,
+  ImageAbout,
 };
