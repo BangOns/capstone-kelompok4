@@ -3,9 +3,11 @@ import Image from "next/image";
 import { ImageImport } from "@/utils/ImageImport";
 import { IconsImport } from "@/utils/IconsImport";
 
-export default function Hero() {
+export default function Hero({ getRef }) {
   return (
-    <div className="flex flex-col-reverse lg:flex-row justify-between items-center  lg:pl-[72px]">
+    <div
+      className={`flex flex-col-reverse h-screen lg:flex-row justify-between items-center  lg:pl-[72px] mb-6  max-lg:mt-24 max-lg:justify-end gap-5`}
+    >
       <div className="w-full px-[25px] lg:px-0 lg:w-[630px] xl:w-[710px] flex flex-col gap-4 mb-8 lg:mb-0 text-start xl:text-start">
         <p className="text-black font-nunito-bold text-2xl md:text-3xl lg:text-4xl xl:text-5xl leading-[35px] md:leading-[35px] lg:leading-[45px] xl:leading-[65px]">
           Spread Kindness,
@@ -40,7 +42,6 @@ export default function Hero() {
         <Image
           src={ImageImport.ImageHero}
           alt="Hero Image"
-          layout="intrinsic"
           className="w-[260px] sm:w-[350px]  xl:w-[493px]"
         />
       </div>
