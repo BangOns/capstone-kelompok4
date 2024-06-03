@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
-import { ImageImport } from "../../../../utils/ImageImport";
+import { ImageImport } from "../../../utils/ImageImport";
 import { motion } from "framer-motion";
 
 const variants = {

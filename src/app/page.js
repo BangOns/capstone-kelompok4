@@ -1,6 +1,8 @@
 "use client";
 import { useRef } from "react";
 import About from "../components/Landing/About";
+import CTA from "../components/Landing/CTA";
+import FAQ from "../components/Landing/FAQ/FAQsection";
 import Hero from "../components/Landing/hero";
 import NavbarLanding from "../components/Landing/navbar";
 import Mitra from "../components/Landing/Mitra";
@@ -15,6 +17,8 @@ export default function Home() {
       <Mitra />
       <Explore />
       <About />
+      <FAQ />
+      <CTA />
     </main>
   );
 }

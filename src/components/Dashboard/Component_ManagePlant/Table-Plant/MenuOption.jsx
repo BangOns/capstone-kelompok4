@@ -1,7 +1,6 @@
 import IconsEdit from "@/utils/Component-Icons-Table/IconsEdit";
 import IconsView from "@/utils/Component-Icons-Table/IconsView";
-import { IconsImport } from "@/utils/IconsImport";
-import Image from "next/image";
+
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import IconsDelete from "@/utils/Component-Icons-Table/IconsDelete";

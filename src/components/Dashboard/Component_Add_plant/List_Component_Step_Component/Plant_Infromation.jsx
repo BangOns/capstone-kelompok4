@@ -14,6 +14,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Message_Error from "../../../Component_Message/Message_Error";
 import {
   FuncMessagePlantError,
+  FuncPlantInformation,
   FuncPlantInformationStep2,
 } from "../../../../libs/redux/Slice/DashboardSlice";
 export default function Plant_Infromation() {

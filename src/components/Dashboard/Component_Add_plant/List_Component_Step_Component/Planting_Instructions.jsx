@@ -28,6 +28,7 @@ export default function Planting_Instructions() {
   }
   function handleClickNext() {
     dispatch(FuncMessagePlantError(true));
+
     dispatch(FuncNextStep());
   }
 

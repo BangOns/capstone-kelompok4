@@ -1,6 +1,6 @@
 import Image from "next/image";
 import React from "react";
-import { ImageImport } from "../../../../utils/ImageImport";
+import { ImageImport } from "../../../utils/ImageImport";
 
 export default function Article_About() {
   return (

@@ -9,6 +9,7 @@ const initialState = {
   messagePlantSuccess: false,
   messagePlantError: false,
   messagePlantDelete: false,
+  data: {},
 };
 
 const DashboardSlice = createSlice({

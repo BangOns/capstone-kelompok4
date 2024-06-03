@@ -17,6 +17,8 @@ import ImageParallax2 from "@/assets/image/Image-Parallax2.png";
 import ImageParallax3 from "@/assets/image/Image-Parallax3.png";
 import ImageParallax4 from "@/assets/image/Image-Parallax4.png";
 import ImageAbout from "@/assets/image/Image-About.svg";
+import ImageBgCTA from "@/assets/image/Image-Bg-CTA.png";
+import ImageHpCTA from "@/assets/image/Image-Hp-CTA.png";
 export const ImageImport = {
   // masukkan image disini
   ImageTest,
@@ -38,4 +40,6 @@ export const ImageImport = {
   ImageParallax3,
   ImageParallax4,
   ImageAbout,
+  ImageBgCTA,
+  ImageHpCTA,
 };
