@@ -76,3 +76,17 @@ input[type="number"] {
   color: #10b981;
   letter-spacing: 6px;
 }
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 18px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #10b981;
+  border-radius: 50px;
+  border: 5px solid #ffff;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #10b981bd;
+}

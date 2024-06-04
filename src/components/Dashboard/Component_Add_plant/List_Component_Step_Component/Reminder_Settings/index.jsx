@@ -11,8 +11,7 @@ import {
   FuncMessagePlantError,
   FuncNextStep,
   FuncPrevStep,
-  NextStep,
-  PrevStep,
+  FuncReminderSettings,
 } from "../../../../../libs/redux/Slice/DashboardSlice";
 import { useDispatch } from "react-redux";
 import Message_Error from "../../../../Component_Message/Message_Error";
@@ -61,9 +60,20 @@ const Reminder_Settings = () => {
   const handleClickPrev = () => {
     dispatch(FuncPrevStep());
   };
-  const handleClickNext = () => {
+  const handleClickNext = (ifTheWather, whatYouNeed) => {
     dispatch(FuncMessagePlantError(true));
     dispatch(FuncNextStep());
+    dispatch(
+      FuncReminderSettings(
+        wateringFrequency,
+        wateringUnit,
+        wateringAmount,
+        wateringAmountUnit,
+        wateringTime,
+        ifTheWather,
+        whatYouNeed
+      )
+    );
   };
 
   return (
