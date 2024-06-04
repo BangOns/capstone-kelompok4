@@ -1,22 +1,12 @@
 import React from "react";
 import Image from "next/image";
 import { ImageImport } from "../../../utils/ImageImport";
-// import { IconsImport } from "../../../../../utils/IconsImport";
-// import { FuncToIndex } from "../../../../../libs/redux/Slice/DashboardSlice";
-// import { useDispatch } from "react-redux";
 
 export default function Component_Plant_Information() {
-  // const dispatch = useDispatch();
   return (
     <section className="w-full">
       <header className="w-full flex justify-between py-[12.5px]">
-        <h1 className="font-nunito-bold text-xl">Plant Information</h1>
-        {/* <Image
-          src={IconsImport.IconsEditFinishing}
-          alt="edit"
-          className="cursor-pointer"
-          onClick={() => dispatch(FuncToIndex(1))}
-        /> */}
+        <h1 className="font-nunito-bold text-xl">Plant Information</h1>      
       </header>
       <section className="w-full p-4 border-slate-200 border rounded-[10px] flex gap-6">
         <article className="flex  gap-4 items-center">
