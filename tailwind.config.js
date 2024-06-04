@@ -20,5 +20,8 @@ module.exports = {
       "nunito-italic": ["nunito-italic", "sans-serif"],
     },
   },
-  plugins: [require("daisyui")],
+  plugins: [
+    require("daisyui"),
+    require("tailwind-scrollbar")({ nocompatible: true }),
+  ],
 };

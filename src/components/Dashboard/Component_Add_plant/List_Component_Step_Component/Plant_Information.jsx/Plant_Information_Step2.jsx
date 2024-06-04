@@ -14,6 +14,7 @@ import {
   FuncPlantInformationStep2,
 } from "../../../../../libs/redux/Slice/DashboardSlice";
 import Message_Error from "../../../../Component_Message/Message_Error";
+import Leaf_Color from "./Select_Option/Leaf_Color";
 export default function Plant_Information_Step2() {
   const dispatch = useDispatch();
   function handleClickNext() {
@@ -143,25 +144,7 @@ export default function Plant_Information_Step2() {
               </section>
             </div>
             <div className=" h-1/2  basis-1/2">
-              <div className="border border-slate-200 rounded-[10px] p-4">
-                <h2 className="text-sm font-nunito-bold pb-1">
-                  Leaf Color <span className="text-red-500">*</span>
-                </h2>
-                <div className="w-full items-center flex justify-between py-[14px] px-3 border border-slate-950 rounded-lg">
-                  <select
-                    name=""
-                    id=""
-                    className="w-full focus:ring-0 outline-none"
-                  >
-                    <option value="">Colors</option>
-                    <option value="green">Green</option>
-                    <option value="red">Red</option>
-                    <option value="yellow">Yellow</option>
-                    <option value="white">White</option>
-                    <option value="black">Black</option>
-                  </select>
-                </div>
-              </div>
+              <Leaf_Color />
               <p className="text-sm font-nunito pt-2 ">
                 <span className="text-red-500">*</span> = must be filled
               </p>
