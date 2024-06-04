@@ -78,7 +78,7 @@ const Reminder_Settings = () => {
 
   return (
     <Fragment>
-      <section>
+      <section className="mt-6 p-4 border rounded-[10px]">
         <div className="grid grid-cols-2 justify-center items-center gap-4">
           <div className="h-full border border-[#E5E7EB] rounded-md p-4">
             <h3 className="text-[#030712] text-xl font-nunito font-bold leading-normal mb-6">

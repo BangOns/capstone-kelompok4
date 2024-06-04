@@ -1,5 +1,9 @@
 import React from "react";
-
+import { IoIosArrowDown } from "react-icons/io";
+import { CiSearch } from "react-icons/ci";
+import Harvest_Duration from "./Select_Option/Harvest_Duration";
+import Climate_Condition from "./Select_Option/Climate_Condition";
+import Plant_Category from "./Select_Option/Plant_Category";
 export default function Plant_Input() {
   return (
     <article className="w-full pt-6 flex justify-between">
@@ -15,41 +19,9 @@ export default function Plant_Input() {
           />
         </div>
       </section>
-      <section className="basis-[23%] w-full">
-        <label htmlFor="" className="font-nunito-bold text-sm pb-1">
-          Plant Category <span className="text-red-500">*</span>
-        </label>
-        <div className="w-full px-3 py-[14px] border rounded-lg">
-          <select name="" id="" className="w-full focus:ring-0 outline-none">
-            <option value="">Select Category</option>
-            <option value="">Category 1</option>
-            <option value="">Category 2</option>
-            <option value="">Category 3</option>
-          </select>
-        </div>
-      </section>
-      <section className="basis-[23%] w-full">
-        <label htmlFor="" className="font-nunito-bold text-sm pb-1">
-          Harvest Duration <span className="text-red-500">*</span>
-        </label>
-        <div className="w-full px-3 py-[14px] border rounded-lg">
-          <select name="" id="" className="w-full focus:ring-0 outline-none">
-            <option value="">1 Month</option>
-            <option value="">Category 1</option>
-          </select>
-        </div>
-      </section>
-      <section className="basis-[23%] w-full">
-        <label htmlFor="" className="font-nunito-bold text-sm pb-1">
-          Climate Condition <span className="text-red-500">*</span>
-        </label>
-        <div className="w-full px-3 py-[14px] border rounded-lg">
-          <select name="" id="" className="w-full focus:ring-0 outline-none">
-            <option value="">Dry</option>
-            <option value="">Category 1</option>
-          </select>
-        </div>
-      </section>
+      <Plant_Category />
+      <Harvest_Duration />
+      <Climate_Condition />
     </article>
   );
 }
