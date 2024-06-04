@@ -9,16 +9,19 @@ import { FiMinus } from "react-icons/fi";
 import { FiPlus } from "react-icons/fi";
 import { useDispatch } from "react-redux";
 import {
-  NextStep,
-  PlantInformationStep2,
-} from "@/libs/redux/Slice/DashboardSlice";
+  FuncMessagePlantError,
+  FuncNextStep,
+  FuncPlantInformationStep2,
+} from "../../../../../libs/redux/Slice/DashboardSlice";
+import Message_Error from "../../../../Component_Message/Message_Error";
 export default function Plant_Information_Step2() {
   const dispatch = useDispatch();
   function handleClickNext() {
-    dispatch(NextStep());
+    dispatch(FuncMessagePlantError(true));
+    dispatch(FuncNextStep());
   }
   function handleClickPrev() {
-    dispatch(PlantInformationStep2(false));
+    dispatch(FuncPlantInformationStep2(false));
   }
   return (
     <>
@@ -176,6 +179,11 @@ export default function Plant_Information_Step2() {
           <NextButtonPlant disabledOn={false} handleClick={handleClickNext} />
         </div>
       </div>
+      <Message_Error
+        message={
+          "Uh oh! You need to fill out the data first before move on to next step~"
+        }
+      />
     </>
   );
 }

@@ -6,52 +6,68 @@ const initialState = {
   cancelAddPlant: false,
   deletePlant: false,
   finishAddPlant: false,
+  messagePlantSuccess: false,
+  messagePlantError: false,
+  messagePlantDelete: false,
+  data: {},
 };
 
 const DashboardSlice = createSlice({
   name: "dashboard",
   initialState,
   reducers: {
-    PlantInformationStep2: (state, action) => {
+    FuncPlantInformationStep2: (state, action) => {
       state.plantInformationStep2 = action.payload;
     },
-    NextStep: (state) => {
+    FuncNextStep: (state) => {
       if (state.indexStep >= 6) {
         state.indexStep = 6;
       } else {
         state.indexStep += 1;
       }
     },
-    PrevStep: (state) => {
+    FuncPrevStep: (state) => {
       if (state.indexStep <= 0) {
         state.indexStep = 1;
       } else {
         state.indexStep -= 1;
       }
     },
-    ToIndex: (state, action) => {
+    FuncToIndex: (state, action) => {
       state.indexStep = action.payload;
     },
-    CancelAddPlant: (state, action) => {
+    FuncCancelAddPlant: (state, action) => {
       state.cancelAddPlant = action.payload;
     },
-    DeletePlant: (state, action) => {
+    FuncDeletePlant: (state, action) => {
       state.deletePlant = action.payload;
     },
-    FinishAddPlant: (state, action) => {
+    FuncFinishAddPlant: (state, action) => {
       state.finishAddPlant = action.payload;
+    },
+    FuncMessagePlantSuccess: (state, action) => {
+      state.messagePlantSuccess = action.payload;
+    },
+    FuncMessagePlantError: (state, action) => {
+      state.messagePlantError = action.payload;
+    },
+    FuncMessagePlantDelete: (state, action) => {
+      state.messagePlantDelete = action.payload;
     },
   },
 });
 
 export const {
-  PlantInformationStep2,
-  NextStep,
-  PrevStep,
-  ToIndex,
-  CancelAddPlant,
-  DeletePlant,
-  FinishAddPlant,
+  FuncPlantInformationStep2,
+  FuncNextStep,
+  FuncPrevStep,
+  FuncToIndex,
+  FuncCancelAddPlant,
+  FuncDeletePlant,
+  FuncFinishAddPlant,
+  FuncMessagePlantSuccess,
+  FuncMessagePlantError,
+  FuncMessagePlantDelete,
 } = DashboardSlice.actions;
 
 export default DashboardSlice.reducer;

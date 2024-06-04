@@ -20,6 +20,8 @@ import IconsCheck from "@/assets/icons/Icons-Check.svg";
 import IconsUnseePassword from "@/assets/icons/Icons-Unsee-Password.svg";
 import IconsEditFinishing from "@/assets/icons/Icons-Edit-Finishing.svg";
 import IconsHuman from "@/assets/icons/Icons-Human.svg";
+import IconsGooglePlay from "@/assets/icons/Icons-Google-Play.svg";
+import IconsMaximize from "@/assets/icons/Icons-Maximize.svg";
 
 export const IconsImport = {
   // masukkan icon di sini
@@ -45,4 +47,6 @@ export const IconsImport = {
   IconsUnseePassword,
   IconsEditFinishing,
   IconsHuman,
+  IconsGooglePlay,
+  IconsMaximize,
 };

@@ -3,6 +3,8 @@ import SearchManagePlant from "@/components/Dashboard/Component_ManagePlant/Sear
 
 import React from "react";
 import Alert_DeletePlant from "../../../components/Dashboard/Component_Add_plant/Component-Alert/Alert_DeletePlant";
+import Message_Success from "../../../components/Component_Message/Message_Success";
+import Message_DeletePlant from "../../../components/Component_Message/Message_Delete";
 
 export default function page() {
   return (
@@ -12,6 +14,10 @@ export default function page() {
         <ContentManagePlant />
       </section>
       <Alert_DeletePlant />
+      <Message_Success
+        message={"Yay! Plant successfully added to your plant list! 🙌"}
+      />
+      <Message_DeletePlant message={"Plant data deleted successfully."} />
     </>
   );
 }

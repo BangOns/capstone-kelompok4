@@ -11,10 +11,15 @@ import PreviousButtonPlant from "../Component_Buttons/previous_buton_plant";
 import NextButtonPlant from "../Component_Buttons/next_buton_plant";
 import Plant_Information_Step2 from "./Plant_Information.jsx/Plant_Information_Step2";
 import { useDispatch, useSelector } from "react-redux";
-import { PlantInformationStep2 } from "@/libs/redux/Slice/DashboardSlice";
+import Message_Error from "../../../Component_Message/Message_Error";
+import {
+  FuncMessagePlantError,
+  FuncPlantInformation,
+  FuncPlantInformationStep2,
+} from "../../../../libs/redux/Slice/DashboardSlice";
 export default function Plant_Infromation() {
-  const { plantInformationStep2 } = useSelector((state) => state.dashboard);
   const dispatch = useDispatch();
+  const { plantInformationStep2 } = useSelector((state) => state.dashboard);
   const [value, setValue] = useState("");
   const [imageThumbnail, imageThumbnailSet] = useState("");
   const [imageChild, imageChildSet] = useState({
@@ -27,7 +32,6 @@ export default function Plant_Infromation() {
     image7: "",
     image8: "",
   });
-
   function handleChangeFileThumbnails(e) {
     e.preventDefault();
     const { files } = e.target;
@@ -42,7 +46,8 @@ export default function Plant_Infromation() {
   }
 
   function handleClickNext() {
-    dispatch(PlantInformationStep2(true));
+    dispatch(FuncMessagePlantError(true));
+    dispatch(FuncPlantInformationStep2(true));
   }
 
   return (
@@ -140,6 +145,11 @@ export default function Plant_Infromation() {
       ) : (
         <Plant_Information_Step2 />
       )}
+      <Message_Error
+        message={
+          "Uh oh! You need to fill out the data first before move on to next step~"
+        }
+      />
     </Fragment>
   );
 }

@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import { IconsImport } from "../../../../../utils/IconsImport";
-import { ToIndex } from "../../../../../libs/redux/Slice/DashboardSlice";
+import { FuncToIndex } from "../../../../../libs/redux/Slice/DashboardSlice";
 import { useDispatch } from "react-redux";
 
 export default function Component_Additional_Planting_Tips() {
@@ -14,7 +14,7 @@ export default function Component_Additional_Planting_Tips() {
           src={IconsImport.IconsEditFinishing}
           alt="edit"
           className="cursor-pointer"
-          onClick={() => dispatch(ToIndex(4))}
+          onClick={() => dispatch(FuncToIndex(4))}
         />
       </header>
       <article className="w-full border border-gray-200 rounded-[10px] p-4">

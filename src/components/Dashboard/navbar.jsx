@@ -28,7 +28,7 @@ export default function Navbar() {
             }`}
           />
           {!isMinimized && (
-            <h1 className="text-xl font-nunito-bold text-emerald-500">
+            <h1 className="text-xl font-nunito-bold text-emerald-500 transition duration-300">
               Plantopia
             </h1>
           )}

@@ -4,7 +4,10 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { IconsImport } from "../../../../utils/IconsImport";
 import Image from "next/image";
-import { CancelAddPlant } from "../../../../libs/redux/Slice/DashboardSlice";
+import {
+  FuncCancelAddPlant,
+  FuncToIndex,
+} from "../../../../libs/redux/Slice/DashboardSlice";
 import { useRouter } from "next/navigation";
 
 const variants = {
@@ -41,14 +44,15 @@ export default function Alert_CancelPlant() {
               </div>
               <div className="mt-8 font-nunito-bold flex w-full gap-2 justify-between">
                 <button
-                  onClick={() => dispatch(CancelAddPlant(false))}
+                  onClick={() => dispatch(FuncCancelAddPlant(false))}
                   className="basis-1/2 text-emerald-500 w-full p-[14px] rounded-md bg-white"
                 >
                   Cancel
                 </button>
                 <button
                   onClick={() => {
-                    dispatch(CancelAddPlant(false));
+                    dispatch(FuncToIndex(1));
+                    dispatch(FuncCancelAddPlant(false));
                     route.push("/dashboard/manage-plant");
                   }}
                   className=" text-white basis-1/2 w-full p-[14px] rounded-md bg-red-500"

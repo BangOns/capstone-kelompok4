@@ -4,7 +4,7 @@ import Certain_Weather_Condition from "./Component_Reminder_Settings/Certain_Wea
 import Image from "next/image";
 import { IconsImport } from "../../../../../utils/IconsImport";
 import { useDispatch } from "react-redux";
-import { ToIndex } from "../../../../../libs/redux/Slice/DashboardSlice";
+import { FuncToIndex } from "../../../../../libs/redux/Slice/DashboardSlice";
 
 export default function Component_Reminder_Settings() {
   const dispatch = useDispatch();
@@ -16,7 +16,7 @@ export default function Component_Reminder_Settings() {
           src={IconsImport.IconsEditFinishing}
           alt="edit"
           className="cursor-pointer"
-          onClick={() => dispatch(ToIndex(2))}
+          onClick={() => dispatch(FuncToIndex(2))}
         />
       </header>
       <article className="flex w-full gap-4 justify-between">

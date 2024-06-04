@@ -2,10 +2,12 @@
 import React from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
-import { IconsImport } from "../../../../utils/IconsImport";
 import { ImageImport } from "../../../../utils/ImageImport";
 import { useDispatch, useSelector } from "react-redux";
-import { FinishAddPlant } from "../../../../libs/redux/Slice/DashboardSlice";
+import {
+  FuncFinishAddPlant,
+  FuncToIndex,
+} from "../../../../libs/redux/Slice/DashboardSlice";
 import { useRouter } from "next/navigation";
 
 const variants = {
@@ -33,16 +35,17 @@ export default function Alert_Congratulations() {
             </figure>
             <div className="mt-8">
               <p className="text-center text-2xl font-nunito-bold">
-                Are you sure you want to cancel adding plant data?
+                Congratulations!
               </p>
               <p className="font-nunito text-center">
-                All of the information will be erased and cannot be restored
+                You've successfully added a new plant data to your collection
               </p>
             </div>
             <div className="mt-8 font-nunito-bold flex w-full gap-2 justify-between">
               <button
                 onClick={() => {
-                  dispatch(FinishAddPlant(false));
+                  dispatch(FuncToIndex(1));
+                  dispatch(FuncFinishAddPlant(false));
                   route.push("/dashboard/manage-plant");
                 }}
                 className=" text-white  w-full p-[14px] rounded-md bg-emerald-500"
