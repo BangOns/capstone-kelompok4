@@ -36,7 +36,7 @@ export default function MenuOption({ active }) {
         } text-base font-nunito-bold rounded-[5px] flex gap-2 p-2`}
         onMouseMove={() => viewMenuSet(true)}
         onMouseLeave={() => viewMenuSet(false)}
-        onClick={() => router.push("manage-plant/view-plant")}
+        onClick={() => router.push("manage-plant/view-plant/:id")}
       >
         <IconsView active={viewMenu} />
         View
