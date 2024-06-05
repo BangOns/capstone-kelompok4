@@ -35,8 +35,8 @@ export default function Planting_Instructions() {
     <Fragment>
       <div className="mt-6 p-4 border rounded-[10px]">
         <div className="rounded-lg border-2 mt-10">
-          <div className="flex  m-[16px] mx-10 ">
-            <div className="w-full  ">
+          <div className="md:flex  m-[16px] mx-10 ">
+            <div className="w-full ">
               <div className="flex text-green-500">
                 <div className="mr-[16px]">
                   <IconsAddPlant />
@@ -50,33 +50,37 @@ export default function Planting_Instructions() {
               minimize the box
             </p>
           </div>
-          <div className=" border-2 rounded-lg mx-10 mb-10 border-slate-400">
-            <div className="flex">
+          <div className="  md:border-2  md:rounded-lg md:mx-10 mb-10  md:border-slate-400">
+            <div className="xl:flex">
               <p className="mx-[16px] my-5 font-bold">Step 1</p>
               <div className="flex ml-auto">
                 <Image
-                  className="m-[16px]"
+                  className="m-[16px] max-md:mx-auto"
                   src={IconsImport.IconsDeletePlant}
                   alt="image"
                 />
                 <Image
-                  className="m-[16px]"
+                  className="m-[16px] max-md:mx-auto"
                   src={IconsImport.IconsDropdown}
                   alt="image"
                 />
               </div>
             </div>
-            <div className="flex">
-              <Image src={ImageImport.ImageTest} alt="profile" />
+            <div className="xl:flex">
+              <Image
+                src={ImageImport.ImageTest}
+                className="max-xl:m-auto"
+                alt="profile"
+              />
               <div className="w-full">
-                <div className="flex m-5">
+                <div className="xl:flex m-5 ">
                   <div className=" w-full">
                     <p className="text-[14px] font-[700]">
                       Title<span className="text-red-500">*</span>
                     </p>
                     <div className="relative w-full">
                       <input
-                        className="p-2 border-2 rounded-lg border-black h-[52px] w-[90%] pr-10"
+                        className="p-2 border-2 rounded-lg border-black h-[52px]  max-xl:w-full xl:w-[90%] pr-10"
                         type="text"
                         name=""
                         id=""
@@ -111,7 +115,7 @@ export default function Planting_Instructions() {
             </div>
           </div>
           <div className=" border-2 rounded-lg mx-10 mb-10">
-            <div className="flex">
+            <div className="md:flex">
               <div className="grid justify-items-end mx-5">
                 <Image
                   className="m-auto"
@@ -127,12 +131,12 @@ export default function Planting_Instructions() {
               </div>
               <div className="flex ml-auto">
                 <Image
-                  className="m-[16px]"
+                  className="m-[16px] max-md:mx-auto"
                   src={IconsImport.IconsDeletePlant}
                   alt="delet"
                 />
                 <Image
-                  className="m-[16px]"
+                  className="m-[16px] max-md:mx-auto"
                   src={IconsImport.IconsDropdown}
                   alt="dropdown"
                 />
@@ -140,9 +144,9 @@ export default function Planting_Instructions() {
             </div>
           </div>
         </div>
-        <div className="flex justify-between mt-10">
+        <div className="md:flex justify-between mt-10">
           <CancelButtonPlant />
-          <div className=" flex">
+          <div className="flex">
             <PreviousButtonPlant
               handleClick={handleClickPrev}
               disableOn={false}
