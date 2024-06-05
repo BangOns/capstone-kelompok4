@@ -9,7 +9,6 @@ const initialState = {
   messagePlantSuccess: false,
   messagePlantError: false,
   messagePlantDelete: false,
-  data: {},
 };
 
 const DashboardSlice = createSlice({
@@ -55,7 +54,7 @@ const DashboardSlice = createSlice({
       state.messagePlantDelete = action.payload;
     },
     FuncReminderSettings: (state, action) => {
-      state.data = action.payload;
+      state.dataPlantNew = action.payload;
     },
   },
 });
