@@ -17,6 +17,7 @@ import {
 } from "../../../../libs/redux/Slice/DashboardSlice";
 import Message_Error from "../../../Component_Message/Message_Error";
 import { IconsEdit } from "../../../../utils/Component-Icons-Reminder-settings";
+import DropdownSearch from "./Planting_Instructions/dropdown";
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 
 export default function Planting_Instructions() {
@@ -80,7 +81,7 @@ export default function Planting_Instructions() {
                     </p>
                     <div className="relative w-full">
                       <input
-                        className="p-2 border-2 rounded-lg border-black h-[52px]  max-xl:w-full xl:w-[90%] pr-10"
+                        className="p-2 border rounded-lg border-gray-300 max-xl:w-full xl:w-[90%] pr-10"
                         type="text"
                         name=""
                         id=""
@@ -94,15 +95,7 @@ export default function Planting_Instructions() {
                     <p className="text-[14px] font-[700]  ml-2">
                       Steps Categorys <span className="text-red-500">*</span>
                     </p>
-                    <select
-                      className="p-2 border-2 rounded-lg border-black h-[52px] bg-white w-[100%]"
-                      name=""
-                      id=""
-                    >
-                      <option value="">Soil Preparation</option>
-                      <option value="">a</option>
-                      <option value="">a</option>
-                    </select>
+                    <DropdownSearch></DropdownSearch>
                   </div>
                 </div>
                 <ReactQuill
