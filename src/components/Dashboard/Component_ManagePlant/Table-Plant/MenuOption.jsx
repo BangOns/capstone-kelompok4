@@ -47,6 +47,7 @@ export default function MenuOption({ active }) {
         } text-base font-nunito-bold rounded-[5px] flex gap-2 p-2`}
         onMouseMove={() => editMenuSet(true)}
         onMouseLeave={() => editMenuSet(false)}
+        onClick={() => router.push("manage-plant/edit-plant/:id")}
       >
         <IconsEdit active={editMenu} />
         Edit
