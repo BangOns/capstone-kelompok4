@@ -6,11 +6,13 @@ import { motion } from "framer-motion";
 import IconsDelete from "@/utils/Component-Icons-Table/IconsDelete";
 import { useDispatch } from "react-redux";
 import { FuncDeletePlant } from "../../../../libs/redux/Slice/DashboardSlice";
+import { useRouter } from "next/navigation";
 
 export default function MenuOption({ active }) {
   const [viewMenu, viewMenuSet] = useState(false);
   const [editMenu, editMenuSet] = useState(false);
   const [deleteMenu, deleteMenuSet] = useState(false);
+  const router = useRouter();
   const dispatch = useDispatch();
   return (
     <motion.div
@@ -34,6 +36,7 @@ export default function MenuOption({ active }) {
         } text-base font-nunito-bold rounded-[5px] flex gap-2 p-2`}
         onMouseMove={() => viewMenuSet(true)}
         onMouseLeave={() => viewMenuSet(false)}
+        onClick={() => router.push("manage-plant/view-plant/:id")}
       >
         <IconsView active={viewMenu} />
         View
@@ -44,6 +47,7 @@ export default function MenuOption({ active }) {
         } text-base font-nunito-bold rounded-[5px] flex gap-2 p-2`}
         onMouseMove={() => editMenuSet(true)}
         onMouseLeave={() => editMenuSet(false)}
+        onClick={() => router.push("manage-plant/edit-plant/:id")}
       >
         <IconsEdit active={editMenu} />
         Edit
