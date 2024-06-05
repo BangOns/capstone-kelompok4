@@ -15,6 +15,8 @@ import {
 } from "../../../../../libs/redux/Slice/DashboardSlice";
 import Message_Error from "../../../../Component_Message/Message_Error";
 import Leaf_Color from "./Select_Option/Leaf_Color";
+import Unit from "./Select_Option/Unit";
+import Each from "./Select_Option/Each";
 export default function Plant_Information_Step2() {
   const dispatch = useDispatch();
   function handleClickNext() {
@@ -87,27 +89,7 @@ export default function Plant_Information_Step2() {
                     <FiPlus />
                   </div>
                 </div>
-                <div className="w-[211px] xl:w-1/2">
-                  <h2 className="text-sm font-nunito-bold pb-1">
-                    Unit<span className="text-red-500">*</span>
-                  </h2>
-                  <div className="w-full items-center flex justify-between py-[14px] px-3 border border-slate-950 rounded-lg">
-                    <select
-                      name=""
-                      id=""
-                      className="w-full focus:ring-0 outline-none"
-                    >
-                      <option value="">Meter</option>
-                      <option value="1">1</option>
-                      <option value="2">2</option>
-                      <option value="3">3</option>
-                      <option value="4">4</option>
-                      <option value="5">5</option>
-                      <option value="6">6</option>
-                      <option value="7">7</option>
-                    </select>
-                  </div>
-                </div>
+                <Unit />
               </section>
               <section className="w-full flex gap-4 pt-4">
                 <div className="w-[211px] xl:w-1/2 ">
@@ -120,27 +102,7 @@ export default function Plant_Information_Step2() {
                     <FiPlus />
                   </div>
                 </div>
-                <div className="w-[211px] xl:w-1/2">
-                  <h2 className="text-sm font-nunito-bold pb-1">
-                    Each<span className="text-red-500">*</span>
-                  </h2>
-                  <div className="w-full items-center flex justify-between py-[14px] px-3 border border-slate-950 rounded-lg">
-                    <select
-                      name=""
-                      id=""
-                      className="w-full focus:ring-0 outline-none"
-                    >
-                      <option value="">Centimeter</option>
-                      <option value="1">1</option>
-                      <option value="2">2</option>
-                      <option value="3">3</option>
-                      <option value="4">4</option>
-                      <option value="5">5</option>
-                      <option value="6">6</option>
-                      <option value="7">7</option>
-                    </select>
-                  </div>
-                </div>
+                <Each />
               </section>
             </div>
             <div className=" h-1/2  basis-1/2">

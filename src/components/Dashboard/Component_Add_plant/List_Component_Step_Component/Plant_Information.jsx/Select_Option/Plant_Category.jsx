@@ -15,6 +15,8 @@ const variants = {
 };
 export default function Plant_Category() {
   const [open, setOpen] = useState(false);
+  const arrDataPlantCategory = ["Fruits", "Vegetables", "Flowers", "Seeds"];
+  const [valueCategory, valueCategorySet] = useState("");
   return (
     <section className="basis-[23%] w-full">
       <label htmlFor="" className="font-nunito-bold text-sm pb-1">
@@ -25,7 +27,7 @@ export default function Plant_Category() {
           className="px-3 py-[14px] flex w-full justify-between items-center border rounded-lg cursor-pointer"
           onClick={() => setOpen(!open)}
         >
-          <p>Select Category</p>
+          <p>{valueCategory ? `${valueCategory}` : "Select Category"}</p>
           <IoIosArrowDown />
         </div>
         <motion.div
@@ -44,26 +46,20 @@ export default function Plant_Category() {
             />
           </div>
           <ul className="w-full bg-white ">
-            <li className="w-full px-3 group py-[14px] hover:bg-emerald-500">
-              <p className="font-nunito text-sm group-hover:text-white">
-                Fruits
-              </p>
-            </li>
-            <li className="w-full px-3 group py-[14px] hover:bg-emerald-500">
-              <p className="font-nunito text-sm group-hover:text-white">
-                Fruits
-              </p>
-            </li>
-            <li className="w-full px-3 group py-[14px] hover:bg-emerald-500">
-              <p className="font-nunito text-sm group-hover:text-white">
-                Fruits
-              </p>
-            </li>
-            <li className="w-full px-3 group py-[14px] hover:bg-emerald-500">
-              <p className="font-nunito text-sm group-hover:text-white">
-                Fruits
-              </p>
-            </li>
+            {arrDataPlantCategory?.map((items, i) => (
+              <li
+                key={i}
+                className="w-full px-3 group py-[14px] hover:bg-emerald-500"
+                onClick={() => {
+                  setOpen(false);
+                  valueCategorySet(items);
+                }}
+              >
+                <p className="font-nunito text-sm group-hover:text-white">
+                  {items}
+                </p>
+              </li>
+            ))}
           </ul>
         </motion.div>
       </div>
