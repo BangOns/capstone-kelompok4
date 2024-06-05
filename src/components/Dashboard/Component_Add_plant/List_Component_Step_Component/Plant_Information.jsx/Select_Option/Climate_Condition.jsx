@@ -15,6 +15,8 @@ const variants = {
 };
 export default function Climate_Condition() {
   const [open, setOpen] = useState(false);
+  const arrDataClimateCondition = ["Dry", "Wet"];
+  const [valueClimate, valueClimateSet] = useState("");
   return (
     <section className="basis-[23%] w-full">
       <label htmlFor="" className="font-nunito-bold text-sm pb-1">
@@ -25,7 +27,7 @@ export default function Climate_Condition() {
           className="px-3 py-[14px] flex w-full justify-between items-center border rounded-lg cursor-pointer"
           onClick={() => setOpen(!open)}
         >
-          <p>Conditions...</p>
+          <p>{valueClimate ? `${valueClimate}` : "Conditions"}</p>
           <IoIosArrowDown />
         </div>
         <motion.div
@@ -35,35 +37,21 @@ export default function Climate_Condition() {
             open ? "block" : "hidden"
           }  `}
         >
-          <div className="w-full flex sticky items-center px-2  bg-white top-0">
-            <CiSearch className="text-gray-400" size={18} />
-            <input
-              type="text"
-              placeholder="Search Category"
-              className="w-full   p-2 text-sm font-nunito border-0  focus:ring-0 outline-none"
-            />
-          </div>
           <ul className="w-full bg-white ">
-            <li className="w-full px-3 group py-[14px] hover:bg-emerald-500">
-              <p className="font-nunito text-sm group-hover:text-white">
-                Fruits
-              </p>
-            </li>
-            <li className="w-full px-3 group py-[14px] hover:bg-emerald-500">
-              <p className="font-nunito text-sm group-hover:text-white">
-                Fruits
-              </p>
-            </li>
-            <li className="w-full px-3 group py-[14px] hover:bg-emerald-500">
-              <p className="font-nunito text-sm group-hover:text-white">
-                Fruits
-              </p>
-            </li>
-            <li className="w-full px-3 group py-[14px] hover:bg-emerald-500">
-              <p className="font-nunito text-sm group-hover:text-white">
-                Fruits
-              </p>
-            </li>
+            {arrDataClimateCondition?.map((items, i) => (
+              <li
+                key={i}
+                className="w-full px-3 group py-[14px] hover:bg-emerald-500"
+                onClick={() => {
+                  valueClimateSet(items);
+                  setOpen(false);
+                }}
+              >
+                <p className="font-nunito text-sm group-hover:text-white">
+                  {items}
+                </p>
+              </li>
+            ))}
           </ul>
         </motion.div>
       </div>

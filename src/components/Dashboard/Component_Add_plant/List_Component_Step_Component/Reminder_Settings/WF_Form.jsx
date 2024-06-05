@@ -1,8 +1,9 @@
-import React from "react";
+"use client";
+
+import React, { useState } from "react";
 import {
   IconsMinus,
   IconChevronDown,
-  IconsEdit,
   IconsPlus,
 } from "@/utils/Component-Icons-Reminder-settings";
 
@@ -22,6 +23,9 @@ const WF_Form = (props) => {
     handleIncrementFrequency,
     handleDecrementFrequency,
   } = props;
+
+  const [openEach, setOpenEach] = useState(false);
+  const [openUnit, setOpenUnit] = useState(false);
 
   return (
     <div className="flex flex-col gap-4">
@@ -51,21 +55,59 @@ const WF_Form = (props) => {
             Each<span className="text-[#EF4444]">*</span>
           </p>
           <div className="relative">
-            <select
+            <div
               value={wateringUnit}
-              onChange={(e) => setWateringUnit(e.target.value)}
-              className={`border border-[#D1D5DB] rounded-lg py-[14px] px-3 w-full appearance-none ${
+              onChange={(e) => setWateringUnit(e.target.innerText)}
+              className={`w-full ${
                 wateringUnit === "" ? "text-[#6B7280]" : "text-[#030712]"
               }`}
             >
-              <option value="" hidden>
-                Each...
-              </option>
-              <option value="days">Days</option>
-              <option value="weeks">Weeks</option>
-            </select>
-            <div className="absolute right-3 top-1/2 -translate-y-1/2">
-              <IconChevronDown />
+              <div
+                onClick={() => setOpenEach(!openEach)}
+                className="flex justify-between items-center border border-[#D1D5DB] rounded-lg py-[14px] px-3 w-full cursor-pointer"
+              >
+                <span
+                  className={`font-nunito font-normal leading-normal text-base ${
+                    wateringUnit ? "text-[#030712]" : "text-[#6B7280]"
+                  }`}
+                >
+                  {wateringUnit || "Each..."}
+                </span>
+                <IconChevronDown />
+              </div>
+              <ul
+                className={`mt-2 absolute z-10 shadow-lg bg-white w-full rounded-lg transition-max-height duration-300 ${
+                  openEach ? "border border-[#D1D5DB]" : "hidden"
+                }`}
+              >
+                <li
+                  onClick={() => {
+                    setWateringUnit("Day");
+                    setOpenEach(false);
+                  }}
+                  className="py-[14px] px-3 hover:bg-emerald-500 hover:text-white cursor-pointer"
+                >
+                  Day
+                </li>
+                <li
+                  onClick={() => {
+                    setWateringUnit("Week");
+                    setOpenEach(false);
+                  }}
+                  className="py-[14px] px-3 hover:bg-emerald-500 hover:text-white cursor-pointer"
+                >
+                  Week
+                </li>
+                <li
+                  onClick={() => {
+                    setWateringUnit("Month");
+                    setOpenEach(false);
+                  }}
+                  className="py-[14px] px-3 hover:bg-emerald-500 hover:text-white cursor-pointer"
+                >
+                  Month
+                </li>
+              </ul>
             </div>
           </div>
         </div>
@@ -100,21 +142,50 @@ const WF_Form = (props) => {
             Unit
           </label>
           <div className="relative">
-            <select
+            <div
               value={wateringAmountUnit}
-              onChange={(e) => setWateringAmountUnit(e.target.value)}
-              className={`border border-[#D1D5DB] rounded-lg py-[14px] px-3 gap-[117px] w-full appearance-none ${
+              onChange={(e) => setWateringAmountUnit(e.target.innerText)}
+              className={`w-full ${
                 wateringAmountUnit === "" ? "text-[#6B7280]" : "text-[#030712]"
               }`}
             >
-              <option value="" hidden>
-                Unit...
-              </option>
-              <option value="ml">milliliter (ml)</option>
-              <option value="l">liter (l)</option>
-            </select>
-            <div className="absolute right-3 top-1/2 -translate-y-1/2">
-              <IconChevronDown />
+              <div
+                onClick={() => setOpenUnit(!openUnit)}
+                className="flex justify-between items-center border border-[#D1D5DB] rounded-lg py-[14px] px-3 w-full cursor-pointer"
+              >
+                <span
+                  className={`font-nunito font-normal leading-normal text-base ${
+                    wateringAmountUnit ? "text-[#030712]" : "text-[#6B7280]"
+                  }`}
+                >
+                  {wateringAmountUnit || "Unit..."}
+                </span>
+                <IconChevronDown />
+              </div>
+              <ul
+                className={`mt-2 absolute z-10 shadow-lg bg-white w-full rounded-lg transition-max-height duration-300 ${
+                  openUnit ? "border border-[#D1D5DB]" : "hidden"
+                }`}
+              >
+                <li
+                  onClick={() => {
+                    setWateringAmountUnit("Liter");
+                    setOpenUnit(false);
+                  }}
+                  className="py-[14px] px-3 hover:bg-emerald-500 hover:text-white cursor-pointer"
+                >
+                  Liter
+                </li>
+                <li
+                  onClick={() => {
+                    setWateringAmountUnit("Milliliter");
+                    setOpenUnit(false);
+                  }}
+                  className="py-[14px] px-3 hover:bg-emerald-500 hover:text-white cursor-pointer"
+                >
+                  Milliliter
+                </li>
+              </ul>
             </div>
           </div>
         </div>
