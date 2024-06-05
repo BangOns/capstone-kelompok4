@@ -40,10 +40,11 @@ export default function Plant_Caring() {
             </p>
           </div>
           <ReactQuill
-            className="w-full h-[249px] border border-neutral-300 flex-col-reverse flex  rounded"
+            className="w-full h-[249px] text-neutral-950 border border-neutral-400 text-[14px] flex-col-reverse flex rounded-md"
             theme="snow"
             value={value}
             onChange={setValue}
+            placeholder="Additional Planting Instructions Tips..."
           />
         </div>
         <div className="flex justify-between mt-10">
