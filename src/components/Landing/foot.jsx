@@ -35,8 +35,8 @@ export default function Footer() {
           FAQ
         </Link>
       </div>
-      <div className="flex pb-10 mt-10 pt-10 border-t-2 border-[#6B7280]">
-        <div className="w-full flex flex-row justify-start items-center gap-[10px]">
+      <div className="flex max-[430px]:block pb-10 mt-10 pt-10 border-t-2 border-[#6B7280]">
+        <div className="w-full flex flex-row justify-start max-[430px]:justify-center  items-center gap-[10px]">
           <Image
             src={IconsImport.IconsLogoPlantopia}
             alt="image plants"
@@ -46,7 +46,7 @@ export default function Footer() {
             Plantopia
           </p>
         </div>
-        <div className="w-full  flex flex-row justify-start items-center">
+        <div className="w-full  max-[430px]:py-5  flex flex-row justify-start items-center">
           <p className="font-[700] text-[14px] text-[#4B5563] w-full font-nunito-bold ">
             ©Plantopia
             <span className="font-[400] text-[14px] pl-2 font-nunito-light">
@@ -56,17 +56,17 @@ export default function Footer() {
         </div>
         <div className="w-full  flex">
           <Image
-            className="ml-auto"
+            className="ml-auto max-[430px]:m-auto "
             src={ImageImport.ImageIG}
             alt="image plants"
           />
           <Image
-            className="ml-2"
+            className="ml-2 max-[430px]:m-auto"
             src={ImageImport.ImageFacebook}
             alt="image plants"
           />
           <Image
-            className="ml-2"
+            className="ml-2 max-[430px]:m-auto"
             src={ImageImport.ImageTwiter}
             alt="image plants"
           />
