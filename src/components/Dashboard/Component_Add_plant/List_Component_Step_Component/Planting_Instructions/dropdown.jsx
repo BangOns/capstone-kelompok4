@@ -26,7 +26,7 @@ export default function DropdownSearch({ items, onButtonClick }) {
       </div>
 
       {isOpen && (
-        <div className="w-full absolute right-0 z-10 mt-2 w-56 origin-top-right bg-white border border-gray-300 rounded-md shadow-lg">
+        <div className="w-full absolute right-0 z-10 mt-2  origin-top-right bg-white border border-gray-300 rounded-md shadow-lg">
           <div className="p-2">
             <input
               type="text"

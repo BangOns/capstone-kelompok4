@@ -6,7 +6,7 @@ import IconsTW from "../../../utils/Component-Icons-Footer/IconsTwitter";
 
 export default function FooterComponent() {
   return (
-    <div className="w-full md:h-[312px]  bg-[#ECFDF5]">
+    <div className="w-full md:h-[312px]  bg-emerald-500">
       <div className="w-full h-[111px]  mx-auto py-5 ">
         <h1 className="text-[#030712] text-center font-nunito-bold text-[32px]">
           Plantopia
