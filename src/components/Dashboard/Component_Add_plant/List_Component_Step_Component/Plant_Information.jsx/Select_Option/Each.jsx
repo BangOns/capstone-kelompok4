@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { CiSearch } from "react-icons/ci";
 import { IoIosArrowDown } from "react-icons/io";
 import { motion } from "framer-motion";
-
 const variants = {
   hidden: {
     opacity: 0,
@@ -13,38 +12,38 @@ const variants = {
     y: 0,
   },
 };
-export default function Planting_Time() {
+export default function Each() {
   const [open, setOpen] = useState(false);
-  const arrDataPlantingTime = ["Summer", "Autumn", "Spring", "Winter"];
-  const [valueTime, valueTimeSet] = useState("");
+  const arrDataEach = ["Day", "Week", "Month", "Year"];
+  const [valueEach, valueEachSet] = useState("");
   return (
-    <section className="w-full">
+    <section className="w-[211px] xl:w-1/2">
       <label htmlFor="" className="font-nunito-bold text-sm pb-1">
-        Planting Time <span className="text-red-500">*</span>
+        Each <span className="text-red-500">*</span>
       </label>
-      <div className="w-full relative bg-white  ">
+      <div className="w-full relative bg-white ">
         <div
           className="px-3 py-[14px] flex w-full justify-between items-center border rounded-lg cursor-pointer"
           onClick={() => setOpen(!open)}
         >
-          <p>{valueTime ? `${valueTime}` : "Conditions"}</p>
+          <p>{valueEach ? `${valueEach}` : "Time"}</p>
           <IoIosArrowDown />
         </div>
         <motion.div
           variants={variants}
           animate={open ? "visible" : "hidden"}
-          className={` bg-white w-full absolute scrollbar-thin top-16 max-h-28 scrollbar-thumb-rounded-lg scrollbar-track-rounded-lg scrollbar-thumb-emerald-400 scrollbar-track-white rounded-lg border overflow-y-auto z-10 ${
+          className={` w-full absolute scrollbar-thin top-16 max-h-28 scrollbar-thumb-rounded-lg scrollbar-track-rounded-lg scrollbar-thumb-emerald-400 scrollbar-track-white rounded-lg border overflow-y-auto ${
             open ? "block" : "hidden"
           }   `}
         >
           <ul className="w-full bg-white ">
-            {arrDataPlantingTime?.map((items, i) => (
+            {arrDataEach?.map((items, i) => (
               <li
                 key={i}
                 className="w-full px-3 group py-[14px] hover:bg-emerald-500"
                 onClick={() => {
                   setOpen(false);
-                  valueTimeSet(items);
+                  valueEachSet(items);
                 }}
               >
                 <p className="font-nunito text-sm group-hover:text-white">
