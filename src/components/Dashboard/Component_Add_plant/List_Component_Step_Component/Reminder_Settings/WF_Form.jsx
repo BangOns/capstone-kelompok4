@@ -10,27 +10,15 @@ import { FuncReminderSettingsInput } from "../../../../../libs/redux/Slice/AddPl
 
 const WF_Form = () => {
   const dispatch = useDispatch();
-  const wateringFrequency = useSelector(
-    (state) => state.addplant.ReminderSettingsInput.frequency
-  );
-  const wateringAmount = useSelector(
-    (state) => state.addplant.ReminderSettingsInput.amount
-  );
-  const each = useSelector(
-    (state) => state.addplant.ReminderSettingsInput.each
-  );
-  const unit = useSelector(
-    (state) => state.addplant.ReminderSettingsInput.unit
-  );
-  const time = useSelector(
-    (state) => state.addplant.ReminderSettingsInput.time
-  );
-  const openEach = useSelector(
-    (state) => state.addplant.ReminderSettingsInput.openEach
-  );
-  const openUnit = useSelector(
-    (state) => state.addplant.ReminderSettingsInput.openUnit
-  );
+  const {
+    frequency: wateringFrequency,
+    amount: wateringAmount,
+    each,
+    unit,
+    time,
+    openEach,
+    openUnit,
+  } = useSelector((state) => state.addplant.ReminderSettingsInput);
 
   const handleIncrementFrequency = () => {
     dispatch(
