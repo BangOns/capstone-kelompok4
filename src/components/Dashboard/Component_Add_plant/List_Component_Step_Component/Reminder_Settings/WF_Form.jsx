@@ -1,6 +1,5 @@
 "use client";
 
-import React, { useState } from "react";
 import {
   IconsMinus,
   IconChevronDown,
@@ -41,7 +40,6 @@ const WF_Form = () => {
       })
     );
   };
-
   const handleDecrementFrequency = () => {
     dispatch(
       FuncReminderSettingsInput({
@@ -50,6 +48,7 @@ const WF_Form = () => {
       })
     );
   };
+
   const handleIncrementAmount = () => {
     dispatch(
       FuncReminderSettingsInput({
@@ -58,7 +57,6 @@ const WF_Form = () => {
       })
     );
   };
-
   const handleDecrementAmount = () => {
     dispatch(
       FuncReminderSettingsInput({
@@ -67,12 +65,14 @@ const WF_Form = () => {
       })
     );
   };
+
   const handleEachChange = (value) => {
     dispatch(FuncReminderSettingsInput({ name: "each", value }));
   };
   const handleUnitChange = (value) => {
     dispatch(FuncReminderSettingsInput({ name: "unit", value }));
   };
+
   const handleOpenEach = (value) => {
     dispatch(FuncReminderSettingsInput({ name: "openEach", value }));
   };
