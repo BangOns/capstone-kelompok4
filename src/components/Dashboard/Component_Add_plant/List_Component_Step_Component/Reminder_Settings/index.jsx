@@ -11,17 +11,11 @@ import {
   FuncMessagePlantError,
   FuncNextStep,
   FuncPrevStep,
-  FuncReminderSettings,
 } from "../../../../../libs/redux/Slice/DashboardSlice";
 import { useDispatch } from "react-redux";
 import Message_Error from "../../../../Component_Message/Message_Error";
 
 const Reminder_Settings = () => {
-  const [wateringFrequency, setWateringFrequency] = useState(0);
-  const [wateringUnit, setWateringUnit] = useState("");
-  const [wateringAmount, setWateringAmount] = useState(0);
-  const [wateringAmountUnit, setWateringAmountUnit] = useState("");
-  const [wateringTime, setWateringTime] = useState("00:00");
   const dispatch = useDispatch();
   const [conditions, setConditions] = useState([
     { ifTheWather: "", whatYouNeed: "" },
@@ -41,39 +35,12 @@ const Reminder_Settings = () => {
     const newConditions = conditions.filter((_, i) => i !== index);
     setConditions(newConditions);
   };
-
-  const handleIncrementFrequency = () => {
-    setWateringFrequency((prev) => prev + 1);
-  };
-
-  const handleDecrementFrequency = () => {
-    setWateringFrequency((prev) => (prev > 0 ? prev - 1 : 0));
-  };
-
-  const handleIncrementAmmount = () => {
-    setWateringAmount((prev) => prev + 1);
-  };
-
-  const handleDecrementAmmount = () => {
-    setWateringAmount((prev) => (prev > 0 ? prev - 1 : 0));
-  };
   const handleClickPrev = () => {
     dispatch(FuncPrevStep());
   };
-  const handleClickNext = (ifTheWather, whatYouNeed) => {
+  const handleClickNext = () => {
     dispatch(FuncMessagePlantError(true));
     dispatch(FuncNextStep());
-    dispatch(
-      FuncReminderSettings(
-        wateringFrequency,
-        wateringUnit,
-        wateringAmount,
-        wateringAmountUnit,
-        wateringTime,
-        ifTheWather,
-        whatYouNeed
-      )
-    );
   };
 
   return (
@@ -84,21 +51,7 @@ const Reminder_Settings = () => {
             <h3 className="text-[#030712] text-xl font-nunito font-bold leading-normal mb-6">
               Watering Frequency
             </h3>
-            <WF_Form
-              wateringFrequency={wateringFrequency}
-              wateringUnit={wateringUnit}
-              setWateringUnit={setWateringUnit}
-              wateringAmount={wateringAmount}
-              setWateringAmount={setWateringAmount}
-              wateringAmountUnit={wateringAmountUnit}
-              setWateringAmountUnit={setWateringAmountUnit}
-              wateringTime={wateringTime}
-              setWateringTime={setWateringTime}
-              handleIncrementAmmount={handleIncrementAmmount}
-              handleDecrementAmmount={handleDecrementAmmount}
-              handleIncrementFrequency={handleIncrementFrequency}
-              handleDecrementFrequency={handleDecrementFrequency}
-            />
+            <WF_Form />
           </div>
 
           <div className="h-full border border-[#E5E7EB] rounded-md p-4">

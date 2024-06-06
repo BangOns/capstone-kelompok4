@@ -6,26 +6,79 @@ import {
   IconChevronDown,
   IconsPlus,
 } from "@/utils/Component-Icons-Reminder-settings";
+import { useDispatch, useSelector } from "react-redux";
+import { FuncReminderSettingsInput } from "../../../../../libs/redux/Slice/AddPlantSlice";
 
-const WF_Form = (props) => {
-  const {
-    wateringFrequency,
-    wateringUnit,
-    setWateringUnit,
-    wateringAmount,
-    setWateringAmount,
-    wateringAmountUnit,
-    setWateringAmountUnit,
-    wateringTime,
-    setWateringTime,
-    handleIncrementAmmount,
-    handleDecrementAmmount,
-    handleIncrementFrequency,
-    handleDecrementFrequency,
-  } = props;
+const WF_Form = () => {
+  const dispatch = useDispatch();
+  const wateringFrequency = useSelector(
+    (state) => state.addplant.ReminderSettingsInput.frequency
+  );
+  const wateringAmount = useSelector(
+    (state) => state.addplant.ReminderSettingsInput.amount
+  );
+  const each = useSelector(
+    (state) => state.addplant.ReminderSettingsInput.each
+  );
+  const unit = useSelector(
+    (state) => state.addplant.ReminderSettingsInput.unit
+  );
+  const time = useSelector(
+    (state) => state.addplant.ReminderSettingsInput.time
+  );
+  const openEach = useSelector(
+    (state) => state.addplant.ReminderSettingsInput.openEach
+  );
+  const openUnit = useSelector(
+    (state) => state.addplant.ReminderSettingsInput.openUnit
+  );
 
-  const [openEach, setOpenEach] = useState(false);
-  const [openUnit, setOpenUnit] = useState(false);
+  const handleIncrementFrequency = () => {
+    dispatch(
+      FuncReminderSettingsInput({
+        name: "frequency",
+        operator: "plus",
+      })
+    );
+  };
+
+  const handleDecrementFrequency = () => {
+    dispatch(
+      FuncReminderSettingsInput({
+        name: "frequency",
+        operator: "minus",
+      })
+    );
+  };
+  const handleIncrementAmount = () => {
+    dispatch(
+      FuncReminderSettingsInput({
+        name: "amount",
+        operator: "plus",
+      })
+    );
+  };
+
+  const handleDecrementAmount = () => {
+    dispatch(
+      FuncReminderSettingsInput({
+        name: "amount",
+        operator: "minus",
+      })
+    );
+  };
+  const handleEachChange = (value) => {
+    dispatch(FuncReminderSettingsInput({ name: "each", value }));
+  };
+  const handleUnitChange = (value) => {
+    dispatch(FuncReminderSettingsInput({ name: "unit", value }));
+  };
+  const handleOpenEach = (value) => {
+    dispatch(FuncReminderSettingsInput({ name: "openEach", value }));
+  };
+  const handleOpenUnit = (value) => {
+    dispatch(FuncReminderSettingsInput({ name: "openUnit", value }));
+  };
 
   return (
     <div className="flex flex-col gap-4">
@@ -56,22 +109,22 @@ const WF_Form = (props) => {
           </p>
           <div className="relative">
             <div
-              value={wateringUnit}
-              onChange={(e) => setWateringUnit(e.target.innerText)}
+              value={each}
+              onChange={(e) => handleEachChange(e.target.innerText)}
               className={`w-full ${
-                wateringUnit === "" ? "text-[#6B7280]" : "text-[#030712]"
+                each === "" ? "text-[#6B7280]" : "text-[#030712]"
               }`}
             >
               <div
-                onClick={() => setOpenEach(!openEach)}
+                onClick={() => handleOpenEach(!openEach)}
                 className="flex justify-between items-center border border-[#D1D5DB] rounded-lg py-[14px] px-3 w-full cursor-pointer"
               >
                 <span
                   className={`font-nunito font-normal leading-normal text-base ${
-                    wateringUnit ? "text-[#030712]" : "text-[#6B7280]"
+                    each ? "text-[#030712]" : "text-[#6B7280]"
                   }`}
                 >
-                  {wateringUnit || "Each..."}
+                  {each || "Each..."}
                 </span>
                 <IconChevronDown />
               </div>
@@ -82,8 +135,8 @@ const WF_Form = (props) => {
               >
                 <li
                   onClick={() => {
-                    setWateringUnit("Day");
-                    setOpenEach(false);
+                    handleEachChange("Day");
+                    handleOpenEach(false);
                   }}
                   className="py-[14px] px-3 hover:bg-emerald-500 hover:text-white cursor-pointer"
                 >
@@ -91,8 +144,8 @@ const WF_Form = (props) => {
                 </li>
                 <li
                   onClick={() => {
-                    setWateringUnit("Week");
-                    setOpenEach(false);
+                    handleEachChange("Week");
+                    handleOpenEach(false);
                   }}
                   className="py-[14px] px-3 hover:bg-emerald-500 hover:text-white cursor-pointer"
                 >
@@ -100,8 +153,8 @@ const WF_Form = (props) => {
                 </li>
                 <li
                   onClick={() => {
-                    setWateringUnit("Month");
-                    setOpenEach(false);
+                    handleEachChange("Month");
+                    handleOpenEach(false);
                   }}
                   className="py-[14px] px-3 hover:bg-emerald-500 hover:text-white cursor-pointer"
                 >
@@ -119,20 +172,19 @@ const WF_Form = (props) => {
             Watering Amount
           </label>
           <div className="flex justify-between items-center border border-[#D1D5DB] rounded-lg py-[14px] px-3 gap-2 w-full">
-            <button onClick={handleDecrementAmmount}>
+            <button onClick={handleDecrementAmount}>
               <IconsMinus />
             </button>
             <input
               type="number"
               value={wateringAmount}
-              onChange={(e) => setWateringAmount(parseInt(e.target.value))}
               className={`text-center w-full focus:outline-none placeholder:text-[#6B7280] ${
                 wateringAmount === 0 ? "text-[#6B7280]" : "text-[#030712]"
               }`}
               placeholder="0"
               min={0}
             />
-            <button onClick={handleIncrementAmmount}>
+            <button onClick={handleIncrementAmount}>
               <IconsPlus />
             </button>
           </div>
@@ -143,22 +195,22 @@ const WF_Form = (props) => {
           </label>
           <div className="relative">
             <div
-              value={wateringAmountUnit}
-              onChange={(e) => setWateringAmountUnit(e.target.innerText)}
+              value={unit}
+              onChange={(e) => handleUnitChange(e.target.innerText)}
               className={`w-full ${
-                wateringAmountUnit === "" ? "text-[#6B7280]" : "text-[#030712]"
+                unit === "" ? "text-[#6B7280]" : "text-[#030712]"
               }`}
             >
               <div
-                onClick={() => setOpenUnit(!openUnit)}
+                onClick={() => handleOpenUnit(!openUnit)}
                 className="flex justify-between items-center border border-[#D1D5DB] rounded-lg py-[14px] px-3 w-full cursor-pointer"
               >
                 <span
                   className={`font-nunito font-normal leading-normal text-base ${
-                    wateringAmountUnit ? "text-[#030712]" : "text-[#6B7280]"
+                    unit ? "text-[#030712]" : "text-[#6B7280]"
                   }`}
                 >
-                  {wateringAmountUnit || "Unit..."}
+                  {unit || "Unit..."}
                 </span>
                 <IconChevronDown />
               </div>
@@ -169,8 +221,8 @@ const WF_Form = (props) => {
               >
                 <li
                   onClick={() => {
-                    setWateringAmountUnit("Liter");
-                    setOpenUnit(false);
+                    handleUnitChange("Liter");
+                    handleOpenUnit(false);
                   }}
                   className="py-[14px] px-3 hover:bg-emerald-500 hover:text-white cursor-pointer"
                 >
@@ -178,8 +230,8 @@ const WF_Form = (props) => {
                 </li>
                 <li
                   onClick={() => {
-                    setWateringAmountUnit("Milliliter");
-                    setOpenUnit(false);
+                    handleUnitChange("Milliliter");
+                    handleOpenUnit(false);
                   }}
                   className="py-[14px] px-3 hover:bg-emerald-500 hover:text-white cursor-pointer"
                 >
@@ -197,8 +249,12 @@ const WF_Form = (props) => {
         </label>
         <input
           type="time"
-          value={wateringTime}
-          onChange={(e) => setWateringTime(e.target.value)}
+          value={time}
+          onChange={(e) =>
+            dispatch(
+              FuncReminderSettingsInput({ name: "time", value: e.target.value })
+            )
+          }
           placeholder="00:00"
           className="border border-[#D1D5DB] rounded-lg py-3 px-3 block w-full placeholder:text-[#6B7280] resize-webkit-time-picker-indicator"
         />
