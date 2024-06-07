@@ -16,7 +16,7 @@ export default function Navbar() {
     <nav
       className={`${
         isMinimized ? "w-[88px]" : "w-56"
-      } h-screen px-4 py-6 bg-white fixed top-0 left-0 shadow-lg transition-all duration-300`}
+      } z-20 h-screen px-4 py-6 bg-white fixed top-0 left-0 shadow-lg transition-all duration-300`}
     >
       <section className="w-full h-3/4">
         <header className="w-full flex gap-2 items-center px-3 py-4">

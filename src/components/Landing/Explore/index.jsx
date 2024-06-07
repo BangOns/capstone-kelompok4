@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 export default function Explore() {
   return (
     <div className="my-10">
-      <div className="text-center w-[716px] m-auto">
+      <div className="text-center w-[716px] max-[430px]:w-auto m-auto">
         <p className="font-[700] text-[36px] text-[#030712] font-nunito-bold">
           Explore the{" "}
           <span className="font-[700] text-[36px] text-[#10B981]">
@@ -18,10 +18,10 @@ export default function Explore() {
           cultivating plants and contributing to a greener world
         </p>
       </div>
-      <div className="flex m-auto w-[1120px]">
-        <div>
-          <div className="m-5 p-5 rounded-lg  flex w-[550px] h-[265px] bg-[#F9FAFB] hover:bg-[#ECFDF5] overflow-hidden">
-            <div className="relative w-[303px] font-nunito-bold flex flex-row justify-start items-center">
+      <div className="lg:flex items-center justify-center m-auto xl:w-[1120px] ">
+        <div className="">
+          <div className="m-5 p-5 rounded-lg flex lg:w-[400px] xl:w-[550px] max-[430px]:h-auto h-[265px] bg-[#F9FAFB] hover:bg-[#ECFDF5] overflow-hidden">
+            <div className="max-[430px]:z-10 relative w-[303px] font-nunito-bold flex flex-row justify-start items-center">
               <div>
                 <p className="font-bold text-2xl">Planting Instruction</p>
                 <p className="font-semibold text-sm text-gray-600 font-nunito-light">
@@ -31,24 +31,24 @@ export default function Explore() {
                 </p>
               </div>
             </div>
-            <div className="mt-auto hover:overflow-visible h-[180px] relative ml-auto">
+            <div className="max-[430px]:z-0 mt-auto hover:overflow-visible h-[180px] relative ml-auto">
               <motion.div
-                className="relative transition duration-500 transform hover:scale-125"
+                className="max-[430px]:top-[70px] relative transition duration-500 transform hover:scale-125"
                 whileHover={{ y: -25 }}
                 animate={{ y: 30 }}
               >
-                <div className="rounded-full w-[249px] h-[249px] p-10 bg-[#A7F3D0] absolute top-5 right-[-40px] opacity-50"></div>
+                <div className="rounded-full w-[249px] h-[249px] p-10 bg-[#A7F3D0] absolute top-5 right-[-40px]  max-[430px]:top-1 max-[430px]:right-[-150px] opacity-50"></div>
                 <Image
                   width={148}
                   height={306}
                   src={ImageImport.Imagephone1}
                   alt="imagephone"
-                  className="z-10 relative"
+                  className="relative"
                 />
               </motion.div>
             </div>
           </div>
-          <div className="m-5 p-5 rounded-lg  flex w-[550px] h-[265px] bg-[#F9FAFB] hover:bg-[#ECFDF5] overflow-hidden">
+          <div className="m-5 p-5 rounded-lg flex lg:w-[400px] xl:w-[550px] max-[430px]:h-auto  h-[265px] bg-[#F9FAFB] hover:bg-[#ECFDF5] overflow-hidden">
             <div className="relative w-[303px] font-nunito-bold flex flex-row justify-start items-center">
               <div>
                 <p className="font-bold text-2xl">Organize Your Plants</p>
@@ -60,11 +60,11 @@ export default function Explore() {
             </div>
             <div className="hover:overflow-visible h-[180px] relative ml-auto">
               <motion.div
-                className="relative transition duration-500 transform hover:scale-125"
+                className=" relative transition duration-500 transform hover:scale-125"
                 whileHover={{ y: -20 }}
                 animate={{ y: -50 }}
               >
-                <div className="rounded-full w-[249px] h-[249px] p-10 bg-[#A7F3D0] absolute bottom-32 right-[-40px] opacity-50"></div>
+                <div className="rounded-full w-[249px] h-[249px] p-10 bg-[#A7F3D0] absolute bottom-32 right-[-40px]  max-[430px]:bottom-1 max-[430px]:right-[-150px] opacity-50"></div>
                 <Image
                   width={148}
                   height={306}
@@ -76,9 +76,9 @@ export default function Explore() {
             </div>
           </div>
         </div>
-        <div>
-          <div className="m-5 p-5 rounded-lg  flex w-[550px] h-[265px] bg-[#F9FAFB] hover:bg-[#ECFDF5] overflow-hidden">
-            <div className="relative w-[303px] font-nunito-bold flex flex-row justify-start items-center">
+        <div className="">
+          <div className="m-5 p-5 rounded-lg flex lg:w-[400px] xl:w-[550px] max-[430px]:h-auto h-[265px] bg-[#F9FAFB] hover:bg-[#ECFDF5] overflow-hidden">
+            <div className=" max-[430px]:z-10 relative w-[303px] font-nunito-bold flex flex-row justify-start items-center">
               <div>
                 <p className="font-bold text-2xl">Watering Reminder</p>
                 <p className="font-semibold text-sm text-gray-600 font-nunito-light">
@@ -88,25 +88,25 @@ export default function Explore() {
                 </p>
               </div>
             </div>
-            <div className="hover:overflow-visible h-[180px] relative ml-auto">
+            <div className="max-[430px]:z-0 hover:overflow-visible h-[180px] relative ml-auto">
               <motion.div
                 className="relative transition duration-500 transform hover:scale-125"
                 whileHover={{ y: -20 }}
                 animate={{ y: -50 }}
               >
-                <div className="rounded-full w-[249px] h-[249px] p-10 bg-[#A7F3D0] absolute bottom-20 right-[-40px] opacity-50"></div>
+                <div className="rounded-full w-[249px] h-[249px] p-10 bg-[#A7F3D0] absolute bottom-20 right-[-40px] max-[430px]:bottom-1 max-[430px]:right-[-150px]  opacity-50"></div>
                 <Image
                   width={148}
                   height={306}
                   src={ImageImport.Imagephone3}
                   alt="imagephone"
-                  className="z-10 relative  mb-[300px]"
+                  className="relative mb-[300px]"
                 />
               </motion.div>
             </div>
           </div>
-          <div className="m-5 p-5 rounded-lg  flex w-[550px] h-[265px] bg-[#F9FAFB] hover:bg-[#ECFDF5] overflow-hidden">
-            <div className="relative w-[303px] font-nunito-bold flex flex-row justify-start items-center">
+          <div className="m-5 p-5 rounded-lg flex lg:w-[400px] xl:w-[550px] max-[430px]:h-auto  h-[265px] bg-[#F9FAFB] hover:bg-[#ECFDF5] overflow-hidden">
+            <div className="max-[430px]:z-10 relative w-[303px] font-nunito-bold flex flex-row justify-start items-center">
               <div>
                 <p className="font-bold text-2xl">Planting Instruction</p>
                 <p className="font-semibold text-sm text-gray-600 font-nunito-light">
@@ -119,17 +119,17 @@ export default function Explore() {
 
             <div className="mt-auto hover:overflow-visible h-[180px] relative ml-auto">
               <motion.div
-                className="relative transition duration-500 transform hover:scale-125"
-                animate={{ y: -15 }}
+                className="max-[430px]:top-[70px] relative transition duration-500 transform hover:scale-125"
+                animate={{ y: 10 }}
                 whileHover={{ y: -40 }}
               >
-                <div className="rounded-full w-[249px] h-[249px] p-10 bg-[#A7F3D0] absolute top-12 right-[-40px] opacity-50"></div>
+                <div className="max-[430px]:z-0 rounded-full w-[249px] h-[249px] p-10 bg-[#A7F3D0] absolute top-12 right-[-40px] max-[430px]:top-1 max-[430px]:right-[-150px]  opacity-50"></div>
                 <Image
                   width={148}
                   height={306}
                   src={ImageImport.Imagephone4}
                   alt="imagephone"
-                  className=" z-10 relative"
+                  className="relative"
                 />
               </motion.div>
             </div>
