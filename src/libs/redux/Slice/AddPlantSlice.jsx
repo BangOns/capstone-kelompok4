@@ -5,7 +5,7 @@ const initialState = {
     plantName: "",
   },
   PlantCaringInput: {
-    additionalPlant: "",
+    additional_tips: "",
   },
   FaQInput: {
     asked: "",

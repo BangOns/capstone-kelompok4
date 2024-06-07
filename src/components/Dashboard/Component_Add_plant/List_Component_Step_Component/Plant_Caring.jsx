@@ -60,7 +60,7 @@ export default function Plant_Caring() {
             value={value}
             onChange={(e) => {
               setValue(e);
-              dispatch(FuncPlantCaringInput({ name: "additionalPlant", value: e}));
+              dispatch(FuncPlantCaringInput({ name: "additional_tips", value: e}));
             }}
             placeholder="Additional Planting Instructions Tips..."
           />
