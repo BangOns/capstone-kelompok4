@@ -4,7 +4,7 @@ import { ImageImport } from "../../../utils/ImageImport";
 
 export default function Article_About() {
   return (
-    <article className="w-full h-svh grid place-items-center px-4 sm:px-[70px] mt-12  sm:mt-20 lg:mt-[156px]">
+    <article className="w-full h-svh grid place-items-center px-4 sm:px-[70px] mt-12  sm:mt-20 lg:mt-[156px]" id="about">
       <section className="w-full flex flex-col lg:flex-row gap-[78px] h-full">
         <figure className="basis-1/2 w-full h-full flex max-lg:justify-center items-center lg:items-start">
           <div
