@@ -3,17 +3,55 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import { IconsImport } from "@/utils/IconsImport";
+import { useRouter } from "next/navigation";
 
 export default function Form() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const router = useRouter();
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
 
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    setLoading(true);
+    setError("");
+
+    try {
+      const response = await fetch("https://be-agriculture-awh2j5ffyq-uc.a.run.app/api/v1/admin/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: email,
+          password: password,
+        }),
+      });
+
+      const data = await response.json();
+      setLoading(false);
+
+      if (!response.ok) {
+        throw new Error(data.message || "Something went wrong!");
+      }
+
+      console.log("Login successful:", data);
+      router.push("/dashboard");
+    } catch (error) {
+      setLoading(false);
+      setError(error.message);
+    }
+  };
+
   return (
     <div className="form mt-10">
-      <form>
+      <form onSubmit={handleSubmit}>
         <div className="flex flex-col gap-1 mb-6">
           <p className="font-nunito-bold text-sm leading-[19px]">Email</p>
           <label className="input input-bordered border-black flex items-center gap-2">
@@ -22,6 +60,9 @@ export default function Form() {
               type="email"
               className="grow"
               placeholder="example@mail.com"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
             />
           </label>
         </div>
@@ -33,6 +74,9 @@ export default function Form() {
               type={showPassword ? "text" : "password"}
               className="grow"
               placeholder="********"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
             />
             <span onClick={togglePasswordVisibility} className="cursor-pointer">
               <Image
@@ -62,11 +106,13 @@ export default function Form() {
             Forgot Password?
           </button>
         </div>
+        {error && <p className="text-red-500 mt-2">{error}</p>}
         <button
           type="submit"
           className="bg-emerald-500 w-full rounded-lg mt-6 p-[14px] font-nunito-bold text-base leading-6 text-white"
+          disabled={loading}
         >
-          Log In
+          {loading ? "Logging in..." : "Log In"}
         </button>
       </form>
     </div>
