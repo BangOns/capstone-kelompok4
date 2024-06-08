@@ -148,7 +148,7 @@ const WF_Form = () => {
                 dispatch(
                   FuncReminderSettingsInput({
                     name: "watering_amount",
-                    value: parseInt(e.target.value, 10),
+                    value: parseInt(e.target.value, 10) || 0,
                   })
                 )
               }

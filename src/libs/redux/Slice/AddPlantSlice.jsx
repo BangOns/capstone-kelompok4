@@ -37,8 +37,10 @@ export const AddPlantSlice = createSlice({
             state.ReminderSettingsInput[action.payload.name] + 1;
           break;
         case "minus":
-          state.ReminderSettingsInput[action.payload.name] =
-            state.ReminderSettingsInput[action.payload.name] - 1;
+          if (state.ReminderSettingsInput[action.payload.name] > 0) {
+            state.ReminderSettingsInput[action.payload.name] =
+              state.ReminderSettingsInput[action.payload.name] - 1;
+          }
           break;
         default:
           state.ReminderSettingsInput[action.payload.name] =
