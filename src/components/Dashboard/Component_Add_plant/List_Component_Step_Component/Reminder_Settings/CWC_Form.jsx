@@ -199,10 +199,10 @@ const CWC_Form = () => {
                           e.target.value
                         );
                       }}
-                      className="border border-[#D1D5DB] rounded-lg mt-1 py-[14px] pl-3 pr-11 w-full block placeholder:text-[#6B7280]"
+                      className="border border-[#D1D5DB] rounded-lg mt-1 py-[14px] pl-11 pr-11 w-full block placeholder:text-[#6B7280]"
                       placeholder="Create an recommended action for users..."
                     />
-                    <div className="absolute right-3 top-1/2 -translate-y-1/2">
+                    <div className="absolute left-3 top-1/2 -translate-y-1/2">
                       <IconsEdit />
                     </div>
                   </div>
