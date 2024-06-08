@@ -5,13 +5,13 @@ const initialState = {
     plantName: "",
   },
   ReminderSettingsInput: {
-    frequency: 0,
-    amount: 0,
+    watering_frequency: 0,
     each: "",
+    watering_amount: 0,
     unit: "",
-    time: "00:00",
-    openEach: false,
-    openUnit: false,
+    watering_time: "00:00",
+    weather_condition: "",
+    condition_description: "",
   },
   PlantCaringInput: {
     reachText: "",
@@ -31,12 +31,19 @@ export const AddPlantSlice = createSlice({
     },
     FuncReminderSettingsInput: (state, action) => {
       const { operator } = action.payload;
-      if (operator === "plus") {
-        state.ReminderSettingsInput[action.payload.name] += 1;
-      } else if (operator === "minus") {
-        state.ReminderSettingsInput[action.payload.name] -= 1;
-      } else {
-        state.ReminderSettingsInput[action.payload.name] = action.payload.value;
+      switch (operator) {
+        case "plus":
+          state.ReminderSettingsInput[action.payload.name] =
+            state.ReminderSettingsInput[action.payload.name] + 1;
+          break;
+        case "minus":
+          state.ReminderSettingsInput[action.payload.name] =
+            state.ReminderSettingsInput[action.payload.name] - 1;
+          break;
+        default:
+          state.ReminderSettingsInput[action.payload.name] =
+            action.payload.value;
+          break;
       }
     },
     FuncFaQInput: (state, action) => {
