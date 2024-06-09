@@ -20,11 +20,11 @@ export default function Each() {
   );
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
-  const arrDataEach = ["Day", "Week", "Month", "Year"];
+  const arrDataEach = ["Meter", "Centimeter"];
   return (
     <section className="w-[211px] xl:w-1/2">
       <label htmlFor="" className="font-nunito-bold text-sm pb-1">
-        Each <span className="text-red-500">*</span>
+        Unit <span className="text-red-500">*</span>
       </label>
       <div className="w-full relative bg-white ">
         <div
@@ -34,7 +34,7 @@ export default function Each() {
           <p>
             {plant_characteristic.wide_unit
               ? `${plant_characteristic.wide_unit}`
-              : "Time"}
+              : "Unit..."}
           </p>
           <IoIosArrowDown />
         </div>

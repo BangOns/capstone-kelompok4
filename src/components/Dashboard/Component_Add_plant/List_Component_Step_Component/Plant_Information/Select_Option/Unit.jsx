@@ -19,7 +19,7 @@ export default function Unit() {
   );
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
-  const arrDataUnit = ["Liter(L)", "Militer(Ml)"];
+  const arrDataUnit = ["Meter", "Centimeter"];
   return (
     <section className="w-[211px] xl:w-1/2">
       <label htmlFor="" className="font-nunito-bold text-sm pb-1">
@@ -33,7 +33,7 @@ export default function Unit() {
           <p>
             {plant_characteristic.height_unit
               ? `${plant_characteristic.height_unit}`
-              : "Meter"}
+              : "Unit..."}
           </p>
           <IoIosArrowDown />
         </div>

@@ -22,11 +22,11 @@ export const EACHS = [
 
 export const UNITS = [
   {
-    title: "Liter",
+    title: "Liter (l)",
     value: "liter",
   },
   {
-    title: "Milliliter",
+    title: "Milliliter (ml)",
     value: "milliliter",
   },
 ];
