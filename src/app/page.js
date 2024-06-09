@@ -7,6 +7,7 @@ import Hero from "../components/Landing/hero";
 import NavbarLanding from "../components/Landing/navbar";
 import Mitra from "../components/Landing/Mitra";
 import Explore from "../components/Landing/Explore";
+import Footer from "../components/Landing/foot";
 
 export default function Home() {
   const refNavbar = useRef(null);
@@ -19,6 +20,7 @@ export default function Home() {
       <About />
       <FAQ />
       <CTA />
+      <Footer />
     </main>
   );
 }

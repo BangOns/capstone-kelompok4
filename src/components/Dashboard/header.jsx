@@ -4,7 +4,7 @@ import Profile_header from "./Component_Header/Profile_header";
 
 export default function Header() {
   return (
-    <header>
+    <header className="z-10">
       <div className="flex justify-between items-center py-[16px]">
         <div>
           <Label_header

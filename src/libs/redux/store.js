@@ -1,9 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
 import DashboardReducer from "./Slice/DashboardSlice";
-import { useDispatch } from "react-redux";
+import AddPlantReducer from "./Slice/AddPlantSlice";
 
 export const store = configureStore({
   reducer: {
     dashboard: DashboardReducer,
+    addplant: AddPlantReducer,
   },
 });

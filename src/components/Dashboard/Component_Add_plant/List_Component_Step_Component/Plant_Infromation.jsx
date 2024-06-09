@@ -14,12 +14,15 @@ import { useDispatch, useSelector } from "react-redux";
 import Message_Error from "../../../Component_Message/Message_Error";
 import {
   FuncMessagePlantError,
-  FuncPlantInformation,
   FuncPlantInformationStep2,
 } from "../../../../libs/redux/Slice/DashboardSlice";
+import { FuncAddInputPlantInformation } from "../../../../libs/redux/Slice/AddPlantSlice";
 export default function Plant_Infromation() {
   const dispatch = useDispatch();
   const { plantInformationStep2 } = useSelector((state) => state.dashboard);
+  const { PlantInformationInput, dataPlantNew } = useSelector(
+    (state) => state.addplant
+  );
   const [value, setValue] = useState("");
   const [imageThumbnail, imageThumbnailSet] = useState("");
   const [imageChild, imageChildSet] = useState({
@@ -46,6 +49,15 @@ export default function Plant_Infromation() {
   }
 
   function handleClickNext() {
+    const dataInPlantInformation = {
+      ...PlantInformationInput,
+    };
+    dispatch(
+      FuncAddInputPlantInformation({
+        ...dataPlantNew,
+        ...dataInPlantInformation,
+      })
+    );
     dispatch(FuncMessagePlantError(true));
     dispatch(FuncPlantInformationStep2(true));
   }
@@ -55,7 +67,7 @@ export default function Plant_Infromation() {
       {!plantInformationStep2 ? (
         <div className="mt-6 p-4 border rounded-[10px]">
           <form className="w-full ">
-            <article className="w-full flex justify-between ">
+            <article className="w-full flex justify-between gap-6 ">
               <section className="basis-1/2 h-full">
                 <header className="pb-2">
                   <h1 className="font-nunito-bold text-sm ">
