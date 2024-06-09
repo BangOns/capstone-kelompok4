@@ -29,7 +29,7 @@ const Reminder_Settings = () => {
 
   const handleClickNext = () => {
     const checkValidateReminderSettings = ValidateReminderSettings(
-      ReminderSettingsInput
+      ReminderSettingsInput.watering_schedule
     );
     if (!checkValidateReminderSettings) {
       dispatch(FuncMessagePlantError(true));

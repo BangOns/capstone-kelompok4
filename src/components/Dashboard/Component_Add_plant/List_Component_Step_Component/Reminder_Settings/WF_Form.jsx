@@ -17,7 +17,9 @@ const WF_Form = () => {
   const [openUnit, setOpenUnit] = useState(false);
 
   const { watering_frequency, each, watering_amount, unit, watering_time } =
-    useSelector((state) => state.addplant.ReminderSettingsInput);
+    useSelector(
+      (state) => state.addplant.ReminderSettingsInput.watering_schedule
+    );
 
   const handleIncrementFrequency = () => {
     dispatch(
