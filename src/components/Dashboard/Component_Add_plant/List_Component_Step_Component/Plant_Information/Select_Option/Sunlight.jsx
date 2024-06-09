@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { CiSearch } from "react-icons/ci";
 import { IoIosArrowDown } from "react-icons/io";
 import { motion } from "framer-motion";
+import { useDispatch, useSelector } from "react-redux";
+import { FuncPlantInformationInput } from "../../../../../../libs/redux/Slice/AddPlantSlice";
 const variants = {
   hidden: {
     opacity: 0,
@@ -13,9 +15,14 @@ const variants = {
   },
 };
 export default function Sunlight() {
+  const { PlantInformationInput, dataPlantNew } = useSelector(
+    (state) => state.addplant
+  );
   const [open, setOpen] = useState(false);
   const arrDataSunlight = ["Fullsun", "Partsun", "Shade"];
   const [valueSunlight, valueSunlightSet] = useState("");
+  const dispatch = useDispatch();
+
   return (
     <section className="w-full">
       <label htmlFor="" className="font-nunito-bold text-sm pb-1">
@@ -26,7 +33,11 @@ export default function Sunlight() {
           className="px-3 py-[14px] flex w-full justify-between items-center border rounded-lg cursor-pointer"
           onClick={() => setOpen(!open)}
         >
-          <p>{valueSunlight ? `${valueSunlight}` : "Conditions..."}</p>
+          <p>
+            {PlantInformationInput.sunlight
+              ? `${PlantInformationInput.sunlight}`
+              : "Conditions..."}
+          </p>
           <IoIosArrowDown />
         </div>
         <motion.div
@@ -43,7 +54,12 @@ export default function Sunlight() {
                 className="w-full px-3 group py-[14px] hover:bg-emerald-500"
                 onClick={() => {
                   setOpen(false);
-                  valueSunlightSet(items);
+                  dispatch(
+                    FuncPlantInformationInput({
+                      name: "sunlight",
+                      value: items,
+                    })
+                  );
                 }}
               >
                 <p className="font-nunito text-sm group-hover:text-white">

@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { CiSearch } from "react-icons/ci";
 import { IoIosArrowDown } from "react-icons/io";
 import { motion } from "framer-motion";
+import { useDispatch, useSelector } from "react-redux";
+import { FuncPlantInformationInput } from "../../../../../../libs/redux/Slice/AddPlantSlice";
 
 const variants = {
   hidden: {
@@ -14,9 +16,13 @@ const variants = {
   },
 };
 export default function Climate_Condition() {
+  const { PlantInformationInput, dataPlantNew } = useSelector(
+    (state) => state.addplant
+  );
   const [open, setOpen] = useState(false);
   const arrDataClimateCondition = ["Dry", "Wet"];
-  const [valueClimate, valueClimateSet] = useState("");
+  const dispatch = useDispatch();
+
   return (
     <section className="basis-[23%] w-full">
       <label htmlFor="" className="font-nunito-bold text-sm pb-1">
@@ -27,7 +33,11 @@ export default function Climate_Condition() {
           className="px-3 py-[14px] flex w-full justify-between items-center border rounded-lg cursor-pointer"
           onClick={() => setOpen(!open)}
         >
-          <p>{valueClimate ? `${valueClimate}` : "Conditions"}</p>
+          <p>
+            {PlantInformationInput.climate_condition
+              ? `${PlantInformationInput.climate_condition}`
+              : "Conditions"}
+          </p>
           <IoIosArrowDown />
         </div>
         <motion.div
@@ -43,7 +53,13 @@ export default function Climate_Condition() {
                 key={i}
                 className="w-full px-3 group py-[14px] hover:bg-emerald-500"
                 onClick={() => {
-                  valueClimateSet(items);
+                  console.log(items);
+                  dispatch(
+                    FuncPlantInformationInput({
+                      name: "climate_condition",
+                      value: items,
+                    })
+                  );
                   setOpen(false);
                 }}
               >

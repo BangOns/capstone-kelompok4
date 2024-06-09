@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { CiSearch } from "react-icons/ci";
 import { IoIosArrowDown } from "react-icons/io";
 import { motion } from "framer-motion";
+import { useDispatch, useSelector } from "react-redux";
+import { FuncPlantInformationInput } from "../../../../../../libs/redux/Slice/AddPlantSlice";
 
 const variants = {
   hidden: {
@@ -14,8 +16,10 @@ const variants = {
   },
 };
 export default function Harvest_Duration() {
+  const { PlantInformationInput, dataPlantNew } = useSelector(
+    (state) => state.addplant
+  );
   const [open, setOpen] = useState(false);
-  const [valueDuration, valueDurationSet] = useState("");
   const arrDataHarvestDuration = [
     "1 Month",
     "3 Months",
@@ -23,6 +27,7 @@ export default function Harvest_Duration() {
     "9 Months",
     "12 Months",
   ];
+  const dispatch = useDispatch();
 
   return (
     <section className="basis-[23%] w-full">
@@ -34,7 +39,11 @@ export default function Harvest_Duration() {
           className="px-3 py-[14px] flex w-full justify-between items-center border rounded-lg cursor-pointer"
           onClick={() => setOpen(!open)}
         >
-          <p>{valueDuration ? `${valueDuration}` : "Month"}</p>
+          <p>
+            {PlantInformationInput.harvest_duration
+              ? `${PlantInformationInput.harvest_duration}`
+              : "Month"}
+          </p>
           <IoIosArrowDown />
         </div>
         <motion.div
@@ -50,7 +59,12 @@ export default function Harvest_Duration() {
                 key={i}
                 className="w-full px-3 group py-[14px] hover:bg-emerald-500"
                 onClick={() => {
-                  valueDurationSet(items);
+                  dispatch(
+                    FuncPlantInformationInput({
+                      name: "harvest_duration",
+                      value: items,
+                    })
+                  );
                   setOpen(false);
                 }}
               >

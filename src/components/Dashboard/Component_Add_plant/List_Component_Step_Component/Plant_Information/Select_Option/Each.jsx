@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { CiSearch } from "react-icons/ci";
 import { IoIosArrowDown } from "react-icons/io";
 import { motion } from "framer-motion";
+import { useDispatch, useSelector } from "react-redux";
+import { FuncPlantCharateristic } from "../../../../../../libs/redux/Slice/AddPlantSlice";
 const variants = {
   hidden: {
     opacity: 0,
@@ -13,9 +15,12 @@ const variants = {
   },
 };
 export default function Each() {
+  const { plant_characteristic } = useSelector(
+    (state) => state.addplant.PlantInformationInput
+  );
+  const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
   const arrDataEach = ["Day", "Week", "Month", "Year"];
-  const [valueEach, valueEachSet] = useState("");
   return (
     <section className="w-[211px] xl:w-1/2">
       <label htmlFor="" className="font-nunito-bold text-sm pb-1">
@@ -26,7 +31,11 @@ export default function Each() {
           className="px-3 py-[14px] flex w-full justify-between items-center border rounded-lg cursor-pointer"
           onClick={() => setOpen(!open)}
         >
-          <p>{valueEach ? `${valueEach}` : "Time"}</p>
+          <p>
+            {plant_characteristic.wide_unit
+              ? `${plant_characteristic.wide_unit}`
+              : "Time"}
+          </p>
           <IoIosArrowDown />
         </div>
         <motion.div
@@ -43,7 +52,9 @@ export default function Each() {
                 className="w-full px-3 group py-[14px] hover:bg-emerald-500"
                 onClick={() => {
                   setOpen(false);
-                  valueEachSet(items);
+                  dispatch(
+                    FuncPlantCharateristic({ name: "wide_unit", value: items })
+                  );
                 }}
               >
                 <p className="font-nunito text-sm group-hover:text-white">

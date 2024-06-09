@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { IoIosArrowDown } from "react-icons/io";
 import { motion } from "framer-motion";
+import { useDispatch, useSelector } from "react-redux";
+import { FuncPlantCharateristic } from "../../../../../../libs/redux/Slice/AddPlantSlice";
 const variants = {
   hidden: {
     opacity: 0,
@@ -12,9 +14,12 @@ const variants = {
   },
 };
 export default function Unit() {
+  const { plant_characteristic } = useSelector(
+    (state) => state.addplant.PlantInformationInput
+  );
+  const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
   const arrDataUnit = ["Liter(L)", "Militer(Ml)"];
-  const [valueUnit, valueUnitSet] = useState("");
   return (
     <section className="w-[211px] xl:w-1/2">
       <label htmlFor="" className="font-nunito-bold text-sm pb-1">
@@ -25,7 +30,11 @@ export default function Unit() {
           className="px-3 py-[14px] flex w-full justify-between items-center border rounded-lg cursor-pointer"
           onClick={() => setOpen(!open)}
         >
-          <p>{valueUnit ? `${valueUnit}` : "Meter"}</p>
+          <p>
+            {plant_characteristic.height_unit
+              ? `${plant_characteristic.height_unit}`
+              : "Meter"}
+          </p>
           <IoIosArrowDown />
         </div>
         <motion.div
@@ -42,7 +51,12 @@ export default function Unit() {
                 className="w-full px-3 group py-[14px] hover:bg-emerald-500"
                 onClick={() => {
                   setOpen(false);
-                  valueUnitSet(items);
+                  dispatch(
+                    FuncPlantCharateristic({
+                      name: "height_unit",
+                      value: items,
+                    })
+                  );
                 }}
               >
                 <p className="font-nunito text-sm group-hover:text-white">

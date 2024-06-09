@@ -3,11 +3,8 @@ import React from "react";
 import CancelButtonPlant from "../../Component_Buttons/cancel_buton_plant";
 import PreviousButtonPlant from "../../Component_Buttons/previous_buton_plant";
 import NextButtonPlant from "../../Component_Buttons/next_buton_plant";
-import Image from "next/image";
-import { ImageImport } from "@/utils/ImageImport";
-import { FiMinus } from "react-icons/fi";
-import { FiPlus } from "react-icons/fi";
-import { useDispatch } from "react-redux";
+
+import { useDispatch, useSelector } from "react-redux";
 import {
   FuncMessagePlantError,
   FuncNextStep,
@@ -17,11 +14,35 @@ import Message_Error from "../../../../Component_Message/Message_Error";
 import Leaf_Color from "./Select_Option/Leaf_Color";
 import Unit from "./Select_Option/Unit";
 import Each from "./Select_Option/Each";
+import Plant_Height from "./Plant_Information_Step2/Plant_Height";
+import Plant_Wide from "./Plant_Information_Step2/Plant_Wide";
+import Data_Plant_Information_Step1 from "./Plant_Information_Step2/Data_Plant_Information_Step1";
+import { FuncAddInputPlantInformation } from "../../../../../libs/redux/Slice/AddPlantSlice";
+import { ValidateInformation2 } from "../../../../../utils/Validate_AddPlant/Validate_PlantInformation";
 export default function Plant_Information_Step2() {
+  const { PlantInformationInput, dataPlantNew } = useSelector(
+    (state) => state.addplant
+  );
   const dispatch = useDispatch();
   function handleClickNext() {
-    dispatch(FuncMessagePlantError(true));
-    dispatch(FuncNextStep());
+    const checkValidatePlantInformation2 = ValidateInformation2(
+      PlantInformationInput.plant_characteristic
+    );
+    if (!checkValidatePlantInformation2) {
+      dispatch(FuncMessagePlantError(true));
+    } else {
+      const dataPlantInformation2 = {
+        id: Math.floor(Math.random() * 1000),
+        ...PlantInformationInput,
+      };
+      dispatch(
+        FuncAddInputPlantInformation({
+          ...dataPlantNew,
+          ...dataPlantInformation2,
+        })
+      );
+      dispatch(FuncNextStep());
+    }
   }
   function handleClickPrev() {
     dispatch(FuncPlantInformationStep2(false));
@@ -32,44 +53,7 @@ export default function Plant_Information_Step2() {
         <header className="">
           <h1 className="font-nunito-bold text-xl">Plant Information</h1>
         </header>
-        <section className="w-full p-4 border-slate-200 border rounded-[10px] flex gap-6">
-          <article className="flex  gap-4 items-center">
-            <figure className="w-[60px] h-[60px] rounded-xl border flex items-end justify-center bg-gray-200 overflow-hidden bg-gradient-to-b from-50% from-white to-gray-200/60">
-              <Image src={ImageImport.ImagePlants} alt="Image plants" />
-            </figure>
-            <div className="">
-              <h4 className="font-nunito-bold">Tomato</h4>
-              <p className="text-sm font-nunito italic text-slate-500">
-                Solanaceae
-              </p>
-            </div>
-          </article>
-          <div className="w-px h-[60px] bg-slate-500"></div>
-          <article className="flex gap-10 items-center">
-            <section>
-              <h4 className="text-sm font-nunito text-slate-500">
-                Plant Category
-              </h4>
-              <p className="font-nunito-bold ">Fruits</p>
-            </section>
-            <section>
-              <h4 className="text-sm font-nunito text-slate-500">Toxicity</h4>
-              <p className="font-nunito-bold ">Non-Toxic Plant</p>
-            </section>
-            <section>
-              <h4 className="text-sm font-nunito text-slate-500">
-                Harvest Duration
-              </h4>
-              <p className="font-nunito-bold ">5 Months</p>
-            </section>
-            <section>
-              <h4 className="text-sm font-nunito text-slate-500">
-                Climate Condition
-              </h4>
-              <p className="font-nunito-bold ">Dry</p>
-            </section>
-          </article>
-        </section>
+        <Data_Plant_Information_Step1 />
         <section className="mt-4 ">
           <header className="mb-3">
             <h1 className="font-nunito-bold text-[20px]">
@@ -79,29 +63,11 @@ export default function Plant_Information_Step2() {
           <form className="w-full flex gap-4">
             <div className="border border-slate-200 rounded-[10px] p-4 basis-1/2">
               <section className="w-full flex gap-4">
-                <div className="w-[211px] xl:w-1/2 ">
-                  <h2 className="text-sm font-nunito-bold pb-1">
-                    Height<span className="text-red-500">*</span>
-                  </h2>
-                  <div className="w-full items-center flex justify-between py-[14px] px-3 border border-slate-950 rounded-lg">
-                    <FiMinus />
-                    <p>0</p>
-                    <FiPlus />
-                  </div>
-                </div>
+                <Plant_Height />
                 <Unit />
               </section>
               <section className="w-full flex gap-4 pt-4">
-                <div className="w-[211px] xl:w-1/2 ">
-                  <h2 className="text-sm font-nunito-bold pb-1">
-                    Wide<span className="text-red-500">*</span>
-                  </h2>
-                  <div className="w-full items-center flex justify-between py-[14px] px-3 border border-slate-950 rounded-lg">
-                    <FiMinus />
-                    <p>0</p>
-                    <FiPlus />
-                  </div>
-                </div>
+                <Plant_Wide />
                 <Each />
               </section>
             </div>

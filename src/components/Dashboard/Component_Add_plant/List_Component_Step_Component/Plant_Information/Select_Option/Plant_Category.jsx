@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { CiSearch } from "react-icons/ci";
 import { IoIosArrowDown } from "react-icons/io";
 import { motion } from "framer-motion";
+import { useDispatch, useSelector } from "react-redux";
+import { FuncPlantInformationInput } from "../../../../../../libs/redux/Slice/AddPlantSlice";
 
 const variants = {
   hidden: {
@@ -14,9 +16,29 @@ const variants = {
   },
 };
 export default function Plant_Category() {
+  const { PlantInformationInput, dataPlantNew } = useSelector(
+    (state) => state.addplant
+  );
   const [open, setOpen] = useState(false);
-  const arrDataPlantCategory = ["Fruits", "Vegetables", "Flowers", "Seeds"];
-  const [valueCategory, valueCategorySet] = useState("");
+  const [allPlantCategories, allPlantCategoriesSet] = useState([]);
+  const dispatch = useDispatch();
+  async function getPlantCategories() {
+    try {
+      const response = await fetch(
+        "https://be-agriculture-awh2j5ffyq-uc.a.run.app/api/v1/plants/instructions/categories",
+        {
+          method: "GET",
+        }
+      );
+      const allResponse = await response.json();
+      allPlantCategoriesSet(allResponse.data);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  useEffect(() => {
+    getPlantCategories();
+  }, []);
   return (
     <section className="basis-[23%] w-full">
       <label htmlFor="" className="font-nunito-bold text-sm pb-1">
@@ -27,7 +49,11 @@ export default function Plant_Category() {
           className="px-3 py-[14px] flex w-full justify-between items-center border rounded-lg cursor-pointer"
           onClick={() => setOpen(!open)}
         >
-          <p>{valueCategory ? `${valueCategory}` : "Select Category"}</p>
+          <p>
+            {PlantInformationInput.plant_category.hasOwnProperty("name")
+              ? `${PlantInformationInput.plant_category.name}`
+              : "Select Category"}
+          </p>
           <IoIosArrowDown />
         </div>
         <motion.div
@@ -46,20 +72,29 @@ export default function Plant_Category() {
             />
           </div>
           <ul className="w-full bg-white ">
-            {arrDataPlantCategory?.map((items, i) => (
-              <li
-                key={i}
-                className="w-full px-3 group py-[14px] hover:bg-emerald-500"
-                onClick={() => {
-                  setOpen(false);
-                  valueCategorySet(items);
-                }}
-              >
-                <p className="font-nunito text-sm group-hover:text-white">
-                  {items}
-                </p>
-              </li>
-            ))}
+            {allPlantCategories.length !== 0 ? (
+              allPlantCategories?.map((items, i) => (
+                <li
+                  key={i}
+                  className="w-full px-3 group py-[14px] hover:bg-emerald-500 cursor-pointer"
+                  onClick={() => {
+                    setOpen(false);
+                    dispatch(
+                      FuncPlantInformationInput({
+                        name: "plant_category",
+                        value: items,
+                      })
+                    );
+                  }}
+                >
+                  <p className="font-nunito text-sm group-hover:text-white">
+                    {items.name}
+                  </p>
+                </li>
+              ))
+            ) : (
+              <p>Loading...</p>
+            )}
           </ul>
         </motion.div>
       </div>
