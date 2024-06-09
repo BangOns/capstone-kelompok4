@@ -1,7 +1,7 @@
 "use client";
 
 import React, { Fragment } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import {
   FuncMessagePlantError,
@@ -14,8 +14,13 @@ import NextButtonPlant from "../../Component_Buttons/next_buton_plant";
 import Message_Error from "../../../../Component_Message/Message_Error";
 import WF_Form from "./WF_Form";
 import CWC_Form from "./CWC_Form";
+import { FuncAddInputPlantInformation } from "@/libs/redux/Slice/AddPlantSlice";
+import { ValidateReminderSettings } from "../../../../../utils/Validate_AddPlant/Validate_ReminderSettings";
 
 const Reminder_Settings = () => {
+  const { ReminderSettingsInput, dataPlantNew } = useSelector(
+    (state) => state.addplant
+  );
   const dispatch = useDispatch();
 
   const handleClickPrev = () => {
@@ -23,8 +28,23 @@ const Reminder_Settings = () => {
   };
 
   const handleClickNext = () => {
-    dispatch(FuncMessagePlantError(true));
-    dispatch(FuncNextStep());
+    const checkValidateReminderSettings = ValidateReminderSettings(
+      ReminderSettingsInput
+    );
+    if (!checkValidateReminderSettings) {
+      dispatch(FuncMessagePlantError(true));
+    } else {
+      const dataInputReminderSettings = {
+        ...ReminderSettingsInput,
+      };
+      dispatch(
+        FuncAddInputPlantInformation({
+          ...dataPlantNew,
+          ...dataInputReminderSettings,
+        })
+      );
+      dispatch(FuncNextStep());
+    }
   };
 
   return (
