@@ -3,44 +3,90 @@ import IconsAddPlant from "@/utils/Component-Icons-Add-plant/IconsAddPlant";
 import { ImageImport } from "@/utils/ImageImport";
 import { IconsImport } from "@/utils/IconsImport";
 import Image from "next/image";
-import { Fragment, useState } from "react";
+import { Fragment, useRef, useState } from "react";
 import "react-quill/dist/quill.snow.css";
 import dynamic from "next/dynamic";
 import CancelButtonPlant from "../Component_Buttons/cancel_buton_plant";
 import NextButtonPlant from "../Component_Buttons/next_buton_plant";
 import PreviousButtonPlant from "../Component_Buttons/previous_buton_plant";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   FuncMessagePlantError,
   FuncNextStep,
   FuncPrevStep,
 } from "../../../../libs/redux/Slice/DashboardSlice";
+import { FuncPlantingInstructions } from "../../../../libs/redux/Slice/AddPlantSlice";
 import Message_Error from "../../../Component_Message/Message_Error";
 import { IconsEdit } from "../../../../utils/Component-Icons-Reminder-settings";
 import DropdownSearch from "./Planting_Instructions/dropdown";
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 
 export default function Planting_Instructions() {
-  const [value, setValue] = useState("");
   const dispatch = useDispatch();
+  const count = useSelector((state) => state.addplant.PlantingInstructions);
+  const fileInputRef = useRef(null);
+  const [data, setData] = useState(count);
+  const [hide, setHide] = useState();
+
+  const handleImageClick = () => {
+    fileInputRef.current.click();
+  };
 
   function handleClickPrev() {
     dispatch(FuncPrevStep());
   }
-  function handleClickNext() {
-    dispatch(FuncMessagePlantError(true));
 
+  function handleClickNext() {
+    dispatch(FuncPlantingInstructions(data));
+    if (data.length === 0) {
+      dispatch(FuncMessagePlantError(true));
+    }
     dispatch(FuncNextStep());
   }
 
+  function add() {
+    setData([...data, { nama: "", category: "", description: "", image: "" }]);
+  }
+
+  const updateField = (index, field, value) => {
+    const newData = [...data];
+    if (field === "image") {
+      const file = value.target.files[0];
+      if (file) {
+        const imageUrl = URL.createObjectURL(file);
+        newData[index] = { ...newData[index], [field]: imageUrl };
+        setData(newData);
+      }
+    } else {
+      newData[index] = { ...newData[index], [field]: value };
+      setData(newData);
+    }
+  };
+
+  function delet(e) {
+    const confirmation = confirm(
+      "Apakah Anda yakin ingin menghapus elemen ini?"
+    );
+    if (confirmation) {
+      const newData = [...data];
+      newData.splice(e, 1);
+      setData(newData);
+      console.log("Elemen berhasil dihapus.");
+    } else {
+      console.log("Penghapusan dibatalkan.");
+    }
+  }
   return (
     <Fragment>
       <div className="mt-6 p-4 border rounded-[10px]">
         <div className="rounded-lg border-2 mt-10">
           <div className="md:flex  m-[16px] mx-10 ">
             <div className="w-full ">
-              <div className="flex text-green-500">
-                <div className="mr-[16px]">
+              <div
+                className="flex text-green-500 w-fit cursor-pointer"
+                onClick={add}
+              >
+                <div className="mr-[16px] ">
                   <IconsAddPlant />
                 </div>
                 <p className="text-[16px]"> Add Steps</p>
@@ -52,91 +98,140 @@ export default function Planting_Instructions() {
               minimize the box
             </p>
           </div>
-          <div className="  md:border-2  md:rounded-lg md:mx-10 mb-10  md:border-slate-400">
-            <div className="xl:flex">
-              <p className="mx-[16px] my-5 font-bold">Step 1</p>
-              <div className="flex ml-auto">
-                <Image
-                  className="m-[16px] max-md:mx-auto"
-                  src={IconsImport.IconsDeletePlant}
-                  alt="image"
-                />
-                <Image
-                  className="m-[16px] max-md:mx-auto"
-                  src={IconsImport.IconsDropdown}
-                  alt="image"
-                />
-              </div>
-            </div>
-            <div className="xl:flex">
-              <Image
-                src={ImageImport.ImageTest}
-                className="max-xl:m-auto"
-                alt="profile"
-              />
-              <div className="w-full">
-                <div className="xl:flex m-5 ">
-                  <div className=" w-full">
-                    <p className="text-[14px] font-[700]">
-                      Title<span className="text-red-500">*</span>
-                    </p>
-                    <div className="relative w-full">
-                      <input
-                        className="p-2 border rounded-lg border-gray-300 max-xl:w-full xl:w-[90%] pr-10"
-                        type="text"
-                        name=""
-                        id=""
-                      />
-                      <div className="absolute inset-y-0 right-[50px] flex items-center">
-                        <IconsEdit />
-                      </div>
-                    </div>
+         
+          {data.length == 0 ? (
+            <div className="border-2 md:border-2 md:rounded-lg md:mx-10 mb-10 text-center h-32"></div>
+          ) : (
+            data?.map((e, i) => (
+              <div
+                key={i}
+                className="border-2 md:border-2 md:rounded-lg md:mx-10 mb-10"
+              >
+                <div className={`${hide == i ? "hidden" : "md:flex"}`}>
+                  <div className="grid justify-items-end mx-5">
+                    <Image
+                      className="m-auto py-5"
+                      src={e.image == "" ? ImageImport.ImageTest : e.image}
+                      width={56}
+                      height={56}
+                      alt="image"
+                    />
                   </div>
-                  <div className=" w-full">
-                    <p className="text-[14px] font-[700]  ml-2">
-                      Steps Categorys <span className="text-red-500">*</span>
-                    </p>
-                    <DropdownSearch></DropdownSearch>
+                  <div className="mx-[16px] my-5 text-[14px] ">
+                    <p className=" font-bold ">Step {i + 1}</p>
+                    <p className="text-[#6B7280]">{e.nama}</p>
+                  </div>
+                  <div className="flex ml-auto">
+                    <Image
+                      className="m-[16px] max-md:mx-auto cursor-pointer"
+                      src={IconsImport.IconsDeletePlant}
+                      alt="delet"
+                      onClick={() => delet(i)}
+                    />
+                    <Image
+                      onClick={() => {
+                        setHide(i);
+                        console.log(i);
+                      }}
+                      className="m-[16px] max-md:mx-auto cursor-pointer"
+                      src={IconsImport.IconsDropdown}
+                      alt="dropdown"
+                    />
                   </div>
                 </div>
-                <ReactQuill
-                  className="flex-col-reverse flex  m-5 border-2 rounded-lg  h-[50%]"
-                  theme="snow"
-                  value={value}
-                  onChange={setValue}
-                ></ReactQuill>
+                <div className={`${hide == i ? "" : "hidden"}`}>
+                  <div className="xl:flex">
+                    <p className="mx-[16px] my-5 font-bold">Step {i + 1}</p>
+                    <div className="flex ml-auto">
+                      <Image
+                        className="m-[16px] max-md:mx-auto cursor-pointer"
+                        src={IconsImport.IconsDeletePlant}
+                        alt="image"
+                        onClick={() => delet(i)}
+                      />
+                      <Image
+                        onClick={() => {
+                          hide === i ? setHide(null) : setHide(i);
+                          console.log(hide);
+                        }}
+                        className="m-[16px] max-md:mx-auto cursor-pointer"
+                        src={IconsImport.IconsDropdown}
+                        alt="image"
+                      />
+                    </div>
+                  </div>
+                  <div className="xl:flex">
+                    <div className="relative">
+                      <Image
+                        src={e.image == "" ? ImageImport.ImageTest : e.image}
+                        className="max-xl:m-auto"
+                        height={237}
+                        width={237}
+                        alt="profile"
+                      />
+                      <div className="absolute bg-[#10B981] p-3 border rounded-lg w-fit h-fit top-0 right-0">
+                        <input
+                          type="file"
+                          ref={fileInputRef}
+                          className="hidden"
+                          onChange={(event) => updateField(i, "image", event)}
+                        />
+                        <Image
+                          src={IconsImport.IconsEdit}
+                          className="max-xl:m-auto cursor-pointer"
+                          alt="profile"
+                          onClick={handleImageClick}
+                        />
+                      </div>
+                    </div>
+                    <div className="w-full">
+                      <div className="xl:flex m-5 ">
+                        <div className=" w-full">
+                          <p className="text-[14px] font-[700]">
+                            Title<span className="text-red-500">*</span>
+                          </p>
+                          <div className="relative w-full">
+                            <input
+                              className="p-2 border rounded-lg border-gray-300 max-xl:w-full xl:w-[90%] pr-10"
+                              type="text"
+                              name=""
+                              id=""
+                              value={e.nama}
+                              onChange={(event) =>
+                                updateField(i, "nama", event.target.value)
+                              }
+                            />
+                            <div className="absolute inset-y-0 right-[50px] flex items-center">
+                              <IconsEdit />
+                            </div>
+                          </div>
+                        </div>
+                        <div className=" w-full">
+                          <p className="text-[14px] font-[700]  ml-2">
+                            Steps Categorys
+                            <span className="text-red-500">*</span>
+                          </p>
+                          <DropdownSearch
+                            setCategory={(category) =>
+                              updateField(i, "category", category)
+                            }
+                          ></DropdownSearch>
+                        </div>
+                      </div>
+                      <ReactQuill
+                        className="flex-col-reverse flex  m-5 border-2 rounded-lg  h-[50%]"
+                        theme="snow"
+                        value={e.description}
+                        onChange={(value) =>
+                          updateField(i, "description", value)
+                        }
+                      ></ReactQuill>
+                    </div>
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
-          <div className=" border-2 rounded-lg mx-10 mb-10">
-            <div className="md:flex">
-              <div className="grid justify-items-end mx-5">
-                <Image
-                  className="m-auto"
-                  src={ImageImport.ImageTest}
-                  width={56}
-                  height={56}
-                  alt="image"
-                />
-              </div>
-              <div className="mx-[16px] my-5 text-[14px] ">
-                <p className=" font-bold ">Step 2</p>
-                <p className="text-[#6B7280]">Choose Planting Location</p>
-              </div>
-              <div className="flex ml-auto">
-                <Image
-                  className="m-[16px] max-md:mx-auto"
-                  src={IconsImport.IconsDeletePlant}
-                  alt="delet"
-                />
-                <Image
-                  className="m-[16px] max-md:mx-auto"
-                  src={IconsImport.IconsDropdown}
-                  alt="dropdown"
-                />
-              </div>
-            </div>
-          </div>
+            ))
+          )}
         </div>
         <div className="md:flex justify-between mt-10">
           <CancelButtonPlant />

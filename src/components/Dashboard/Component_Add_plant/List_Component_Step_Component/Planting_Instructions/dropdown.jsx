@@ -2,9 +2,8 @@
 import { useState } from "react";
 import { IconsImport } from "@/utils/IconsImport";
 import Image from "next/image";
-import IconsAddPlant from "@/utils/Component-Icons-Add-plant/IconsAddPlant";
 
-export default function DropdownSearch({ items, onButtonClick }) {
+export default function DropdownSearch({ items, onButtonClick, setCategory }) {
   const [searchTerm, setSearchTerm] = useState("Fruits");
   const [isOpen, setIsOpen] = useState(false);
 
@@ -39,6 +38,7 @@ export default function DropdownSearch({ items, onButtonClick }) {
               onClick={() => {
                 setSearchTerm("Fruits");
                 setIsOpen(false);
+                setCategory("Fruits");
               }}
               className="block w-full px-4 py-2 text-left text-sm text-gray-700 hover:bg-gray-100"
             >
@@ -48,6 +48,7 @@ export default function DropdownSearch({ items, onButtonClick }) {
               onClick={() => {
                 setSearchTerm("Angiosperms");
                 setIsOpen(false);
+                setCategory("Angiosperms");
               }}
               className="block w-full px-4 py-2 text-left text-sm text-gray-700 hover:bg-gray-100"
             >
