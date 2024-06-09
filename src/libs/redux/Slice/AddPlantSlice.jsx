@@ -21,7 +21,7 @@ const initialState = {
     },
   },
   PlantCaringInput: {
-    reachText: "",
+    additional_tips: "",
   },
   FaQInput: {
     asked: "",
@@ -69,6 +69,9 @@ export const AddPlantSlice = createSlice({
       state.PlantInformationInput.plant_characteristic[action.payload.name] =
         action.payload.value;
     },
+    FuncPlantCaringInput: (state, action) => {
+      state.PlantCaringInput[action.payload.name] = action.payload.value;
+    },
 
     FuncFaQInput: (state, action) => {
       state.FaQInput[action.payload.name] = action.payload.value;
@@ -82,6 +85,7 @@ export const AddPlantSlice = createSlice({
 export const {
   FuncPlantInformationInput,
   FuncAddInputPlantInformation,
+  FuncPlantCaringInput,
   FuncFaQInput,
   FuncPlantCharateristic,
 } = AddPlantSlice.actions;

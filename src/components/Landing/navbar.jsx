@@ -1,12 +1,13 @@
 import React from "react";
 import Image from "next/image";
 import { IconsImport } from "@/utils/IconsImport";
+import { Link as ScrollLink } from "react-scroll";
 
 export default function NavbarLanding({ refNavbar }) {
   return (
     <div
       ref={refNavbar}
-      className="flex fixed w-full z-30 bg-white flex-row justify-between items-center px-[25px] lg:px-[72px] "
+      className="flex fixed w-full z-30 bg-white flex-row justify-between items-center px-[25px] lg:px-[72px]"
     >
       <div className="flex flex-row justify-start items-center pt-[7px] pb-[7.87px] my-[6px] gap-[10px]">
         <Image
@@ -19,18 +20,34 @@ export default function NavbarLanding({ refNavbar }) {
         </p>
       </div>
       <div className="hidden lg:flex flex-row justify-end items-center gap-[58px]">
-        <button className="font-nunito-bold text-base leading-[22px] text-black hover:text-emerald-600">
+        <ScrollLink
+          to="home"
+          smooth={true}
+          className="font-nunito-bold text-base leading-[22px] text-black hover:text-emerald-600 cursor-pointer"
+        >
           Home
-        </button>
-        <button className="font-nunito-bold text-base leading-[22px] text-black hover:text-emerald-600">
+        </ScrollLink>
+        <ScrollLink
+          to="features"
+          smooth={true}
+          className="font-nunito-bold text-base leading-[22px] text-black hover:text-emerald-600 cursor-pointer"
+        >
           Features
-        </button>
-        <button className="font-nunito-bold text-base leading-[22px] text-black hover:text-emerald-600">
+        </ScrollLink>
+        <ScrollLink
+          to="about"
+          smooth={true}
+          className="font-nunito-bold text-base leading-[22px] text-black hover:text-emerald-600 cursor-pointer"
+        >
           About us
-        </button>
-        <button className="font-nunito-bold text-base leading-[22px] text-black hover:text-emerald-600">
+        </ScrollLink>
+        <ScrollLink
+          to="faq"
+          smooth={true}
+          className="font-nunito-bold text-base leading-[22px] text-black hover:text-emerald-600 cursor-pointer"
+        >
           FAQ
-        </button>
+        </ScrollLink>
       </div>
       <div className="lg:hidden">
         <div className="dropdown">
@@ -52,20 +69,36 @@ export default function NavbarLanding({ refNavbar }) {
           </div>
           <ul
             tabIndex={0}
-            className="menu menu-sm dropdown-content  p-2 shadow bg-base-100 rounded-box w-36 right-4"
+            className="menu menu-sm dropdown-content p-2 shadow bg-base-100 rounded-box w-36 right-4"
           >
-            <button className="font-nunito-bold text-base leading-[22px] text-black hover:text-emerald-600">
+            <ScrollLink
+              to="home"
+              smooth={true}
+              className="font-nunito-bold text-base leading-[22px] text-black hover:text-emerald-600 cursor-pointer"
+            >
               Home
-            </button>
-            <button className="font-nunito-bold text-base leading-[22px] text-black hover:text-emerald-600">
+            </ScrollLink>
+            <ScrollLink
+              to="features"
+              smooth={true}
+              className="font-nunito-bold text-base leading-[22px] text-black hover:text-emerald-600 cursor-pointer"
+            >
               Features
-            </button>
-            <button className="font-nunito-bold text-base leading-[22px] text-black hover:text-emerald-600">
+            </ScrollLink>
+            <ScrollLink
+              to="about"
+              smooth={true}
+              className="font-nunito-bold text-base leading-[22px] text-black hover:text-emerald-600 cursor-pointer"
+            >
               About us
-            </button>
-            <button className="font-nunito-bold text-base leading-[22px] text-black hover:text-emerald-600">
+            </ScrollLink>
+            <ScrollLink
+              to="faq"
+              smooth={true}
+              className="font-nunito-bold text-base leading-[22px] text-black hover:text-emerald-600 cursor-pointer"
+            >
               FAQ
-            </button>
+            </ScrollLink>
           </ul>
         </div>
       </div>
