@@ -2,7 +2,10 @@ import { IconsImport } from "@/utils/IconsImport";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { FuncPlantInformationInputImage } from "../../../../../libs/redux/Slice/AddPlantSlice";
+import {
+  FuncDeleteImagePlantInformation,
+  FuncPlantInformationInputImage,
+} from "../../../../../libs/redux/Slice/AddPlantSlice";
 import PlantInformation from "../../../Component_ManagePlant/Table-Plant/PlantInformation";
 
 export default function Upload_Image_Child_Plant({ ids }) {
@@ -49,6 +52,38 @@ export default function Upload_Image_Child_Plant({ ids }) {
             width={50}
             height={50}
           />
+          <div className="absolute top-0 left-0 group w-full h-full  grid place-items-center transition">
+            <input
+              type="file"
+              name=""
+              accept="image/*"
+              id={`imageEdit-${ids}`}
+              className="hidden"
+              onChange={handleChangeFileThumbnails}
+            />
+            <Image
+              src={IconsImport.IconsEditImage}
+              alt="delete"
+              className="absolute top-0 right-0 rounded-lg p-[2px]  bg-emerald-500 hover:bg-slate-400/50  cursor-pointer hover:rounded-full transition-all"
+              onClick={() =>
+                document.getElementById(`imageEdit-${ids}`).click()
+              }
+              width={20}
+              height={20}
+            />
+            <Image
+              src={IconsImport.IconsDeletePlants}
+              alt="delete"
+              className="hidden group-hover:block cursor-pointer   hover:bg-slate-400/50 hover:p-2 hover:rounded-full transition-all"
+              onClick={() => {
+                dispatch(FuncDeleteImagePlantInformation({ id: ids }));
+
+                imageChildSet("");
+              }}
+              width={20}
+              height={20}
+            />
+          </div>
         </div>
       ) : (
         <div
