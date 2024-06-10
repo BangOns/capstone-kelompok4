@@ -3,15 +3,23 @@ import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { FuncPlantInformationInputImage } from "../../../../../libs/redux/Slice/AddPlantSlice";
+import PlantInformation from "../../../Component_ManagePlant/Table-Plant/PlantInformation";
 
 export default function Upload_Image_Child_Plant({ ids }) {
   const { PlantInformationInput } = useSelector((state) => state.addplant);
   const [imageChild, imageChildSet] = useState("");
   const dispatch = useDispatch();
-  const getThumbnailChild =
-    PlantInformationInput.plant_images !== 0
-      ? PlantInformationInput.plant_images.filter((items) => items.id === ids)
-      : [];
+
+  useEffect(() => {
+    if (PlantInformationInput.plant_images.length !== 0) {
+      const dataFilter = PlantInformationInput.plant_images.find(
+        (items) => items.id === ids
+      );
+      if (dataFilter) {
+        imageChildSet(dataFilter.file_name);
+      }
+    }
+  }, [PlantInformationInput, ids]);
 
   function handleChangeFileThumbnails(e) {
     e.preventDefault();
@@ -27,16 +35,9 @@ export default function Upload_Image_Child_Plant({ ids }) {
         },
       })
     );
-    imageChildSet(URL.createObjectURL(files[0]));
+    imageChildSet(imgUrl);
   }
-  useEffect(() => {
-    if (PlantInformationInput.plant_images.length !== 0) {
-      const dataFilter = PlantInformationInput.plant_images.find(
-        (items) => items.id === ids
-      );
-      imageChildSet(dataFilter?.plant_images.file_name);
-    }
-  }, [PlantInformationInput]);
+
   return (
     <div className="w-[50px] h-[50px] border-2 overflow-hidden border-dashed border-gray-300 rounded-lg cursor-pointer ">
       {imageChild ? (
