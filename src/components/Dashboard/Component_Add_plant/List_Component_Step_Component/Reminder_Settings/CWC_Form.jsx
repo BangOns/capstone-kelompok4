@@ -67,6 +67,8 @@ const CWC_Form = () => {
   };
 
   useEffect(() => {
+    const weatherCondition = condition.map((c) => c.weatherCondition);
+    const conditionDescription = condition.map((c) => c.conditionDescription);
     dispatch(
       FuncReminderSettingsInput({
         name: "weather_condition",
@@ -79,7 +81,7 @@ const CWC_Form = () => {
         value: conditionDescription,
       })
     );
-  }, [weatherCondition, conditionDescription, dispatch]);
+  }, [condition, dispatch]);
 
   return (
     <div className="h-full border border-[#E5E7EB] rounded-md p-4">

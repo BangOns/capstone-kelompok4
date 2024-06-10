@@ -32,10 +32,7 @@ export default function Component_Reminder_Settings() {
               Certain Weather Condition
             </h2>
           </header>
-          <article className="overflow-y-auto w-full h-36 pt-4">
-            <Certain_Weather_Condition />
-            <Certain_Weather_Condition />
-            <Certain_Weather_Condition />
+          <article className="overflow-y-auto w-full h-36 pt-4 custom-scrollbar">
             <Certain_Weather_Condition />
           </article>
         </section>
