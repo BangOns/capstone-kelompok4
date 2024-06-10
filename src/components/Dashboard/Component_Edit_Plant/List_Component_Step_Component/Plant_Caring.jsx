@@ -13,16 +13,15 @@ import {
   FuncNextStep,
   FuncPrevStep,
 } from "../../../../libs/redux/Slice/DashboardSlice";
-import { 
-  FuncAddInputPlantInformation ,
+import {
+  FuncAddInputPlantInformation,
   FuncPlantCaringInput,
 } from "../../../../libs/redux/Slice/AddPlantSlice";
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 
 export default function Plant_Caring() {
   const [value, setValue] = useState("");
-  const { PlantCaringInput } = useSelector((state) => state.addplant)
-  console.log(PlantCaringInput);
+  const { PlantCaringInput } = useSelector((state) => state.addplant);
   const dispatch = useDispatch();
   function handleClickPrev() {
     dispatch(FuncPrevStep());
@@ -39,7 +38,7 @@ export default function Plant_Caring() {
     );
     dispatch(FuncMessagePlantError(true));
     dispatch(FuncNextStep());
-  }  
+  }
   return (
     <Fragment>
       <div className="mt-6 p-4 border rounded-[10px]">
@@ -59,7 +58,9 @@ export default function Plant_Caring() {
             value={value}
             onChange={(e) => {
               setValue(e);
-              dispatch(FuncPlantCaringInput({ name: "additional_tips", value: e}));
+              dispatch(
+                FuncPlantCaringInput({ name: "additional_tips", value: e })
+              );
             }}
             placeholder="Additional Planting Instructions Tips..."
           />

@@ -23,16 +23,19 @@ export default function Form() {
     setError("");
 
     try {
-      const response = await fetch("https://be-agriculture-awh2j5ffyq-uc.a.run.app/api/v1/admin/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email: email,
-          password: password,
-        }),
-      });
+      const response = await fetch(
+        "https://be-agriculture-awh2j5ffyq-uc.a.run.app/api/v1/admin/login",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email: email,
+            password: password,
+          }),
+        }
+      );
 
       const data = await response.json();
       setLoading(false);
@@ -41,7 +44,6 @@ export default function Form() {
         throw new Error(data.message || "Something went wrong!");
       }
 
-      console.log("Login successful:", data);
       router.push("/dashboard");
     } catch (error) {
       setLoading(false);

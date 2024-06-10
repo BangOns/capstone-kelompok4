@@ -37,6 +37,7 @@ const initialState = {
   FaQInput: {
     asked: "",
   },
+  PlantingInstructions: [],
 
   dataPlantNew: {},
 };
@@ -115,6 +116,9 @@ export const AddPlantSlice = createSlice({
     FuncAddInputPlantInformation: (state, action) => {
       state.dataPlantNew = action.payload;
     },
+    FuncPlantingInstructions: (state, action) => {
+      state.PlantingInstructions = action.payload;
+    },
   },
 });
 
@@ -125,5 +129,6 @@ export const {
   FuncPlantCaringInput,
   FuncFaQInput,
   FuncPlantCharateristic,
+  FuncPlantingInstructions,
 } = AddPlantSlice.actions;
 export default AddPlantSlice.reducer;
