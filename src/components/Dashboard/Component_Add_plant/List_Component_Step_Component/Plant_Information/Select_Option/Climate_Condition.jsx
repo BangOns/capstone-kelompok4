@@ -53,7 +53,6 @@ export default function Climate_Condition() {
                 key={i}
                 className="w-full px-3 group py-[14px] hover:bg-emerald-500"
                 onClick={() => {
-                  console.log(items);
                   dispatch(
                     FuncPlantInformationInput({
                       name: "climate_condition",

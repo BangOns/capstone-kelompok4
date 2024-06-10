@@ -1,19 +1,49 @@
 import { IconsImport } from "@/utils/IconsImport";
 import Image from "next/image";
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { FuncPlantInformationInputImage } from "../../../../../libs/redux/Slice/AddPlantSlice";
 
-export default function Upload_Image_Child_Plant({
-  imageChild,
-  name,
-  handleChangeImageChild,
-}) {
+export default function Upload_Image_Child_Plant({ ids }) {
+  const { PlantInformationInput } = useSelector((state) => state.addplant);
+  const [imageChild, imageChildSet] = useState("");
+  const dispatch = useDispatch();
+  const getThumbnailChild =
+    PlantInformationInput.plant_images !== 0
+      ? PlantInformationInput.plant_images.filter((items) => items.id === ids)
+      : [];
+
+  function handleChangeFileThumbnails(e) {
+    e.preventDefault();
+    const { files } = e.target;
+    const imgUrl = URL.createObjectURL(files[0]);
+    dispatch(
+      FuncPlantInformationInputImage({
+        value: {
+          id: ids,
+          plant_id: Math.floor(Math.random() * 100),
+          file_name: imgUrl,
+          is_primary: 0,
+        },
+      })
+    );
+    imageChildSet(URL.createObjectURL(files[0]));
+  }
+  useEffect(() => {
+    if (PlantInformationInput.plant_images.length !== 0) {
+      const dataFilter = PlantInformationInput.plant_images.find(
+        (items) => items.id === ids
+      );
+      imageChildSet(dataFilter?.plant_images.file_name);
+    }
+  }, [PlantInformationInput]);
   return (
     <div className="w-[50px] h-[50px] border-2 overflow-hidden border-dashed border-gray-300 rounded-lg cursor-pointer ">
-      {imageChild[name] ? (
+      {imageChild ? (
         <div className="w-full h-full relative ">
           <Image
-            src={imageChild[name]}
-            alt="thumbnails"
+            src={imageChild}
+            alt="image-child"
             className="w-full h-full"
             width={50}
             height={50}
@@ -22,16 +52,21 @@ export default function Upload_Image_Child_Plant({
       ) : (
         <div
           className="w-full h-full grid place-items-center"
-          onClick={() => document.getElementById(name).click()}
+          onClick={() =>
+            document
+              .getElementById(
+                `image-${PlantInformationInput.plant_images.length}`
+              )
+              .click()
+          }
         >
           <Image src={IconsImport.IconsImageUploadChildren} alt="uploadImage" />
           <input
             type="file"
-            name={name}
-            id={name}
+            id={`image-${PlantInformationInput.plant_images.length}`}
             accept="image/*"
             className="hidden"
-            onChange={handleChangeImageChild}
+            onChange={handleChangeFileThumbnails}
           />
         </div>
       )}
