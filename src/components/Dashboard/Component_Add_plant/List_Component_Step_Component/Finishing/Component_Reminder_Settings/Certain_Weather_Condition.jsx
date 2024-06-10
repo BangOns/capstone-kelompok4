@@ -4,9 +4,11 @@ import { useSelector } from "react-redux";
 export default function Certain_Weather_Condition() {
   const { dataPlantNew } = useSelector((state) => state.addplant);
 
-  const weatherCondition = dataPlantNew?.weather_condition || [];
-  const conditionDescription = dataPlantNew?.condition_description || [];
-
+  const weatherCondition =
+    dataPlantNew?.watering_schedule.weather_condition || [];
+  const conditionDescription =
+    dataPlantNew?.watering_schedule.condition_description || [];
+  console.log(dataPlantNew);
   return (
     <section>
       {weatherCondition.map((condition, index) => (
