@@ -84,7 +84,7 @@ export const EditPlantSlice = createSlice({
 export const {
   FuncPlantInformationInput,
   FuncReminderSettingsInput,
-  FuncAddInputPlantInformation,
+  FuncEditInputPlantInformation,
   FuncPlantCaringInput,
   FuncFaQInput,
   FuncPlantCharateristic,
