@@ -16,7 +16,7 @@ import {
 import { 
   FuncAddInputPlantInformation ,
   FuncPlantCaringInput,
-} from "../../../../libs/redux/Slice/AddPlantSlice";
+} from "../../../../libs/redux/Slice/EditPlantSlice";
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 
 export default function Plant_Caring() {
