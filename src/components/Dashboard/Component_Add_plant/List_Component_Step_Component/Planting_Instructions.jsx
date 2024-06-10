@@ -70,7 +70,7 @@ export default function Planting_Instructions() {
           description: "",
           image_url: "",
         },
-        step_number: data.length,
+        step_number: data.length + 1,
 
         step_title: "",
         category: "",
