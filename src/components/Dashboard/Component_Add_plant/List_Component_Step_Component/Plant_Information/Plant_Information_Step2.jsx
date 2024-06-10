@@ -17,7 +17,10 @@ import Each from "./Select_Option/Each";
 import Plant_Height from "./Plant_Information_Step2/Plant_Height";
 import Plant_Wide from "./Plant_Information_Step2/Plant_Wide";
 import Data_Plant_Information_Step1 from "./Plant_Information_Step2/Data_Plant_Information_Step1";
-import { FuncAddInputPlantInformation } from "../../../../../libs/redux/Slice/AddPlantSlice";
+import {
+  FuncAddInputPlantInformation,
+  FuncDeleteImagePreviousPlantInformation,
+} from "../../../../../libs/redux/Slice/AddPlantSlice";
 import { ValidateInformation2 } from "../../../../../utils/Validate_AddPlant/Validate_PlantInformation";
 export default function Plant_Information_Step2() {
   const { PlantInformationInput, dataPlantNew } = useSelector(
@@ -45,6 +48,7 @@ export default function Plant_Information_Step2() {
     }
   }
   function handleClickPrev() {
+    // dispatch(FuncDeleteImagePreviousPlantInformation());
     dispatch(FuncPlantInformationStep2(false));
   }
   return (
