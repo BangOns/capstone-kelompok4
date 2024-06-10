@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import { useDispatch } from "react-redux";
 
 import { FuncReminderSettingsInput } from "@/libs/redux/Slice/AddPlantSlice";
@@ -9,19 +9,23 @@ import {
   IconsPlusAdd,
 } from "@/utils/Component-Icons-Reminder-settings";
 import { WEATHERS } from "./config";
+import { AddPlantsContext } from "../../../../../hook/add-plants-providers";
 
 const CWC_Form = () => {
   const dispatch = useDispatch();
 
-  const [weatherCondition, setWeatherCondition] = useState([]);
-  const [conditionDescription, setConditionDescription] = useState([]);
-
-  const [condition, setCondition] = useState([
-    {
-      weatherCondition: "",
-      conditionDescription: "",
-    },
-  ]);
+  const {
+    weatherCondition,
+    setWeatherCondition,
+    conditionDescription,
+    setConditionDescription,
+    condition,
+    setCondition,
+    weatherConditionDisplay,
+    setWeatherConditionDisplay,
+    isWeatherOpen,
+    setIsWeatherOpen,
+  } = useContext(AddPlantsContext);
 
   const handleConditionChange = (index, weather, description) => {
     const newCondition = [...condition];
@@ -31,9 +35,6 @@ const CWC_Form = () => {
     };
     setCondition(newCondition);
   };
-
-  const [isWeatherOpen, setIsWeatherOpen] = useState([]);
-  const [weatherConditionDisplay, setWeatherConditionDisplay] = useState([]);
 
   const handleWeatherDisplayChange = (index, value) => {
     setWeatherConditionDisplay((prevState) => {
@@ -64,11 +65,19 @@ const CWC_Form = () => {
       newState.splice(index, 1);
       return newState;
     });
+    setWeatherCondition((prevState) => {
+      const newState = [...prevState];
+      newState.splice(index, 1);
+      return newState;
+    });
+    setConditionDescription((prevState) => {
+      const newState = [...prevState];
+      newState.splice(index, 1);
+      return newState;
+    });
   };
 
   useEffect(() => {
-    const weatherCondition = condition.map((c) => c.weatherCondition);
-    const conditionDescription = condition.map((c) => c.conditionDescription);
     dispatch(
       FuncReminderSettingsInput({
         name: "weather_condition",
@@ -92,7 +101,7 @@ const CWC_Form = () => {
         </span>
       </h3>
       <div className="flex flex-col gap-4">
-        {condition.map((_, conditionIndex) => {
+        {condition?.map((_, conditionIndex) => {
           const lastIndex = condition.length - 1;
 
           return (
@@ -158,6 +167,7 @@ const CWC_Form = () => {
                                     {weather.title}
                                   </span>
                                 );
+
                                 setWeatherCondition((prevState) => {
                                   const newState = [...prevState];
                                   newState[conditionIndex] = weather.title;
