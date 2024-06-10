@@ -12,6 +12,7 @@ const initialState = {
     quest: "",
   },
   dataPlantNew: {},
+  faqList: [],
 };
 
 export const AddPlantSlice = createSlice({
@@ -27,6 +28,9 @@ export const AddPlantSlice = createSlice({
     FuncAddInputPlantInformation: (state, action) => {
       state.dataPlantNew = action.payload;
     },
+    FuncAddFAQList: (state, action) => {
+      state.faqList = action.payload;
+    },
   },
 });
 
@@ -34,5 +38,6 @@ export const {
   FuncPlantInformationInput,
   FuncAddInputPlantInformation,
   FuncFaQInput,
+  FuncAddFAQList,
 } = AddPlantSlice.actions;
 export default AddPlantSlice.reducer;

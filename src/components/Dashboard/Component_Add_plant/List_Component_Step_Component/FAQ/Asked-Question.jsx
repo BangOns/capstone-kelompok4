@@ -50,8 +50,8 @@ export default function AskedQuestion({ id, question, answer, onDelete, onUpdate
         </div>
 
         <div className="w-full gap-4 flex items-center justify-between px-4">
-          <Answer name="Questions" redux="quest" value={localQuestion} onChange={setLocalQuestion} />
-          <Answer name="Answers" redux="asked" value={localAnswer} onChange={setLocalAnswer} />
+          <Answer name="Questions" redux="quest" value={localQuestion} onChange={setLocalQuestion} id={id} onUpdate={onUpdate} />
+          <Answer name="Answers" redux="asked" value={localAnswer} onChange={setLocalAnswer} id={id} onUpdate={onUpdate} />
         </div>
       </div>
 

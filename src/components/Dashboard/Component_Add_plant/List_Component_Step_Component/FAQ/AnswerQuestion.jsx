@@ -7,12 +7,14 @@ import { FuncFaQInput } from "../../../../../libs/redux/Slice/AddPlantSlice";
 
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 
-export default function Answer({ name, redux, value, onChange }) {
+export default function Answer({ name, redux, value, onChange, id, onUpdate }) {
   const dispatch = useDispatch();
 
   const handleChange = (e) => {
     onChange(e); // Memanggil fungsi onChange dari props untuk memperbarui state di komponen induk
     dispatch(FuncFaQInput({ name: redux, value: e })); // Memperbarui Redux store
+
+    onUpdate(id, { [redux]: e });
   };
 
   return (

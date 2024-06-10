@@ -1,11 +1,12 @@
 import IconsAdd from "@/utils/Component-Icons-FAQ/IconAdd";
 import AskedQuestion from "./FAQ/Asked-Question";
+import "./FAQ/faq.css"
 import { IconsImport } from "@/utils/IconsImport";
 import Image from "next/image";
 import CancelButtonPlant from "../Component_Buttons/cancel_buton_plant";
 import PreviousButtonPlant from "../Component_Buttons/previous_buton_plant";
 import NextButtonPlant from "../Component_Buttons/next_buton_plant";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   FuncMessagePlantError,
   FuncNextStep,
@@ -13,6 +14,7 @@ import {
 } from "../../../../libs/redux/Slice/DashboardSlice";
 import { Fragment, useState } from "react";
 import Message_Error from "../../../Component_Message/Message_Error";
+import { FuncAddFAQList } from "../../../../libs/redux/Slice/AddPlantSlice";
 
 export default function Faq() {
   const dispatch = useDispatch();
@@ -34,6 +36,10 @@ export default function Faq() {
   }
 
   function handleAddQuestion() {
+
+    dispatch(FuncAddFAQList(questions))
+    console.log("Questions dispatched to Redux:", questions);
+
     const newQuestion = {
       id: questions.length + 1,
       question: "",
@@ -52,12 +58,17 @@ export default function Faq() {
         question.id === id ? { ...question, ...updatedQuestion } : question
       )
     );
+    dispatch(FuncAddFAQList(questions));
+    console.log("Updated questions dispatched to Redux:", questions);
   }
+
+ 
 
   return (
     <Fragment>
       <div className="rounded-lg border-2 mt-10">
-        <div className="w-full p-4">
+        <div className="w-full max-h-[883px] p-4">
+          <div className="scrollbar w-full max-h-[759px] overflow-y-auto">
           <div className="flex items-center justify-between p-4">
             <div
               className="flex justify-center gap-5 items-center text-[#10B981] cursor-pointer"
@@ -87,6 +98,8 @@ export default function Faq() {
               />
             </div>
           ))}
+          </div>
+          
           <div className="flex justify-between mt-10 pr-4">
             <CancelButtonPlant />
             <div className=" flex">
