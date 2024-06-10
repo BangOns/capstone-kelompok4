@@ -4,10 +4,12 @@ import Component_Steps from "./Component_Planting_Steps/Component_Steps";
 import Image from "next/image";
 import { IconsImport } from "../../../../../utils/IconsImport";
 import { FuncToIndex } from "../../../../../libs/redux/Slice/DashboardSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function Component_Planting_Steps() {
   const dispatch = useDispatch();
+  const { dataPlantNew } = useSelector((state) => state.addplant);
+  console.log(dataPlantNew.plant_instructions);
   return (
     <section className="w-full mt-6">
       <header className="w-full py-[12.5px] flex justify-between">
@@ -20,10 +22,9 @@ export default function Component_Planting_Steps() {
         />
       </header>
       <article className="w-11/12">
-        <Component_Steps />
-        <Component_Steps />
-        <Component_Steps />
-        <Component_Steps />
+        {dataPlantNew.plant_instructions?.map((items) => (
+          <Component_Steps dataPlantNew={items} />
+        ))}
       </article>
     </section>
   );

@@ -8,7 +8,6 @@ export default function Certain_Weather_Condition() {
     dataPlantNew?.watering_schedule.weather_condition || [];
   const conditionDescription =
     dataPlantNew?.watering_schedule.condition_description || [];
-  console.log(dataPlantNew);
   return (
     <section>
       {weatherCondition.map((condition, index) => (

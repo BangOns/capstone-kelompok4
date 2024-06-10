@@ -44,9 +44,7 @@ export default function Planting_Instructions() {
     if (data.length === 0) {
       dispatch(FuncMessagePlantError(true));
     } else {
-      const plant_instructions = {
-        ...data,
-      };
+      const plant_instructions = [...data];
       dispatch(
         FuncAddInputPlantInformation({
           ...dataPlantNew,

@@ -12,12 +12,10 @@ export default function Component_Plant_Information() {
   const { dataPlantNew } = useSelector((state) => state.addplant);
   const plantName = dataPlantNew.name.split("-")[0];
   const FamilyName = dataPlantNew.name.split("-")[1];
-  console.log(dataPlantNew);
   const GetImageThumbnails =
     dataPlantNew.plant_images.length !== 0
       ? dataPlantNew.plant_images.filter((items) => items.is_primary === 1)
       : [];
-  console.log(GetImageThumbnails);
 
   useEffect(() => {
     if (GetImageThumbnails.length !== 0) {
