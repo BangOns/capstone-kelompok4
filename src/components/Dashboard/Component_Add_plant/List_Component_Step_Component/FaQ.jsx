@@ -21,9 +21,9 @@ export default function Faq() {
   const [questions, setQuestions] = useState([
     {
       id: 1,
-      question: "How often should I water my tomato plants?",
+      question: "",
       answer:
-        "Tomato plants need consistent moisture. Water deeply once or twice a week, more frequently in hot, dry weather...",
+        "",
     },
   ]);
 

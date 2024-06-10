@@ -1,22 +1,24 @@
 "use client";
 
 import React, { Fragment, useState } from "react";
-import Upload_Image_Plant from "./Plant_Information.jsx/Upload_Image_Plant";
-import Upload_Image_Child_Plant from "./Plant_Information.jsx/Upload_Image_Child_Plant";
-import Plant_Descriptions from "./Plant_Information.jsx/Plant_Descriptions";
-import Plant_Input from "./Plant_Information.jsx/Plant_Input";
-import Plant_Input_RadioButton from "./Plant_Information.jsx/Plant_Input_RadioButton";
+import Upload_Image_Child_Plant from "./Plant_Information/Upload_Image_Child_Plant";
+import Plant_Descriptions from "./Plant_Information/Plant_Descriptions";
+import Plant_Input from "./Plant_Information/Plant_Input";
+import Plant_Input_RadioButton from "./Plant_Information/Plant_Input_RadioButton";
 import CancelButtonPlant from "../Component_Buttons/cancel_buton_plant";
 import PreviousButtonPlant from "../Component_Buttons/previous_buton_plant";
 import NextButtonPlant from "../Component_Buttons/next_buton_plant";
-import Plant_Information_Step2 from "./Plant_Information.jsx/Plant_Information_Step2";
+import Plant_Information_Step2 from "./Plant_Information/Plant_Information_Step2";
 import { useDispatch, useSelector } from "react-redux";
 import Message_Error from "../../../Component_Message/Message_Error";
 import {
+  FuncMessageErrorPlantName,
   FuncMessagePlantError,
   FuncPlantInformationStep2,
 } from "../../../../libs/redux/Slice/DashboardSlice";
 import { FuncAddInputPlantInformation } from "../../../../libs/redux/Slice/AddPlantSlice";
+import Upload_Image_Plant from "./Plant_Information/Upload_Image_Plant";
+import { ValidateInformation } from "../../../../utils/Validate_AddPlant/Validate_PlantInformation";
 export default function Plant_Infromation() {
   const dispatch = useDispatch();
   const { plantInformationStep2 } = useSelector((state) => state.dashboard);
@@ -35,6 +37,8 @@ export default function Plant_Infromation() {
     image7: "",
     image8: "",
   });
+  const regex = /^[^-]+-[^-]+$/;
+
   function handleChangeFileThumbnails(e) {
     e.preventDefault();
     const { files } = e.target;
@@ -49,17 +53,25 @@ export default function Plant_Infromation() {
   }
 
   function handleClickNext() {
-    const dataInPlantInformation = {
-      ...PlantInformationInput,
-    };
-    dispatch(
-      FuncAddInputPlantInformation({
-        ...dataPlantNew,
-        ...dataInPlantInformation,
-      })
-    );
-    dispatch(FuncMessagePlantError(true));
-    dispatch(FuncPlantInformationStep2(true));
+    const checkValidate = ValidateInformation(PlantInformationInput);
+    if (!checkValidate || !regex.test(PlantInformationInput.name)) {
+      if (!regex.test(PlantInformationInput.name)) {
+        dispatch(FuncMessageErrorPlantName(true));
+      }
+      dispatch(FuncMessagePlantError(true));
+    } else {
+      const dataInPlantInformation = {
+        ...PlantInformationInput,
+      };
+
+      dispatch(
+        FuncAddInputPlantInformation({
+          ...dataPlantNew,
+          ...dataInPlantInformation,
+        })
+      );
+      dispatch(FuncPlantInformationStep2(true));
+    }
   }
 
   return (
@@ -76,9 +88,9 @@ export default function Plant_Infromation() {
                 </header>
                 <article className="w-11/12 flex gap-4 h-[180px]">
                   <Upload_Image_Plant
-                    imageThumbnail={imageThumbnail}
-                    imageThumbnailSet={imageThumbnailSet}
-                    handleChangeFileThumbnails={handleChangeFileThumbnails}
+                  // imageThumbnail={imageThumbnail}
+                  // imageThumbnailSet={imageThumbnailSet}
+                  // handleChangeFileThumbnails={handleChangeFileThumbnails}
                   />
                   <section className="w-5/6">
                     <div className="w-full flex items-start justify-between">

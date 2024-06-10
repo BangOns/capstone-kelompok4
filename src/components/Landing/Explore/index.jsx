@@ -4,7 +4,7 @@ import { ImageImport } from "../../../utils/ImageImport";
 import { motion } from "framer-motion";
 export default function Explore() {
   return (
-    <div className="my-10">
+    <div className="my-10" id="features">
       <div className="text-center w-[716px] max-[430px]:w-auto m-auto">
         <p className="font-[700] text-[36px] text-[#030712] font-nunito-bold">
           Explore the{" "}

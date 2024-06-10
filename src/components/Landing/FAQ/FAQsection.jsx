@@ -47,7 +47,7 @@ export default function FAQ() {
   ];
 
   return (
-    <div className="px-[25px] lg:px-[70px] mt-[65px]">
+    <div className="px-[25px] lg:px-[70px] mt-[65px]" id="faq">
       <h3 className="text-black font-nunito-bold text-xl md:text-2xl lg:text-4xl leading-normal">
         Frequently Asked Questions
       </h3>

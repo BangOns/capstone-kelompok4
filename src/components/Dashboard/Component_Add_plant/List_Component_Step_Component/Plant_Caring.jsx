@@ -1,11 +1,11 @@
 "use client";
 
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import "react-quill/dist/quill.snow.css";
 import CancelButtonPlant from "../Component_Buttons/cancel_buton_plant";
 import PreviousButtonPlant from "../Component_Buttons/previous_buton_plant";
 import NextButtonPlant from "../Component_Buttons/next_buton_plant";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import dynamic from "next/dynamic";
 import Message_Error from "../../../Component_Message/Message_Error";
 import {
@@ -13,19 +13,38 @@ import {
   FuncNextStep,
   FuncPrevStep,
 } from "../../../../libs/redux/Slice/DashboardSlice";
+import {
+  FuncAddInputPlantInformation,
+  FuncPlantCaringInput,
+} from "../../../../libs/redux/Slice/AddPlantSlice";
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 
 export default function Plant_Caring() {
   const [value, setValue] = useState("");
-
+  const { PlantCaringInput, dataPlantNew } = useSelector(
+    (state) => state.addplant
+  );
   const dispatch = useDispatch();
   function handleClickPrev() {
     dispatch(FuncPrevStep());
   }
   function handleClickNext() {
-    dispatch(FuncMessagePlantError(true));
-    dispatch(FuncNextStep());
+    if (PlantCaringInput.additional_tips === "") {
+      dispatch(FuncMessagePlantError(true));
+    } else {
+      const dataInpPlantCaring = {
+        ...PlantCaringInput,
+      };
+      dispatch(
+        FuncAddInputPlantInformation({
+          ...dataPlantNew,
+          ...dataInpPlantCaring,
+        })
+      );
+      dispatch(FuncNextStep());
+    }
   }
+
   return (
     <Fragment>
       <div className="mt-6 p-4 border rounded-[10px]">
@@ -42,8 +61,13 @@ export default function Plant_Caring() {
           <ReactQuill
             className="w-full h-[249px] text-neutral-950 border border-neutral-400 text-[14px] flex-col-reverse flex rounded-md"
             theme="snow"
-            value={value}
-            onChange={setValue}
+            value={PlantCaringInput.additional_tips || value}
+            onChange={(e) => {
+              setValue(e);
+              dispatch(
+                FuncPlantCaringInput({ name: "additional_tips", value: e })
+              );
+            }}
             placeholder="Additional Planting Instructions Tips..."
           />
         </div>

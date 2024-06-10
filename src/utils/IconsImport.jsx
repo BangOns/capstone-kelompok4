@@ -19,6 +19,8 @@ import IconsSeePassword from "@/assets/icons/Icons-See-Password.svg";
 import IconsCheck from "@/assets/icons/Icons-Check.svg";
 import IconsUnseePassword from "@/assets/icons/Icons-Unsee-Password.svg";
 import IconsEditFinishing from "@/assets/icons/Icons-Edit-Finishing.svg";
+import IconsEditImage from "@/assets/icons/Icons-Edit-Image.svg";
+import IconsEdit from "@/assets/icons/Icons-Edit.svg";
 import IconsHuman from "@/assets/icons/Icons-Human.svg";
 import IconsGooglePlay from "@/assets/icons/Icons-Google-Play.svg";
 import IconsMaximize from "@/assets/icons/Icons-Maximize.svg";
@@ -49,4 +51,6 @@ export const IconsImport = {
   IconsHuman,
   IconsGooglePlay,
   IconsMaximize,
+  IconsEditImage,
+  IconsEdit,
 };

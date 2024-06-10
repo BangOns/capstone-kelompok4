@@ -6,7 +6,8 @@ import { IconsImport } from "@/utils/IconsImport";
 export default function Hero({ getRef }) {
   return (
     <div
-      className={`flex flex-col-reverse h-screen lg:flex-row justify-between items-center  lg:pl-[72px] mb-6  max-lg:mt-24 max-lg:justify-end gap-5`}
+      className={`flex flex-col-reverse h-screen lg:flex-row justify-between items-center lg:pl-[72px] mb-6 max-lg:mt-24 max-lg:justify-end gap-5`}
+      id="home"
     >
       <div className="w-full px-[25px] lg:px-0 lg:w-[630px] xl:w-[710px] flex flex-col gap-4 mb-8 lg:mb-0 text-start xl:text-start">
         <p className="text-black font-nunito-bold text-2xl md:text-3xl lg:text-4xl xl:text-5xl leading-[35px] md:leading-[35px] lg:leading-[45px] xl:leading-[65px]">
@@ -35,14 +36,14 @@ export default function Hero({ getRef }) {
         </div>
       </div>
       <div
-        className="w-full  lg:w-[670px] xl:w-[652px] h-[300px] sm:h-[400px] md:h-[430px] lg:h-[550px] xl:h-[662px] bg-emerald-50 
-                flex items-center justify-center  lg:rounded-bl-[50px]   lg:justify-end lg:pr-[80px] 
-                xl:justify-end  mr-0 xl:pr-[80px] order-1 lg:order-last mb-4 md:mb-5 lg:mb-0 xl:mb-0"
+        className="w-full lg:w-[670px] xl:w-[652px] h-[300px] sm:h-[400px] md:h-[430px] lg:h-[550px] xl:h-[662px] bg-emerald-50 
+                flex items-center justify-center lg:rounded-bl-[50px] lg:justify-end lg:pr-[80px] 
+                xl:justify-end mr-0 xl:pr-[80px] order-1 lg:order-last mb-4 md:mb-5 lg:mb-0 xl:mb-0"
       >
         <Image
           src={ImageImport.ImageHero}
           alt="Hero Image"
-          className="w-[260px] sm:w-[350px]  xl:w-[493px]"
+          className="w-[260px] sm:w-[350px] xl:w-[493px] transform transition-transform duration-300 hover:scale-110"
         />
       </div>
     </div>
