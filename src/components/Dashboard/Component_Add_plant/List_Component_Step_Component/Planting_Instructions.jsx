@@ -38,16 +38,7 @@ export default function Planting_Instructions() {
   const [data, setData] = useState(count);
   const [hide, setHide] = useState();
   const [index, setIndex] = useState();
-  const { messagePlantDelete } = useSelector((state) => state.dashboard);
 
-  useEffect(() => {
-    if (messagePlantDelete) {
-      const newData = [...data];
-      newData.splice(index, 1);
-      setData(newData);
-      dispatch(FuncMessagePlantDelete(false));
-    }
-  }, [messagePlantDelete]);
 
   const handleImageClick = () => {
     fileInputRef.current.click();
@@ -112,12 +103,13 @@ export default function Planting_Instructions() {
   };
 
   async function delet(e) {
+    setIndex(e)
     dispatch(FuncDeletePlant({ popUp: true, id: e }));
   }
-  function handleClickDeleteStep({ confirmation, i }) {
+  function handleClickDeleteStep({ confirmation }) {
     if (confirmation) {
       const newData = [...data];
-      newData.splice(i, 1);
+      newData.splice(index, 1);
       setData(newData);
     }
   }
