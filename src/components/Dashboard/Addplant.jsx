@@ -7,8 +7,8 @@ export default function AddPlant() {
   const { indexStep } = useSelector((state) => state.dashboard);
   return (
     <>
-      <Header_add_plant pages={3} />
-      <List_Component_Step pages={3} />
+      <Header_add_plant pages={indexStep} />
+      <List_Component_Step pages={indexStep} />
     </>
   );
 }
