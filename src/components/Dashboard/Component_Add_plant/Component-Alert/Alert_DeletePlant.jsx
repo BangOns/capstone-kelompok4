@@ -9,6 +9,7 @@ import {
   FuncMessagePlantDelete,
 } from "../../../../libs/redux/Slice/DashboardSlice";
 import { useRouter } from "next/navigation";
+import { FuncDataAllPlants } from "../../../../libs/redux/Slice/AddPlantSlice";
 
 const variants = {
   hidden: { opacity: 0, scale: 0 },
@@ -16,7 +17,14 @@ const variants = {
 };
 export default function Alert_DeletePlant() {
   const dispatch = useDispatch();
-  const { deletePlant } = useSelector((state) => state.dashboard);
+  const { deletePlant, idToDeletePlant } = useSelector(
+    (state) => state.dashboard
+  );
+  const { DataAllPlants } = useSelector((state) => state.addplant);
+  const deletePlantsById =
+    DataAllPlants && idToDeletePlant
+      ? DataAllPlants.filter((items) => items.id !== idToDeletePlant)
+      : [];
   const route = useRouter();
   return (
     <>
@@ -44,7 +52,9 @@ export default function Alert_DeletePlant() {
               </div>
               <div className="mt-8 font-nunito-bold flex w-full gap-2 justify-between">
                 <button
-                  onClick={() => dispatch(FuncDeletePlant(false))}
+                  onClick={() =>
+                    dispatch(FuncDeletePlant({ popUp: false, id: 0 }))
+                  }
                   className="basis-1/2 text-emerald-500 w-full p-[14px] rounded-md bg-white"
                 >
                   Cancel
@@ -53,6 +63,7 @@ export default function Alert_DeletePlant() {
                   onClick={() => {
                     dispatch(FuncMessagePlantDelete(true));
                     dispatch(FuncDeletePlant(false));
+                    dispatch(FuncDataAllPlants({ value: deletePlantsById }));
                   }}
                   className=" text-white basis-1/2 w-full p-[14px] rounded-md bg-red-500"
                 >

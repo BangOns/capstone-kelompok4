@@ -1,9 +1,13 @@
+"use client";
 import React from "react";
-import PlantInformation from "./PlantInformation";
 import Image from "next/image";
 import { IconsImport } from "@/utils/IconsImport";
+import TablePlantInformation from "./PlantInformation";
+import { useSelector } from "react-redux";
 
 export default function TablePlant() {
+  const { DataAllPlants } = useSelector((state) => state.addplant);
+
   return (
     <table className="table border">
       {/* head */}
@@ -45,8 +49,13 @@ export default function TablePlant() {
         </tr>
       </thead>
       <tbody>
-        <PlantInformation />
-        <PlantInformation />
+        {DataAllPlants !== 0 ? (
+          DataAllPlants?.map((items, index) => (
+            <TablePlantInformation key={index} dataPlant={items} />
+          ))
+        ) : (
+          <p>Loading...</p>
+        )}
       </tbody>
     </table>
   );

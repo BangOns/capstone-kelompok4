@@ -1,9 +1,8 @@
 import Image from "next/image";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { ImageImport } from "../../../../../../utils/ImageImport";
 import { motion } from "framer-motion";
 import { IconsImport } from "../../../../../../utils/IconsImport";
-import { useSelector } from "react-redux";
 const variants = {
   hidden: { opacity: 0 },
   visible: { opacity: 1 },

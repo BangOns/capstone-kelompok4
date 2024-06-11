@@ -5,6 +5,7 @@ const initialState = {
   plantInformationStep2: false,
   cancelAddPlant: false,
   deletePlant: false,
+  idToDeletePlant: 0,
   finishAddPlant: false,
   messagePlantSuccess: false,
   messagePlantError: false,
@@ -40,7 +41,8 @@ const DashboardSlice = createSlice({
       state.cancelAddPlant = action.payload;
     },
     FuncDeletePlant: (state, action) => {
-      state.deletePlant = action.payload;
+      state.deletePlant = action.payload.popUp;
+      state.idToDeletePlant = action.payload.id;
     },
     FuncFinishAddPlant: (state, action) => {
       state.finishAddPlant = action.payload;

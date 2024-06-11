@@ -8,7 +8,7 @@ import { useDispatch } from "react-redux";
 import { FuncDeletePlant } from "../../../../libs/redux/Slice/DashboardSlice";
 import { useRouter } from "next/navigation";
 
-export default function MenuOption({ active }) {
+export default function MenuOption({ active, id }) {
   const [viewMenu, viewMenuSet] = useState(false);
   const [editMenu, editMenuSet] = useState(false);
   const [deleteMenu, deleteMenuSet] = useState(false);
@@ -36,7 +36,7 @@ export default function MenuOption({ active }) {
         } text-base font-nunito-bold rounded-[5px] flex gap-2 p-2`}
         onMouseMove={() => viewMenuSet(true)}
         onMouseLeave={() => viewMenuSet(false)}
-        onClick={() => router.push(`manage-plant/view-plant/${1}`)}
+        onClick={() => router.push(`manage-plant/view-plant/${id}`)}
       >
         <IconsView active={viewMenu} />
         View
@@ -47,7 +47,7 @@ export default function MenuOption({ active }) {
         } text-base font-nunito-bold rounded-[5px] flex gap-2 p-2`}
         onMouseMove={() => editMenuSet(true)}
         onMouseLeave={() => editMenuSet(false)}
-        onClick={() => router.push(`manage-plant/edit-plant/${1}`)}
+        onClick={() => router.push(`manage-plant/edit-plant/${id}`)}
       >
         <IconsEdit active={editMenu} />
         Edit
@@ -58,7 +58,7 @@ export default function MenuOption({ active }) {
         } text-base font-nunito-bold rounded-[5px] flex gap-2 p-2`}
         onMouseMove={() => deleteMenuSet(true)}
         onMouseLeave={() => deleteMenuSet(false)}
-        onClick={() => dispatch(FuncDeletePlant(true))}
+        onClick={() => dispatch(FuncDeletePlant({ popUp: true, id }))}
       >
         <IconsDelete active={deleteMenu} />
         Delete

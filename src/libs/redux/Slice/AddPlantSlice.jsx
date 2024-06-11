@@ -1,6 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { dataDummyPlant } from "../../../utils/DataDummy";
 
 const initialState = {
+  DataAllPlants: [...dataDummyPlant],
   PlantInformationInput: {
     name: "",
     description: "",
@@ -46,6 +48,9 @@ export const AddPlantSlice = createSlice({
   name: "addPlant",
   initialState,
   reducers: {
+    FuncDataAllPlants: (state, action) => {
+      state.DataAllPlants = action.payload.value;
+    },
     FuncPlantInformationInput: (state, action) => {
       state.PlantInformationInput[action.payload.name] = action.payload.value;
     },
@@ -141,6 +146,7 @@ export const AddPlantSlice = createSlice({
 });
 
 export const {
+  FuncDataAllPlants,
   FuncPlantInformationInput,
   FuncPlantInformationInputImage,
   FuncReminderSettingsInput,
