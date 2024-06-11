@@ -35,8 +35,8 @@ const initialState = {
     additional_tips: "",
   },
   FaQInput: {
-    asked: "",
-    quest: "",
+    answer: "",
+    question: "",
   },
   faqList: [],
   PlantingInstructions: [],
