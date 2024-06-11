@@ -18,8 +18,7 @@ import {
   FuncMessagePlantDelete,
 } from "../../../../libs/redux/Slice/DashboardSlice";
 import {
-  FuncAddInputPlantInformation,
-  FuncPlantingInstructions,
+  FuncPlantingInstructions
 } from "../../../../libs/redux/Slice/AddPlantSlice";
 import Message_Error from "../../../Component_Message/Message_Error";
 import { IconsEdit } from "../../../../utils/Component-Icons-Reminder-settings";
@@ -31,7 +30,6 @@ const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 export default function Planting_Instructions() {
   const dispatch = useDispatch();
   const count = useSelector((state) => state.addplant.PlantingInstructions);
-  const { dataPlantNew } = useSelector((state) => state.addplant);
   const fileInputRef = useRef(null);
   const [data, setData] = useState(count);
   const [hide, setHide] = useState();
@@ -43,6 +41,7 @@ export default function Planting_Instructions() {
   };
 
   function handleClickPrev() {
+    dispatch(FuncPlantingInstructions(data));
     dispatch(FuncPrevStep());
   }
 
@@ -50,13 +49,6 @@ export default function Planting_Instructions() {
     if (data.length === 0) {
       dispatch(FuncMessagePlantError(true));
     } else {
-      const plant_instructions = [...data];
-      dispatch(
-        FuncAddInputPlantInformation({
-          ...dataPlantNew,
-          plant_instructions,
-        })
-      );
       dispatch(FuncPlantingInstructions(data));
     }
     dispatch(FuncNextStep());
