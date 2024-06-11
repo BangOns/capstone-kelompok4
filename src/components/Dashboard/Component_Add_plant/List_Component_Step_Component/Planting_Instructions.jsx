@@ -24,8 +24,6 @@ import {
 import Message_Error from "../../../Component_Message/Message_Error";
 import { IconsEdit } from "../../../../utils/Component-Icons-Reminder-settings";
 import DropdownSearch from "./Planting_Instructions/dropdown";
-import Alert_DeletePlant from "../Component-Alert/Alert_DeletePlant";
-import Alert_CancelPlant from "../Component-Alert/Alert_CancelPlant";
 import Alert_DeletePlantInstructions from "../Component-Alert/Alert_Delete_PlantInstructions";
 
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
