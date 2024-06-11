@@ -8,16 +8,22 @@ import PreviousButtonPlant from "../Component_Buttons/previous_buton_plant";
 import NextButtonPlant from "../Component_Buttons/next_buton_plant";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  FuncMessageErrorPlantName,
   FuncMessagePlantError,
   FuncNextStep,
+  FuncPlantInformationStep2,
   FuncPrevStep,
 } from "../../../../libs/redux/Slice/DashboardSlice";
 import { Fragment, useState } from "react";
 import Message_Error from "../../../Component_Message/Message_Error";
-import { FuncAddFAQList } from "../../../../libs/redux/Slice/AddPlantSlice";
+import { FuncAddFAQList, FuncAddInputPlantInformation } from "../../../../libs/redux/Slice/AddPlantSlice";
+import { ValidateInformation } from "../../../../utils/Validate_AddPlant/Validate_PlantInformation";
 
 export default function Faq() {
   const dispatch = useDispatch();
+  const { FaQInput, dataPlantNew } = useSelector(
+    (state) => state.addplant
+  );
   const [questions, setQuestions] = useState([
     {
       id: 1,
@@ -30,37 +36,71 @@ export default function Faq() {
   function handleClickPrev() {
     dispatch(FuncPrevStep());
   }
+
   function handleClickNext() {
-    dispatch(FuncMessagePlantError(true));
-    dispatch(FuncNextStep());
+    if (FaQInput.asked === "" && FaQInput.quest === "") {
+      dispatch(FuncMessagePlantError(true));
+    } else {
+      const plant_faqs = {
+        ...FaQInput,
+      };
+  
+      const updatedDataPlantNew = {
+        ...dataPlantNew,
+        plant_faqs,
+      };
+  
+      // Dispatch update ke Redux
+      dispatch(FuncAddInputPlantInformation(updatedDataPlantNew));
+  
+      console.log("Updated dataPlantNew:", updatedDataPlantNew);
+  
+      dispatch(FuncNextStep());
+    }
   }
+  
+
+  
 
   function handleAddQuestion() {
-
-    dispatch(FuncAddFAQList(questions))
-    console.log("Questions dispatched to Redux:", questions);
-
     const newQuestion = {
       id: questions.length + 1,
       question: "",
       answer: "",
     };
-    setQuestions([newQuestion, ...questions]); // Menambahkan elemen di bagian atas array
+  
+    const updatedQuestions = [newQuestion, ...questions];
+    
+    // Perbarui state lokal
+    setQuestions(updatedQuestions);
+  
+    // Dispatch ke Redux
+    dispatch(FuncAddFAQList(updatedQuestions));
+    
+    
+    console.log("Questions dispatched to Redux:", updatedQuestions);
   }
+  
 
   function handleDeleteQuestion(id) {
     setQuestions(questions.filter((question) => question.id !== id));
   }
 
   function handleUpdateQuestion(id, updatedQuestion) {
-    setQuestions(
-      questions.map((question) =>
-        question.id === id ? { ...question, ...updatedQuestion } : question
-      )
+    const updatedQuestions = questions.map((question) =>
+      question.id === id ? { ...question, ...updatedQuestion } : question
     );
-    dispatch(FuncAddFAQList(questions));
-    console.log("Updated questions dispatched to Redux:", questions);
+  
+    // Perbarui state lokal
+    setQuestions(updatedQuestions);
+  
+    // Dispatch ke Redux
+    dispatch(FuncAddFAQList(updatedQuestions));
+  
+    
+    console.log("Updated questions dispatched to Redux:", updatedQuestions);
   }
+  
 
  
 

@@ -36,11 +36,13 @@ const initialState = {
   },
   FaQInput: {
     asked: "",
+    quest: "",
   },
   faqList: [],
   PlantingInstructions: [],
 
   dataPlantNew: {},
+  dataFaqNew: {},
 };
 
 export const AddPlantSlice = createSlice({
