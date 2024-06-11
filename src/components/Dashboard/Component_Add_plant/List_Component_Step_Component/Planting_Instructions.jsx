@@ -26,6 +26,7 @@ import { IconsEdit } from "../../../../utils/Component-Icons-Reminder-settings";
 import DropdownSearch from "./Planting_Instructions/dropdown";
 import Alert_DeletePlant from "../Component-Alert/Alert_DeletePlant";
 import Alert_CancelPlant from "../Component-Alert/Alert_CancelPlant";
+import Alert_DeletePlantInstructions from "../Component-Alert/Alert_Delete_PlantInstructions";
 
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 
@@ -111,10 +112,15 @@ export default function Planting_Instructions() {
   };
 
   async function delet(e) {
-    dispatch(FuncDeletePlant(true));
-    setIndex(e);
+    dispatch(FuncDeletePlant({ popUp: true, id: e }));
   }
-
+  function handleClickDeleteStep({ confirmation, i }) {
+    if (confirmation) {
+      const newData = [...data];
+      newData.splice(i, 1);
+      setData(newData);
+    }
+  }
   return (
     <Fragment>
       <div className="mt-6 p-4 border rounded-[10px]">
@@ -291,8 +297,9 @@ export default function Planting_Instructions() {
           </div>
         </div>
       </div>
-      <Alert_DeletePlant />
-      <Alert_CancelPlant />
+      <Alert_DeletePlantInstructions
+        onCLickDeleteStep={handleClickDeleteStep}
+      />
       <Message_Error
         message={
           "Uh oh! You need to fill out the data first before move on to next step~"

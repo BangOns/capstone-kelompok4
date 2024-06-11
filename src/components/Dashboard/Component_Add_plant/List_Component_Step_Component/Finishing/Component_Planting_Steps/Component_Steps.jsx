@@ -3,6 +3,8 @@ import React, { useState } from "react";
 import { ImageImport } from "../../../../../../utils/ImageImport";
 import { motion } from "framer-motion";
 import { IconsImport } from "../../../../../../utils/IconsImport";
+import { useDispatch } from "react-redux";
+import { FuncToIndex } from "../../../../../../libs/redux/Slice/DashboardSlice";
 const variants = {
   hidden: { opacity: 0 },
   visible: { opacity: 1 },
@@ -20,6 +22,7 @@ const variantsDesc = {
 
 export default function Component_Steps({ dataPlantNew }) {
   const [activeDesc, activeDescSet] = useState(false);
+  const dispatch = useDispatch();
 
   return (
     <section className="w-full border border-gray-500 rounded-md p-4 mb-4">
@@ -60,6 +63,7 @@ export default function Component_Steps({ dataPlantNew }) {
             src={IconsImport.IconsDeletePlant}
             alt="delete"
             className="m-4 cursor-pointer"
+            onClick={() => dispatch(FuncToIndex(3))}
           />
           <Image
             src={IconsImport.IconsDropdown}
