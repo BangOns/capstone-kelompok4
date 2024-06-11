@@ -106,6 +106,7 @@ export default function Planting_Instructions() {
     setIndex(e)
     dispatch(FuncDeletePlant({ popUp: true, id: e }));
   }
+  
   function handleClickDeleteStep({ confirmation }) {
     if (confirmation) {
       const newData = [...data];
