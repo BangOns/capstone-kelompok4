@@ -47,7 +47,6 @@ export default function Alert_DeletePlant() {
                 <button
                   onClick={() => {
                     dispatch(FuncDeletePlant(false));
-                    dispatch(FuncMessagePlantDelete(false));
                   }}
                   className="basis-1/2 text-emerald-500 w-full p-[14px] rounded-md bg-white"
                 >
