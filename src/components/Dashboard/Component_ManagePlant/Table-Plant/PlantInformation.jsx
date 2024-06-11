@@ -4,9 +4,13 @@ import { ImageImport } from "@/utils/ImageImport";
 import Image from "next/image";
 import React, { useState } from "react";
 import MenuOption from "./MenuOption";
+import { FormatDate } from "../../../../utils/FormatDate";
 
-export default function PlantInformation() {
+export default function TablePlantInformation({ dataPlant }) {
   const [activeMenu, activeMenuSet] = useState(false);
+  const plantName = dataPlant.name.split("-")[0];
+  const familyName = dataPlant.name.split("-")[1];
+  const FormatDates = FormatDate(dataPlant.created_at);
   return (
     <tr className="text-center">
       <td className="flex justify-center">
@@ -16,18 +20,21 @@ export default function PlantInformation() {
       </td>
       <td>
         <div className="text-center">
-          <h4 className="text-base font-nunito-bold">Aloea Vera</h4>
-          <p className="text-sm font-nunito italic">Asphodelaceae</p>
+          <h4 className="text-base font-nunito-bold">{plantName}</h4>
+          <p className="text-sm font-nunito italic">{familyName}</p>
         </div>
       </td>
-      <td>21 May 2024</td>
-      <td>Succulents</td>
+      <td>{FormatDates}</td>
+      <td>{dataPlant.plant_category?.name}</td>
       <td>
-        <p>1x per day</p>
-        <p>08:00 AM</p>
+        <p>
+          {dataPlant.watering_schedule?.watering_frequency}x per{" "}
+          {dataPlant.watering_schedule?.each}
+        </p>
+        <p> {dataPlant.watering_schedule?.watering_time} AM</p>
       </td>
       <td>
-        <p>3 Month</p>
+        <p>{dataPlant.harvest_duration}</p>
       </td>
       <td className="relative">
         <Image
@@ -36,7 +43,7 @@ export default function PlantInformation() {
           onClick={() => activeMenuSet(!activeMenu)}
           className="hover:cursor-pointer"
         />
-        <MenuOption active={activeMenu} />
+        <MenuOption active={activeMenu} id={dataPlant.id} />
       </td>
     </tr>
   );

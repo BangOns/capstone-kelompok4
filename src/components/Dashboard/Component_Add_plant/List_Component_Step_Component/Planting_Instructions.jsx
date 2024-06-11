@@ -3,7 +3,7 @@ import IconsAddPlant from "@/utils/Component-Icons-Add-plant/IconsAddPlant";
 import { ImageImport } from "@/utils/ImageImport";
 import { IconsImport } from "@/utils/IconsImport";
 import Image from "next/image";
-import { Fragment, useRef, useState } from "react";
+import { Fragment, useEffect, useRef, useState } from "react";
 import "react-quill/dist/quill.snow.css";
 import dynamic from "next/dynamic";
 import CancelButtonPlant from "../Component_Buttons/cancel_buton_plant";
@@ -14,6 +14,8 @@ import {
   FuncMessagePlantError,
   FuncNextStep,
   FuncPrevStep,
+  FuncDeletePlant,
+  FuncMessagePlantDelete,
 } from "../../../../libs/redux/Slice/DashboardSlice";
 import {
   FuncAddInputPlantInformation,
@@ -22,6 +24,10 @@ import {
 import Message_Error from "../../../Component_Message/Message_Error";
 import { IconsEdit } from "../../../../utils/Component-Icons-Reminder-settings";
 import DropdownSearch from "./Planting_Instructions/dropdown";
+import Alert_DeletePlant from "../Component-Alert/Alert_DeletePlant";
+import Alert_CancelPlant from "../Component-Alert/Alert_CancelPlant";
+import Alert_DeletePlantInstructions from "../Component-Alert/Alert_Delete_PlantInstructions";
+
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 
 export default function Planting_Instructions() {
@@ -31,6 +37,17 @@ export default function Planting_Instructions() {
   const fileInputRef = useRef(null);
   const [data, setData] = useState(count);
   const [hide, setHide] = useState();
+  const [index, setIndex] = useState();
+  const { messagePlantDelete } = useSelector((state) => state.dashboard);
+
+  useEffect(() => {
+    if (messagePlantDelete) {
+      const newData = [...data];
+      newData.splice(index, 1);
+      setData(newData);
+      dispatch(FuncMessagePlantDelete(false));
+    }
+  }, [messagePlantDelete]);
 
   const handleImageClick = () => {
     fileInputRef.current.click();
@@ -44,9 +61,7 @@ export default function Planting_Instructions() {
     if (data.length === 0) {
       dispatch(FuncMessagePlantError(true));
     } else {
-      const plant_instructions = {
-        ...data,
-      };
+      const plant_instructions = [...data];
       dispatch(
         FuncAddInputPlantInformation({
           ...dataPlantNew,
@@ -96,17 +111,14 @@ export default function Planting_Instructions() {
     }
   };
 
-  function delet(e) {
-    const confirmation = confirm(
-      "Apakah Anda yakin ingin menghapus elemen ini?"
-    );
+  async function delet(e) {
+    dispatch(FuncDeletePlant({ popUp: true, id: e }));
+  }
+  function handleClickDeleteStep({ confirmation, i }) {
     if (confirmation) {
       const newData = [...data];
-      newData.splice(e, 1);
+      newData.splice(i, 1);
       setData(newData);
-      console.log("Elemen berhasil dihapus.");
-    } else {
-      console.log("Penghapusan dibatalkan.");
     }
   }
   return (
@@ -285,6 +297,9 @@ export default function Planting_Instructions() {
           </div>
         </div>
       </div>
+      <Alert_DeletePlantInstructions
+        onCLickDeleteStep={handleClickDeleteStep}
+      />
       <Message_Error
         message={
           "Uh oh! You need to fill out the data first before move on to next step~"

@@ -1,9 +1,7 @@
-"use client"
-
 import Image from "next/image";
 import React, { useState } from "react";
-import { ImageImport } from "../../../../utils/ImageImport";
 import { motion } from "framer-motion";
+import { ImageImport } from "../../../../utils/ImageImport";
 import { IconsImport } from "../../../../utils/IconsImport";
 const variants = {
   hidden: { opacity: 0 },
@@ -20,7 +18,7 @@ const variantsDesc = {
   },
 };
 
-export default function Component_Steps() {
+export default function Component_Steps({ dataPlantsStep }) {
   const [activeDesc, activeDescSet] = useState(false);
   return (
     <section className="w-full border border-gray-500 rounded-md p-4 mb-4">
@@ -31,16 +29,28 @@ export default function Component_Steps() {
             variants={variants}
             animate={activeDesc ? "hidden" : "visible"}
           >
-            <Image src={ImageImport.ImagePlants} alt="image-plants" />
+            <Image
+              src={
+                dataPlantsStep.step_image_url
+                  ? ImageImport.ImagePlants
+                  : dataPlantsStep.step_image_url
+              }
+              width={60}
+              height={60}
+              className="w-[60px] h-[60px] rounded object-cover"
+              alt="image-plants"
+            />
           </motion.div>
           <figcaption>
-            <h2 className="text-sm font-nunito-bold">Step 1</h2>
+            <h2 className="text-sm font-nunito-bold">
+              Step {dataPlantsStep.step_number}
+            </h2>
             <motion.p
               variants={variants}
               animate={activeDesc ? "hidden" : "visible"}
               className="text-sm font-nunito"
             >
-              Choose Your Seeds or Seedlings
+              {dataPlantsStep.step_title}
             </motion.p>
           </figcaption>
         </figure>
@@ -68,9 +78,13 @@ export default function Component_Steps() {
       >
         <figure className="w-full flex gap-4">
           <Image
-            src={ImageImport.ImageTest}
+            src={
+              dataPlantsStep.step_image_url
+                ? ImageImport.ImagePlants
+                : dataPlantsStep.step_image_url
+            }
             alt="image-test"
-            className="w-[237px] h-[231px]"
+            className="w-[237px] h-[231px] object-cover rounded"
             width={237}
             height={231}
           />
@@ -79,26 +93,16 @@ export default function Component_Steps() {
               <h4 className="text-sm font-nunito-bold pb-1">Title</h4>
               <div className="w-full border border-gray-950 rounded-lg py-[14px] px-3">
                 <p className="font-nunito-bold text-sm">
-                  Choose Your Seeds or Seedlings:{" "}
+                  {dataPlantsStep.step_title}
                 </p>
               </div>
               <div className="w-full mt-2 border border-gray-950 rounded-lg py-[14px] px-3">
-                <p className="text-sm font-nunito">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Laboriosam cum amet pariatur corporis expedita culpa dolores
-                  perspiciatis quam? Accusamus recusandae quod perferendis eius
-                  saepe voluptatibus repellendus fugiat nulla ex expedita.
-                </p>
-                <ul className="font-nunito text-sm list-disc px-5">
-                  <li className="">
-                    Seeds: Start indoors 6-8 weeks before the last expected
-                    frost date.
-                  </li>
-                  <li>
-                    Seeds: Start indoors 6-8 weeks before the last expected
-                    frost date.
-                  </li>
-                </ul>
+                <div
+                  className="prose"
+                  dangerouslySetInnerHTML={{
+                    __html: dataPlantsStep.step_description,
+                  }}
+                />
               </div>
             </div>
           </figcaption>

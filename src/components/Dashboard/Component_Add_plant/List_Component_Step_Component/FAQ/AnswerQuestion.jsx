@@ -2,7 +2,7 @@
 
 import dynamic from "next/dynamic";
 import "react-quill/dist/quill.snow.css";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { FuncFaQInput } from "../../../../../libs/redux/Slice/AddPlantSlice";
 
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });

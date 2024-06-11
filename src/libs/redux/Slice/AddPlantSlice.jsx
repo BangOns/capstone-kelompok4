@@ -1,6 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { dataDummyPlant } from "../../../utils/DataDummy";
 
 const initialState = {
+  DataAllPlants: [...dataDummyPlant],
   PlantInformationInput: {
     name: "",
     description: "",
@@ -42,25 +44,45 @@ const initialState = {
   PlantingInstructions: [],
 
   dataPlantNew: {},
-  dataFaqNew: {},
 };
 
 export const AddPlantSlice = createSlice({
   name: "addPlant",
   initialState,
   reducers: {
+    FuncDataAllPlants: (state, action) => {
+      state.DataAllPlants = action.payload.value;
+    },
     FuncPlantInformationInput: (state, action) => {
-      if (action.payload.name === "plant_images") {
-        state.PlantInformationInput[action.payload.name].push(
-          action.payload.value
-        );
-      }
-      if (action.payload.name === "plant_characteristic") {
-        state.PlantInformationInput.plant_characteristic[
-          action.payload.nameChild
-        ] = action.payload.value;
-      }
       state.PlantInformationInput[action.payload.name] = action.payload.value;
+    },
+    FuncPlantInformationInputImage: (state, action) => {
+      if (!state.PlantInformationInput.plant_images.length) {
+        state.PlantInformationInput.plant_images = [action.payload.value];
+      } else {
+        const findIndex = state.PlantInformationInput.plant_images.findIndex(
+          (items) => items.id === action.payload.value.id
+        );
+        if (findIndex >= 0) {
+          state.PlantInformationInput.plant_images[findIndex] =
+            action.payload.value;
+        } else {
+          state.PlantInformationInput.plant_images = [
+            ...state.PlantInformationInput.plant_images,
+            action.payload.value,
+          ];
+        }
+      }
+    },
+    FuncDeleteImagePlantInformation: (state, action) => {
+      state.PlantInformationInput.plant_images =
+        state.PlantInformationInput.plant_images.filter(
+          (items) => items.id !== action.payload.id
+        );
+    },
+    FuncDeleteImagePreviousPlantInformation: (state, action) => {
+      state.PlantInformationInput.plant_images = [];
+      state.dataPlantNew.plant_images = [];
     },
     FuncPlantCharateristic: (state, action) => {
       if (action.payload.operatorHeight === "plus") {
@@ -129,13 +151,17 @@ export const AddPlantSlice = createSlice({
 });
 
 export const {
+  FuncDataAllPlants,
   FuncPlantInformationInput,
+  FuncPlantInformationInputImage,
   FuncReminderSettingsInput,
   FuncAddInputPlantInformation,
+  FuncDeleteImagePlantInformation,
   FuncPlantCaringInput,
   FuncFaQInput,
   FuncAddFAQList,
   FuncPlantCharateristic,
   FuncPlantingInstructions,
+  FuncDeleteImagePreviousPlantInformation,
 } = AddPlantSlice.actions;
 export default AddPlantSlice.reducer;

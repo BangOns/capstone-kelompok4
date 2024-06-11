@@ -8,15 +8,17 @@ import NextButtonPlant from "../Component_Buttons/next_buton_plant";
 import { useDispatch, useSelector } from "react-redux";
 import dynamic from "next/dynamic";
 import Message_Error from "../../../Component_Message/Message_Error";
+
+import {
+  FuncAddInputPlantInformation,
+  FuncPlantCaringInput,
+} from "../../../../libs/redux/Slice/AddPlantSlice";
 import {
   FuncMessagePlantError,
   FuncNextStep,
   FuncPrevStep,
 } from "../../../../libs/redux/Slice/DashboardSlice";
-import {
-  FuncAddInputPlantInformation,
-  FuncPlantCaringInput,
-} from "../../../../libs/redux/Slice/AddPlantSlice";
+
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 
 export default function Plant_Caring() {

@@ -1,10 +1,10 @@
 export const dataDummyPlant = [
   {
     id: 1,
-    name: "Lavender",
+    name: "Lavender-antrornawd",
     description: "Lavender is Flowers Updated",
     is_toxic: true,
-    harvest_duration: 90,
+    harvest_duration: "3 month",
     plant_category: {
       id: 1,
       name: "Fruits",
@@ -29,8 +29,11 @@ export const dataDummyPlant = [
       watering_amount: 500,
       unit: "ml",
       watering_time: "09:00",
-      weather_condition: "Sunny",
-      condition_description: "Water early in the morning when it's sunny",
+      weather_condition: ["Sunny", "Bright Sunny"],
+      condition_description: [
+        "Water early in the morning when it's sunny",
+        "If Sunny May wons",
+      ],
     },
     plant_instructions: [
       {
@@ -94,10 +97,10 @@ export const dataDummyPlant = [
   },
   {
     id: 2,
-    name: "Lavender",
+    name: "Lavender-asggg",
     description: "Lavender is Flowers Updated",
     is_toxic: true,
-    harvest_duration: 90,
+    harvest_duration: "3 month",
     plant_category: {
       id: 1,
       name: "Fruits",
@@ -122,8 +125,11 @@ export const dataDummyPlant = [
       watering_amount: 500,
       unit: "ml",
       watering_time: "09:00",
-      weather_condition: "Sunny",
-      condition_description: "Water early in the morning when it's sunny",
+      weather_condition: ["Sunny", "Bright Sunny"],
+      condition_description: [
+        "Water early in the morning when it's sunny",
+        "If Sunny May wons",
+      ],
     },
     plant_instructions: [
       {

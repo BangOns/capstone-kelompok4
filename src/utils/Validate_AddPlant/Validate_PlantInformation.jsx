@@ -1,4 +1,7 @@
 export function ValidateInformation(dataPlant) {
+  const filterImage = dataPlant.plant_images.filter(
+    (items) => items.is_primary === 1
+  );
   if (
     dataPlant.name === "" ||
     dataPlant.description === "" ||
@@ -7,7 +10,8 @@ export function ValidateInformation(dataPlant) {
     dataPlant.sunlight === "" ||
     dataPlant.planting_time === "" ||
     !dataPlant.plant_category ||
-    dataPlant.is_toxic === ""
+    dataPlant.is_toxic === "" ||
+    !filterImage.length
   ) {
     return false;
   } else {

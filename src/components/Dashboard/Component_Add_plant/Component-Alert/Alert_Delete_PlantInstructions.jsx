@@ -8,17 +8,16 @@ import {
   FuncDeletePlant,
   FuncMessagePlantDelete,
 } from "../../../../libs/redux/Slice/DashboardSlice";
-import { useRouter } from "next/navigation";
 
 const variants = {
   hidden: { opacity: 0, scale: 0 },
   visible: { opacity: 1, scale: 1 },
 };
-export default function Alert_DeletePlant() {
+export default function Alert_DeletePlantInstructions({ onCLickDeleteStep }) {
+  const { deletePlant, idToDeletePlant } = useSelector(
+    (state) => state.dashboard
+  );
   const dispatch = useDispatch();
-  const { deletePlant } = useSelector((state) => state.dashboard);
-  const route = useRouter();
-
   return (
     <>
       <AnimatePresence>
@@ -46,7 +45,12 @@ export default function Alert_DeletePlant() {
               <div className="mt-8 font-nunito-bold flex w-full gap-2 justify-between">
                 <button
                   onClick={() => {
-                    dispatch(FuncDeletePlant(false));
+                    onCLickDeleteStep({
+                      confirmation: false,
+                      id: idToDeletePlant,
+                    });
+
+                    dispatch(FuncDeletePlant({ popUp: false }));
                   }}
                   className="basis-1/2 text-emerald-500 w-full p-[14px] rounded-md bg-white"
                 >
@@ -55,7 +59,11 @@ export default function Alert_DeletePlant() {
                 <button
                   onClick={() => {
                     dispatch(FuncMessagePlantDelete(true));
-                    dispatch(FuncDeletePlant(false));
+                    dispatch(FuncDeletePlant({ popUp: false, id: 0 }));
+                    onCLickDeleteStep({
+                      confirmation: true,
+                      id: idToDeletePlant,
+                    });
                   }}
                   className=" text-white basis-1/2 w-full p-[14px] rounded-md bg-red-500"
                 >
