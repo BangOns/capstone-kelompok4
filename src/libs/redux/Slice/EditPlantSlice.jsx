@@ -8,7 +8,7 @@ export const EditPlantSlice = createSlice({
   name: "editPlant",
   initialState,
   reducers: {
-    FuncPlantInformationInput: (state, action) => {
+    FuncPlantInformationInputEdit: (state, action) => {
       if (action.payload.name === "plant_images") {
         state.dataPlantEdit[action.payload.name].push(
           action.payload.value
@@ -21,7 +21,7 @@ export const EditPlantSlice = createSlice({
       }
       state.dataPlantEdit[action.payload.name] = action.payload.value;
     },
-    FuncPlantCharateristic: (state, action) => {
+    FuncPlantCharateristicEdit: (state, action) => {
       if (action.payload.operatorHeight === "plus") {
         state.dataPlantEdit.plant_characteristic.height += 1;
       } else if (action.payload.operatorHeight === "minus") {
@@ -43,11 +43,11 @@ export const EditPlantSlice = createSlice({
       state.dataPlantEdit.plant_characteristic[action.payload.name] =
         action.payload.value;
     },
-    FuncPlantCaringInput: (state, action) => {
+    FuncPlantCaringInputEdit: (state, action) => {
       state.dataPlantEdit[action.payload.name] = action.payload.value;
     },
 
-    FuncReminderSettingsInput: (state, action) => {
+    FuncReminderSettingsInputEdit: (state, action) => {
       const { operator } = action.payload;
       switch (operator) {
         case "plus":
@@ -72,21 +72,33 @@ export const EditPlantSlice = createSlice({
           break;
       }
     },
-    FuncFaQInput: (state, action) => {
+    FuncFaQInputEdit: (state, action) => {
       state.dataPlantEdit[action.payload.name] = action.payload.value;
     },
+    FuncEditFAQList: (state, action) => {
+      state.faqList = action.payload;
+    },
     FuncEditInputPlantInformation: (state, action) => {
-      state.dataPlantEdit = action.payload;
+      state.dataPlantNew = action.payload;
+    },
+    FuncPlantingInstructionsEdit: (state, action) => {
+      state.PlantingInstructions = action.payload;
+    },
+    FuncEditDataPlants: (state, action) => {
+      state.DataAllPlants = action.payload;
     },
   },
 });
 
 export const {
-  FuncPlantInformationInput,
-  FuncReminderSettingsInput,
+  FuncPlantInformationInputEdit,
+  FuncPlantCharateristicEdit,
+  FuncPlantCaringInputEdit,
+  FuncReminderSettingsInputEdit,
+  FuncFaQInputEdit,
+  FuncEditFAQList,
   FuncEditInputPlantInformation,
-  FuncPlantCaringInput,
-  FuncFaQInput,
-  FuncPlantCharateristic,
+  FuncPlantingInstructionsEdit,
+  FuncEditDataPlants,
 } = EditPlantSlice.actions;
 export default EditPlantSlice.reducer;
