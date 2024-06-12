@@ -23,23 +23,13 @@ import { ValidateInformation } from "../../../../utils/Validate_AddPlant/Validat
 export default function Plant_Infromation() {
   const dispatch = useDispatch();
   const { plantInformationStep2 } = useSelector((state) => state.dashboard);
-  const { PlantInformationInputEdit } = useSelector(
-    (state) => state.editplant
-  );
-  // const { PlantInformationInput, dataPlantNew } = useSelector(
-  //   (state) => state.addplant
-  // );
+  const { dataPlantEdit } = useSelector((state) => state.editplant);
+
+  const PlantInformation = {
+    name: dataPlantEdit.name,
+  };
   const [value, setValue] = useState("");
-  // const [imageChild, imageChildSet] = useState({
-  //   image1: "",
-  //   image2: "",
-  //   image3: "",
-  //   image4: "",
-  //   image5: "",
-  //   image6: "",
-  //   image7: "",
-  //   image8: "",
-  // });
+
   const regex = /^[^-]+-[^-]+$/;
 
   function handleChangeImageChild(e) {

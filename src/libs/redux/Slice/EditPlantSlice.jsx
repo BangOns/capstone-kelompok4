@@ -10,14 +10,11 @@ export const EditPlantSlice = createSlice({
   reducers: {
     FuncPlantInformationInputEdit: (state, action) => {
       if (action.payload.name === "plant_images") {
-        state.dataPlantEdit[action.payload.name].push(
-          action.payload.value
-        );
+        state.dataPlantEdit[action.payload.name].push(action.payload.value);
       }
       if (action.payload.name === "plant_characteristic") {
-        state.dataPlantEdit.plant_characteristic[
-          action.payload.nameChild
-        ] = action.payload.value;
+        state.dataPlantEdit.plant_characteristic[action.payload.nameChild] =
+          action.payload.value;
       }
       state.dataPlantEdit[action.payload.name] = action.payload.value;
     },
@@ -52,18 +49,12 @@ export const EditPlantSlice = createSlice({
       switch (operator) {
         case "plus":
           state.dataPlantEdit.watering_schedule[action.payload.name] =
-            state.dataPlantEdit.watering_schedule[action.payload.name] +
-            1;
+            state.dataPlantEdit.watering_schedule[action.payload.name] + 1;
           break;
         case "minus":
-          if (
-            state.dataPlantEdit.watering_schedule[action.payload.name] >
-            0
-          ) {
+          if (state.dataPlantEdit.watering_schedule[action.payload.name] > 0) {
             state.dataPlantEdit.watering_schedule[action.payload.name] =
-              state.dataPlantEdit.watering_schedule[
-                action.payload.name
-              ] - 1;
+              state.dataPlantEdit.watering_schedule[action.payload.name] - 1;
           }
           break;
         default:
@@ -76,16 +67,13 @@ export const EditPlantSlice = createSlice({
       state.dataPlantEdit[action.payload.name] = action.payload.value;
     },
     FuncEditFAQList: (state, action) => {
-      state.faqList = action.payload;
+      state.dataPlantEdit.faq_plants = action.payload;
     },
     FuncEditInputPlantInformation: (state, action) => {
-      state.dataPlantNew = action.payload;
+      state.dataPlantEdit = action.payload;
     },
     FuncPlantingInstructionsEdit: (state, action) => {
-      state.PlantingInstructions = action.payload;
-    },
-    FuncEditDataPlants: (state, action) => {
-      state.DataAllPlants = action.payload;
+      state.dataPlantEdit[action.payload.name] = action.payload;
     },
   },
 });
