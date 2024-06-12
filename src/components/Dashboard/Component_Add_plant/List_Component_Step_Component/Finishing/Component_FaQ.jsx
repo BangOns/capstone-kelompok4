@@ -3,9 +3,10 @@ import Image from "next/image";
 import Asked_And_Answer from "./Component_FaQ/Asked_And_Answer";
 import { IconsImport } from "../../../../../utils/IconsImport";
 import { FuncToIndex } from "../../../../../libs/redux/Slice/DashboardSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function Component_FaQ() {
+  const { dataPlantNew } = useSelector((state) => state.addplant);
   const dispatch = useDispatch();
   return (
     <section className="-full mt-6">
@@ -19,12 +20,9 @@ export default function Component_FaQ() {
         />
       </header>
       <article className="w-11/12 mb-6">
-        <Asked_And_Answer />
-        <Asked_And_Answer />
-        <Asked_And_Answer />
-        <Asked_And_Answer />
-        <Asked_And_Answer />
-        <Asked_And_Answer />
+        {dataPlantNew.plant_faqs?.map((items, i) => (
+          <Asked_And_Answer key={i} dataPlants={items} />
+        ))}
       </article>
     </section>
   );

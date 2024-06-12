@@ -8,10 +8,8 @@ import PreviousButtonPlant from "../Component_Buttons/previous_buton_plant";
 import NextButtonPlant from "../Component_Buttons/next_buton_plant";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  FuncMessageErrorPlantName,
   FuncMessagePlantError,
   FuncNextStep,
-  FuncPlantInformationStep2,
   FuncPrevStep,
 } from "../../../../libs/redux/Slice/DashboardSlice";
 import { Fragment, useEffect, useState } from "react";
@@ -20,7 +18,6 @@ import {
   FuncAddFAQList,
   FuncAddInputPlantInformation,
 } from "../../../../libs/redux/Slice/AddPlantSlice";
-import { ValidateInformation } from "../../../../utils/Validate_AddPlant/Validate_PlantInformation";
 
 export default function Faq() {
   const dispatch = useDispatch();
@@ -32,6 +29,7 @@ export default function Faq() {
       id: 1,
       question: "",
       answer: "",
+      created_at: new Date(),
     },
   ]);
 
@@ -55,8 +53,6 @@ export default function Faq() {
       // Dispatch update ke Redux
       dispatch(FuncAddInputPlantInformation(updatedDataPlantNew));
 
-      console.log("Updated dataPlantNew:", updatedDataPlantNew);
-
       dispatch(FuncNextStep());
     }
   }
@@ -75,8 +71,6 @@ export default function Faq() {
 
     // Dispatch ke Redux
     dispatch(FuncAddFAQList(updatedQuestions));
-
-    console.log("Questions dispatched to Redux:", updatedQuestions);
   }
 
   function handleDeleteQuestion(id) {
@@ -93,8 +87,6 @@ export default function Faq() {
 
     // Dispatch ke Redux
     dispatch(FuncAddFAQList(updatedQuestions));
-
-    console.log("Updated questions dispatched to Redux:", updatedQuestions);
   }
   useEffect(() => {
     if (faqList.length !== 0) {
