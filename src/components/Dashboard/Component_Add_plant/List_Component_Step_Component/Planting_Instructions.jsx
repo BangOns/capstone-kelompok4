@@ -15,17 +15,11 @@ import {
   FuncNextStep,
   FuncPrevStep,
   FuncDeletePlant,
-  FuncMessagePlantDelete,
 } from "../../../../libs/redux/Slice/DashboardSlice";
-import {
-  FuncAddInputPlantInformation,
-  FuncPlantingInstructions,
-} from "../../../../libs/redux/Slice/AddPlantSlice";
+import { FuncPlantingInstructions } from "../../../../libs/redux/Slice/AddPlantSlice";
 import Message_Error from "../../../Component_Message/Message_Error";
 import { IconsEdit } from "../../../../utils/Component-Icons-Reminder-settings";
 import DropdownSearch from "./Planting_Instructions/dropdown";
-import Alert_DeletePlant from "../Component-Alert/Alert_DeletePlant";
-import Alert_CancelPlant from "../Component-Alert/Alert_CancelPlant";
 import Alert_DeletePlantInstructions from "../Component-Alert/Alert_Delete_PlantInstructions";
 
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
@@ -33,21 +27,10 @@ const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 export default function Planting_Instructions() {
   const dispatch = useDispatch();
   const count = useSelector((state) => state.addplant.PlantingInstructions);
-  const { dataPlantNew } = useSelector((state) => state.addplant);
   const fileInputRef = useRef(null);
   const [data, setData] = useState(count);
   const [hide, setHide] = useState();
   const [index, setIndex] = useState();
-  const { messagePlantDelete } = useSelector((state) => state.dashboard);
-
-  useEffect(() => {
-    if (messagePlantDelete) {
-      const newData = [...data];
-      newData.splice(index, 1);
-      setData(newData);
-      dispatch(FuncMessagePlantDelete(false));
-    }
-  }, [messagePlantDelete]);
 
   const handleImageClick = () => {
     fileInputRef.current.click();
@@ -55,19 +38,13 @@ export default function Planting_Instructions() {
 
   function handleClickPrev() {
     dispatch(FuncPrevStep());
+    dispatch(FuncPlantingInstructions(data));
   }
 
   function handleClickNext() {
     if (data.length === 0) {
       dispatch(FuncMessagePlantError(true));
     } else {
-      const plant_instructions = [...data];
-      dispatch(
-        FuncAddInputPlantInformation({
-          ...dataPlantNew,
-          plant_instructions,
-        })
-      );
       dispatch(FuncPlantingInstructions(data));
     }
     dispatch(FuncNextStep());
@@ -112,12 +89,14 @@ export default function Planting_Instructions() {
   };
 
   async function delet(e) {
+    setIndex(e);
     dispatch(FuncDeletePlant({ popUp: true, id: e }));
   }
-  function handleClickDeleteStep({ confirmation, i }) {
+
+  function handleClickDeleteStep({ confirmation }) {
     if (confirmation) {
       const newData = [...data];
-      newData.splice(i, 1);
+      newData.splice(index, 1);
       setData(newData);
     }
   }
