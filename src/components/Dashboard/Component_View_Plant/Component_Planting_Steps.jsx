@@ -9,8 +9,8 @@ export default function Component_Planting_Steps({ dataPlants }) {
         <h1 className="font-nunito-bold text-xl">Planting Steps</h1>
       </header>
       <article className="w-11/12">
-        {dataPlants.plant_instructions?.map((items) => (
-          <Component_Steps dataPlantsStep={items} />
+        {dataPlants.plant_instructions?.map((items, i) => (
+          <Component_Steps dataPlantsStep={items} key={i} />
         ))}
       </article>
     </section>

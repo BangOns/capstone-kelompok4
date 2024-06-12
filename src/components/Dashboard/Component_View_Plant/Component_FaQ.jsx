@@ -9,12 +9,9 @@ export default function Component_FaQ({ dataPlants }) {
         <h1 className="font-nunito-bold text-xl">FAQ</h1>
       </header>
       <article className="w-11/12 mb-6">
-        <Asked_And_Answer />
-        <Asked_And_Answer />
-        <Asked_And_Answer />
-        <Asked_And_Answer />
-        <Asked_And_Answer />
-        <Asked_And_Answer />
+        {dataPlants?.plant_faqs.map((items, i) => (
+          <Asked_And_Answer dataPlants={items} key={i} />
+        ))}
       </article>
     </section>
   );

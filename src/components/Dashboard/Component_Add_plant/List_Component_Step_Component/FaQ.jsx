@@ -24,14 +24,8 @@ export default function Faq() {
   const { FaQInput, dataPlantNew, faqList } = useSelector(
     (state) => state.addplant
   );
-  const [questions, setQuestions] = useState([
-    {
-      id: 1,
-      question: "",
-      answer: "",
-      created_at: new Date(),
-    },
-  ]);
+  const dateObj = new Date();
+  const [questions, setQuestions] = useState([]);
 
   function handleClickPrev() {
     dispatch(FuncPrevStep());
@@ -41,9 +35,7 @@ export default function Faq() {
     if ((FaQInput.asked === "" && FaQInput.quest === "") || !faqList.length) {
       dispatch(FuncMessagePlantError(true));
     } else {
-      const plant_faqs = {
-        ...faqList,
-      };
+      const plant_faqs = [...faqList];
 
       const updatedDataPlantNew = {
         ...dataPlantNew,
@@ -62,6 +54,7 @@ export default function Faq() {
       id: questions.length + 1,
       question: "",
       answer: "",
+      created_at: "",
     };
 
     const updatedQuestions = [newQuestion, ...questions];
@@ -116,17 +109,18 @@ export default function Faq() {
                 box
               </div>
             </div>
-            {questions.map((q) => (
-              <div key={q.id} className="px-4 mb-4">
-                <AskedQuestion
-                  question={q.question}
-                  answer={q.answer}
-                  id={q.id}
-                  onDelete={handleDeleteQuestion}
-                  onUpdate={handleUpdateQuestion}
-                />
-              </div>
-            ))}
+            {questions.length !== 0 &&
+              questions.map((q) => (
+                <div key={q.id} className="px-4 mb-4">
+                  <AskedQuestion
+                    question={q.question}
+                    answer={q.answer}
+                    id={q.id}
+                    onDelete={handleDeleteQuestion}
+                    onUpdate={handleUpdateQuestion}
+                  />
+                </div>
+              ))}
           </div>
 
           <div className="flex justify-between mt-10 pr-4">

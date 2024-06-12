@@ -21,7 +21,20 @@ export default function Plant_Height() {
       </h2>
       <div className="w-full items-center flex justify-between py-[14px] px-3 border border-slate-950 rounded-lg">
         <FiMinus onClick={handleCountMinus} className="cursor-pointer" />
-        <p>{plant_characteristic.height || 0}</p>
+        <input
+          type="number"
+          value={plant_characteristic.height}
+          placeholder="0"
+          className="text-center outline-none border-0"
+          onChange={(e) => {
+            dispatch(
+              FuncPlantCharateristic({
+                name: "height",
+                value: parseInt(e.target.value),
+              })
+            );
+          }}
+        />
         <FiPlus onClick={handleCountPlus} className="cursor-pointer" />
       </div>
     </div>

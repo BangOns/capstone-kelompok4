@@ -21,8 +21,8 @@ export default function Component_Planting_Steps() {
         />
       </header>
       <article className="w-11/12">
-        {dataPlantNew.plant_instructions?.map((items) => (
-          <Component_Steps dataPlantNew={items} />
+        {dataPlantNew.plant_instructions?.map((items, i) => (
+          <Component_Steps dataPlantNew={items} key={i} />
         ))}
       </article>
     </section>

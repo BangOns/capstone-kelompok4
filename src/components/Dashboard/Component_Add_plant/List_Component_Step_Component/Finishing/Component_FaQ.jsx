@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 export default function Component_FaQ() {
   const { dataPlantNew } = useSelector((state) => state.addplant);
+  console.log(dataPlantNew);
   const dispatch = useDispatch();
   return (
     <section className="-full mt-6">

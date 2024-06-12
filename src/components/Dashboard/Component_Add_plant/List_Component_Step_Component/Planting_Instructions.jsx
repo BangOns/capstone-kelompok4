@@ -16,7 +16,10 @@ import {
   FuncPrevStep,
   FuncDeletePlant,
 } from "../../../../libs/redux/Slice/DashboardSlice";
-import { FuncPlantingInstructions } from "../../../../libs/redux/Slice/AddPlantSlice";
+import {
+  FuncAddInputPlantInformation,
+  FuncPlantingInstructions,
+} from "../../../../libs/redux/Slice/AddPlantSlice";
 import Message_Error from "../../../Component_Message/Message_Error";
 import { IconsEdit } from "../../../../utils/Component-Icons-Reminder-settings";
 import DropdownSearch from "./Planting_Instructions/dropdown";
@@ -27,14 +30,11 @@ const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 export default function Planting_Instructions() {
   const dispatch = useDispatch();
   const count = useSelector((state) => state.addplant.PlantingInstructions);
+  const { dataPlantNew } = useSelector((state) => state.addplant);
   const fileInputRef = useRef(null);
   const [data, setData] = useState(count);
   const [hide, setHide] = useState();
   const [index, setIndex] = useState();
-
-  const handleImageClick = () => {
-    fileInputRef.current.click();
-  };
 
   function handleClickPrev() {
     dispatch(FuncPrevStep());
@@ -45,34 +45,62 @@ export default function Planting_Instructions() {
     if (data.length === 0) {
       dispatch(FuncMessagePlantError(true));
     } else {
+      const plant_instructions = [...data];
+      dispatch(
+        FuncAddInputPlantInformation({
+          ...dataPlantNew,
+          plant_instructions,
+        })
+      );
       dispatch(FuncPlantingInstructions(data));
+      dispatch(FuncNextStep());
     }
-    dispatch(FuncNextStep());
   }
 
   function add() {
-    setData([
-      ...data,
-      {
-        id: Math.floor(Math.random() * 100),
-        plant_id: Math.floor(Math.random() * 100),
-        instruction_category: {
+    if (!data.length) {
+      setData([
+        {
           id: Math.floor(Math.random() * 100),
-          name: "",
-          description: "",
-          image_url: "",
+          plant_id: Math.floor(Math.random() * 100),
+          instruction_category: {
+            id: Math.floor(Math.random() * 100),
+            name: "",
+            description: "",
+            image_url: "",
+          },
+          step_number: data.length + 1,
+
+          step_title: "",
+          category: "",
+          step_description: "",
+          step_image_url: "",
+          additional_tips: "",
         },
-        step_number: data.length + 1,
+      ]);
+    } else {
+      setData([
+        ...data,
+        {
+          id: Math.floor(Math.random() * 100),
+          plant_id: Math.floor(Math.random() * 100),
+          instruction_category: {
+            id: Math.floor(Math.random() * 100),
+            name: "",
+            description: "",
+            image_url: "",
+          },
+          step_number: data.length + 1,
 
-        step_title: "",
-        category: "",
-        step_description: "",
-        step_image_url: "",
-        additional_tips: "",
-      },
-    ]);
+          step_title: "",
+          category: "",
+          step_description: "",
+          step_image_url: "",
+          additional_tips: "",
+        },
+      ]);
+    }
   }
-
   const updateField = (index, field, value) => {
     const newData = [...data];
     if (field === "step_image_url") {
@@ -80,7 +108,8 @@ export default function Planting_Instructions() {
       if (file) {
         const imageUrl = URL.createObjectURL(file);
         newData[index] = { ...newData[index], [field]: imageUrl };
-        setData(newData);
+        const dataNew = newData;
+        setData(dataNew);
       }
     } else {
       newData[index] = { ...newData[index], [field]: value };
@@ -97,7 +126,12 @@ export default function Planting_Instructions() {
     if (confirmation) {
       const newData = [...data];
       newData.splice(index, 1);
-      setData(newData);
+
+      const updateData = newData.map((items, i) => ({
+        ...items,
+        step_number: i + 1,
+      }));
+      setData(updateData);
     }
   }
   return (
@@ -146,7 +180,7 @@ export default function Planting_Instructions() {
                     />
                   </div>
                   <div className="mx-[16px] my-5 text-[14px] ">
-                    <p className=" font-bold ">Step {i + 1}</p>
+                    <p className=" font-bold ">Step {e.step_number}</p>
                     <p className="text-[#6B7280]">{e.step_title}</p>
                   </div>
                   <div className="flex ml-auto">
@@ -202,8 +236,9 @@ export default function Planting_Instructions() {
                       <div className="absolute bg-[#10B981] p-3 border rounded-lg w-fit h-fit top-0 right-0">
                         <input
                           type="file"
-                          ref={fileInputRef}
+                          // ref={fileInputRef}
                           className="hidden"
+                          id={`image-url-${i}`}
                           onChange={(event) =>
                             updateField(i, "step_image_url", event)
                           }
@@ -212,7 +247,9 @@ export default function Planting_Instructions() {
                           src={IconsImport.IconsEdit}
                           className="max-xl:m-auto cursor-pointer"
                           alt="profile"
-                          onClick={handleImageClick}
+                          onClick={() =>
+                            document.getElementById(`image-url-${i}`).click()
+                          }
                         />
                       </div>
                     </div>

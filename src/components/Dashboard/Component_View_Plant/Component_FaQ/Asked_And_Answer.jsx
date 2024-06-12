@@ -7,9 +7,13 @@ const variants = {
   hidden: { opacity: 0, y: 75 },
   visible: { opacity: 1, y: 0 },
 };
-export default function Asked_And_Answer() {
+export default function Asked_And_Answer({ dataPlants }) {
   const [activeQuest, activeQuestSet] = useState(false);
-
+  function stripHtmlTags(str) {
+    if (str === null || str === "") return false;
+    else str = str.toString();
+    return str.replace(/<[^>]*>/g, "");
+  }
   return (
     <section className="w-full rounded-md border border-gray-200 p-4 my-4">
       <header className="flex justify-between items-center">
@@ -21,9 +25,12 @@ export default function Asked_And_Answer() {
           ) : (
             <>
               <p className="font-nunito-bold text-sm pb-2">
-                Q : Hello My Friends
+                Q : {stripHtmlTags(dataPlants.question)}
               </p>
-              <p className=" text-sm font-nunito">A : Hello Friends</p>
+              <p className=" text-sm font-nunito">
+                <span className="font-nunito-bold">A:</span>{" "}
+                {stripHtmlTags(dataPlants.answer)}
+              </p>
             </>
           )}
         </article>

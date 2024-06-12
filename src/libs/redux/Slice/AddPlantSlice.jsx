@@ -147,6 +147,9 @@ export const AddPlantSlice = createSlice({
     FuncPlantingInstructions: (state, action) => {
       state.PlantingInstructions = action.payload;
     },
+    FuncAddNewDataPlants: (state, action) => {
+      state.DataAllPlants = action.payload;
+    },
   },
 });
 
@@ -163,5 +166,6 @@ export const {
   FuncPlantCharateristic,
   FuncPlantingInstructions,
   FuncDeleteImagePreviousPlantInformation,
+  FuncAddNewDataPlants,
 } = AddPlantSlice.actions;
 export default AddPlantSlice.reducer;

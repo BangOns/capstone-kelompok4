@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { FiMinus, FiPlus } from "react-icons/fi";
 import { useDispatch, useSelector } from "react-redux";
 import { FuncPlantCharateristic } from "../../../../../../libs/redux/Slice/AddPlantSlice";
@@ -7,6 +7,7 @@ export default function Plant_Wide() {
   const { plant_characteristic } = useSelector(
     (state) => state.addplant.PlantInformationInput
   );
+  const [count, countSet] = useState(plant_characteristic.wide);
   const dispatch = useDispatch();
   function handleCountPlus() {
     dispatch(FuncPlantCharateristic({ operatorWide: "plus" }));
@@ -21,7 +22,20 @@ export default function Plant_Wide() {
       </h2>
       <div className="w-full items-center flex justify-between py-[14px] px-3 border border-slate-950 rounded-lg">
         <FiMinus className="cursor-pointer" onClick={handleCountMinus} />
-        <p>{plant_characteristic.wide || 0}</p>
+        <input
+          type="number"
+          value={plant_characteristic.wide}
+          placeholder="0"
+          className="text-center outline-none border-0"
+          onChange={(e) => {
+            dispatch(
+              FuncPlantCharateristic({
+                name: "wide",
+                value: parseInt(e.target.value),
+              })
+            );
+          }}
+        />
         <FiPlus className="cursor-pointer" onClick={handleCountPlus} />
       </div>
     </div>
