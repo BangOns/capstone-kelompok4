@@ -25,7 +25,7 @@ export default function Plant_Category() {
   async function getPlantCategories() {
     try {
       const response = await fetch(
-        "https://be-agriculture-awh2j5ffyq-uc.a.run.app/api/v1/plants/instructions/categories",
+        "https://be-agriculture-awh2j5ffyq-uc.a.run.app/api/v1/plants/categories",
         {
           method: "GET",
         }
