@@ -24,9 +24,18 @@ export default function Plant_Infromation() {
   const dispatch = useDispatch();
   const { plantInformationStep2 } = useSelector((state) => state.dashboard);
   const { dataPlantEdit } = useSelector((state) => state.editplant);
+  console.log(dataPlantEdit)
 
   const PlantInformation = {
     name: dataPlantEdit.name,
+    description: dataPlantEdit.description,
+    category: dataPlantEdit.category,
+    harvestDuration: dataPlantEdit.harvestDuration,
+    climateCondition: dataPlantEdit.climateCondition,
+    type: dataPlantEdit.type,
+    sunlight: dataPlantEdit.sunlight,
+    plantingTime: dataPlantEdit.plantingTime,
+    plant_image: dataPlantEdit.plant_image,
   };
   const [value, setValue] = useState("");
 
