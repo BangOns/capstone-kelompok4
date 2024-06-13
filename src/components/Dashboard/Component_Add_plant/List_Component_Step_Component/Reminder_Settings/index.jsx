@@ -34,8 +34,21 @@ const Reminder_Settings = () => {
     if (!checkValidateReminderSettings) {
       dispatch(FuncMessagePlantError(true));
     } else {
+      const weatherConditionString =
+        ReminderSettingsInput.watering_schedule.weather_condition.join(", ");
+
+      const conditionDescriptionString =
+        ReminderSettingsInput.watering_schedule.condition_description.join(
+          ", "
+        );
+
       const dataInputReminderSettings = {
         ...ReminderSettingsInput,
+        watering_schedule: {
+          ...ReminderSettingsInput.watering_schedule,
+          weather_condition: weatherConditionString,
+          condition_description: conditionDescriptionString,
+        },
       };
       dispatch(
         FuncAddInputPlantInformation({

@@ -5,9 +5,9 @@ export default function Certain_Weather_Condition() {
   const { dataPlantNew } = useSelector((state) => state.addplant);
 
   const weatherCondition =
-    dataPlantNew?.watering_schedule.weather_condition || [];
+    dataPlantNew?.watering_schedule.weather_condition.split(", ") || [];
   const conditionDescription =
-    dataPlantNew?.watering_schedule.condition_description || [];
+    dataPlantNew?.watering_schedule.condition_description.split(", ") || [];
   return (
     <section>
       {weatherCondition.map((condition, index) => (
