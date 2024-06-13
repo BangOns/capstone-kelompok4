@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { IconsImport } from "@/utils/IconsImport";
 import TablePlantInformation from "./PlantInformation";
@@ -7,7 +7,22 @@ import { useSelector } from "react-redux";
 
 export default function TablePlant() {
   const { DataAllPlants } = useSelector((state) => state.addplant);
-
+  const [dataAllPlantsWithAPI, dataAllPlantsWithAPISet] = useState([]);
+  async function getDataAllPlants() {
+    try {
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_API_KEY}/plants?page=${1}&limit=10`
+      );
+      const allResponse = await response.json();
+      dataAllPlantsWithAPISet(allResponse.data);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  console.log(dataAllPlantsWithAPI.plants);
+  useEffect(() => {
+    getDataAllPlants();
+  }, []);
   return (
     <table className="table border">
       {/* head */}
@@ -49,8 +64,8 @@ export default function TablePlant() {
         </tr>
       </thead>
       <tbody>
-        {DataAllPlants !== 0 ? (
-          DataAllPlants?.map((items, index) => (
+        {dataAllPlantsWithAPI ? (
+          dataAllPlantsWithAPI.plants?.map((items, index) => (
             <TablePlantInformation key={index} dataPlant={items} />
           ))
         ) : (
