@@ -9,19 +9,41 @@ export default function Header() {
   const [userName, setUserName] = useState("");
 
   useEffect(() => {
-    const userEmail = 'octavianoryan123@gmail.com';
+    const fetchAdminProfile = async () => {
+      try {
+        const token = getCookie("token");
+        if (!token) {
+          throw new Error("Token not found in cookies");
+        }
 
-    fetch(`https://be-agriculture-awh2j5ffyq-uc.a.run.app/api/v1/admin?email=${userEmail}`)
-      .then(response => response.json())
-      .then(data => {
-        const fullName = data.name;
-        const firstName = fullName.split(" ")[0];
-        setUserName(firstName);
-      })
-      .catch(error => {
-        console.error('Error fetching user info:', error);
-      });
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/admin/profile`,
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+
+        const data = await response.json();
+        if (!response.ok) {
+          throw new Error(data.message || "Failed to fetch admin profile");
+        }
+        setUserName(data.data.name.split(' ')[0]);
+
+      } catch (error) {
+        console.error("Error fetching admin profile:", error.message);
+      }
+    };
+
+    fetchAdminProfile();
   }, []); 
+
+  const getCookie = (name) => {
+    const cookieValue = document.cookie.match('(^|;)\\s*' + name + '\\s*=\\s*([^;]+)');
+    return cookieValue ? cookieValue.pop() : '';
+  };
 
   return (
     <header className="z-10">
