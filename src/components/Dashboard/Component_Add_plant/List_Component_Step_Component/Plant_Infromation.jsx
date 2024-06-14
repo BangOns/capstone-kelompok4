@@ -31,6 +31,7 @@ export default function Plant_Infromation() {
 
   function handleClickNext() {
     const checkValidate = ValidateInformation(PlantInformationInput);
+    console.log(checkValidate);
     if (!checkValidate || !regex.test(PlantInformationInput.name)) {
       if (!regex.test(PlantInformationInput.name)) {
         dispatch(FuncMessageErrorPlantName(true));

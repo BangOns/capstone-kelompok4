@@ -62,20 +62,35 @@ export default function Faq() {
     dispatch(FuncAddFAQList(updatedQuestions));
   }
 
-  function handleDeleteQuestion(id) {
-    setQuestions(questions.filter((question) => question.id !== id));
+  function handleDeleteQuestion(index) {
+    const newData = [...questions];
+    newData.splice(index, 1);
+
+    const updateData = newData.map((items) => ({
+      ...items,
+    }));
+    setQuestions(updateData);
+
+    dispatch(FuncAddFAQList(updateData));
   }
-
   function handleUpdateQuestion(id, updatedQuestion) {
-    const updatedQuestions = questions.map((question) =>
-      question.id === id ? { ...question, ...updatedQuestion } : question
-    );
+    // const Questionsupdated = questions.map((items) =>
+    //   items.question === updatedQuestion.question
+    //     ? { ...items, ...updatedQuestion }
+    //     : items
+    // );
 
-    // Perbarui state lokal
-    setQuestions(updatedQuestions);
+    console.log({ ...updatedQuestion });
+    // if (updatedQuestion.hasOwnProperty("question")) {
 
-    // Dispatch ke Redux
-    dispatch(FuncAddFAQList(updatedQuestions));
+    // } else if (updatedQuestion.hasOwnProperty("answer")) {
+    //   questions[id].answer = updatedQuestion.answer;
+    // }
+    // // Perbarui state lokal
+    // setQuestions(questions);
+
+    // // Dispatch ke Redux
+    // dispatch(FuncAddFAQList(questions));
   }
   useEffect(() => {
     if (faqList.length !== 0) {
@@ -106,12 +121,12 @@ export default function Faq() {
               </div>
             </div>
             {questions.length !== 0 &&
-              questions.map((q) => (
-                <div key={q.id} className="px-4 mb-4">
+              questions.map((q, i) => (
+                <div key={i} className="px-4 mb-4">
                   <AskedQuestion
                     question={q.question}
                     answer={q.answer}
-                    id={q.id}
+                    id={i}
                     onDelete={handleDeleteQuestion}
                     onUpdate={handleUpdateQuestion}
                   />

@@ -2,6 +2,7 @@ export function ValidateInformation(dataPlant) {
   const filterImage = dataPlant.plant_images.filter(
     (items) => items.is_primary === 1
   );
+  console.log(dataPlant);
   if (
     dataPlant.name === "" ||
     dataPlant.description === "" ||
@@ -9,7 +10,7 @@ export function ValidateInformation(dataPlant) {
     dataPlant.climate_condition === "" ||
     dataPlant.sunlight === "" ||
     dataPlant.planting_time === "" ||
-    !dataPlant.plant_category ||
+    dataPlant.plant_category_id <= 0 ||
     dataPlant.is_toxic === "" ||
     !filterImage.length
   ) {

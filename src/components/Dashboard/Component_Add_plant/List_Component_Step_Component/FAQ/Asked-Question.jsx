@@ -21,8 +21,8 @@ export default function AskedQuestion({
     setLocalAnswer(answer);
   }, [question, answer]);
 
+  onUpdate(id, { question: localQuestion, answer: localAnswer });
   function handleMinimize() {
-    onUpdate(id, { question: localQuestion, answer: localAnswer });
     setMini(!mini);
   }
 

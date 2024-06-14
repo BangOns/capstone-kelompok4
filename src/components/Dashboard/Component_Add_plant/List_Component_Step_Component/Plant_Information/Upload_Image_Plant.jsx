@@ -70,7 +70,9 @@ export default function Upload_Image_Plant() {
               alt="delete"
               className="hidden group-hover:block cursor-pointer   hover:bg-slate-400/50 hover:p-2 hover:rounded-full transition-all"
               onClick={() => {
-                dispatch(FuncDeleteImagePlantInformation({ id: 14 }));
+                dispatch(
+                  FuncDeleteImagePlantInformation({ filename: imageThumb })
+                );
 
                 imageThumbSet("");
               }}

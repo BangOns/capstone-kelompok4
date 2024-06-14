@@ -15,15 +15,20 @@ export default function Upload_Image_Child_Plant({ ids }) {
 
   useEffect(() => {
     if (PlantInformationInput.plant_images.length !== 0) {
-      const dataFilter = PlantInformationInput.plant_images.find(
-        (items) => items.id === ids
-      );
+      const dataFilter = PlantInformationInput.plant_images
+        .filter((items) => items.is_primary !== 1)
+        .find(
+          (items) =>
+            items.file_name ===
+            PlantInformationInput.plant_images[ids]?.file_name
+        );
       if (dataFilter) {
         imageChildSet(dataFilter.file_name);
+      } else {
+        imageChildSet("");
       }
     }
   }, [PlantInformationInput, ids]);
-
   function handleChangeFileThumbnails(e) {
     e.preventDefault();
     const { files } = e.target;
@@ -31,7 +36,6 @@ export default function Upload_Image_Child_Plant({ ids }) {
     dispatch(
       FuncPlantInformationInputImage({
         value: {
-          id: ids,
           file_name: imgUrl,
           is_primary: 0,
         },
@@ -75,7 +79,9 @@ export default function Upload_Image_Child_Plant({ ids }) {
               alt="delete"
               className="hidden group-hover:block cursor-pointer   hover:bg-slate-400/50 hover:p-2 hover:rounded-full transition-all"
               onClick={() => {
-                dispatch(FuncDeleteImagePlantInformation({ id: ids }));
+                dispatch(
+                  FuncDeleteImagePlantInformation({ filename: imageChild })
+                );
 
                 imageChildSet("");
               }}

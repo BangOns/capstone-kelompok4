@@ -8,7 +8,7 @@ const initialState = {
     name: "",
     description: "",
     plant_images: [],
-    plant_category: {},
+    plant_category_id: 0,
     harvest_duration: "",
     climate_condition: "",
     sunlight: "",
@@ -120,7 +120,7 @@ export const AddPlantSlice = createSlice({
         state.PlantInformationInput.plant_images = [action.payload.value];
       } else {
         const findIndex = state.PlantInformationInput.plant_images.findIndex(
-          (items) => items.id === action.payload.value.id
+          (items) => items.file_name === action.payload.value.file_name
         );
         if (findIndex >= 0) {
           state.PlantInformationInput.plant_images[findIndex] =
@@ -134,9 +134,10 @@ export const AddPlantSlice = createSlice({
       }
     },
     FuncDeleteImagePlantInformation: (state, action) => {
+      console.log(action.payload.filename);
       state.PlantInformationInput.plant_images =
         state.PlantInformationInput.plant_images.filter(
-          (items) => items.id !== action.payload.id
+          (items) => items.file_name !== action.payload.filename
         );
     },
     FuncDeleteImagePreviousPlantInformation: (state, action) => {

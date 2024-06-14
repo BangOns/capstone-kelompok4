@@ -40,12 +40,12 @@ export default function Planting_Instructions() {
     dispatch(FuncPrevStep());
     dispatch(FuncPlantingInstructions(data));
   }
+
   function handleClickNext() {
     if (data.length === 0) {
       dispatch(FuncMessagePlantError(true));
     } else {
       const plant_instructions = [...data];
-
       dispatch(
         FuncAddInputPlantInformation({
           ...dataPlantNew,
@@ -61,11 +61,7 @@ export default function Planting_Instructions() {
     if (!data.length) {
       setData([
         {
-          instruction_category: {
-            name: "",
-            description: "",
-            image_url: "",
-          },
+          instruction_category_id: 0,
           step_number: data.length + 1,
 
           step_title: "",
@@ -79,11 +75,7 @@ export default function Planting_Instructions() {
       setData([
         ...data,
         {
-          instruction_category: {
-            name: "",
-            description: "",
-            image_url: "",
-          },
+          instruction_category_id: 0,
           step_number: data.length + 1,
 
           step_title: "",
@@ -275,7 +267,11 @@ export default function Planting_Instructions() {
                           </p>
                           <DropdownSearch
                             setCategory={(category) =>
-                              updateField(i, "instruction_category", category)
+                              updateField(
+                                i,
+                                "instruction_category_id",
+                                category
+                              )
                             }
                           ></DropdownSearch>
                         </div>

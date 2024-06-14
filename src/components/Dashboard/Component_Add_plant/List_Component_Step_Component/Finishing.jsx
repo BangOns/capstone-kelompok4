@@ -27,13 +27,13 @@ export default function Finishing() {
   function handleClickPrev() {
     dispatch(FuncPrevStep());
   }
+  console.log(dataPlantNew);
   async function handleClickNext(e) {
     e.preventDefault();
     try {
       if (dataPlantNew) {
         const DataPlantNews = {
           ...dataPlantNew,
-          created_at: new Date().toISOString(),
         };
         dispatch(PostDataPlantsNew(DataPlantNews));
         // if (PostDataMessageSuccess.status === "success") {
