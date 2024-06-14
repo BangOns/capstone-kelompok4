@@ -44,10 +44,7 @@ const initialState = {
   PlantingInstructions: [],
 
   dataPlantNew: {},
-  //Get ALl Plant Data
-  DataPlantAllFullField: {},
-  DataPlantAllLoading: false,
-  DataPlantAllError: false,
+
   // Post data Plant New
   PostDataMessageSuccess: {},
   PostDataMessageLoading: false,
@@ -58,24 +55,6 @@ const initialState = {
   PlantByIDLoading: false,
   PlantByIDError: false,
 };
-
-export const FetchDataAllPlants = createAsyncThunk(
-  "addPlant/FetchDataAllPlants",
-  async (index, thunkAPI) => {
-    try {
-      const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_BASE_URL}/plants?page=${index}&limit=10`,
-        {
-          method: "GET",
-        }
-      );
-      const datas = await response.json();
-      return datas.data;
-    } catch (error) {
-      return new Error(error);
-    }
-  }
-);
 
 export const PostDataPlantsNew = createAsyncThunk(
   "addPlant/PostDataPlantsNew",
@@ -265,20 +244,6 @@ export const AddPlantSlice = createSlice({
       .addCase(PostDataPlantsNew.rejected, (state) => {
         state.PostDataMessageLoading = false;
         state.PostDataMessageError = true;
-      });
-    builder
-      .addCase(FetchDataAllPlants.fulfilled, (state, action) => {
-        state.DataPlantAllFullField = action.payload;
-        state.DataPlantAllLoading = false;
-        state.DataPlantAllError = false;
-      })
-      .addCase(FetchDataAllPlants.pending, (state) => {
-        state.DataPlantAllLoading = true;
-        state.DataPlantAllError = false;
-      })
-      .addCase(FetchDataAllPlants.rejected, (state) => {
-        state.DataPlantAllLoading = false;
-        state.DataPlantAllError = true;
       });
   },
 });

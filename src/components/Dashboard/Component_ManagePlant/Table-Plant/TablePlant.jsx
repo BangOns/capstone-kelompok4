@@ -6,20 +6,17 @@ import TablePlantInformation from "./PlantInformation";
 import { useDispatch, useSelector } from "react-redux";
 import Loading_Table from "../../../../utils/Component-Loading/Loading_Table";
 import { FetchDataAllPlants } from "../../../../libs/redux/Slice/AddPlantSlice";
+import { FetchDataTable } from "../../../../utils/Function-FetchAPI/GetDataAllTable";
 
 export default function TablePlant() {
   const { indexStepTable } = useSelector((state) => state.dashboard);
-  const { DataPlantAllFullField } = useSelector((state) => state.addplant);
-  const dispatch = useDispatch();
   const [dataAllPlantsWithAPI, dataAllPlantsWithAPISet] = useState([]);
 
   useEffect(() => {
-    if (Object.keys(DataPlantAllFullField).length <= 0) {
-      dispatch(FetchDataAllPlants(indexStepTable));
-    } else {
-      dataAllPlantsWithAPISet(DataPlantAllFullField);
-    }
-  }, [indexStepTable, DataPlantAllFullField]);
+    FetchDataTable(indexStepTable, (items) => {
+      dataAllPlantsWithAPISet(items);
+    });
+  }, [indexStepTable]);
   return (
     <table className="table border ">
       {/* head */}

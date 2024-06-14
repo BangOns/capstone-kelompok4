@@ -5,8 +5,8 @@ import { ImageImport } from "../../../utils/ImageImport";
 export default function Component_Plant_Information({ dataPlants }) {
   const [imageThumb, imageThumbSet] = useState("");
 
-  const plantName = dataPlants.name.split("-")[0] || "";
-  const FamilyName = dataPlants.name.split("-")[1] || "";
+  const plantName = dataPlants.name.split("-")[0] || "no name";
+  const FamilyName = dataPlants.name.split("-")[1] || "no family name";
   const GetImageThumbnails = dataPlants.plant_images
     ? dataPlants.plant_images.length !== 0
       ? dataPlants.plant_images.filter((items) => items.is_primary === 1)
