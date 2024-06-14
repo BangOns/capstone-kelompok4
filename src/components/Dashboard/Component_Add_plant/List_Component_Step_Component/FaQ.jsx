@@ -73,14 +73,16 @@ export default function Faq() {
 
     dispatch(FuncAddFAQList(updateData));
   }
-  function handleUpdateQuestion(id, updatedQuestion) {
+  console.log(questions);
+  function handleUpdateQuestion(id, field, value) {
     // const Questionsupdated = questions.map((items) =>
     //   items.question === updatedQuestion.question
     //     ? { ...items, ...updatedQuestion }
     //     : items
     // );
-
-    console.log({ ...updatedQuestion });
+    const newData = [...questions];
+    newData[id] = { ...newData[id], [field]: value };
+    setQuestions(newData);
     // if (updatedQuestion.hasOwnProperty("question")) {
 
     // } else if (updatedQuestion.hasOwnProperty("answer")) {
