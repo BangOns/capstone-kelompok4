@@ -1,5 +1,6 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { dataDummyPlant } from "../../../utils/DataDummy";
+import axios from "axios";
 
 const initialState = {
   DataAllPlants: [...dataDummyPlant],
@@ -14,7 +15,6 @@ const initialState = {
     planting_time: "",
     is_toxic: "",
     plant_characteristic: {
-      id: 0,
       height: 0,
       height_unit: "",
       wide: 0,
@@ -44,7 +44,87 @@ const initialState = {
   PlantingInstructions: [],
 
   dataPlantNew: {},
+  //Get ALl Plant Data
+  DataPlantAllFullField: {},
+  DataPlantAllLoading: false,
+  DataPlantAllError: false,
+  // Post data Plant New
+  PostDataMessageSuccess: {},
+  PostDataMessageLoading: false,
+  PostDataMessageError: false,
+
+  // Get data By ID
+  PlantByIDFullField: {},
+  PlantByIDLoading: false,
+  PlantByIDError: false,
 };
+
+export const FetchDataAllPlants = createAsyncThunk(
+  "addPlant/FetchDataAllPlants",
+  async (index, thunkAPI) => {
+    try {
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/plants?page=${index}&limit=10`,
+        {
+          method: "GET",
+        }
+      );
+      const datas = await response.json();
+      return datas.data;
+    } catch (error) {
+      return new Error(error);
+    }
+  }
+);
+
+export const PostDataPlantsNew = createAsyncThunk(
+  "addPlant/PostDataPlantsNew",
+  async (data, thunkAPI) => {
+    try {
+      const formData = new FormData();
+      Object.keys(data).forEach((key) => {
+        if (typeof data[key] === "object" && data[key] !== null) {
+          formData.append(key, JSON.stringify(data[key]));
+        } else {
+          formData.append(key, data[key]);
+        }
+      });
+      const response = await axios.post(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/admin/plants`,
+        data,
+        {
+          headers: {
+            Authorization: `Bearer ${process.env.NEXT_PUBLIC_API_TOKEN_KEY}`,
+          },
+        }
+      );
+      console.log(response.data);
+
+      return response.data;
+    } catch (error) {
+      console.log(error);
+      return new Error(error);
+    }
+  }
+);
+
+export const FetchDataPlantsByID = createAsyncThunk(
+  "addPlant/FetchDataPlantsByID",
+  async (id, thunkAPI) => {
+    try {
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/plants/${id}`,
+        {
+          method: "GET",
+        }
+      );
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      return new Error(error);
+    }
+  }
+);
 
 export const AddPlantSlice = createSlice({
   name: "addPlant",
@@ -103,8 +183,14 @@ export const AddPlantSlice = createSlice({
           state.PlantInformationInput.plant_characteristic.wide -= 1;
         }
       }
-      state.PlantInformationInput.plant_characteristic[action.payload.name] =
-        action.payload.value;
+      if (
+        state.PlantInformationInput.plant_characteristic.hasOwnProperty([
+          action.payload.name,
+        ])
+      ) {
+        state.PlantInformationInput.plant_characteristic[action.payload.name] =
+          action.payload.value;
+      }
     },
     FuncPlantCaringInput: (state, action) => {
       state.PlantCaringInput[action.payload.name] = action.payload.value;
@@ -150,6 +236,50 @@ export const AddPlantSlice = createSlice({
     FuncAddNewDataPlants: (state, action) => {
       state.DataAllPlants = action.payload;
     },
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(FetchDataPlantsByID.fulfilled, (state, action) => {
+        state.PlantByIDFullField = action.payload;
+        state.PlantByIDLoading = false;
+        state.PlantByIDError = false;
+      })
+      .addCase(FetchDataPlantsByID.pending, (state) => {
+        state.PlantByIDLoading = true;
+        state.PlantByIDError = false;
+      })
+      .addCase(FetchDataPlantsByID.rejected, (state) => {
+        state.PlantByIDLoading = false;
+        state.PlantByIDError = true;
+      });
+    builder
+      .addCase(PostDataPlantsNew.fulfilled, (state, action) => {
+        state.PostDataMessageSuccess = action.payload;
+        state.PostDataMessageLoading = false;
+        state.PostDataMessageError = false;
+      })
+      .addCase(PostDataPlantsNew.pending, (state) => {
+        state.PostDataMessageLoading = true;
+        state.PostDataMessageError = false;
+      })
+      .addCase(PostDataPlantsNew.rejected, (state) => {
+        state.PostDataMessageLoading = false;
+        state.PostDataMessageError = true;
+      });
+    builder
+      .addCase(FetchDataAllPlants.fulfilled, (state, action) => {
+        state.DataPlantAllFullField = action.payload;
+        state.DataPlantAllLoading = false;
+        state.DataPlantAllError = false;
+      })
+      .addCase(FetchDataAllPlants.pending, (state) => {
+        state.DataPlantAllLoading = true;
+        state.DataPlantAllError = false;
+      })
+      .addCase(FetchDataAllPlants.rejected, (state) => {
+        state.DataPlantAllLoading = false;
+        state.DataPlantAllError = true;
+      });
   },
 });
 

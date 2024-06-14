@@ -7,7 +7,6 @@ export default function Plant_Wide() {
   const { plant_characteristic } = useSelector(
     (state) => state.addplant.PlantInformationInput
   );
-  const [count, countSet] = useState(plant_characteristic.wide);
   const dispatch = useDispatch();
   function handleCountPlus() {
     dispatch(FuncPlantCharateristic({ operatorWide: "plus" }));

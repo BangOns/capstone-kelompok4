@@ -26,7 +26,7 @@ export default function Plant_Category() {
   async function getPlantCategories() {
     try {
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_KEY}/plants/categories`,
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/plants/categories`,
         {
           method: "GET",
         }

@@ -1,10 +1,10 @@
 "use client";
 import { IconsImport } from "@/utils/IconsImport";
 import { ImageImport } from "@/utils/ImageImport";
-import Image from "next/image";
 import React, { useState } from "react";
 import MenuOption from "./MenuOption";
 import { FormatDate } from "../../../../utils/FormatDate";
+import Image from "next/image";
 
 export default function TablePlantInformation({ dataPlant }) {
   const [activeMenu, activeMenuSet] = useState(false);
@@ -15,7 +15,12 @@ export default function TablePlantInformation({ dataPlant }) {
     <tr className="text-center">
       <td className="flex justify-center">
         <figure className="w-[60px] h-[60px] rounded-xl border flex items-end justify-center bg-gray-200 overflow-hidden bg-gradient-to-b from-50% from-white to-gray-200/60">
-          <Image src={ImageImport.ImagePlants} alt="image plants" />
+          <Image
+            src={ImageImport.ImagePlants}
+            alt="image plants"
+            width={60}
+            height={60}
+          />
         </figure>
       </td>
       <td>

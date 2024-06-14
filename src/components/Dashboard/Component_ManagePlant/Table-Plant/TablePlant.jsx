@@ -3,28 +3,25 @@ import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { IconsImport } from "@/utils/IconsImport";
 import TablePlantInformation from "./PlantInformation";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import Loading_Table from "../../../../utils/Component-Loading/Loading_Table";
+import { FetchDataAllPlants } from "../../../../libs/redux/Slice/AddPlantSlice";
 
 export default function TablePlant() {
-  const { DataAllPlants } = useSelector((state) => state.addplant);
+  const { indexStepTable } = useSelector((state) => state.dashboard);
+  const { DataPlantAllFullField } = useSelector((state) => state.addplant);
+  const dispatch = useDispatch();
   const [dataAllPlantsWithAPI, dataAllPlantsWithAPISet] = useState([]);
-  async function getDataAllPlants() {
-    try {
-      const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_KEY}/plants?page=${1}&limit=10`
-      );
-      const allResponse = await response.json();
-      dataAllPlantsWithAPISet(allResponse.data);
-    } catch (error) {
-      console.log(error);
-    }
-  }
-  console.log(dataAllPlantsWithAPI.plants);
+
   useEffect(() => {
-    getDataAllPlants();
-  }, []);
+    if (Object.keys(DataPlantAllFullField).length <= 0) {
+      dispatch(FetchDataAllPlants(indexStepTable));
+    } else {
+      dataAllPlantsWithAPISet(DataPlantAllFullField);
+    }
+  }, [indexStepTable, DataPlantAllFullField]);
   return (
-    <table className="table border">
+    <table className="table border ">
       {/* head */}
       <thead className="bg-base-200 ">
         <tr className="font-nunito-bold text-black text-base text-center">
@@ -64,12 +61,18 @@ export default function TablePlant() {
         </tr>
       </thead>
       <tbody>
-        {dataAllPlantsWithAPI ? (
+        {dataAllPlantsWithAPI?.plants ? (
           dataAllPlantsWithAPI.plants?.map((items, index) => (
             <TablePlantInformation key={index} dataPlant={items} />
           ))
         ) : (
-          <p>Loading...</p>
+          <>
+            <Loading_Table />
+            <Loading_Table />
+            <Loading_Table />
+            <Loading_Table />
+            <Loading_Table />
+          </>
         )}
       </tbody>
     </table>

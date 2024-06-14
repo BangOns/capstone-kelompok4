@@ -32,7 +32,6 @@ export default function Upload_Image_Child_Plant({ ids }) {
       FuncPlantInformationInputImage({
         value: {
           id: ids,
-          plant_id: Math.floor(Math.random() * 100),
           file_name: imgUrl,
           is_primary: 0,
         },

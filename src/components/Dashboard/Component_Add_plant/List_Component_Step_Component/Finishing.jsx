@@ -15,26 +15,35 @@ import {
   FuncPrevStep,
 } from "../../../../libs/redux/Slice/DashboardSlice";
 import Message_Error from "../../../Component_Message/Message_Error";
-import { FuncAddNewDataPlants } from "../../../../libs/redux/Slice/AddPlantSlice";
+import {
+  FuncAddNewDataPlants,
+  PostDataPlantsNew,
+} from "../../../../libs/redux/Slice/AddPlantSlice";
 
 export default function Finishing() {
-  const { DataAllPlants, dataPlantNew } = useSelector(
-    (state) => state.addplant
-  );
-  console.log(DataAllPlants);
+  const { dataPlantNew, PostDataMessageSuccess, PostDataMessageLoading } =
+    useSelector((state) => state.addplant);
   const dispatch = useDispatch();
   function handleClickPrev() {
     dispatch(FuncPrevStep());
   }
-  function handleClickNext() {
-    if (dataPlantNew) {
-      const DataPlantNews = {
-        ...dataPlantNew,
-        created_at: new Date().toISOString(),
-      };
-      dispatch(FuncAddNewDataPlants([...DataAllPlants, DataPlantNews]));
-      dispatch(FuncFinishAddPlant(true));
-    } else {
+  async function handleClickNext(e) {
+    e.preventDefault();
+    try {
+      if (dataPlantNew) {
+        const DataPlantNews = {
+          ...dataPlantNew,
+          created_at: new Date().toISOString(),
+        };
+        dispatch(PostDataPlantsNew(DataPlantNews));
+        // if (PostDataMessageSuccess.status === "success") {
+        //   dispatch(FuncFinishAddPlant(true));
+        // } else {
+        //   dispatch(FuncMessagePlantError(true));
+        // }
+      }
+    } catch (error) {
+      console.log(error);
       dispatch(FuncMessagePlantError(true));
     }
   }
@@ -53,7 +62,11 @@ export default function Finishing() {
               handleClick={handleClickPrev}
               disableOn={false}
             />
-            <NextButtonPlant disabledOn={false} handleClick={handleClickNext} />
+            <NextButtonPlant
+              disabledOn={PostDataMessageLoading ? true : false}
+              finish={true}
+              handleClick={handleClickNext}
+            />
           </div>
         </div>
       </article>
