@@ -8,7 +8,7 @@ export default function AddPlant() {
   return (
     <>
       <Header_add_plant pages={indexStep} />
-      <List_Component_Step pages={5} />
+      <List_Component_Step pages={indexStep} />
     </>
   );
 }
