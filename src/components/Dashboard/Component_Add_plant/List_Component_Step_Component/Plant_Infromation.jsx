@@ -26,25 +26,8 @@ export default function Plant_Infromation() {
     (state) => state.addplant
   );
   const [value, setValue] = useState("");
-  // const [imageChild, imageChildSet] = useState({
-  //   image1: "",
-  //   image2: "",
-  //   image3: "",
-  //   image4: "",
-  //   image5: "",
-  //   image6: "",
-  //   image7: "",
-  //   image8: "",
-  // });
-  const regex = /^[^-]+-[^-]+$/;
 
-  function handleChangeImageChild(e) {
-    const { name, files } = e.target;
-    imageChildSet((prev) => ({
-      ...prev,
-      [name]: URL.createObjectURL(files[0]),
-    }));
-  }
+  const regex = /^[^-]+-[^-]+$/;
 
   function handleClickNext() {
     const checkValidate = ValidateInformation(PlantInformationInput);

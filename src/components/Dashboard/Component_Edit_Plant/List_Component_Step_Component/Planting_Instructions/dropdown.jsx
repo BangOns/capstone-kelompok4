@@ -2,10 +2,9 @@
 import { useState } from "react";
 import { IconsImport } from "@/utils/IconsImport";
 import Image from "next/image";
-import IconsAddPlant from "@/utils/Component-Icons-Add-plant/IconsAddPlant";
 
-export default function DropdownSearch({ items, onButtonClick }) {
-  const [searchTerm, setSearchTerm] = useState("Fruits");
+export default function DropdownSearch({ items, onButtonClick, setCategory }) {
+  const [searchTerm, setSearchTerm] = useState("");
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -16,7 +15,7 @@ export default function DropdownSearch({ items, onButtonClick }) {
           className="text-left text-[16px] font-[400] flex w-full px-4 py-2 text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none"
           onClick={() => setIsOpen(!isOpen)}
         >
-          {searchTerm}{" "}
+          {searchTerm ? searchTerm : "Soil Preparation"}{" "}
           <Image
             className="ml-auto"
             src={IconsImport.IconsDropdown}
@@ -26,7 +25,7 @@ export default function DropdownSearch({ items, onButtonClick }) {
       </div>
 
       {isOpen && (
-        <div className="w-full absolute right-0 z-10 mt-2 w-56 origin-top-right bg-white border border-gray-300 rounded-md shadow-lg">
+        <div className="w-full absolute right-0 z-10 mt-2  origin-top-right bg-white border border-gray-300 rounded-md shadow-lg">
           <div className="p-2">
             <input
               type="text"
@@ -37,21 +36,43 @@ export default function DropdownSearch({ items, onButtonClick }) {
           <div className="max-h-60 overflow-auto">
             <button
               onClick={() => {
-                setSearchTerm("Fruits");
+                setSearchTerm("Planting Seeds");
                 setIsOpen(false);
+                setCategory("Planting Seeds");
               }}
               className="block w-full px-4 py-2 text-left text-sm text-gray-700 hover:bg-gray-100"
             >
-              Fruits
+              Planting Seeds
             </button>
             <button
               onClick={() => {
-                setSearchTerm("Angiosperms");
+                setSearchTerm("Planting Seeds");
                 setIsOpen(false);
+                setCategory("Planting Seeds");
               }}
               className="block w-full px-4 py-2 text-left text-sm text-gray-700 hover:bg-gray-100"
             >
-              Angiosperms
+              Planting Seeds
+            </button>
+            <button
+              onClick={() => {
+                setSearchTerm("Plant Care");
+                setIsOpen(false);
+                setCategory("Plant Care");
+              }}
+              className="block w-full px-4 py-2 text-left text-sm text-gray-700 hover:bg-gray-100"
+            >
+              Plant Care
+            </button>
+            <button
+              onClick={() => {
+                setSearchTerm("Harvest");
+                setIsOpen(false);
+                setCategory("Harvest");
+              }}
+              className="block w-full px-4 py-2 text-left text-sm text-gray-700 hover:bg-gray-100"
+            >
+              Harvest
             </button>
           </div>
           <div className="py-2">

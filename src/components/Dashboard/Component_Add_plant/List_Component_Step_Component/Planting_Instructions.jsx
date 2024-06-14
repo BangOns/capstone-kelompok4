@@ -40,12 +40,12 @@ export default function Planting_Instructions() {
     dispatch(FuncPrevStep());
     dispatch(FuncPlantingInstructions(data));
   }
-
   function handleClickNext() {
     if (data.length === 0) {
       dispatch(FuncMessagePlantError(true));
     } else {
       const plant_instructions = [...data];
+
       dispatch(
         FuncAddInputPlantInformation({
           ...dataPlantNew,
@@ -61,10 +61,7 @@ export default function Planting_Instructions() {
     if (!data.length) {
       setData([
         {
-          id: Math.floor(Math.random() * 100),
-          plant_id: Math.floor(Math.random() * 100),
           instruction_category: {
-            id: Math.floor(Math.random() * 100),
             name: "",
             description: "",
             image_url: "",
@@ -82,10 +79,7 @@ export default function Planting_Instructions() {
       setData([
         ...data,
         {
-          id: Math.floor(Math.random() * 100),
-          plant_id: Math.floor(Math.random() * 100),
           instruction_category: {
-            id: Math.floor(Math.random() * 100),
             name: "",
             description: "",
             image_url: "",
@@ -236,7 +230,6 @@ export default function Planting_Instructions() {
                       <div className="absolute bg-[#10B981] p-3 border rounded-lg w-fit h-fit top-0 right-0">
                         <input
                           type="file"
-                          // ref={fileInputRef}
                           className="hidden"
                           id={`image-url-${i}`}
                           onChange={(event) =>
@@ -282,7 +275,7 @@ export default function Planting_Instructions() {
                           </p>
                           <DropdownSearch
                             setCategory={(category) =>
-                              updateField(i, "category", category)
+                              updateField(i, "instruction_category", category)
                             }
                           ></DropdownSearch>
                         </div>

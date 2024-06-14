@@ -19,13 +19,14 @@ export default function Plant_Category() {
   const { PlantInformationInput, dataPlantNew } = useSelector(
     (state) => state.addplant
   );
+  const [inputValue, inputValueSet] = useState("");
   const [open, setOpen] = useState(false);
   const [allPlantCategories, allPlantCategoriesSet] = useState([]);
   const dispatch = useDispatch();
   async function getPlantCategories() {
     try {
       const response = await fetch(
-        "https://be-agriculture-awh2j5ffyq-uc.a.run.app/api/v1/plants/instructions/categories",
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/plants/categories`,
         {
           method: "GET",
         }
@@ -68,6 +69,8 @@ export default function Plant_Category() {
             <input
               type="text"
               placeholder="Search Category"
+              value={inputValue}
+              onChange={(e) => inputValueSet(e.target.value)}
               className="w-full   p-2 text-sm font-nunito border-0  focus:ring-0 outline-none"
             />
           </div>
@@ -76,7 +79,11 @@ export default function Plant_Category() {
               allPlantCategories?.map((items, i) => (
                 <li
                   key={i}
-                  className="w-full px-3 group py-[14px] hover:bg-emerald-500 cursor-pointer"
+                  className={`w-full px-3 group py-[14px] hover:bg-emerald-500 cursor-pointer ${
+                    items?.name.toLowerCase().startsWith(inputValue)
+                      ? "block"
+                      : "hidden"
+                  }`}
                   onClick={() => {
                     setOpen(false);
                     dispatch(

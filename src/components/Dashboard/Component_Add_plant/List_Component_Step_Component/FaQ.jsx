@@ -24,13 +24,11 @@ export default function Faq() {
   const { FaQInput, dataPlantNew, faqList } = useSelector(
     (state) => state.addplant
   );
-  const dateObj = new Date();
   const [questions, setQuestions] = useState([]);
 
   function handleClickPrev() {
     dispatch(FuncPrevStep());
   }
-
   function handleClickNext() {
     if ((FaQInput.asked === "" && FaQInput.quest === "") || !faqList.length) {
       dispatch(FuncMessagePlantError(true));
@@ -51,10 +49,8 @@ export default function Faq() {
 
   function handleAddQuestion() {
     const newQuestion = {
-      id: questions.length + 1,
       question: "",
       answer: "",
-      created_at: "",
     };
 
     const updatedQuestions = [newQuestion, ...questions];

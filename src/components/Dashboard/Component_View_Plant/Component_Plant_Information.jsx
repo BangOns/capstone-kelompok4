@@ -4,12 +4,14 @@ import { ImageImport } from "../../../utils/ImageImport";
 
 export default function Component_Plant_Information({ dataPlants }) {
   const [imageThumb, imageThumbSet] = useState("");
-  const plantName = dataPlants.name.split("-")[0];
-  const FamilyName = dataPlants.name.split("-")[1];
-  const GetImageThumbnails =
-    dataPlants.plant_images.length !== 0
+
+  const plantName = dataPlants.name.split("-")[0] || "no name";
+  const FamilyName = dataPlants.name.split("-")[1] || "no family name";
+  const GetImageThumbnails = dataPlants.plant_images
+    ? dataPlants.plant_images.length !== 0
       ? dataPlants.plant_images.filter((items) => items.is_primary === 1)
-      : [];
+      : []
+    : [];
 
   useEffect(() => {
     if (GetImageThumbnails.length !== 0) {
@@ -25,7 +27,11 @@ export default function Component_Plant_Information({ dataPlants }) {
         <article className="flex  gap-4 items-center">
           <figure className="w-[60px] h-[60px] rounded-xl border flex items-end justify-center bg-gray-200 overflow-hidden bg-gradient-to-b from-50% from-white to-gray-200/60">
             <Image
-              src={imageThumb ? ImageImport.ImagePlants : imageThumb}
+              src={
+                imageThumb
+                  ? GetImageThumbnails[0].file_name
+                  : ImageImport.ImagePlants
+              }
               width={60}
               height={60}
               alt="Image plants"

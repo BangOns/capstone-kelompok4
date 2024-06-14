@@ -24,8 +24,6 @@ export default function Upload_Image_Plant() {
     dispatch(
       FuncPlantInformationInputImage({
         value: {
-          id: 14,
-          plant_id: 2,
           file_name: imgUrl,
           is_primary: 1,
         },
