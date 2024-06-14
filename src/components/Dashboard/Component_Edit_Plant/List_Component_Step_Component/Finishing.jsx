@@ -7,7 +7,7 @@ import Component_FaQ from "./Finishing/Component_FaQ";
 import CancelButtonPlant from "../Component_Buttons/cancel_buton_plant";
 import PreviousButtonPlant from "../Component_Buttons/previous_buton_plant";
 import NextButtonPlant from "../Component_Buttons/next_buton_plant";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   FuncFinishAddPlant,
   FuncMessagePlantError,
@@ -15,16 +15,28 @@ import {
   FuncPrevStep,
 } from "../../../../libs/redux/Slice/DashboardSlice";
 import Message_Error from "../../../Component_Message/Message_Error";
+import { FuncAddNewDataPlants } from "../../../../libs/redux/Slice/AddPlantSlice";
 
 export default function Finishing() {
+  const { DataAllPlants, dataPlantNew } = useSelector(
+    (state) => state.addplant
+  );
+  console.log(DataAllPlants);
   const dispatch = useDispatch();
   function handleClickPrev() {
     dispatch(FuncPrevStep());
   }
   function handleClickNext() {
-    // dispatch(FuncMessagePlantError(true));
-    dispatch(FuncMessagePlantSuccess(true));
-    dispatch(FuncFinishAddPlant(true));
+    if (dataPlantNew) {
+      const DataPlantNews = {
+        ...dataPlantNew,
+        created_at: new Date().toISOString(),
+      };
+      dispatch(FuncAddNewDataPlants([...DataAllPlants, DataPlantNews]));
+      dispatch(FuncFinishAddPlant(true));
+    } else {
+      dispatch(FuncMessagePlantError(true));
+    }
   }
   return (
     <Fragment>

@@ -8,20 +8,17 @@ export const EditPlantSlice = createSlice({
   name: "editPlant",
   initialState,
   reducers: {
-    FuncPlantInformationInput: (state, action) => {
+    FuncPlantInformationInputEdit: (state, action) => {
       if (action.payload.name === "plant_images") {
-        state.dataPlantEdit[action.payload.name].push(
-          action.payload.value
-        );
+        state.dataPlantEdit[action.payload.name].push(action.payload.value);
       }
       if (action.payload.name === "plant_characteristic") {
-        state.dataPlantEdit.plant_characteristic[
-          action.payload.nameChild
-        ] = action.payload.value;
+        state.dataPlantEdit.plant_characteristic[action.payload.nameChild] =
+          action.payload.value;
       }
       state.dataPlantEdit[action.payload.name] = action.payload.value;
     },
-    FuncPlantCharateristic: (state, action) => {
+    FuncPlantCharateristicEdit: (state, action) => {
       if (action.payload.operatorHeight === "plus") {
         state.dataPlantEdit.plant_characteristic.height += 1;
       } else if (action.payload.operatorHeight === "minus") {
@@ -43,27 +40,21 @@ export const EditPlantSlice = createSlice({
       state.dataPlantEdit.plant_characteristic[action.payload.name] =
         action.payload.value;
     },
-    FuncPlantCaringInput: (state, action) => {
+    FuncPlantCaringInputEdit: (state, action) => {
       state.dataPlantEdit[action.payload.name] = action.payload.value;
     },
 
-    FuncReminderSettingsInput: (state, action) => {
+    FuncReminderSettingsInputEdit: (state, action) => {
       const { operator } = action.payload;
       switch (operator) {
         case "plus":
           state.dataPlantEdit.watering_schedule[action.payload.name] =
-            state.dataPlantEdit.watering_schedule[action.payload.name] +
-            1;
+            state.dataPlantEdit.watering_schedule[action.payload.name] + 1;
           break;
         case "minus":
-          if (
-            state.dataPlantEdit.watering_schedule[action.payload.name] >
-            0
-          ) {
+          if (state.dataPlantEdit.watering_schedule[action.payload.name] > 0) {
             state.dataPlantEdit.watering_schedule[action.payload.name] =
-              state.dataPlantEdit.watering_schedule[
-                action.payload.name
-              ] - 1;
+              state.dataPlantEdit.watering_schedule[action.payload.name] - 1;
           }
           break;
         default:
@@ -72,21 +63,30 @@ export const EditPlantSlice = createSlice({
           break;
       }
     },
-    FuncFaQInput: (state, action) => {
+    FuncFaQInputEdit: (state, action) => {
       state.dataPlantEdit[action.payload.name] = action.payload.value;
+    },
+    FuncEditFAQList: (state, action) => {
+      state.dataPlantEdit.faq_plants = action.payload;
     },
     FuncEditInputPlantInformation: (state, action) => {
       state.dataPlantEdit = action.payload;
+    },
+    FuncPlantingInstructionsEdit: (state, action) => {
+      state.dataPlantEdit[action.payload.name] = action.payload;
     },
   },
 });
 
 export const {
-  FuncPlantInformationInput,
-  FuncReminderSettingsInput,
+  FuncPlantInformationInputEdit,
+  FuncPlantCharateristicEdit,
+  FuncPlantCaringInputEdit,
+  FuncReminderSettingsInputEdit,
+  FuncFaQInputEdit,
+  FuncEditFAQList,
   FuncEditInputPlantInformation,
-  FuncPlantCaringInput,
-  FuncFaQInput,
-  FuncPlantCharateristic,
+  FuncPlantingInstructionsEdit,
+  FuncEditDataPlants,
 } = EditPlantSlice.actions;
 export default EditPlantSlice.reducer;

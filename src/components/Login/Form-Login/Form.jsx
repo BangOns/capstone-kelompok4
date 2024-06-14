@@ -23,8 +23,7 @@ export default function Form() {
     setError("");
 
     try {
-      const response = await fetch(
-        "https://be-agriculture-awh2j5ffyq-uc.a.run.app/api/v1/admin/login",
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/admin/login`,
         {
           method: "POST",
           headers: {
@@ -43,7 +42,8 @@ export default function Form() {
       if (!response.ok) {
         throw new Error(data.message || "Something went wrong!");
       }
-
+      document.cookie = `token=${data.data.token}; path=/`;
+      
       router.push("/dashboard");
     } catch (error) {
       setLoading(false);
