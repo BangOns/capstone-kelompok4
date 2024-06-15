@@ -24,10 +24,6 @@ export default function Alert_DeletePlant() {
   );
   async function DeletePlantById() {
     try {
-      const token = getCookie("token");
-      if (!token) {
-        throw new Error("Token not found in cookies");
-      } else {
         const response = await axios.delete(
           `${process.env.NEXT_PUBLIC_API_BASE_URL}/admin/plants/${idToDeletePlant}`,
           {
@@ -45,7 +41,7 @@ export default function Alert_DeletePlant() {
           dispatch(FuncMessagePlantError(true));
           dispatch(FuncDeletePlant(false));
         }
-      }
+      
     } catch (error) {
       console.log(error);
       dispatch(FuncMessagePlantError(true));
