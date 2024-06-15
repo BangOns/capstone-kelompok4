@@ -32,7 +32,7 @@ export default function Alert_DeletePlant() {
           `${process.env.NEXT_PUBLIC_API_BASE_URL}/admin/plants/${idToDeletePlant}`,
           {
             headers: {
-              Authorization: `Bearer ${token}`,
+              Authorization: `Bearer ${process.env.NEXT_PUBLIC_API_TOKEN_KEY}`,
             },
           }
         );

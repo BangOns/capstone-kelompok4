@@ -58,7 +58,7 @@ const initialState = {
 
 export const PostDataPlantsNew = createAsyncThunk(
   "addPlant/PostDataPlantsNew",
-  async ({ data, token }, thunkAPI) => {
+  async ({ data }, thunkAPI) => {
     try {
       let formData = new FormData();
       // Tambahkan data sederhana
@@ -129,7 +129,7 @@ export const PostDataPlantsNew = createAsyncThunk(
         formData,
         {
           headers: {
-            Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${process.env.NEXT_PUBLIC_API_TOKEN_KEY}`,
           },
         }
       );
