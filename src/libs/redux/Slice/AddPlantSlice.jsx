@@ -8,7 +8,7 @@ const initialState = {
     name: "",
     description: "",
     plant_images: [],
-    plant_category: {},
+    plant_category_id: 0,
     harvest_duration: "",
     climate_condition: "",
     sunlight: "",
@@ -60,24 +60,87 @@ export const PostDataPlantsNew = createAsyncThunk(
   "addPlant/PostDataPlantsNew",
   async (data, thunkAPI) => {
     try {
-      const formData = new FormData();
-      Object.keys(data).forEach((key) => {
-        if (typeof data[key] === "object" && data[key] !== null) {
-          formData.append(key, JSON.stringify(data[key]));
-        } else {
-          formData.append(key, data[key]);
+      let formData = new FormData();
+
+      // Tambahkan data sederhana
+      formData.append("name", data.name);
+      formData.append("description", data.description);
+      formData.append("plant_category_id", data.plant_category_id);
+      formData.append("harvest_duration", data.harvest_duration);
+      formData.append("climate_condition", data.climate_condition);
+      formData.append("sunlight", data.sunlight);
+      formData.append("planting_time", data.planting_time);
+      formData.append("is_toxic", data.is_toxic);
+      formData.append("additional_tips", data.additional_tips);
+
+      // Tambahkan plant_characteristic
+      for (let key in data.plant_characteristic) {
+        formData.append(
+          `plant_characteristic.${key}`,
+          data.plant_characteristic[key]
+        );
+      }
+
+      // Tambahkan watering_schedule
+      for (let key in data.watering_schedule) {
+        formData.append(
+          `watering_schedule.${key}`,
+          data.watering_schedule[key]
+        );
+      }
+
+      // Fungsi untuk mengkonversi URL blob ke objek File
+      async function urlToFile(url, filename, mimeType) {
+        const response = await fetch(url);
+        const blob = await response.blob();
+        return new File([blob], filename, { type: mimeType });
+      }
+
+      // Tambahkan plant_instructions dengan gambar terkait
+      for (let i = 0; i < data.plant_instructions.length; i++) {
+        const instruction = data.plant_instructions[i];
+        for (let key in instruction) {
+          if (key === "step_image_url" && instruction[key]) {
+            const file = await urlToFile(
+              instruction[key],
+              `instruction_image_${i}.png`,
+              "image/png"
+            );
+            formData.append(`plant_instructions.${key}`, file);
+          } else {
+            formData.append(`plant_instructions.${key}`, instruction[key]);
+          }
         }
-      });
+      }
+
+      // Tambahkan plant_faqs
+      for (let i = 0; i < data.plant_faqs.length; i++) {
+        const faq = data.plant_faqs[i];
+        formData.append(`plant_faqs.question`, faq.question);
+        formData.append(`plant_faqs.answer`, faq.answer);
+      }
+
+      // Tambahkan plant_images
+      for (let i = 0; i < data.plant_images.length; i++) {
+        const image = data.plant_images[i];
+        const file = await urlToFile(
+          image.file_name,
+          `image_${i}.png`,
+          "image/png"
+        );
+        formData.append("plant_images", file);
+        formData.append("plant_images.is_primary", image.is_primary);
+      }
+
       const response = await axios.post(
         `${process.env.NEXT_PUBLIC_API_BASE_URL}/admin/plants`,
-        data,
+        formData,
         {
           headers: {
             Authorization: `Bearer ${process.env.NEXT_PUBLIC_API_TOKEN_KEY}`,
           },
         }
       );
-      console.log(response.data);
 
       return response.data;
     } catch (error) {
@@ -120,7 +183,7 @@ export const AddPlantSlice = createSlice({
         state.PlantInformationInput.plant_images = [action.payload.value];
       } else {
         const findIndex = state.PlantInformationInput.plant_images.findIndex(
-          (items) => items.id === action.payload.value.id
+          (items) => items.file_name === action.payload.imagePrev
         );
         if (findIndex >= 0) {
           state.PlantInformationInput.plant_images[findIndex] =
@@ -136,7 +199,7 @@ export const AddPlantSlice = createSlice({
     FuncDeleteImagePlantInformation: (state, action) => {
       state.PlantInformationInput.plant_images =
         state.PlantInformationInput.plant_images.filter(
-          (items) => items.id !== action.payload.id
+          (items) => items.file_name !== action.payload.filename
         );
     },
     FuncDeleteImagePreviousPlantInformation: (state, action) => {

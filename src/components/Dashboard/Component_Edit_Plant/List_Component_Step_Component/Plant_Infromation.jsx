@@ -24,7 +24,6 @@ export default function Plant_Infromation() {
   const dispatch = useDispatch();
   const { plantInformationStep2 } = useSelector((state) => state.dashboard);
   const { dataPlantEdit } = useSelector((state) => state.editplant);
-  console.log(dataPlantEdit)
 
   const PlantInformation = {
     name: dataPlantEdit.name,

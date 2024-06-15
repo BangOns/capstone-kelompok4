@@ -7,9 +7,11 @@ import Image from "next/image";
 import {
   FuncDeletePlant,
   FuncMessagePlantDelete,
+  FuncMessagePlantError,
 } from "../../../../libs/redux/Slice/DashboardSlice";
 import { useRouter } from "next/navigation";
 import { FuncDataAllPlants } from "../../../../libs/redux/Slice/AddPlantSlice";
+import axios from "axios";
 
 const variants = {
   hidden: { opacity: 0, scale: 0 },
@@ -20,12 +22,42 @@ export default function Alert_DeletePlant() {
   const { deletePlant, idToDeletePlant } = useSelector(
     (state) => state.dashboard
   );
-  const { DataAllPlants } = useSelector((state) => state.addplant);
-  const deletePlantsById =
-    DataAllPlants && idToDeletePlant
-      ? DataAllPlants.filter((items) => items.id !== idToDeletePlant)
-      : [];
-  const route = useRouter();
+  async function DeletePlantById() {
+    try {
+      const token = getCookie("token");
+      if (!token) {
+        throw new Error("Token not found in cookies");
+      } else {
+        const response = await axios.delete(
+          `${process.env.NEXT_PUBLIC_API_BASE_URL}/admin/plants/${idToDeletePlant}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+
+        if (response.status === 200) {
+          dispatch(FuncMessagePlantDelete(true));
+          dispatch(FuncDeletePlant(false));
+          window.location.reload();
+        } else {
+          dispatch(FuncMessagePlantError(true));
+          dispatch(FuncDeletePlant(false));
+        }
+      }
+    } catch (error) {
+      console.log(error);
+      dispatch(FuncMessagePlantError(true));
+      dispatch(FuncDeletePlant(false));
+    }
+  }
+  const getCookie = (name) => {
+    const cookieValue = document.cookie.match(
+      "(^|;)\\s*" + name + "\\s*=\\s*([^;]+)"
+    );
+    return cookieValue ? cookieValue.pop() : "";
+  };
   return (
     <>
       <AnimatePresence>
@@ -60,11 +92,7 @@ export default function Alert_DeletePlant() {
                   Cancel
                 </button>
                 <button
-                  onClick={() => {
-                    dispatch(FuncMessagePlantDelete(true));
-                    dispatch(FuncDeletePlant(false));
-                    dispatch(FuncDataAllPlants({ value: deletePlantsById }));
-                  }}
+                  onClick={DeletePlantById}
                   className=" text-white basis-1/2 w-full p-[14px] rounded-md bg-red-500"
                 >
                   Delete

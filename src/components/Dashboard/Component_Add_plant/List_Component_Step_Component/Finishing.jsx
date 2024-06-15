@@ -33,14 +33,13 @@ export default function Finishing() {
       if (dataPlantNew) {
         const DataPlantNews = {
           ...dataPlantNew,
-          created_at: new Date().toISOString(),
         };
         dispatch(PostDataPlantsNew(DataPlantNews));
-        // if (PostDataMessageSuccess.status === "success") {
-        //   dispatch(FuncFinishAddPlant(true));
-        // } else {
-        //   dispatch(FuncMessagePlantError(true));
-        // }
+        if (PostDataMessageSuccess.status === "success") {
+          dispatch(FuncFinishAddPlant(true));
+        } else {
+          dispatch(FuncMessagePlantError(true));
+        }
       }
     } catch (error) {
       console.log(error);

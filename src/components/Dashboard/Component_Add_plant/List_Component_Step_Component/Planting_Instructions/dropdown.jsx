@@ -55,7 +55,7 @@ export default function DropdownSearch({ items, onButtonClick, setCategory }) {
                   onClick={() => {
                     setSearchTerm(items.name);
                     setIsOpen(false);
-                    setCategory(items);
+                    setCategory(items.id);
                   }}
                   className="block w-full px-4 py-2 text-left text-sm text-gray-700 hover:bg-gray-100"
                 >

@@ -22,9 +22,10 @@ export default function Alert_Congratulations() {
   const route = useRouter();
   async function handleClickCongrats() {
     await route.push("/dashboard/manage-plant");
-    dispatch(FuncToIndex(1));
     dispatch(FuncFinishAddPlant(false));
     dispatch(FuncMessagePlantSuccess(true));
+    dispatch(FuncToIndex(1));
+    window.location.reload();
   }
   return (
     <AnimatePresence>

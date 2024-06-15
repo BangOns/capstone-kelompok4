@@ -21,7 +21,6 @@ export default function Finishing() {
   const { DataAllPlants, dataPlantNew } = useSelector(
     (state) => state.addplant
   );
-  console.log(DataAllPlants);
   const dispatch = useDispatch();
   function handleClickPrev() {
     dispatch(FuncPrevStep());
