@@ -27,7 +27,6 @@ export default function Finishing() {
   function handleClickPrev() {
     dispatch(FuncPrevStep());
   }
-  console.log(dataPlantNew);
   async function handleClickNext(e) {
     e.preventDefault();
     try {
@@ -36,11 +35,11 @@ export default function Finishing() {
           ...dataPlantNew,
         };
         dispatch(PostDataPlantsNew(DataPlantNews));
-        // if (PostDataMessageSuccess.status === "success") {
-        //   dispatch(FuncFinishAddPlant(true));
-        // } else {
-        //   dispatch(FuncMessagePlantError(true));
-        // }
+        if (PostDataMessageSuccess.status === "success") {
+          dispatch(FuncFinishAddPlant(true));
+        } else {
+          dispatch(FuncMessagePlantError(true));
+        }
       }
     } catch (error) {
       console.log(error);

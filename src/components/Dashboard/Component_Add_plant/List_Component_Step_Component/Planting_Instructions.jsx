@@ -65,10 +65,8 @@ export default function Planting_Instructions() {
           step_number: data.length + 1,
 
           step_title: "",
-          category: "",
           step_description: "",
           step_image_url: "",
-          additional_tips: "",
         },
       ]);
     } else {
@@ -79,10 +77,8 @@ export default function Planting_Instructions() {
           step_number: data.length + 1,
 
           step_title: "",
-          category: "",
           step_description: "",
           step_image_url: "",
-          additional_tips: "",
         },
       ]);
     }

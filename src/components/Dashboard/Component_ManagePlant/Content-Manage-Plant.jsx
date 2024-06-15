@@ -16,7 +16,6 @@ export default function ContentManagePlant() {
     dataAllPlantsWithAPI && dataAllPlantsWithAPI.plants?.length >= 10
       ? false
       : true;
-  console.log(validateStepTable);
   useEffect(() => {
     FetchDataTable(indexStepTable, (items) => {
       dataAllPlantsWithAPISet(items);

@@ -25,7 +25,6 @@ export default function Faq() {
     (state) => state.addplant
   );
   const [questions, setQuestions] = useState([]);
-
   function handleClickPrev() {
     dispatch(FuncPrevStep());
   }
@@ -33,8 +32,7 @@ export default function Faq() {
     if ((FaQInput.asked === "" && FaQInput.quest === "") || !faqList.length) {
       dispatch(FuncMessagePlantError(true));
     } else {
-      const plant_faqs = [...faqList];
-
+      const plant_faqs = [...questions];
       const updatedDataPlantNew = {
         ...dataPlantNew,
         plant_faqs,
@@ -42,6 +40,7 @@ export default function Faq() {
 
       // Dispatch update ke Redux
       dispatch(FuncAddInputPlantInformation(updatedDataPlantNew));
+      dispatch(FuncAddFAQList(plant_faqs));
 
       dispatch(FuncNextStep());
     }
@@ -73,26 +72,10 @@ export default function Faq() {
 
     dispatch(FuncAddFAQList(updateData));
   }
-  console.log(questions);
   function handleUpdateQuestion(id, field, value) {
-    // const Questionsupdated = questions.map((items) =>
-    //   items.question === updatedQuestion.question
-    //     ? { ...items, ...updatedQuestion }
-    //     : items
-    // );
     const newData = [...questions];
     newData[id] = { ...newData[id], [field]: value };
     setQuestions(newData);
-    // if (updatedQuestion.hasOwnProperty("question")) {
-
-    // } else if (updatedQuestion.hasOwnProperty("answer")) {
-    //   questions[id].answer = updatedQuestion.answer;
-    // }
-    // // Perbarui state lokal
-    // setQuestions(questions);
-
-    // // Dispatch ke Redux
-    // dispatch(FuncAddFAQList(questions));
   }
   useEffect(() => {
     if (faqList.length !== 0) {

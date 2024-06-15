@@ -28,13 +28,14 @@ export default function Upload_Image_Child_Plant({ ids }) {
         imageChildSet("");
       }
     }
-  }, [PlantInformationInput, ids]);
+  }, [PlantInformationInput]);
   function handleChangeFileThumbnails(e) {
     e.preventDefault();
     const { files } = e.target;
     const imgUrl = URL.createObjectURL(files[0]);
     dispatch(
       FuncPlantInformationInputImage({
+        imagePrev: imageChild ? imageChild : "",
         value: {
           file_name: imgUrl,
           is_primary: 0,

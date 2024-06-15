@@ -30,7 +30,7 @@ export default function TablePlantInformation({ dataPlant }) {
           <Image
             src={
               imageThumb
-                ? GetImageThumbnails[0].file_name
+                ? GetImageThumbnails[0]?.file_name
                 : ImageImport.ImagePlants
             }
             alt="image plants"

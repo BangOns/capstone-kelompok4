@@ -31,7 +31,6 @@ export default function Plant_Infromation() {
 
   function handleClickNext() {
     const checkValidate = ValidateInformation(PlantInformationInput);
-    console.log(checkValidate);
     if (!checkValidate || !regex.test(PlantInformationInput.name)) {
       if (!regex.test(PlantInformationInput.name)) {
         dispatch(FuncMessageErrorPlantName(true));
@@ -68,12 +67,12 @@ export default function Plant_Infromation() {
                   <Upload_Image_Plant />
                   <section className="w-5/6">
                     <div className="w-full flex items-start justify-between">
-                      {Array(1, 2, 3, 4).map((item, index) => (
+                      {[1, 2, 3, 4].map((item, index) => (
                         <Upload_Image_Child_Plant key={index} ids={item} />
                       ))}
                     </div>
                     <div className="w-full flex items-start justify-between pt-2">
-                      {Array(5, 6, 7, 8).map((item, index) => (
+                      {[5, 6, 7, 8].map((item, index) => (
                         <Upload_Image_Child_Plant key={index} ids={item} />
                       ))}
                     </div>
