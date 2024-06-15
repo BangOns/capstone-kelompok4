@@ -61,42 +61,24 @@ export default function Planting_Instructions() {
     if (!data.length) {
       setData([
         {
-          id: Math.floor(Math.random() * 100),
-          plant_id: Math.floor(Math.random() * 100),
-          instruction_category: {
-            id: Math.floor(Math.random() * 100),
-            name: "",
-            description: "",
-            image_url: "",
-          },
+          instruction_category_id: 0,
           step_number: data.length + 1,
 
           step_title: "",
-          category: "",
           step_description: "",
           step_image_url: "",
-          additional_tips: "",
         },
       ]);
     } else {
       setData([
         ...data,
         {
-          id: Math.floor(Math.random() * 100),
-          plant_id: Math.floor(Math.random() * 100),
-          instruction_category: {
-            id: Math.floor(Math.random() * 100),
-            name: "",
-            description: "",
-            image_url: "",
-          },
+          instruction_category_id: 0,
           step_number: data.length + 1,
 
           step_title: "",
-          category: "",
           step_description: "",
           step_image_url: "",
-          additional_tips: "",
         },
       ]);
     }
@@ -236,7 +218,6 @@ export default function Planting_Instructions() {
                       <div className="absolute bg-[#10B981] p-3 border rounded-lg w-fit h-fit top-0 right-0">
                         <input
                           type="file"
-                          // ref={fileInputRef}
                           className="hidden"
                           id={`image-url-${i}`}
                           onChange={(event) =>
@@ -282,7 +263,11 @@ export default function Planting_Instructions() {
                           </p>
                           <DropdownSearch
                             setCategory={(category) =>
-                              updateField(i, "category", category)
+                              updateField(
+                                i,
+                                "instruction_category_id",
+                                category
+                              )
                             }
                           ></DropdownSearch>
                         </div>

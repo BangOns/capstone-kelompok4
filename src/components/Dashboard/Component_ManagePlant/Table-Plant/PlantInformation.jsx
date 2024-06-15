@@ -1,21 +1,42 @@
 "use client";
 import { IconsImport } from "@/utils/IconsImport";
 import { ImageImport } from "@/utils/ImageImport";
-import Image from "next/image";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import MenuOption from "./MenuOption";
 import { FormatDate } from "../../../../utils/FormatDate";
+import Image from "next/image";
 
 export default function TablePlantInformation({ dataPlant }) {
   const [activeMenu, activeMenuSet] = useState(false);
+  const [imageThumb, imageThumbSet] = useState("");
+
   const plantName = dataPlant.name.split("-")[0];
   const familyName = dataPlant.name.split("-")[1];
   const FormatDates = FormatDate(dataPlant.created_at);
+  const GetImageThumbnails = dataPlant.plant_images
+    ? dataPlant.plant_images.length !== 0
+      ? dataPlant.plant_images.filter((items) => items.is_primary === 1)
+      : []
+    : [];
+  useEffect(() => {
+    if (GetImageThumbnails.length !== 0) {
+      imageThumbSet(GetImageThumbnails[0].file_name);
+    }
+  }, [GetImageThumbnails, dataPlant]);
   return (
     <tr className="text-center">
       <td className="flex justify-center">
         <figure className="w-[60px] h-[60px] rounded-xl border flex items-end justify-center bg-gray-200 overflow-hidden bg-gradient-to-b from-50% from-white to-gray-200/60">
-          <Image src={ImageImport.ImagePlants} alt="image plants" />
+          <Image
+            src={
+              imageThumb
+                ? GetImageThumbnails[0]?.file_name
+                : ImageImport.ImagePlants
+            }
+            alt="image plants"
+            width={60}
+            height={60}
+          />
         </figure>
       </td>
       <td>

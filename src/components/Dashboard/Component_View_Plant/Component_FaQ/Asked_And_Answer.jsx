@@ -36,11 +36,6 @@ export default function Asked_And_Answer({ dataPlants }) {
         </article>
         <div className="flex items-center ">
           <Image
-            src={IconsImport.IconsDeletePlant}
-            alt="delete"
-            className="m-4 cursor-pointer"
-          />
-          <Image
             src={IconsImport.IconsDropdown}
             alt="dropdown"
             className="m-4 cursor-pointer"
@@ -63,12 +58,10 @@ export default function Asked_And_Answer({ dataPlants }) {
             className="border border-gray-200 rounded-md
 mt-2 p-3"
           >
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Accusantium eligendi autem quaerat, assumenda similique doloribus
-              itaque vitae ipsum adipisci minima et veniam enim quidem rerum
-              deleniti quo odio possimus voluptatum.
-            </p>
+            <div
+              className="prose"
+              dangerouslySetInnerHTML={{ __html: dataPlants.question }}
+            />
           </div>
         </section>
         <section className="basis-1/2 w-full ">
@@ -77,12 +70,10 @@ mt-2 p-3"
             className="border border-gray-200 rounded-md
 mt-2 p-3"
           >
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Accusantium eligendi autem quaerat, assumenda similique doloribus
-              itaque vitae ipsum adipisci minima et veniam enim quidem rerum
-              deleniti quo odio possimus voluptatum.
-            </p>
+            <div
+              className="prose"
+              dangerouslySetInnerHTML={{ __html: dataPlants.answer }}
+            />
           </div>
         </section>
       </motion.article>

@@ -56,11 +56,6 @@ export default function Component_Steps({ dataPlantsStep }) {
         </figure>
         <div className="flex items-center ">
           <Image
-            src={IconsImport.IconsDeletePlant}
-            alt="delete"
-            className="m-4 cursor-pointer"
-          />
-          <Image
             src={IconsImport.IconsDropdown}
             alt="dropdown"
             className="m-4 cursor-pointer"

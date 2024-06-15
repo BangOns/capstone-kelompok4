@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   indexStep: 1,
+  indexStepTable: 1,
   plantInformationStep2: false,
   cancelAddPlant: false,
   deletePlant: false,
@@ -62,6 +63,20 @@ const DashboardSlice = createSlice({
     FuncMessageErrorPlantName: (state, action) => {
       state.messageErrorPlantName = action.payload;
     },
+    FuncNextStepTable: (state) => {
+      if (state.indexStepTable >= 6) {
+        state.indexStepTable = 6;
+      } else {
+        state.indexStepTable += 1;
+      }
+    },
+    FuncPrevStepTable: (state) => {
+      if (state.indexStepTable <= 0) {
+        state.indexStepTable = 1;
+      } else {
+        state.indexStepTable -= 1;
+      }
+    },
   },
 });
 
@@ -78,6 +93,8 @@ export const {
   FuncMessagePlantDelete,
   FuncReminderSettings,
   FuncMessageErrorPlantName,
+  FuncNextStepTable,
+  FuncPrevStepTable
 } = DashboardSlice.actions;
 
 export default DashboardSlice.reducer;

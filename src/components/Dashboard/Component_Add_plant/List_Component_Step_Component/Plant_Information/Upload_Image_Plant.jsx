@@ -23,9 +23,8 @@ export default function Upload_Image_Plant() {
 
     dispatch(
       FuncPlantInformationInputImage({
+        imagePrev: imageThumb ? imageThumb : "",
         value: {
-          id: 14,
-          plant_id: 2,
           file_name: imgUrl,
           is_primary: 1,
         },
@@ -37,6 +36,8 @@ export default function Upload_Image_Plant() {
   useEffect(() => {
     if (GetImageThumbnails.length !== 0) {
       imageThumbSet(GetImageThumbnails[0].file_name);
+    } else {
+      imageThumbSet("");
     }
   }, [GetImageThumbnails]);
   return (
@@ -72,7 +73,12 @@ export default function Upload_Image_Plant() {
               alt="delete"
               className="hidden group-hover:block cursor-pointer   hover:bg-slate-400/50 hover:p-2 hover:rounded-full transition-all"
               onClick={() => {
-                dispatch(FuncDeleteImagePlantInformation({ id: 14 }));
+                dispatch(
+                  FuncDeleteImagePlantInformation({
+                    is_primary: 1,
+                    filename: imageThumb,
+                  })
+                );
 
                 imageThumbSet("");
               }}

@@ -1,15 +1,24 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { IconsImport } from "@/utils/IconsImport";
 import TablePlantInformation from "./PlantInformation";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import Loading_Table from "../../../../utils/Component-Loading/Loading_Table";
+import { FetchDataAllPlants } from "../../../../libs/redux/Slice/AddPlantSlice";
+import { FetchDataTable } from "../../../../utils/Function-FetchAPI/GetDataAllTable";
 
 export default function TablePlant() {
-  const { DataAllPlants } = useSelector((state) => state.addplant);
+  const { indexStepTable } = useSelector((state) => state.dashboard);
+  const [dataAllPlantsWithAPI, dataAllPlantsWithAPISet] = useState([]);
 
+  useEffect(() => {
+    FetchDataTable(indexStepTable, (items) => {
+      dataAllPlantsWithAPISet(items);
+    });
+  }, [indexStepTable]);
   return (
-    <table className="table border">
+    <table className="table border ">
       {/* head */}
       <thead className="bg-base-200 ">
         <tr className="font-nunito-bold text-black text-base text-center">
@@ -49,12 +58,18 @@ export default function TablePlant() {
         </tr>
       </thead>
       <tbody>
-        {DataAllPlants !== 0 ? (
-          DataAllPlants?.map((items, index) => (
+        {dataAllPlantsWithAPI?.plants ? (
+          dataAllPlantsWithAPI.plants?.map((items, index) => (
             <TablePlantInformation key={index} dataPlant={items} />
           ))
         ) : (
-          <p>Loading...</p>
+          <>
+            <Loading_Table />
+            <Loading_Table />
+            <Loading_Table />
+            <Loading_Table />
+            <Loading_Table />
+          </>
         )}
       </tbody>
     </table>

@@ -24,19 +24,15 @@ export default function Faq() {
   const { FaQInput, dataPlantNew, faqList } = useSelector(
     (state) => state.addplant
   );
-  const dateObj = new Date();
   const [questions, setQuestions] = useState([]);
-
   function handleClickPrev() {
     dispatch(FuncPrevStep());
   }
-
   function handleClickNext() {
     if ((FaQInput.asked === "" && FaQInput.quest === "") || !faqList.length) {
       dispatch(FuncMessagePlantError(true));
     } else {
-      const plant_faqs = [...faqList];
-
+      const plant_faqs = [...questions];
       const updatedDataPlantNew = {
         ...dataPlantNew,
         plant_faqs,
@@ -44,6 +40,7 @@ export default function Faq() {
 
       // Dispatch update ke Redux
       dispatch(FuncAddInputPlantInformation(updatedDataPlantNew));
+      dispatch(FuncAddFAQList(plant_faqs));
 
       dispatch(FuncNextStep());
     }
@@ -51,10 +48,8 @@ export default function Faq() {
 
   function handleAddQuestion() {
     const newQuestion = {
-      id: questions.length + 1,
       question: "",
       answer: "",
-      created_at: "",
     };
 
     const updatedQuestions = [newQuestion, ...questions];
@@ -66,20 +61,21 @@ export default function Faq() {
     dispatch(FuncAddFAQList(updatedQuestions));
   }
 
-  function handleDeleteQuestion(id) {
-    setQuestions(questions.filter((question) => question.id !== id));
+  function handleDeleteQuestion(index) {
+    const newData = [...questions];
+    newData.splice(index, 1);
+
+    const updateData = newData.map((items) => ({
+      ...items,
+    }));
+    setQuestions(updateData);
+
+    dispatch(FuncAddFAQList(updateData));
   }
-
-  function handleUpdateQuestion(id, updatedQuestion) {
-    const updatedQuestions = questions.map((question) =>
-      question.id === id ? { ...question, ...updatedQuestion } : question
-    );
-
-    // Perbarui state lokal
-    setQuestions(updatedQuestions);
-
-    // Dispatch ke Redux
-    dispatch(FuncAddFAQList(updatedQuestions));
+  function handleUpdateQuestion(id, field, value) {
+    const newData = [...questions];
+    newData[id] = { ...newData[id], [field]: value };
+    setQuestions(newData);
   }
   useEffect(() => {
     if (faqList.length !== 0) {
@@ -110,12 +106,12 @@ export default function Faq() {
               </div>
             </div>
             {questions.length !== 0 &&
-              questions.map((q) => (
-                <div key={q.id} className="px-4 mb-4">
+              questions.map((q, i) => (
+                <div key={i} className="px-4 mb-4">
                   <AskedQuestion
                     question={q.question}
                     answer={q.answer}
-                    id={q.id}
+                    id={i}
                     onDelete={handleDeleteQuestion}
                     onUpdate={handleUpdateQuestion}
                   />

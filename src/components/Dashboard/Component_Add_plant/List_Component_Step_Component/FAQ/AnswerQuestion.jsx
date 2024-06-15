@@ -7,15 +7,15 @@ import { FuncFaQInput } from "../../../../../libs/redux/Slice/AddPlantSlice";
 
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 
-export default function Answer({ name, redux, value, onChange, id, onUpdate }) {
+export default function Answer({ name, redux, value, id, onUpdate }) {
   const dispatch = useDispatch();
 
-  const handleChange = (e) => {
-    onChange(e); // Memanggil fungsi onChange dari props untuk memperbarui state di komponen induk
-    dispatch(FuncFaQInput({ name: redux, value: e })); // Memperbarui Redux store
+  // const handleChange = (e) => {
+  //   onChange(e); // Memanggil fungsi onChange dari props untuk memperbarui state di komponen induk
+  //   dispatch(FuncFaQInput({ name: redux, value: e })); // Memperbarui Redux store
 
-    onUpdate(id, { [redux]: e });
-  };
+  //   onUpdate(id, { [redux]: e });
+  // };
 
   return (
     <div className="w-full basis-1/2">
@@ -26,7 +26,7 @@ export default function Answer({ name, redux, value, onChange, id, onUpdate }) {
         <ReactQuill
           className="w-full h-[148px] text-neutral-950 border border-neutral-400 text-[14px] flex-col-reverse flex rounded-md"
           value={value}
-          onChange={handleChange}
+          onChange={(e) => onUpdate(id, redux, e)}
           placeholder={`${name}...`}
         />
       </div>

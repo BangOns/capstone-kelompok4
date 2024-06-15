@@ -16,9 +16,7 @@ const variants = {
   },
 };
 export default function Harvest_Duration() {
-  const { PlantInformationInput, dataPlantNew } = useSelector(
-    (state) => state.addplant
-  );
+  const { PlantInformationInput } = useSelector((state) => state.addplant);
   const [open, setOpen] = useState(false);
   const arrDataHarvestDuration = [
     "1 Month",
@@ -41,7 +39,7 @@ export default function Harvest_Duration() {
         >
           <p>
             {PlantInformationInput.harvest_duration
-              ? `${PlantInformationInput.harvest_duration}`
+              ? `${PlantInformationInput.harvest_duration} month`
               : "Month"}
           </p>
           <IoIosArrowDown />
@@ -62,7 +60,7 @@ export default function Harvest_Duration() {
                   dispatch(
                     FuncPlantInformationInput({
                       name: "harvest_duration",
-                      value: items,
+                      value: parseInt(items.split(" ")[0]),
                     })
                   );
                   setOpen(false);
