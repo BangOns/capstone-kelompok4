@@ -17,6 +17,10 @@ export default function TablePlant() {
         a.name.localeCompare(b.name)
       );
       dataAllPlantsWithAPISet(sortPlantName);
+    } else if (nameSort === "addedDate") {
+      // menguurutkan data dari tanggal yang paling terbaru
+    } else if (nameSort === "category") {
+      // mengurutkan data dari alfavbet seperti plant name
     }
   }
   useEffect(() => {
@@ -36,7 +40,7 @@ export default function TablePlant() {
             <Image
               src={IconsImport.IconsDropdown}
               alt="dropdown"
-              disabled={!dataAllPlantsWithAPI ? true : false}
+              disabled={!dataAllPlantsWithAPI?.length ? true : false}
               className="cursor-pointer"
               onClick={() => HandleSortDataTable("plantName")}
             />
@@ -47,7 +51,9 @@ export default function TablePlant() {
               <Image
                 src={IconsImport.IconsDropdown}
                 alt="dropdown"
+                disabled={!dataAllPlantsWithAPI?.length ? true : false}
                 className="cursor-pointer"
+                onClick={() => HandleSortDataTable("addedDate")}
               />
             </div>
           </th>
@@ -59,6 +65,7 @@ export default function TablePlant() {
                 src={IconsImport.IconsDropdown}
                 alt="dropdown"
                 className="cursor-pointer"
+                onClick={() => HandleSortDataTable("category")}
               />
             </div>
           </th>
