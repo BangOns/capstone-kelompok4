@@ -17,7 +17,6 @@ import {
   FuncPlantInformationStep2,
 } from "../../../../libs/redux/Slice/DashboardSlice";
 import { FuncEditInputPlantInformation } from "../../../../libs/redux/Slice/EditPlantSlice";
-// import { FuncAddInputPlantInformation } from "../../../../libs/redux/Slice/AddPlantSlice";
 import Upload_Image_Plant from "./Plant_Information/Upload_Image_Plant";
 import { ValidateInformation } from "../../../../utils/Validate_AddPlant/Validate_PlantInformation";
 export default function Plant_Infromation() {
@@ -29,13 +28,13 @@ export default function Plant_Infromation() {
   const PlantInformation = {
     name: dataPlantEdit.name,
     description: dataPlantEdit.description,
-    category: dataPlantEdit.category,
-    harvestDuration: dataPlantEdit.harvestDuration,
-    climateCondition: dataPlantEdit.climateCondition,
-    type: dataPlantEdit.type,
+    is_toxic: dataPlantEdit.is_toxic,
+    harvest_duration: dataPlantEdit.harvest_duration,
+    plant_category: dataPlantEdit.plant_category,
+    climate_condition: dataPlantEdit.climate_condition,
+    planting_time: dataPlantEdit.planting_time,
     sunlight: dataPlantEdit.sunlight,
-    plantingTime: dataPlantEdit.plantingTime,
-    plant_image: dataPlantEdit.plant_image,
+    plant_images: dataPlantEdit.plant_images
   };
   const [value, setValue] = useState("");
 

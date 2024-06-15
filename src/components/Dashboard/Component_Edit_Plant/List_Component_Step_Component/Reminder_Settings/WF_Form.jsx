@@ -1,8 +1,7 @@
 "use client";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-
-import { FuncReminderSettingsInput } from "@/libs/redux/Slice/AddPlantSlice";
+import { FuncReminderSettingsInputEdit } from "@libs/redux/Slice/EditPlantSlice";
 import {
   IconsMinus,
   IconChevronDown,
@@ -23,7 +22,7 @@ const WF_Form = () => {
 
   const handleIncrementFrequency = () => {
     dispatch(
-      FuncReminderSettingsInput({
+      FuncReminderSettingsInputEdit({
         name: "watering_frequency",
         operator: "plus",
       })

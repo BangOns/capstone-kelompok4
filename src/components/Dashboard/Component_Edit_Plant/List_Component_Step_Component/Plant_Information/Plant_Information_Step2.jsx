@@ -17,16 +17,18 @@ import Each from "./Select_Option/Each";
 import Plant_Height from "./Plant_Information_Step2/Plant_Height";
 import Plant_Wide from "./Plant_Information_Step2/Plant_Wide";
 import Data_Plant_Information_Step1 from "./Plant_Information_Step2/Data_Plant_Information_Step1";
-import {
-  FuncAddInputPlantInformation,
-  FuncDeleteImagePreviousPlantInformation,
-} from "../../../../../libs/redux/Slice/AddPlantSlice";
+import { FuncEditInputPlantInformation } from "../../../../../libs/redux/Slice/EditPlantSlice";
 import { ValidateInformation2 } from "../../../../../utils/Validate_AddPlant/Validate_PlantInformation";
 export default function Plant_Information_Step2() {
-  const { PlantInformationInput, dataPlantNew } = useSelector(
-    (state) => state.addplant
-  );
+  const { dataPlantEdit } = useSelector((state) => state.editplant);
   const dispatch = useDispatch();
+  const plant_characteristic = {
+    height: plant_characteristic.height,
+    height_unit: plant_characteristic.height_unit,
+    wide: plant_characteristic.wide,
+    wide_unit: plant_characteristic.wide_unit,
+    leaf_color: plant_characteristic.leaf_color,
+  }
   function handleClickNext() {
     const checkValidatePlantInformation2 = ValidateInformation2(
       PlantInformationInput.plant_characteristic
