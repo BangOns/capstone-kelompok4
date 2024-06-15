@@ -20,12 +20,10 @@ export default function Alert_Congratulations() {
   const dispatch = useDispatch();
   const { finishAddPlant } = useSelector((state) => state.dashboard);
   const route = useRouter();
-  async function handleClickCongrats() {
-    await route.push("/dashboard/manage-plant");
+  function handleClickCongrats() {
     dispatch(FuncFinishAddPlant(false));
     dispatch(FuncMessagePlantSuccess(true));
-    dispatch(FuncToIndex(1));
-    window.location.reload();
+    route.push("/dashboard/manage-plant");
   }
   return (
     <AnimatePresence>
