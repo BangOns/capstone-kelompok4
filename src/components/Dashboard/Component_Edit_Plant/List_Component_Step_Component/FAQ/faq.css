@@ -1,0 +1,22 @@
+/* globals.css */
+.scrollbar {
+    scrollbar-width: thin; /* For Firefox */
+    scrollbar-color: #10B981 #F3F4F6; /* For Firefox */
+  }
+  
+  .scrollbar::-webkit-scrollbar {
+    width: 8px; /* For Chrome, Safari, and Opera */
+    height: 8px; /* For horizontal scrollbar */
+  }
+  
+  .scrollbar::-webkit-scrollbar-track {
+    background: #F3F4F6; /* Background of the scrollbar track */
+    border-radius: 10px; /* Border radius of the scrollbar track */
+  }
+  
+  .scrollbar::-webkit-scrollbar-thumb {
+    background-color: #10B981; /* Scrollbar color */
+    border-radius: 10px; /* Border radius of the scrollbar thumb */
+    border: 3px solid #F3F4F6; /* Space around scrollbar thumb */
+  }
+  
