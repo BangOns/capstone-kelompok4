@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
-export default function SearchManagePlant() {
+export default function SearchManagePlant({ searchValue, searchValueSet }) {
   return (
     <header className="">
       <h1 className="text-[28px] font-nunito-bold pb-6">Manage Plant</h1>
@@ -15,6 +15,8 @@ export default function SearchManagePlant() {
             type="text"
             placeholder="Search Plants..."
             className="w-full border-0 focus:ring-0 outline-none text-sm font-poppins"
+            value={searchValue}
+            onChange={(e) => searchValueSet(e.target.value)}
           />
         </div>
         <Link
