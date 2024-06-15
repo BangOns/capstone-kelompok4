@@ -12,7 +12,6 @@ export default function Component_Plant_Information({ dataPlants }) {
       ? dataPlants.plant_images.filter((items) => items.is_primary === 1)
       : []
     : [];
-
   useEffect(() => {
     if (GetImageThumbnails.length !== 0) {
       imageThumbSet(GetImageThumbnails[0].file_name);

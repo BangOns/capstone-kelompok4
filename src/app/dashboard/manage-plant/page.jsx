@@ -5,6 +5,7 @@ import React from "react";
 import Alert_DeletePlant from "../../../components/Dashboard/Component_Add_plant/Component-Alert/Alert_DeletePlant";
 import Message_Success from "../../../components/Component_Message/Message_Success";
 import Message_DeletePlant from "../../../components/Component_Message/Message_Delete";
+import Message_Error from "../../../components/Component_Message/Message_Error";
 
 export default function page() {
   return (
@@ -17,6 +18,7 @@ export default function page() {
       <Message_Success
         message={"Yay! Plant successfully added to your plant list! 🙌"}
       />
+      <Message_Error message={"Uh oh! youre data is error to Delete"} />
       <Message_DeletePlant message={"Plant data deleted successfully."} />
     </>
   );

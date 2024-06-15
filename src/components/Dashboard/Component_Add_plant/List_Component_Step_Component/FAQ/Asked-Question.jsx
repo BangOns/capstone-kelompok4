@@ -13,19 +13,11 @@ export default function AskedQuestion({
   onUpdate,
 }) {
   const [mini, setMini] = useState(false);
-  const [localQuestion, setLocalQuestion] = useState(question);
-  const [localAnswer, setLocalAnswer] = useState(answer);
-
-  useEffect(() => {
-    setLocalQuestion(question);
-    setLocalAnswer(answer);
-  }, [question, answer]);
 
   function handleMinimize() {
-    onUpdate(id, { question: localQuestion, answer: localAnswer });
     setMini(!mini);
   }
-
+  
   function stripHtmlTags(str) {
     if (str === null || str === "") return false;
     else str = str.toString();
@@ -67,16 +59,14 @@ export default function AskedQuestion({
           <Answer
             name="Questions"
             redux="question"
-            value={localQuestion}
-            onChange={setLocalQuestion}
+            value={question}
             id={id}
             onUpdate={onUpdate}
           />
           <Answer
             name="Answers"
             redux="answer"
-            value={localAnswer}
-            onChange={setLocalAnswer}
+            value={answer}
             id={id}
             onUpdate={onUpdate}
           />
@@ -90,11 +80,11 @@ export default function AskedQuestion({
       >
         <div>
           <div className="text-[#030712] font-nunito-bold text-[14px] my-1">
-            Q: {stripHtmlTags(localQuestion)}
+            Q: {stripHtmlTags(question)}
           </div>
           <div className="text-[#030712] text-[14px] font-nunito my-1">
             <span className="font-nunito-bold">A:</span>{" "}
-            {stripHtmlTags(localAnswer)}
+            {stripHtmlTags(answer)}
           </div>
         </div>
         <div className="flex items-center justify-center gap-5">
