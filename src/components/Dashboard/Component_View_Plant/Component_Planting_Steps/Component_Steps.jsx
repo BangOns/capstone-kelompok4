@@ -75,8 +75,8 @@ export default function Component_Steps({ dataPlantsStep }) {
           <Image
             src={
               dataPlantsStep.step_image_url
-                ? ImageImport.ImagePlants
-                : dataPlantsStep.step_image_url
+                ? dataPlantsStep.step_image_url
+                : ImageImport.ImagePlants
             }
             alt="image-test"
             className="w-[237px] h-[231px] object-cover rounded"
