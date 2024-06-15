@@ -8,15 +8,7 @@ import Loading_Table from "../../../../utils/Component-Loading/Loading_Table";
 import { FetchDataAllPlants } from "../../../../libs/redux/Slice/AddPlantSlice";
 import { FetchDataTable } from "../../../../utils/Function-FetchAPI/GetDataAllTable";
 
-export default function TablePlant() {
-  const { indexStepTable } = useSelector((state) => state.dashboard);
-  const [dataAllPlantsWithAPI, dataAllPlantsWithAPISet] = useState([]);
-
-  useEffect(() => {
-    FetchDataTable(indexStepTable, (items) => {
-      dataAllPlantsWithAPISet(items);
-    });
-  }, [indexStepTable]);
+export default function TablePlant({ dataAllPlantsWithAPI }) {
   return (
     <table className="table border ">
       {/* head */}
