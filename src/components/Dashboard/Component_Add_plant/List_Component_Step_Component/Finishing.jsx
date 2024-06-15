@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect } from "react";
 import Component_Plant_Information from "./Finishing/Component_Plant_Information";
 import Component_Reminder_Settings from "./Finishing/Component_Reminder_Settings";
 import Component_Planting_Steps from "./Finishing/Component_Planting_Steps";
@@ -35,17 +35,20 @@ export default function Finishing() {
           ...dataPlantNew,
         };
         dispatch(PostDataPlantsNew(DataPlantNews));
-        if (PostDataMessageSuccess.status === "success") {
-          dispatch(FuncFinishAddPlant(true));
-        } else {
-          dispatch(FuncMessagePlantError(true));
-        }
       }
     } catch (error) {
       console.log(error);
       dispatch(FuncMessagePlantError(true));
     }
   }
+  useEffect(() => {
+    if (PostDataMessageSuccess) {
+      if (PostDataMessageSuccess.status === "success") {
+        dispatch(FuncFinishAddPlant(true));
+      }
+    }
+  }, [PostDataMessageSuccess]);
+
   return (
     <Fragment>
       <article className="w-full mt-6 ">
