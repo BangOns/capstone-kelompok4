@@ -10,7 +10,7 @@ import { GetPlantCAtegoriesById } from "../../../../../utils/Function-FetchAPI/G
 export default function Component_Plant_Information() {
   const dispatch = useDispatch();
   const [imageThumb, imageThumbSet] = useState("");
-  const { dataPlantNew } = useSelector((state) => state.addplant);
+  const { dataPlantEdit } = useSelector((state) => state.editplant);
   const [chooseCategory, chooseCategorySet] = useState("");
   const plantName = dataPlantNew.name.split("-")[0];
   const FamilyName = dataPlantNew.name.split("-")[1];

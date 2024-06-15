@@ -16,10 +16,11 @@ import {
   FuncPrevStep,
   FuncDeletePlant,
 } from "../../../../libs/redux/Slice/DashboardSlice";
-import {
-  FuncAddInputPlantInformation,
-  FuncPlantingInstructions,
-} from "../../../../libs/redux/Slice/AddPlantSlice";
+import { FuncEditInputPlantInformation, FuncPlantingInstructionsEdit } from "../../../../libs/redux/Slice/EditPlantSlice";
+// import {
+//   FuncAddInputPlantInformation,
+//   FuncPlantingInstructions,
+// } from "../../../../libs/redux/Slice/AddPlantSlice";
 import Message_Error from "../../../Component_Message/Message_Error";
 import { IconsEdit } from "../../../../utils/Component-Icons-Reminder-settings";
 import DropdownSearch from "./Planting_Instructions/dropdown";
@@ -29,8 +30,8 @@ const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 
 export default function Planting_Instructions() {
   const dispatch = useDispatch();
-  const count = useSelector((state) => state.addplant.PlantingInstructions);
-  const { dataPlantNew } = useSelector((state) => state.addplant);
+  const count = useSelector((state) => state.editplant.PlantingInstructionsEdit);
+  const { dataPlantEdit } = useSelector((state) => state.editplant);
   const fileInputRef = useRef(null);
   const [data, setData] = useState(count);
   const [hide, setHide] = useState();
@@ -38,7 +39,7 @@ export default function Planting_Instructions() {
 
   function handleClickPrev() {
     dispatch(FuncPrevStep());
-    dispatch(FuncPlantingInstructions(data));
+    dispatch(FuncPlantingInstructionsEdit(data));
   }
 
   function handleClickNext() {
@@ -47,12 +48,12 @@ export default function Planting_Instructions() {
     } else {
       const plant_instructions = [...data];
       dispatch(
-        FuncAddInputPlantInformation({
-          ...dataPlantNew,
+        FuncEditInputPlantInformation({
+          ...dataPlantEdit,
           plant_instructions,
         })
       );
-      dispatch(FuncPlantingInstructions(data));
+      dispatch(FuncEditInputPlantInformation(data));
       dispatch(FuncNextStep());
     }
   }
@@ -83,6 +84,7 @@ export default function Planting_Instructions() {
       ]);
     }
   }
+  //belom keubah ke edit
   const updateField = (index, field, value) => {
     const newData = [...data];
     if (field === "step_image_url") {

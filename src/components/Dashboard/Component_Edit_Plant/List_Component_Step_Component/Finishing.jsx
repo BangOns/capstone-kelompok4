@@ -15,14 +15,15 @@ import {
   FuncPrevStep,
 } from "../../../../libs/redux/Slice/DashboardSlice";
 import Message_Error from "../../../Component_Message/Message_Error";
-import {
-  FuncAddNewDataPlants,
-  PostDataPlantsNew,
-} from "../../../../libs/redux/Slice/AddPlantSlice";
+// import {
+//   FuncAddNewDataPlants,
+//   PostDataPlantsNew,
+// } from "../../../../libs/redux/Slice/AddPlantSlice";
+// belum menambahkan import buat edit
 
 export default function Finishing() {
   const { dataPlantNew, PostDataMessageSuccess, PostDataMessageLoading } =
-    useSelector((state) => state.addplant);
+    useSelector((state) => state.editplant);
   const dispatch = useDispatch();
   function handleClickPrev() {
     dispatch(FuncPrevStep());
@@ -31,8 +32,8 @@ export default function Finishing() {
     e.preventDefault();
     try {
       if (dataPlantNew) {
-        const DataPlantNews = {
-          ...dataPlantNew,
+        const DataPlantEdits = {
+          ...dataPlantEdit,
         };
         dispatch(PostDataPlantsNew(DataPlantNews));
       }
@@ -45,6 +46,7 @@ export default function Finishing() {
     if (PostDataMessageSuccess) {
       if (PostDataMessageSuccess.status === "success") {
         dispatch(FuncFinishAddPlant(true));
+        // belom keubah ke edit karena clueless
       }
     }
   }, [PostDataMessageSuccess]);

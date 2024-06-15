@@ -3,7 +3,8 @@ import { CiSearch } from "react-icons/ci";
 import { IoIosArrowDown } from "react-icons/io";
 import { motion } from "framer-motion";
 import { useDispatch, useSelector } from "react-redux";
-import { FuncPlantInformationInput } from "../../../../../../libs/redux/Slice/AddPlantSlice";
+// import { FuncPlantInformationInput } from "../../../../../../libs/redux/Slice/AddPlantSlice";
+import { FuncPlantInformationInputEdit } from "../../../../../../libs/redux/Slice/EditPlantSlice";
 import {
   getPlantCategories,
   GetPlantCAtegoriesById,
@@ -20,8 +21,8 @@ const variants = {
   },
 };
 export default function Plant_Category() {
-  const { PlantInformationInput, dataPlantNew } = useSelector(
-    (state) => state.addplant
+  const { PlantInformationInputEdit, dataPlantEdit } = useSelector(
+    (state) => state.editplant
   );
   const [inputValue, inputValueSet] = useState("");
   const [chooseCategory, chooseCategorySet] = useState("");
@@ -35,15 +36,15 @@ export default function Plant_Category() {
     });
   }, []);
   useEffect(() => {
-    if (PlantInformationInput.plant_category_id !== 0) {
+    if (PlantInformationInputEdit.plant_category_id !== 0) {
       GetPlantCAtegoriesById(
-        PlantInformationInput.plant_category_id,
+        PlantInformationInputEdit.plant_category_id,
         (items) => {
           chooseCategorySet(items.name);
         }
       );
     }
-  }, [PlantInformationInput.plant_category_id]);
+  }, [PlantInformationInputEdit.plant_category_id]);
   return (
     <section className="basis-[23%] w-full">
       <label htmlFor="" className="font-nunito-bold text-sm pb-1">
@@ -87,7 +88,7 @@ export default function Plant_Category() {
                   onClick={() => {
                     setOpen(false);
                     dispatch(
-                      FuncPlantInformationInput({
+                      FuncPlantInformationInputEdit({
                         name: "plant_category_id",
                         value: items.id,
                       })

@@ -3,7 +3,8 @@ import { CiSearch } from "react-icons/ci";
 import { IoIosArrowDown } from "react-icons/io";
 import { motion } from "framer-motion";
 import { useDispatch, useSelector } from "react-redux";
-import { FuncPlantInformationInput } from "../../../../../../libs/redux/Slice/AddPlantSlice";
+// import { FuncPlantInformationInput } from "../../../../../../libs/redux/Slice/AddPlantSlice";
+import { FuncPlantInformationInputEdit } from "../../../../../../libs/redux/Slice/EditPlantSlice";
 
 const variants = {
   hidden: {
@@ -16,8 +17,8 @@ const variants = {
   },
 };
 export default function Climate_Condition() {
-  const { PlantInformationInput, dataPlantNew } = useSelector(
-    (state) => state.addplant
+  const { PlantInformationInputEdit, dataPlantEdit } = useSelector(
+    (state) => state.editplant
   );
   const [open, setOpen] = useState(false);
   const arrDataClimateCondition = ["Dry", "Wet"];
@@ -34,8 +35,8 @@ export default function Climate_Condition() {
           onClick={() => setOpen(!open)}
         >
           <p>
-            {PlantInformationInput.climate_condition
-              ? `${PlantInformationInput.climate_condition}`
+            {PlantInformationInputEdit.climate_condition
+              ? `${PlantInformationInputEdit.climate_condition}`
               : "Conditions"}
           </p>
           <IoIosArrowDown />
@@ -54,7 +55,7 @@ export default function Climate_Condition() {
                 className="w-full px-3 group py-[14px] hover:bg-emerald-500"
                 onClick={() => {
                   dispatch(
-                    FuncPlantInformationInput({
+                    FuncPlantInformationInputEdit({
                       name: "climate_condition",
                       value: items,
                     })

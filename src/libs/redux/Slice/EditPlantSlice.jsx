@@ -75,6 +75,30 @@ export const EditPlantSlice = createSlice({
     FuncPlantingInstructionsEdit: (state, action) => {
       state.dataPlantEdit[action.payload.name] = action.payload;
     },
+    FuncDeleteImagePlantInformationEdit: (state, action) => {
+      state.dataPlantEdit.plant_images =
+        state.dataPlantEdit.plant_images.filter(
+          (items) => items.file_name !== action.payload.filename
+        );
+    },
+    FuncPlantInformationInputImageEdit: (state, action) => {
+      if (!state.dataPlantEdit.plant_images.length) {
+        state.dataPlantEdit.plant_images = [action.payload.value];
+      } else {
+        const findIndex = state.dataPlantEdit.plant_images.findIndex(
+          (items) => items.file_name === action.payload.imagePrev
+        );
+        if (findIndex >= 0) {
+          state.dataPlantEdit.plant_images[findIndex] =
+            action.payload.value;
+        } else {
+          state.dataPlantEdit.plant_images = [
+            ...state.dataPlantEdit.plant_images,
+            action.payload.value,
+          ];
+        }
+      }
+    },
   },
 });
 
@@ -88,5 +112,7 @@ export const {
   FuncEditInputPlantInformation,
   FuncPlantingInstructionsEdit,
   FuncEditDataPlants,
+  FuncDeleteImagePlantInformationEdit,
+  FuncPlantInformationInputImageEdit,
 } = EditPlantSlice.actions;
 export default EditPlantSlice.reducer;

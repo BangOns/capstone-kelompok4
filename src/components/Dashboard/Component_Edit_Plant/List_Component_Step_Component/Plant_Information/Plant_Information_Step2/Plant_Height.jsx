@@ -1,18 +1,19 @@
 import React, { useState } from "react";
 import { FiMinus, FiPlus } from "react-icons/fi";
 import { useDispatch, useSelector } from "react-redux";
-import { FuncPlantCharateristic } from "../../../../../../libs/redux/Slice/AddPlantSlice";
+// import { FuncPlantCharateristic } from "../../../../../../libs/redux/Slice/AddPlantSlice";
+import { FuncPlantCharateristicEdit } from "../../../../../../libs/redux/Slice/EditPlantSlice";
 
 export default function Plant_Height() {
-  const { plant_characteristic } = useSelector(
-    (state) => state.addplant.PlantInformationInput
+  const { plant_characteristicEdit } = useSelector(
+    (state) => state.editplant.PlantInformationInputEdit
   );
   const dispatch = useDispatch();
   function handleCountPlus() {
-    dispatch(FuncPlantCharateristic({ operatorHeight: "plus" }));
+    dispatch(FuncPlantCharateristicEdit({ operatorHeight: "plus" }));
   }
   function handleCountMinus() {
-    dispatch(FuncPlantCharateristic({ operatorHeight: "minus" }));
+    dispatch(FuncPlantCharateristicEdit({ operatorHeight: "minus" }));
   }
   return (
     <div className="w-[211px] xl:w-1/2 ">
@@ -28,7 +29,7 @@ export default function Plant_Height() {
           className="text-center outline-none border-0"
           onChange={(e) => {
             dispatch(
-              FuncPlantCharateristic({
+              FuncPlantCharateristicEdit({
                 name: "height",
                 value: parseInt(e.target.value),
               })

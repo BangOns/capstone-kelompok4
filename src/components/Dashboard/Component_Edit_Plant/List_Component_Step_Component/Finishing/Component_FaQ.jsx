@@ -6,7 +6,7 @@ import { FuncToIndex } from "../../../../../libs/redux/Slice/DashboardSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 export default function Component_FaQ() {
-  const { dataPlantNew } = useSelector((state) => state.addplant);
+  const { dataPlantEdit } = useSelector((state) => state.editplant);
   const dispatch = useDispatch();
   return (
     <section className="-full mt-6">

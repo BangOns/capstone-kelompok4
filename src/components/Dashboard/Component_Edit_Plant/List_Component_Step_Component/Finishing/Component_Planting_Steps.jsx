@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 export default function Component_Planting_Steps() {
   const dispatch = useDispatch();
-  const { dataPlantNew } = useSelector((state) => state.addplant);
+  const { dataPlantEdit } = useSelector((state) => state.editplant);
   return (
     <section className="w-full mt-6">
       <header className="w-full py-[12.5px] flex justify-between">

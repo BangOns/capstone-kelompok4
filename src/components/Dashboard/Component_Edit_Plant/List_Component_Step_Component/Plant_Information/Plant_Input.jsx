@@ -4,12 +4,13 @@ import Harvest_Duration from "./Select_Option/Harvest_Duration";
 import Climate_Condition from "./Select_Option/Climate_Condition";
 import Plant_Category from "./Select_Option/Plant_Category";
 import { useDispatch, useSelector } from "react-redux";
-import { FuncPlantInformationInput } from "../../../../../libs/redux/Slice/AddPlantSlice";
+// import { FuncPlantInformationInput } from "../../../../../libs/redux/Slice/AddPlantSlice";
+import { FuncPlantInformationInputEdit } from "../../../../../libs/redux/Slice/EditPlantSlice";
 import { FuncMessageErrorPlantName } from "../../../../../libs/redux/Slice/DashboardSlice";
 export default function Plant_Input() {
   const dispatch = useDispatch();
-  const { PlantInformationInput, dataPlantNew } = useSelector(
-    (state) => state.addplant
+  const { PlantInformationInputEdit, dataPlantEdit } = useSelector(
+    (state) => state.editplant
   );
   const { messageErrorPlantName } = useSelector((state) => state.dashboard);
   const [errorName, errorNameSet] = useState(false);
@@ -19,7 +20,7 @@ export default function Plant_Input() {
       dispatch(FuncMessageErrorPlantName(false));
     }
     dispatch(
-      FuncPlantInformationInput({
+      FuncPlantInformationInputEdit({
         name: "name",
         value: e.target.value,
       })
@@ -39,7 +40,7 @@ export default function Plant_Input() {
         >
           <input
             type="text"
-            value={PlantInformationInput.name || ""}
+            value={PlantInformationInputEdit.name || ""}
             placeholder="Plant name - Family name"
             className="w-full border-0 focus:ring-0 outline-none text-base font-nunito"
             onChange={validateName}

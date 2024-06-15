@@ -2,25 +2,26 @@ import { IconsImport } from "@/utils/IconsImport";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  FuncDeleteImagePlantInformation,
-  FuncPlantInformationInputImage,
-} from "../../../../../libs/redux/Slice/AddPlantSlice";
+// import {
+//   FuncDeleteImagePlantInformation,
+//   FuncPlantInformationInputImage,
+// } from "../../../../../libs/redux/Slice/AddPlantSlice";
+import { FuncDeleteImagePlantInformationEdit, FuncPlantInformationInputImageEdit } from "../../../../../libs/redux/Slice/EditPlantSlice";
 import PlantInformation from "../../../Component_ManagePlant/Table-Plant/PlantInformation";
 
 export default function Upload_Image_Child_Plant({ ids }) {
-  const { PlantInformationInput } = useSelector((state) => state.addplant);
+  const { PlantInformationInputEdit } = useSelector((state) => state.editplant);
   const [imageChild, imageChildSet] = useState("");
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (PlantInformationInput.plant_images.length !== 0) {
-      const dataFilter = PlantInformationInput.plant_images
+    if (PlantInformationInputEdit.plant_images.length !== 0) {
+      const dataFilter = PlantInformationInputEdit.plant_images
         .filter((items) => items.is_primary !== 1)
         .find(
           (items) =>
             items.file_name ===
-            PlantInformationInput.plant_images[ids]?.file_name
+            PlantInformationInputEdit.plant_images[ids]?.file_name
         );
       if (dataFilter) {
         imageChildSet(dataFilter.file_name);
@@ -34,7 +35,7 @@ export default function Upload_Image_Child_Plant({ ids }) {
     const { files } = e.target;
     const imgUrl = URL.createObjectURL(files[0]);
     dispatch(
-      FuncPlantInformationInputImage({
+      FuncPlantInformationInputImageEdit({
         imagePrev: imageChild ? imageChild : "",
         value: {
           file_name: imgUrl,
@@ -81,7 +82,7 @@ export default function Upload_Image_Child_Plant({ ids }) {
               className="hidden group-hover:block cursor-pointer   hover:bg-slate-400/50 hover:p-2 hover:rounded-full transition-all"
               onClick={() => {
                 dispatch(
-                  FuncDeleteImagePlantInformation({ filename: imageChild })
+                  FuncDeleteImagePlantInformationEdit({ filename: imageChild })
                 );
 
                 imageChildSet("");

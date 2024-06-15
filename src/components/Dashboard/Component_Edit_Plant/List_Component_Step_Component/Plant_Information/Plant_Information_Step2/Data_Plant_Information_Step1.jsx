@@ -7,12 +7,12 @@ import { GetPlantCAtegoriesById } from "../../../../../../utils/Function-FetchAP
 export default function Data_Plant_Information_Step1() {
   const [imageThumb, imageThumbSet] = useState("");
   const [chooseCategory, chooseCategorySet] = useState("");
-  const { PlantInformationInput } = useSelector((state) => state.addplant);
-  const plantName = PlantInformationInput.name.split("-")[0];
-  const FamilyName = PlantInformationInput.name.split("-")[1];
+  const { PlantInformationInputEdit } = useSelector((state) => state.addplant);
+  const plantName = PlantInformationInputEdit.name.split("-")[0];
+  const FamilyName = PlantInformationInputEdit.name.split("-")[1];
   const GetImageThumbnails =
-    PlantInformationInput.plant_images.length !== 0
-      ? PlantInformationInput.plant_images.filter(
+    PlantInformationInputEdit.plant_images.length !== 0
+      ? PlantInformationInputEdit.plant_images.filter(
           (items) => items.is_primary === 1
         )
       : [];
@@ -21,17 +21,17 @@ export default function Data_Plant_Information_Step1() {
     if (GetImageThumbnails.length !== 0) {
       imageThumbSet(GetImageThumbnails[0].file_name);
     }
-  }, [GetImageThumbnails, PlantInformationInput]);
+  }, [GetImageThumbnails, PlantInformationInputEdit]);
   useEffect(() => {
-    if (PlantInformationInput.plant_category_id !== 0) {
+    if (PlantInformationInputEdit.plant_category_id !== 0) {
       GetPlantCAtegoriesById(
-        PlantInformationInput.plant_category_id,
+        PlantInformationInputEdit.plant_category_id,
         (items) => {
           chooseCategorySet(items.name);
         }
       );
     }
-  }, [PlantInformationInput.plant_category_id]);
+  }, [PlantInformationInputEdit.plant_category_id]);
   return (
     <section className="w-full p-4 border-slate-200 border rounded-[10px] flex gap-6">
       <article className="flex  gap-4 items-center">

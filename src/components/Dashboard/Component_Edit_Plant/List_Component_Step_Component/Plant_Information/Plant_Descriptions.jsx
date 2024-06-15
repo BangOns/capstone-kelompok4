@@ -1,12 +1,13 @@
 import dynamic from "next/dynamic";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { FuncPlantInformationInput } from "../../../../../libs/redux/Slice/AddPlantSlice";
+// import { FuncPlantInformationInput } from "../../../../../libs/redux/Slice/AddPlantSlice";
+import { FuncPlantInformationInputEdit } from "../../../../../libs/redux/Slice/EditPlantSlice";
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 
 export default function Plant_Descriptions({ value, setValue }) {
-  const { PlantInformationInput, dataPlantNew } = useSelector(
-    (state) => state.addplant
+  const { PlantInformationInputEdit, dataPlantEdit } = useSelector(
+    (state) => state.editplant
   );
   const dispatch = useDispatch();
 
@@ -25,7 +26,7 @@ export default function Plant_Descriptions({ value, setValue }) {
           placeholder="Description..."
           onChange={(e) =>
             dispatch(
-              FuncPlantInformationInput({
+              FuncPlantInformationInputEdit({
                 name: "description",
                 value: e,
               })

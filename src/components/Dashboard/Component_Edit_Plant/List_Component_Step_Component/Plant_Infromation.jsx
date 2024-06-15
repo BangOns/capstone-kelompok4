@@ -16,34 +16,35 @@ import {
   FuncMessagePlantError,
   FuncPlantInformationStep2,
 } from "../../../../libs/redux/Slice/DashboardSlice";
-import { FuncAddInputPlantInformation } from "../../../../libs/redux/Slice/AddPlantSlice";
+import { FuncEditInputPlantInformation, FuncPlantInformationInputEdit } from "../../../../libs/redux/Slice/EditPlantSlice";
+// import { FuncAddInputPlantInformation } from "../../../../libs/redux/Slice/AddPlantSlice";
 import Upload_Image_Plant from "./Plant_Information/Upload_Image_Plant";
 import { ValidateInformation } from "../../../../utils/Validate_AddPlant/Validate_PlantInformation";
 export default function Plant_Infromation() {
   const dispatch = useDispatch();
   const { plantInformationStep2 } = useSelector((state) => state.dashboard);
-  const { PlantInformationInput, dataPlantNew } = useSelector(
-    (state) => state.addplant
+  const { PlantInformationInputEdit, dataPlantEdit } = useSelector(
+    (state) => state.editplant
   );
   const [value, setValue] = useState("");
 
   const regex = /^[^-]+-[^-]+$/;
 
   function handleClickNext() {
-    const checkValidate = ValidateInformation(PlantInformationInput);
-    if (!checkValidate || !regex.test(PlantInformationInput.name)) {
-      if (!regex.test(PlantInformationInput.name)) {
+    const checkValidate = ValidateInformation(PlantInformationInputEdit);
+    if (!checkValidate || !regex.test(PlantInformationInputEdit.name)) {
+      if (!regex.test(PlantInformationInputEdit.name)) {
         dispatch(FuncMessageErrorPlantName(true));
       }
       dispatch(FuncMessagePlantError(true));
     } else {
       const dataInPlantInformation = {
-        ...PlantInformationInput,
+        ...PlantInformationInputEdit,
       };
 
       dispatch(
-        FuncAddInputPlantInformation({
-          ...dataPlantNew,
+        FuncEditInputPlantInformation({
+          ...dataPlantEdit,
           ...dataInPlantInformation,
         })
       );

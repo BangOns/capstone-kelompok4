@@ -3,7 +3,8 @@ import { CiSearch } from "react-icons/ci";
 import { IoIosArrowDown } from "react-icons/io";
 import { motion } from "framer-motion";
 import { useDispatch, useSelector } from "react-redux";
-import { FuncPlantInformationInput } from "../../../../../../libs/redux/Slice/AddPlantSlice";
+// import { FuncPlantInformationInput } from "../../../../../../libs/redux/Slice/AddPlantSlice";
+import { FuncPlantInformationInputEdit } from "../../../../../../libs/redux/Slice/EditPlantSlice";
 
 const variants = {
   hidden: {
@@ -16,7 +17,7 @@ const variants = {
   },
 };
 export default function Harvest_Duration() {
-  const { PlantInformationInput } = useSelector((state) => state.addplant);
+  const { PlantInformationInputEdit } = useSelector((state) => state.editplant);
   const [open, setOpen] = useState(false);
   const arrDataHarvestDuration = [
     "1 Month",
@@ -38,8 +39,8 @@ export default function Harvest_Duration() {
           onClick={() => setOpen(!open)}
         >
           <p>
-            {PlantInformationInput.harvest_duration
-              ? `${PlantInformationInput.harvest_duration} month`
+            {PlantInformationInputEdit.harvest_duration
+              ? `${PlantInformationInputEdit.harvest_duration} month`
               : "Month"}
           </p>
           <IoIosArrowDown />
@@ -58,7 +59,7 @@ export default function Harvest_Duration() {
                 className="w-full px-3 group py-[14px] hover:bg-emerald-500"
                 onClick={() => {
                   dispatch(
-                    FuncPlantInformationInput({
+                    FuncPlantInformationInputEdit({
                       name: "harvest_duration",
                       value: parseInt(items.split(" ")[0]),
                     })

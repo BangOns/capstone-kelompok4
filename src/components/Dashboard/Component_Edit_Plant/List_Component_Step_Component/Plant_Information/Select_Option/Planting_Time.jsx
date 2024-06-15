@@ -3,7 +3,8 @@ import { CiSearch } from "react-icons/ci";
 import { IoIosArrowDown } from "react-icons/io";
 import { motion } from "framer-motion";
 import { useDispatch, useSelector } from "react-redux";
-import { FuncPlantInformationInput } from "../../../../../../libs/redux/Slice/AddPlantSlice";
+// import { FuncPlantInformationInput } from "../../../../../../libs/redux/Slice/AddPlantSlice";
+import { FuncPlantInformationInputEdit } from "../../../../../../libs/redux/Slice/EditPlantSlice";
 
 const variants = {
   hidden: {
@@ -16,8 +17,8 @@ const variants = {
   },
 };
 export default function Planting_Time() {
-  const { PlantInformationInput, dataPlantNew } = useSelector(
-    (state) => state.addplant
+  const { PlantInformationInputEdit, dataPlantEdit } = useSelector(
+    (state) => state.editplant
   );
   const [open, setOpen] = useState(false);
   const arrDataPlantingTime = ["Summer", "Autumn", "Spring", "Winter"];
@@ -34,8 +35,8 @@ export default function Planting_Time() {
           onClick={() => setOpen(!open)}
         >
           <p>
-            {PlantInformationInput.planting_time
-              ? `${PlantInformationInput.planting_time}`
+            {PlantInformationInputEdit.planting_time
+              ? `${PlantInformationInputEdit.planting_time}`
               : "Conditions"}
           </p>
           <IoIosArrowDown />
@@ -55,7 +56,7 @@ export default function Planting_Time() {
                 onClick={() => {
                   setOpen(false);
                   dispatch(
-                    FuncPlantInformationInput({
+                    FuncPlantInformationInputEdit({
                       name: "planting_time",
                       value: items,
                     })

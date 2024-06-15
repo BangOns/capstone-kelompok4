@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import { IoIosArrowDown } from "react-icons/io";
 import { motion } from "framer-motion";
 import { useDispatch, useSelector } from "react-redux";
-import { FuncPlantCharateristic } from "../../../../../../libs/redux/Slice/AddPlantSlice";
+// import { FuncPlantCharateristic } from "../../../../../../libs/redux/Slice/AddPlantSlice";
+import { FuncPlantCharateristicEdit } from "../../../../../../libs/redux/Slice/EditPlantSlice";
 const variants = {
   hidden: {
     opacity: 0,
@@ -14,8 +15,8 @@ const variants = {
   },
 };
 export default function Unit() {
-  const { plant_characteristic } = useSelector(
-    (state) => state.addplant.PlantInformationInput
+  const { plant_characteristicEdit } = useSelector(
+    (state) => state.editplant.PlantInformationInputEdit
   );
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
@@ -31,8 +32,8 @@ export default function Unit() {
           onClick={() => setOpen(!open)}
         >
           <p>
-            {plant_characteristic.height_unit
-              ? `${plant_characteristic.height_unit}`
+            {plant_characteristicEdit.height_unit
+              ? `${plant_characteristicEdit.height_unit}`
               : "Unit..."}
           </p>
           <IoIosArrowDown />
@@ -52,7 +53,7 @@ export default function Unit() {
                 onClick={() => {
                   setOpen(false);
                   dispatch(
-                    FuncPlantCharateristic({
+                    FuncPlantCharateristicEdit({
                       name: "height_unit",
                       value: items,
                     })

@@ -9,6 +9,7 @@ import { AddPlantsProvider } from "@/hook/add-plants-providers";
 
 export default function List_Component_Step({ pages }) {
   return (
+    // blm ganti provider ke edit
     <AddPlantsProvider>
       {pages === 1 && <Plant_Infromation />}
       {pages === 2 && <Reminder_Settings />}
