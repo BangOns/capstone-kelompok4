@@ -43,6 +43,7 @@ const Reminder_Settings = () => {
         ...ReminderSettingsInput,
         watering_schedule: {
           ...ReminderSettingsInput.watering_schedule,
+
           weather_condition: ConvertWeatherConditionsToString,
           condition_description: ConvertConditionDescriptionToString,
         },

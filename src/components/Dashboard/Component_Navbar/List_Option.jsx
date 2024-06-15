@@ -5,8 +5,12 @@ import IconsMaximize from "@/utils/Component-Icons-Navbar/IconsMaximize";
 import IconsSettings from "@/utils/Component-Icons-Navbar/IconsSettings";
 import IconsSignOut from "@/utils/Component-Icons-Navbar/IconsSignOut";
 import React, { useState } from "react";
+// Almas
+import Cookies from "js-cookie";
+import { useRouter } from "next/navigation";
 
 export default function List_Option({ isMinimized, toggleMinimize }) {
+  const router = useRouter();
   const [linkHover, linkHoverSet] = useState("");
 
   return (
@@ -61,6 +65,10 @@ export default function List_Option({ isMinimized, toggleMinimize }) {
           className="w-full flex gap-2 items-start"
           onMouseMove={() => linkHoverSet("signout")}
           onMouseLeave={() => linkHoverSet("")}
+          onClick={() => {
+            Cookies.remove("token", { path: "/" });
+            router.push("/");
+          }}
         >
           <IconsSignOut active={linkHover.includes("signout")} />
           {!isMinimized && (
