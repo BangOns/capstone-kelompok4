@@ -6,7 +6,7 @@ import {
   FuncDeleteImagePlantInformation,
   FuncPlantInformationInputImage,
 } from "../../../../../libs/redux/Slice/AddPlantSlice";
-import PlantInformation from "../../../Component_ManagePlant/Table-Plant/PlantInformation";
+import { FuncMessagePlantError } from "../../../../../libs/redux/Slice/DashboardSlice";
 
 export default function Upload_Image_Child_Plant({ ids }) {
   const { PlantInformationInput } = useSelector((state) => state.addplant);
@@ -32,17 +32,22 @@ export default function Upload_Image_Child_Plant({ ids }) {
   function handleChangeFileThumbnails(e) {
     e.preventDefault();
     const { files } = e.target;
-    const imgUrl = URL.createObjectURL(files[0]);
-    dispatch(
-      FuncPlantInformationInputImage({
-        imagePrev: imageChild ? imageChild : "",
-        value: {
-          file_name: imgUrl,
-          is_primary: 0,
-        },
-      })
-    );
-    imageChildSet(imgUrl);
+    const fileSizeMB = files[0].size / (1024 * 1024);
+    if (fileSizeMB > 2) {
+      dispatch(FuncMessagePlantError(true));
+    } else {
+      const imgUrl = URL.createObjectURL(files[0]);
+      dispatch(
+        FuncPlantInformationInputImage({
+          imagePrev: imageChild ? imageChild : "",
+          value: {
+            file_name: imgUrl,
+            is_primary: 0,
+          },
+        })
+      );
+      imageChildSet(imgUrl);
+    }
   }
 
   return (
