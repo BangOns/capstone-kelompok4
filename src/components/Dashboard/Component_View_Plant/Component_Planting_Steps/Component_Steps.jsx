@@ -32,8 +32,8 @@ export default function Component_Steps({ dataPlantsStep }) {
             <Image
               src={
                 dataPlantsStep.step_image_url
-                  ? ImageImport.ImagePlants
-                  : dataPlantsStep.step_image_url
+                  ? dataPlantsStep.step_image_url
+                  : ImageImport.ImagePlants
               }
               width={60}
               height={60}
