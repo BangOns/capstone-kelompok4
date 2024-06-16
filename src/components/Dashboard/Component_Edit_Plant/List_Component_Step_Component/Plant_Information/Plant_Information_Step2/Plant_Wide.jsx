@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { FuncPlantCharateristicEdit } from "../../../../../../libs/redux/Slice/EditPlantSlice";
 
 export default function Plant_Wide() {
-  const { plant_characteristicEdit } = useSelector(
+  const { plant_characteristic } = useSelector(
     (state) => state.editplant.PlantInformationInputEdit
   );
   const dispatch = useDispatch();
