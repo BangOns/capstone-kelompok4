@@ -5,18 +5,26 @@ import { IconsImport } from "@/utils/IconsImport";
 import TablePlantInformation from "./PlantInformation";
 import { useDispatch, useSelector } from "react-redux";
 import Loading_Table from "../../../../utils/Component-Loading/Loading_Table";
-import { FetchDataAllPlants } from "../../../../libs/redux/Slice/AddPlantSlice";
 import { FetchDataTable } from "../../../../utils/Function-FetchAPI/GetDataAllTable";
 
 export default function TablePlant() {
   const { indexStepTable } = useSelector((state) => state.dashboard);
   const [dataAllPlantsWithAPI, dataAllPlantsWithAPISet] = useState([]);
 
+  function HandleSortDataTable(nameSort) {
+    if (nameSort === "plantName") {
+      const sortPlantName = [...dataAllPlantsWithAPI].sort((a, b) =>
+        a.name.localeCompare(b.name)
+      );
+      dataAllPlantsWithAPISet(sortPlantName);
+    }
+  }
   useEffect(() => {
     FetchDataTable(indexStepTable, (items) => {
-      dataAllPlantsWithAPISet(items);
+      dataAllPlantsWithAPISet(items?.plants);
     });
   }, [indexStepTable]);
+
   return (
     <table className="table border ">
       {/* head */}
@@ -28,7 +36,9 @@ export default function TablePlant() {
             <Image
               src={IconsImport.IconsDropdown}
               alt="dropdown"
+              disabled={!dataAllPlantsWithAPI ? true : false}
               className="cursor-pointer"
+              onClick={() => HandleSortDataTable("plantName")}
             />
           </th>
           <th>
@@ -58,8 +68,8 @@ export default function TablePlant() {
         </tr>
       </thead>
       <tbody>
-        {dataAllPlantsWithAPI?.plants ? (
-          dataAllPlantsWithAPI.plants?.map((items, index) => (
+        {dataAllPlantsWithAPI?.length !== 0 ? (
+          dataAllPlantsWithAPI?.map((items, index) => (
             <TablePlantInformation key={index} dataPlant={items} />
           ))
         ) : (

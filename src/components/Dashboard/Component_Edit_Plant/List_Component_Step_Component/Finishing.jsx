@@ -15,35 +15,27 @@ import {
   FuncPrevStep,
 } from "../../../../libs/redux/Slice/DashboardSlice";
 import Message_Error from "../../../Component_Message/Message_Error";
-import {
-  FuncAddNewDataPlants,
-  PostDataPlantsNew,
-} from "../../../../libs/redux/Slice/AddPlantSlice";
+// import {
+//   FuncAddNewDataPlants,
+//   PostDataPlantsNew,
+// } from "../../../../libs/redux/Slice/AddPlantSlice";
+// belum menambahkan import buat edit
 
 export default function Finishing() {
   const { dataPlantNew, PostDataMessageSuccess, PostDataMessageLoading } =
-    useSelector((state) => state.addplant);
+    useSelector((state) => state.editplant);
   const dispatch = useDispatch();
-  const getCookie = (name) => {
-    const cookieValue = document.cookie.match(
-      "(^|;)\\s*" + name + "\\s*=\\s*([^;]+)"
-    );
-    return cookieValue ? cookieValue.pop() : "";
-  };
   function handleClickPrev() {
     dispatch(FuncPrevStep());
   }
   async function handleClickNext(e) {
     e.preventDefault();
     try {
-      const token = getCookie("token");
-      if (!token) {
-        dispatch(FuncMessagePlantError(true));
-      } else {
-        const DataPlantNews = {
-          ...dataPlantNew,
+      if (dataPlantNew) {
+        const DataPlantEdits = {
+          ...dataPlantEdit,
         };
-        dispatch(PostDataPlantsNew({ data: DataPlantNews, token }));
+        dispatch(PostDataPlantsNew(DataPlantNews));
       }
     } catch (error) {
       console.log(error);
@@ -54,6 +46,7 @@ export default function Finishing() {
     if (PostDataMessageSuccess) {
       if (PostDataMessageSuccess.status === "success") {
         dispatch(FuncFinishAddPlant(true));
+        // belom keubah ke edit karena clueless
       }
     }
   }, [PostDataMessageSuccess]);
@@ -82,7 +75,9 @@ export default function Finishing() {
         </div>
       </article>
       <Message_Error
-        message={"Uh oh! There wan an error while fetching data"}
+        message={
+          "Uh oh! You need to fill out the data first before move on to next step~"
+        }
       />
     </Fragment>
   );

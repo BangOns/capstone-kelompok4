@@ -2,41 +2,37 @@ import { IconsImport } from "@/utils/IconsImport";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  FuncDeleteImagePlantInformation,
-  FuncPlantInformationInputImage,
-} from "../../../../../libs/redux/Slice/AddPlantSlice";
-import { FuncMessagePlantError } from "../../../../../libs/redux/Slice/DashboardSlice";
+// import {
+//   FuncDeleteImagePlantInformation,
+//   FuncPlantInformationInputImage,
+// } from "../../../../../libs/redux/Slice/AddPlantSlice";
+import { FuncDeleteImagePlantInformationEdit, FuncPlantInformationInputImageEdit } from "../../../../../libs/redux/Slice/EditPlantSlice";
 
 export default function Upload_Image_Plant() {
-  const { PlantInformationInput } = useSelector((state) => state.addplant);
+  const { PlantInformationInputEdit } = useSelector((state) => state.editplant);
   const dispatch = useDispatch();
   const GetImageThumbnails =
-    PlantInformationInput.plant_images.length !== 0
-      ? PlantInformationInput.plant_images.filter(
+    PlantInformationInputEdit.plant_images.length !== 0
+      ? PlantInformationInputEdit.plant_images.filter(
           (items) => items.is_primary === 1
         )
       : [];
   const [imageThumb, imageThumbSet] = useState("");
   function handleChangeFileThumbnails(e) {
     const { files } = e.target;
-    const fileSizeMB = files[0].size / (1024 * 1024);
-    if (fileSizeMB > 2) {
-      dispatch(FuncMessagePlantError(true));
-    } else {
-      const imgUrl = URL.createObjectURL(files[0]);
-      dispatch(
-        FuncPlantInformationInputImage({
-          imagePrev: imageThumb ? imageThumb : "",
-          value: {
-            file_name: imgUrl,
-            is_primary: 1,
-          },
-        })
-      );
+    const imgUrl = URL.createObjectURL(files[0]);
 
-      imageThumbSet(URL.createObjectURL(files[0]));
-    }
+    dispatch(
+      FuncPlantInformationInputImageEdit({
+        imagePrev: imageThumb ? imageThumb : "",
+        value: {
+          file_name: imgUrl,
+          is_primary: 1,
+        },
+      })
+    );
+
+    imageThumbSet(URL.createObjectURL(files[0]));
   }
   useEffect(() => {
     if (GetImageThumbnails.length !== 0) {
@@ -79,7 +75,7 @@ export default function Upload_Image_Plant() {
               className="hidden group-hover:block cursor-pointer   hover:bg-slate-400/50 hover:p-2 hover:rounded-full transition-all"
               onClick={() => {
                 dispatch(
-                  FuncDeleteImagePlantInformation({
+                  FuncDeleteImagePlantInformationEdit({
                     is_primary: 1,
                     filename: imageThumb,
                   })

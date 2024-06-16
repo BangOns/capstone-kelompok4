@@ -14,11 +14,12 @@ import NextButtonPlant from "../../Component_Buttons/next_buton_plant";
 import Message_Error from "../../../../Component_Message/Message_Error";
 import WF_Form from "./WF_Form";
 import CWC_Form from "./CWC_Form";
-import { FuncAddInputPlantInformation } from "@/libs/redux/Slice/AddPlantSlice";
+// import { FuncAddInputPlantInformation } from "@/libs/redux/Slice/AddPlantSlice";
+import { FuncEditInputPlantInformation } from "../../../../../libs/redux/Slice/EditPlantSlice";
 import { ValidateReminderSettings } from "../../../../../utils/Validate_AddPlant/Validate_ReminderSettings";
 
 const Reminder_Settings = () => {
-  const { ReminderSettingsInput, dataPlantNew } = useSelector(
+  const { ReminderSettingsInputEdit, dataPlantEdit } = useSelector(
     (state) => state.addplant
   );
   const dispatch = useDispatch();
@@ -29,29 +30,28 @@ const Reminder_Settings = () => {
 
   const handleClickNext = () => {
     const checkValidateReminderSettings = ValidateReminderSettings(
-      ReminderSettingsInput.watering_schedule
+      ReminderSettingsInputEdit.watering_schedule
     );
     if (!checkValidateReminderSettings) {
       dispatch(FuncMessagePlantError(true));
     } else {
       const ConvertWeatherConditionsToString =
-        ReminderSettingsInput.watering_schedule.weather_condition.join(",");
+        ReminderSettingsInputEdit.watering_schedule.weather_condition.join(",");
       const ConvertConditionDescriptionToString =
-        ReminderSettingsInput.watering_schedule.condition_description.join(",");
+        ReminderSettingsInputEdit.watering_schedule.condition_description.join(",");
 
-      const dataInputReminderSettings = {
-        ...ReminderSettingsInput,
+      const dataInputReminderSettingsEdit = {
+        ...ReminderSettingsInputEdit,
         watering_schedule: {
-          ...ReminderSettingsInput.watering_schedule,
-
+          ...ReminderSettingsInputEdit.watering_schedule,
           weather_condition: ConvertWeatherConditionsToString,
           condition_description: ConvertConditionDescriptionToString,
         },
       };
       dispatch(
-        FuncAddInputPlantInformation({
-          ...dataPlantNew,
-          ...dataInputReminderSettings,
+        FuncEditInputPlantInformation({
+          ...dataPlantEdit,
+          ...dataInputReminderSettingsEdit,
         })
       );
       dispatch(FuncNextStep());

@@ -5,63 +5,23 @@ import { useDispatch, useSelector } from "react-redux";
 import { IconsImport } from "../../../../utils/IconsImport";
 import Image from "next/image";
 import {
-  FuncDeletePlant,
-  FuncMessagePlantDelete,
-  FuncMessagePlantError,
+  FuncCancelAddPlant,
+  FuncToIndex,
 } from "../../../../libs/redux/Slice/DashboardSlice";
 import { useRouter } from "next/navigation";
-import { FuncDataAllPlants } from "../../../../libs/redux/Slice/AddPlantSlice";
-import axios from "axios";
 
 const variants = {
   hidden: { opacity: 0, scale: 0 },
   visible: { opacity: 1, scale: 1 },
 };
-export default function Alert_DeletePlant() {
+export default function Alert_CancelPlant() {
   const dispatch = useDispatch();
-  const { deletePlant, idToDeletePlant } = useSelector(
-    (state) => state.dashboard
-  );
-  async function DeletePlantById() {
-    try {
-      const token = getCookie("token");
-      if (!token) {
-        dispatch(FuncMessagePlantError(true));
-      } else {
-        const response = await axios.delete(
-          `${process.env.NEXT_PUBLIC_API_BASE_URL}/admin/plants/${idToDeletePlant}`,
-          {
-            headers: {
-              Authorization: `Bearer ${process.env.NEXT_PUBLIC_API_TOKEN_KEY}`,
-            },
-          }
-        );
-
-        if (response.status === 200) {
-          dispatch(FuncMessagePlantDelete(true));
-          dispatch(FuncDeletePlant(false));
-          window.location.reload();
-        } else {
-          dispatch(FuncMessagePlantError(true));
-          dispatch(FuncDeletePlant(false));
-        }
-      }
-    } catch (error) {
-      console.log(error);
-      dispatch(FuncMessagePlantError(true));
-      dispatch(FuncDeletePlant(false));
-    }
-  }
-  const getCookie = (name) => {
-    const cookieValue = document.cookie.match(
-      "(^|;)\\s*" + name + "\\s*=\\s*([^;]+)"
-    );
-    return cookieValue ? cookieValue.pop() : "";
-  };
+  const { cancelAddPlant } = useSelector((state) => state.dashboard);
+  const route = useRouter();
   return (
     <>
       <AnimatePresence>
-        {deletePlant && (
+        {cancelAddPlant && (
           <div className="absolute top-0 z-10 left-0 w-screen h-screen grid place-items-center">
             <motion.div
               variants={variants}
@@ -76,7 +36,7 @@ export default function Alert_DeletePlant() {
               </figure>
               <div className="mt-8">
                 <p className="text-center text-2xl font-nunito-bold">
-                  Are you sure you want to delete plant data?
+                  Are you sure you want to cancel adding plant data?
                 </p>
                 <p className="font-nunito text-center">
                   All of the information will be erased and cannot be restored
@@ -84,15 +44,17 @@ export default function Alert_DeletePlant() {
               </div>
               <div className="mt-8 font-nunito-bold flex w-full gap-2 justify-between">
                 <button
-                  onClick={() =>
-                    dispatch(FuncDeletePlant({ popUp: false, id: 0 }))
-                  }
+                  onClick={() => dispatch(FuncCancelAddPlant(false))}
                   className="basis-1/2 text-emerald-500 w-full p-[14px] rounded-md bg-white"
                 >
                   Cancel
                 </button>
                 <button
-                  onClick={DeletePlantById}
+                  onClick={() => {
+                    dispatch(FuncToIndex(1));
+                    dispatch(FuncCancelAddPlant(false));
+                    route.push("/dashboard/manage-plant");
+                  }}
                   className=" text-white basis-1/2 w-full p-[14px] rounded-md bg-red-500"
                 >
                   Delete
