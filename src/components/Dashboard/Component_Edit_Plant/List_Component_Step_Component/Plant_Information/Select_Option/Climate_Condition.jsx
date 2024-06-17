@@ -34,11 +34,13 @@ export default function Climate_Condition() {
           className="px-3 py-[14px] flex w-full justify-between items-center border rounded-lg cursor-pointer"
           onClick={() => setOpen(!open)}
         >
-          <p>
+          {/* <p>
             {PlantInformationInputEdit.climate_condition
               ? `${PlantInformationInputEdit.climate_condition}`
               : "Conditions"}
           </p>
+          
+          ga kepanggil climate_conditionnya*/}
           <IoIosArrowDown />
         </div>
         <motion.div

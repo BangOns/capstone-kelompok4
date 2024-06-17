@@ -40,7 +40,8 @@ export default function Plant_Input() {
         >
           <input
             type="text"
-            value={PlantInformationInputEdit.name || ""}
+            // value={PlantInformationInputEdit.name || ""}
+            // gabisa manggil .namenya
             placeholder="Plant name - Family name"
             className="w-full border-0 focus:ring-0 outline-none text-base font-nunito"
             onChange={validateName}

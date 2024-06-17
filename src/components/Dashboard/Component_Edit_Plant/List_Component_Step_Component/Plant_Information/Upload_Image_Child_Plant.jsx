@@ -14,22 +14,24 @@ export default function Upload_Image_Child_Plant({ ids }) {
   const [imageChild, imageChildSet] = useState("");
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    if (PlantInformationInputEdit.plant_images.length !== 0) {
-      const dataFilter = PlantInformationInputEdit.plant_images
-        .filter((items) => items.is_primary !== 1)
-        .find(
-          (items) =>
-            items.file_name ===
-            PlantInformationInputEdit.plant_images[ids]?.file_name
-        );
-      if (dataFilter) {
-        imageChildSet(dataFilter.file_name);
-      } else {
-        imageChildSet("");
-      }
-    }
-  }, [PlantInformationInput]);
+  // useEffect(() => {
+  //   if (PlantInformationInputEdit.plant_images.length !== 0) {
+  //     const dataFilter = PlantInformationInputEdit.plant_images
+  //       .filter((items) => items.is_primary !== 1)
+  //       .find(
+  //         (items) =>
+  //           items.file_name ===
+  //           PlantInformationInputEdit.plant_images[ids]?.file_name
+  //       );
+  //     if (dataFilter) {
+  //       imageChildSet(dataFilter.file_name);
+  //     } else {
+  //       imageChildSet("");
+  //     }
+  //   }
+  // }, [PlantInformationInputEdit]);
+
+  // ga kepanggil pllant images nya
   function handleChangeFileThumbnails(e) {
     e.preventDefault();
     const { files } = e.target;
@@ -98,7 +100,8 @@ export default function Upload_Image_Child_Plant({ ids }) {
           onClick={() =>
             document
               .getElementById(
-                `image-${PlantInformationInput.plant_images.length}`
+                // `image-${PlantInformationInputEdit.plant_images.length}`
+                // error di plant_images
               )
               .click()
           }
@@ -106,7 +109,9 @@ export default function Upload_Image_Child_Plant({ ids }) {
           <Image src={IconsImport.IconsImageUploadChildren} alt="uploadImage" />
           <input
             type="file"
-            id={`image-${PlantInformationInput.plant_images.length}`}
+            // id={`image-${PlantInformationInputEdit.plant_images.length}`}
+            // error di plant_images
+          
             accept="image/*"
             className="hidden"
             onChange={handleChangeFileThumbnails}

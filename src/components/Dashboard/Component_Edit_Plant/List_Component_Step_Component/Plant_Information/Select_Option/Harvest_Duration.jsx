@@ -39,9 +39,11 @@ export default function Harvest_Duration() {
           onClick={() => setOpen(!open)}
         >
           <p>
-            {PlantInformationInputEdit.harvest_duration
+            {/* {PlantInformationInputEdit.harvest_duration
               ? `${PlantInformationInputEdit.harvest_duration} month`
-              : "Month"}
+              : "Month"} */}
+
+            {/* harvest_duration ga kepanggil */}
           </p>
           <IoIosArrowDown />
         </div>

@@ -22,7 +22,8 @@ export default function Plant_Descriptions({ value, setValue }) {
         <ReactQuill
           className="w-full h-[180px]  flex-col-reverse flex  font-nunito z-10 "
           theme="snow"
-          value={PlantInformationInput.description || ""}
+          // value={PlantInformationInputEdit.description || ""}
+          // erroor di description
           placeholder="Description..."
           onChange={(e) =>
             dispatch(

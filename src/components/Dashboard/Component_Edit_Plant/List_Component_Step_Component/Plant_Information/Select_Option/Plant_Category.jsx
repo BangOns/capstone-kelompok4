@@ -35,16 +35,18 @@ export default function Plant_Category() {
       allPlantCategoriesSet(items);
     });
   }, []);
-  useEffect(() => {
-    if (PlantInformationInputEdit.plant_category_id !== 0) {
-      GetPlantCAtegoriesById(
-        PlantInformationInputEdit.plant_category_id,
-        (items) => {
-          chooseCategorySet(items.name);
-        }
-      );
-    }
-  }, [PlantInformationInputEdit.plant_category_id]);
+  // useEffect(() => {
+  //   if (PlantInformationInputEdit.plant_category_id !== 0) {
+  //     GetPlantCAtegoriesById(
+  //       PlantInformationInputEdit.plant_category_id,
+  //       (items) => {
+  //         chooseCategorySet(items.name);
+  //       }
+  //     );
+  //   }
+  // }, [PlantInformationInputEdit.plant_category_id]);
+
+  // plant_category_id ga kepanggil
   return (
     <section className="basis-[23%] w-full">
       <label htmlFor="" className="font-nunito-bold text-sm pb-1">

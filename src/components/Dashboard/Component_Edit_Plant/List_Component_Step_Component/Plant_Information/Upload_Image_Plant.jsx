@@ -12,11 +12,13 @@ export default function Upload_Image_Plant() {
   const { PlantInformationInputEdit } = useSelector((state) => state.editplant);
   const dispatch = useDispatch();
   const GetImageThumbnails =
-    PlantInformationInputEdit.plant_images.length !== 0
-      ? PlantInformationInputEdit.plant_images.filter(
-          (items) => items.is_primary === 1
-        )
-      : [];
+    // PlantInformationInputEdit.plant_images.length !== 0
+      // ? PlantInformationInputEdit.plant_images.filter(
+      //     (items) => items.is_primary === 1
+      //   ): 
+
+      // gabisa manggil plant_images
+      [];
   const [imageThumb, imageThumbSet] = useState("");
   function handleChangeFileThumbnails(e) {
     const { files } = e.target;

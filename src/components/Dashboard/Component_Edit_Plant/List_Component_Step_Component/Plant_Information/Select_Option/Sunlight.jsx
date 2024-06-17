@@ -34,11 +34,11 @@ export default function Sunlight() {
           className="px-3 py-[14px] flex w-full justify-between items-center border rounded-lg cursor-pointer"
           onClick={() => setOpen(!open)}
         >
-          <p>
+          {/* <p>
             {PlantInformationInputEdit.sunlight
               ? `${PlantInformationInputEdit.sunlight}`
               : "Conditions..."}
-          </p>
+          </p> ga kepanggil sunlightnya*/}
           <IoIosArrowDown />
         </div>
         <motion.div

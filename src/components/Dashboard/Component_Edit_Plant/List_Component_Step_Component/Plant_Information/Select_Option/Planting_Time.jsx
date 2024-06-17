@@ -34,11 +34,13 @@ export default function Planting_Time() {
           className="px-3 py-[14px] flex w-full justify-between items-center border rounded-lg cursor-pointer"
           onClick={() => setOpen(!open)}
         >
-          <p>
+          {/* <p>
             {PlantInformationInputEdit.planting_time
               ? `${PlantInformationInputEdit.planting_time}`
               : "Conditions"}
           </p>
+          
+          ga kepanggil planting timenya*/}
           <IoIosArrowDown />
         </div>
         <motion.div
