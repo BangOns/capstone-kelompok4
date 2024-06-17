@@ -16,37 +16,19 @@ import {
   FuncMessagePlantError,
   FuncPlantInformationStep2,
 } from "../../../../libs/redux/Slice/DashboardSlice";
-import { FuncEditInputPlantInformation } from "../../../../libs/redux/Slice/EditPlantSlice";
+import { FuncEditInputPlantInformation, FuncPlantInformationInputEdit } from "../../../../libs/redux/Slice/EditPlantSlice";
 // import { FuncAddInputPlantInformation } from "../../../../libs/redux/Slice/AddPlantSlice";
 import Upload_Image_Plant from "./Plant_Information/Upload_Image_Plant";
 import { ValidateInformation } from "../../../../utils/Validate_AddPlant/Validate_PlantInformation";
 export default function Plant_Infromation() {
   const dispatch = useDispatch();
   const { plantInformationStep2 } = useSelector((state) => state.dashboard);
-  const { dataPlantEdit } = useSelector((state) => state.editplant);
-
-  const PlantInformation = {
-    name: dataPlantEdit.name,
-    description: dataPlantEdit.description,
-    category: dataPlantEdit.category,
-    harvestDuration: dataPlantEdit.harvestDuration,
-    climateCondition: dataPlantEdit.climateCondition,
-    type: dataPlantEdit.type,
-    sunlight: dataPlantEdit.sunlight,
-    plantingTime: dataPlantEdit.plantingTime,
-    plant_image: dataPlantEdit.plant_image,
-  };
+  const { PlantInformationInputEdit, dataPlantEdit } = useSelector(
+    (state) => state.editplant
+  );
   const [value, setValue] = useState("");
 
   const regex = /^[^-]+-[^-]+$/;
-
-  function handleChangeImageChild(e) {
-    const { name, files } = e.target;
-    imageChildSet((prev) => ({
-      ...prev,
-      [name]: URL.createObjectURL(files[0]),
-    }));
-  }
 
   function handleClickNext() {
     const checkValidate = ValidateInformation(PlantInformationInputEdit);
@@ -56,14 +38,14 @@ export default function Plant_Infromation() {
       }
       dispatch(FuncMessagePlantError(true));
     } else {
-      const dataInPlantInformationEdit = {
+      const dataInPlantInformation = {
         ...PlantInformationInputEdit,
       };
 
       dispatch(
         FuncEditInputPlantInformation({
           ...dataPlantEdit,
-          ...dataInPlantInformationEdit,
+          ...dataInPlantInformation,
         })
       );
       dispatch(FuncPlantInformationStep2(true));
@@ -86,12 +68,12 @@ export default function Plant_Infromation() {
                   <Upload_Image_Plant />
                   <section className="w-5/6">
                     <div className="w-full flex items-start justify-between">
-                      {Array(1, 2, 3, 4).map((item, index) => (
+                      {[1, 2, 3, 4].map((item, index) => (
                         <Upload_Image_Child_Plant key={index} ids={item} />
                       ))}
                     </div>
                     <div className="w-full flex items-start justify-between pt-2">
-                      {Array(5, 6, 7, 8).map((item, index) => (
+                      {[5, 6, 7, 8].map((item, index) => (
                         <Upload_Image_Child_Plant key={index} ids={item} />
                       ))}
                     </div>

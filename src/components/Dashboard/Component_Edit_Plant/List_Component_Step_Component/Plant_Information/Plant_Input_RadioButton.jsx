@@ -2,11 +2,12 @@ import React, { useEffect } from "react";
 import Sunlight from "./Select_Option/Sunlight";
 import Planting_Time from "./Select_Option/Planting_Time";
 import { useDispatch, useSelector } from "react-redux";
-import { FuncPlantInformationInput } from "../../../../../libs/redux/Slice/AddPlantSlice";
+// import { FuncPlantInformationInput } from "../../../../../libs/redux/Slice/AddPlantSlice";
+import { FuncPlantInformationInputEdit } from "../../../../../libs/redux/Slice/EditPlantSlice";
 
 export default function Plant_Input_RadioButton() {
-  const { PlantInformationInput, dataPlantNew } = useSelector(
-    (state) => state.addplant
+  const { PlantInformationInputEdit, dataPlantEdit } = useSelector(
+    (state) => state.editplant
   );
   const dispatch = useDispatch();
   const arrDataInputRadioButton = [
@@ -27,7 +28,7 @@ export default function Plant_Input_RadioButton() {
               onChange={(e) => {
                 const value = e.target.value;
                 dispatch(
-                  FuncPlantInformationInput({
+                  FuncPlantInformationInputEdit({
                     name: "is_toxic",
                     value: value === "toxic" ? true : false,
                   })

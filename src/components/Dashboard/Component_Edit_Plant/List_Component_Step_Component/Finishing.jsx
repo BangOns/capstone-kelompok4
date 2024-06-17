@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect } from "react";
 import Component_Plant_Information from "./Finishing/Component_Plant_Information";
 import Component_Reminder_Settings from "./Finishing/Component_Reminder_Settings";
 import Component_Planting_Steps from "./Finishing/Component_Planting_Steps";
@@ -15,28 +15,42 @@ import {
   FuncPrevStep,
 } from "../../../../libs/redux/Slice/DashboardSlice";
 import Message_Error from "../../../Component_Message/Message_Error";
-import { FuncAddNewDataPlants } from "../../../../libs/redux/Slice/AddPlantSlice";
+// import {
+//   FuncAddNewDataPlants,
+//   PostDataPlantsNew,
+// } from "../../../../libs/redux/Slice/AddPlantSlice";
+// belum menambahkan import buat edit
 
 export default function Finishing() {
-  const { DataAllPlants, dataPlantNew } = useSelector(
-    (state) => state.addplant
-  );
+  const { dataPlantNew, PostDataMessageSuccess, PostDataMessageLoading } =
+    useSelector((state) => state.editplant);
   const dispatch = useDispatch();
   function handleClickPrev() {
     dispatch(FuncPrevStep());
   }
-  function handleClickNext() {
-    if (dataPlantNew) {
-      const DataPlantNews = {
-        ...dataPlantNew,
-        created_at: new Date().toISOString(),
-      };
-      dispatch(FuncAddNewDataPlants([...DataAllPlants, DataPlantNews]));
-      dispatch(FuncFinishAddPlant(true));
-    } else {
+  async function handleClickNext(e) {
+    e.preventDefault();
+    try {
+      if (dataPlantNew) {
+        const DataPlantEdits = {
+          ...dataPlantEdit,
+        };
+        dispatch(PostDataPlantsNew(DataPlantNews));
+      }
+    } catch (error) {
+      console.log(error);
       dispatch(FuncMessagePlantError(true));
     }
   }
+  useEffect(() => {
+    if (PostDataMessageSuccess) {
+      if (PostDataMessageSuccess.status === "success") {
+        dispatch(FuncFinishAddPlant(true));
+        // belom keubah ke edit karena clueless
+      }
+    }
+  }, [PostDataMessageSuccess]);
+
   return (
     <Fragment>
       <article className="w-full mt-6 ">
@@ -52,7 +66,11 @@ export default function Finishing() {
               handleClick={handleClickPrev}
               disableOn={false}
             />
-            <NextButtonPlant disabledOn={false} handleClick={handleClickNext} />
+            <NextButtonPlant
+              disabledOn={PostDataMessageLoading ? true : false}
+              finish={true}
+              handleClick={handleClickNext}
+            />
           </div>
         </div>
       </article>

@@ -2,15 +2,17 @@ import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import { ImageImport } from "../../../../../../utils/ImageImport";
 import { useSelector } from "react-redux";
+import { GetPlantCAtegoriesById } from "../../../../../../utils/Function-FetchAPI/GetDataCategories";
 
 export default function Data_Plant_Information_Step1() {
   const [imageThumb, imageThumbSet] = useState("");
-  const { PlantInformationInput } = useSelector((state) => state.addplant);
-  const plantName = PlantInformationInput.name.split("-")[0];
-  const FamilyName = PlantInformationInput.name.split("-")[1];
+  const [chooseCategory, chooseCategorySet] = useState("");
+  const { PlantInformationInputEdit } = useSelector((state) => state.addplant);
+  const plantName = PlantInformationInputEdit.name.split("-")[0];
+  const FamilyName = PlantInformationInputEdit.name.split("-")[1];
   const GetImageThumbnails =
-    PlantInformationInput.plant_images.length !== 0
-      ? PlantInformationInput.plant_images.filter(
+    PlantInformationInputEdit.plant_images.length !== 0
+      ? PlantInformationInputEdit.plant_images.filter(
           (items) => items.is_primary === 1
         )
       : [];
@@ -19,7 +21,17 @@ export default function Data_Plant_Information_Step1() {
     if (GetImageThumbnails.length !== 0) {
       imageThumbSet(GetImageThumbnails[0].file_name);
     }
-  }, [GetImageThumbnails, PlantInformationInput]);
+  }, [GetImageThumbnails, PlantInformationInputEdit]);
+  useEffect(() => {
+    if (PlantInformationInputEdit.plant_category_id !== 0) {
+      GetPlantCAtegoriesById(
+        PlantInformationInputEdit.plant_category_id,
+        (items) => {
+          chooseCategorySet(items.name);
+        }
+      );
+    }
+  }, [PlantInformationInputEdit.plant_category_id]);
   return (
     <section className="w-full p-4 border-slate-200 border rounded-[10px] flex gap-6">
       <article className="flex  gap-4 items-center">
@@ -43,10 +55,7 @@ export default function Data_Plant_Information_Step1() {
       <article className="flex gap-10 items-center">
         <section>
           <h4 className="text-sm font-nunito text-slate-500">Plant Category</h4>
-          <p className="font-nunito-bold ">
-            {" "}
-            {PlantInformationInput?.plant_category.name}
-          </p>
+          <p className="font-nunito-bold "> {chooseCategory}</p>
         </section>
         <section>
           <h4 className="text-sm font-nunito text-slate-500">Toxicity</h4>

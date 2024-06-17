@@ -3,7 +3,8 @@ import { IoIosArrowDown } from "react-icons/io";
 import { motion } from "framer-motion";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { FuncPlantCharateristic } from "../../../../../../libs/redux/Slice/AddPlantSlice";
+// import { FuncPlantCharateristic } from "../../../../../../libs/redux/Slice/AddPlantSlice";
+import { FuncPlantCharateristicEdit } from "../../../../../../libs/redux/Slice/EditPlantSlice";
 
 const variants = {
   hidden: {
@@ -16,8 +17,8 @@ const variants = {
   },
 };
 export default function Leaf_Color() {
-  const { plant_characteristic } = useSelector(
-    (state) => state.addplant.PlantInformationInput
+  const { plant_characteristicEdit } = useSelector(
+    (state) => state.editplant.PlantInformationInputEdit
   );
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
@@ -33,8 +34,8 @@ export default function Leaf_Color() {
           onClick={() => setOpen(!open)}
         >
           <p>
-            {plant_characteristic.leaf_color
-              ? `${plant_characteristic.leaf_color}`
+            {plant_characteristicEdit.leaf_color
+              ? `${plant_characteristicEdit.leaf_color}`
               : "Colors"}
           </p>
           <IoIosArrowDown />
@@ -54,7 +55,7 @@ export default function Leaf_Color() {
                 onClick={() => {
                   setOpen(false);
                   dispatch(
-                    FuncPlantCharateristic({
+                    FuncPlantCharateristicEdit({
                       name: "leaf_color",
                       value: items,
                     })

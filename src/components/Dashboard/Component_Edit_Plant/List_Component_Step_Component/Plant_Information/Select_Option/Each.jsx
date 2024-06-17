@@ -3,7 +3,8 @@ import { CiSearch } from "react-icons/ci";
 import { IoIosArrowDown } from "react-icons/io";
 import { motion } from "framer-motion";
 import { useDispatch, useSelector } from "react-redux";
-import { FuncPlantCharateristic } from "../../../../../../libs/redux/Slice/AddPlantSlice";
+// import { FuncPlantCharateristic } from "../../../../../../libs/redux/Slice/AddPlantSlice";
+import { FuncPlantCharateristicEdit } from "../../../../../../libs/redux/Slice/EditPlantSlice";
 const variants = {
   hidden: {
     opacity: 0,
@@ -15,8 +16,8 @@ const variants = {
   },
 };
 export default function Each() {
-  const { plant_characteristic } = useSelector(
-    (state) => state.addplant.PlantInformationInput
+  const { plant_characteristicEdit } = useSelector(
+    (state) => state.editplant.PlantInformationInputEdit
   );
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
@@ -32,8 +33,8 @@ export default function Each() {
           onClick={() => setOpen(!open)}
         >
           <p>
-            {plant_characteristic.wide_unit
-              ? `${plant_characteristic.wide_unit}`
+            {plant_characteristicEdit.wide_unit
+              ? `${plant_characteristicEdit.wide_unit}`
               : "Unit..."}
           </p>
           <IoIosArrowDown />
@@ -53,7 +54,7 @@ export default function Each() {
                 onClick={() => {
                   setOpen(false);
                   dispatch(
-                    FuncPlantCharateristic({ name: "wide_unit", value: items })
+                    FuncPlantCharateristicEdit({ name: "wide_unit", value: items })
                   );
                 }}
               >

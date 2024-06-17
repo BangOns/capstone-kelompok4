@@ -13,31 +13,32 @@ import {
   FuncNextStep,
   FuncPrevStep,
 } from "../../../../libs/redux/Slice/DashboardSlice";
-import {
-  FuncAddInputPlantInformation,
-  FuncPlantCaringInput,
-} from "../../../../libs/redux/Slice/AddPlantSlice";
+// import {
+//   FuncAddInputPlantInformation,
+//   FuncPlantCaringInput,
+// } from "../../../../libs/redux/Slice/AddPlantSlice";
+import { FuncEditInputPlantInformation, FuncPlantCaringInputEdit } from "../../../../libs/redux/Slice/EditPlantSlice";
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 
 export default function Plant_Caring() {
   const [value, setValue] = useState("");
-  const { PlantCaringInput, dataPlantNew } = useSelector(
-    (state) => state.addplant
+  const { PlantCaringInputEdit, dataPlantEdit } = useSelector(
+    (state) => state.editplant
   );
   const dispatch = useDispatch();
   function handleClickPrev() {
     dispatch(FuncPrevStep());
   }
   function handleClickNext() {
-    if (PlantCaringInput.additional_tips === "") {
+    if (PlantCaringInputEdit.additional_tips === "") {
       dispatch(FuncMessagePlantError(true));
     } else {
       const dataInpPlantCaring = {
-        ...PlantCaringInput,
+        ...PlantCaringInputEdit,
       };
       dispatch(
-        FuncAddInputPlantInformation({
-          ...dataPlantNew,
+        FuncEditInputPlantInformation({
+          ...dataPlantEdit,
           ...dataInpPlantCaring,
         })
       );
@@ -59,13 +60,13 @@ export default function Plant_Caring() {
             </p>
           </div>
           <ReactQuill
-            className="w-full h-[249px] text-neutral-950 border border-neutral-400 text-[14px] flex-col-reverse flex rounded-md"
+            className="w-full h-[249px] text-neutral-950 border border-neutral-300 text-[14px] flex-col-reverse flex rounded-md"
             theme="snow"
-            value={PlantCaringInput.additional_tips || value}
+            value={PlantCaringInputEdit.additional_tips || value}
             onChange={(e) => {
               setValue(e);
               dispatch(
-                FuncPlantCaringInput({ name: "additional_tips", value: e })
+                FuncPlantCaringInputEdit({ name: "additional_tips", value: e })
               );
             }}
             placeholder="Additional Planting Instructions Tips..."

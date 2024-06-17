@@ -4,11 +4,13 @@ import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
 import { ImageImport } from "../../../../utils/ImageImport";
 import { useDispatch, useSelector } from "react-redux";
+
+import { useRouter } from "next/navigation";
 import {
   FuncFinishAddPlant,
+  FuncMessagePlantSuccess,
   FuncToIndex,
 } from "../../../../libs/redux/Slice/DashboardSlice";
-import { useRouter } from "next/navigation";
 
 const variants = {
   hidden: { opacity: 0, scale: 0 },
@@ -18,6 +20,11 @@ export default function Alert_Congratulations() {
   const dispatch = useDispatch();
   const { finishAddPlant } = useSelector((state) => state.dashboard);
   const route = useRouter();
+  function handleClickCongrats() {
+    dispatch(FuncFinishAddPlant(false));
+    dispatch(FuncMessagePlantSuccess(true));
+    route.push("/dashboard/manage-plant");
+  }
   return (
     <AnimatePresence>
       {finishAddPlant && (
@@ -43,11 +50,7 @@ export default function Alert_Congratulations() {
             </div>
             <div className="mt-8 font-nunito-bold flex w-full gap-2 justify-between">
               <button
-                onClick={() => {
-                  dispatch(FuncToIndex(1));
-                  dispatch(FuncFinishAddPlant(false));
-                  route.push("/dashboard/manage-plant");
-                }}
+                onClick={handleClickCongrats}
                 className=" text-white  w-full p-[14px] rounded-md bg-emerald-500"
               >
                 View Added Plants

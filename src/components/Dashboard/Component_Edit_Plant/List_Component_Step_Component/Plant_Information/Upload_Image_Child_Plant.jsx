@@ -2,37 +2,44 @@ import { IconsImport } from "@/utils/IconsImport";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  FuncDeleteImagePlantInformation,
-  FuncPlantInformationInputImage,
-} from "../../../../../libs/redux/Slice/AddPlantSlice";
+// import {
+//   FuncDeleteImagePlantInformation,
+//   FuncPlantInformationInputImage,
+// } from "../../../../../libs/redux/Slice/AddPlantSlice";
+import { FuncDeleteImagePlantInformationEdit, FuncPlantInformationInputImageEdit } from "../../../../../libs/redux/Slice/EditPlantSlice";
 import PlantInformation from "../../../Component_ManagePlant/Table-Plant/PlantInformation";
 
 export default function Upload_Image_Child_Plant({ ids }) {
-  const { PlantInformationInput } = useSelector((state) => state.addplant);
+  const { PlantInformationInputEdit } = useSelector((state) => state.editplant);
   const [imageChild, imageChildSet] = useState("");
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    if (PlantInformationInput.plant_images.length !== 0) {
-      const dataFilter = PlantInformationInput.plant_images.find(
-        (items) => items.id === ids
-      );
-      if (dataFilter) {
-        imageChildSet(dataFilter.file_name);
-      }
-    }
-  }, [PlantInformationInput, ids]);
+  // useEffect(() => {
+  //   if (PlantInformationInputEdit.plant_images.length !== 0) {
+  //     const dataFilter = PlantInformationInputEdit.plant_images
+  //       .filter((items) => items.is_primary !== 1)
+  //       .find(
+  //         (items) =>
+  //           items.file_name ===
+  //           PlantInformationInputEdit.plant_images[ids]?.file_name
+  //       );
+  //     if (dataFilter) {
+  //       imageChildSet(dataFilter.file_name);
+  //     } else {
+  //       imageChildSet("");
+  //     }
+  //   }
+  // }, [PlantInformationInputEdit]);
 
+  // ga kepanggil pllant images nya
   function handleChangeFileThumbnails(e) {
     e.preventDefault();
     const { files } = e.target;
     const imgUrl = URL.createObjectURL(files[0]);
     dispatch(
-      FuncPlantInformationInputImage({
+      FuncPlantInformationInputImageEdit({
+        imagePrev: imageChild ? imageChild : "",
         value: {
-          id: ids,
-          plant_id: Math.floor(Math.random() * 100),
           file_name: imgUrl,
           is_primary: 0,
         },
@@ -76,7 +83,9 @@ export default function Upload_Image_Child_Plant({ ids }) {
               alt="delete"
               className="hidden group-hover:block cursor-pointer   hover:bg-slate-400/50 hover:p-2 hover:rounded-full transition-all"
               onClick={() => {
-                dispatch(FuncDeleteImagePlantInformation({ id: ids }));
+                dispatch(
+                  FuncDeleteImagePlantInformationEdit({ filename: imageChild })
+                );
 
                 imageChildSet("");
               }}
@@ -91,7 +100,8 @@ export default function Upload_Image_Child_Plant({ ids }) {
           onClick={() =>
             document
               .getElementById(
-                `image-${PlantInformationInput.plant_images.length}`
+                // `image-${PlantInformationInputEdit.plant_images.length}`
+                // error di plant_images
               )
               .click()
           }
@@ -99,7 +109,9 @@ export default function Upload_Image_Child_Plant({ ids }) {
           <Image src={IconsImport.IconsImageUploadChildren} alt="uploadImage" />
           <input
             type="file"
-            id={`image-${PlantInformationInput.plant_images.length}`}
+            // id={`image-${PlantInformationInputEdit.plant_images.length}`}
+            // error di plant_images
+          
             accept="image/*"
             className="hidden"
             onChange={handleChangeFileThumbnails}
