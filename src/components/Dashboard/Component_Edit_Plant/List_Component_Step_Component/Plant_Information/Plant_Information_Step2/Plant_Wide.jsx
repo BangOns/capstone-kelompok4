@@ -20,7 +20,7 @@ export default function Plant_Wide() {
       <h2 className="text-sm font-nunito-bold pb-1">
         Wide<span className="text-red-500">*</span>
       </h2>
-      <div className="w-full items-center flex justify-between py-[14px] px-3 border border-slate-950 rounded-lg">
+      <div className="w-full items-center flex justify-between py-[14px] px-3 border border-neutral-300 rounded-lg">
         <FiMinus className="cursor-pointer" onClick={handleCountMinus} />
         <input
           type="number"

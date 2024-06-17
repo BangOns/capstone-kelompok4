@@ -18,7 +18,7 @@ export default function Plant_Descriptions({ value, setValue }) {
           Plant Description<span className="text-red-500">*</span>
         </h1>
       </header>
-      <article className="w-full border border-neutral-400 rounded-lg ">
+      <article className="w-full border border-neutral-300  rounded-lg ">
         <ReactQuill
           className="w-full h-[180px]  flex-col-reverse flex  font-nunito z-10 "
           theme="snow"

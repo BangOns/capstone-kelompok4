@@ -145,7 +145,7 @@ export default function Planting_Instructions() {
             data?.map((e, i) => (
               <div
                 key={i}
-                className="border-2 md:border-2 md:rounded-lg md:mx-10 mb-10"
+                className="border-2 md:border-2 md:rounded-lg md:mx-10 mb-10 pb-4"
               >
                 <div className={`${hide == i ? "hidden" : "md:flex"}`}>
                   <div className="grid justify-items-end mx-5">

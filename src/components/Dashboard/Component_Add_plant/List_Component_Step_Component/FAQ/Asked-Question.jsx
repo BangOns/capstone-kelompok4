@@ -29,7 +29,7 @@ export default function AskedQuestion({
       <div
         className={`${
           mini ? "hidden" : ""
-        } w-full border border-[#030712] rounded-xl pb-4`}
+        } w-full border border-neutral-500 rounded-xl pb-4`}
       >
         <div className="flex justify-between items-center p-4">
           <div className="text-[#030712] font-nunito-bold text-[14px]">
