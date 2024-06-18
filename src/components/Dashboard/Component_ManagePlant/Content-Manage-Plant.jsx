@@ -19,9 +19,7 @@ export default function ContentManagePlant() {
   const [value] = useDebounce(searchValue, 1000);
   const [dataAllPlantsWithAPI, dataAllPlantsWithAPISet] = useState([]);
   const validateStepTable =
-    dataAllPlantsWithAPI && dataAllPlantsWithAPI.plants?.length >= 10
-      ? false
-      : true;
+    dataAllPlantsWithAPI && dataAllPlantsWithAPI?.length >= 10 ? false : true;
 
   useEffect(() => {
     if (value) {

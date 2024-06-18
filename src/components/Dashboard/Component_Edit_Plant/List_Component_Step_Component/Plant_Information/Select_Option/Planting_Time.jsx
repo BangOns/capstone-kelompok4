@@ -17,13 +17,24 @@ const variants = {
   },
 };
 export default function Planting_Time() {
-  const { PlantInformationInputEdit, dataPlantEdit } = useSelector(
+  const { dataPlantEditFullField, dataPlantNewEdit } = useSelector(
     (state) => state.editplant
   );
   const [open, setOpen] = useState(false);
   const arrDataPlantingTime = ["Summer", "Autumn", "Spring", "Winter"];
   const dispatch = useDispatch();
-
+  useEffect(() => {
+    if (dataPlantEditFullField.data) {
+      dispatch(
+        FuncPlantInformationInputEdit({
+          name: "planting_time",
+          value: dataPlantNewEdit.planting_time
+            ? dataPlantNewEdit.planting_time
+            : dataPlantEditFullField.data.planting_time,
+        })
+      );
+    }
+  }, [dataPlantEditFullField]);
   return (
     <section className="w-full">
       <label htmlFor="" className="font-nunito-bold text-sm pb-1">
@@ -34,13 +45,11 @@ export default function Planting_Time() {
           className="px-3 py-[14px] flex w-full justify-between items-center border rounded-lg cursor-pointer"
           onClick={() => setOpen(!open)}
         >
-          {/* <p>
-            {PlantInformationInputEdit.planting_time
-              ? `${PlantInformationInputEdit.planting_time}`
-              : "Conditions"}
+          <p>
+            {dataPlantNewEdit.planting_time &&
+              `${dataPlantNewEdit.planting_time}`}
           </p>
-          
-          ga kepanggil planting timenya*/}
+
           <IoIosArrowDown />
         </div>
         <motion.div

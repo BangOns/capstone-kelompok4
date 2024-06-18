@@ -18,9 +18,12 @@ import Message_Error from "../../../Component_Message/Message_Error";
 //   FuncAddFAQList,
 //   FuncAddInputPlantInformation,
 // } from "../../../../libs/redux/Slice/AddPlantSlice";
-import { FuncEditInputPlantInformation, FuncEditFAQList } from "../../../../libs/redux/Slice/EditPlantSlice";
+import {
+  FuncEditInputPlantInformation,
+  FuncEditFAQList,
+} from "../../../../libs/redux/Slice/EditPlantSlice";
 
-export default function Faq() {
+export default function Faq({ DataPlantEdit }) {
   const dispatch = useDispatch();
   const { FaQInputEdit, dataPlantEdit, faqList } = useSelector(
     (state) => state.editplant
@@ -30,7 +33,10 @@ export default function Faq() {
     dispatch(FuncPrevStep());
   }
   function handleClickNext() {
-    if ((FaQInpuEdit.asked === "" && FaQInputEdit.quest === "") || !faqList.length) {
+    if (
+      (FaQInpuEdit.asked === "" && FaQInputEdit.quest === "") ||
+      !faqList.length
+    ) {
       dispatch(FuncMessagePlantError(true));
     } else {
       const plant_faqs = [...questions];

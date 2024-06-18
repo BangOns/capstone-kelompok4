@@ -14,48 +14,53 @@ import NextButtonPlant from "../../Component_Buttons/next_buton_plant";
 import Message_Error from "../../../../Component_Message/Message_Error";
 import WF_Form from "./WF_Form";
 import CWC_Form from "./CWC_Form";
-// import { FuncAddInputPlantInformation } from "@/libs/redux/Slice/AddPlantSlice";
 import { FuncEditInputPlantInformation } from "../../../../../libs/redux/Slice/EditPlantSlice";
 import { ValidateReminderSettings } from "../../../../../utils/Validate_AddPlant/Validate_ReminderSettings";
+import {
+  FuncNextStepEdit,
+  FuncPrevStepEdit,
+} from "../../../../../libs/redux/Slice/DashboardSlice";
 
 const Reminder_Settings = () => {
-  const { ReminderSettingsInputEdit, dataPlantEdit } = useSelector(
-    (state) => state.addplant
+  const { dataPlantNewEdit, dataPlantEditFullField } = useSelector(
+    (state) => state.editplant
   );
   const dispatch = useDispatch();
 
   const handleClickPrev = () => {
-    dispatch(FuncPrevStep());
+    dispatch(FuncPrevStepEdit());
   };
 
   const handleClickNext = () => {
-    const checkValidateReminderSettings = ValidateReminderSettings(
-      ReminderSettingsInputEdit.watering_schedule
-    );
-    if (!checkValidateReminderSettings) {
-      dispatch(FuncMessagePlantError(true));
-    } else {
-      const ConvertWeatherConditionsToString =
-        ReminderSettingsInputEdit.watering_schedule.weather_condition.join(",");
-      const ConvertConditionDescriptionToString =
-        ReminderSettingsInputEdit.watering_schedule.condition_description.join(",");
+    // const checkValidateReminderSettings = ValidateReminderSettings(
+    //   ReminderSettingsInputEdit.watering_schedule
+    // );
+    // if (!checkValidateReminderSettings) {
+    //   dispatch(FuncMessagePlantError(true));
+    // } else {
+    // const ConvertWeatherConditionsToString =
+    //   ReminderSettingsInputEdit.watering_schedule.weather_condition.join(",");
+    // const ConvertConditionDescriptionToString =
+    //   ReminderSettingsInputEdit.watering_schedule.condition_description.join(
+    //     ","
+    //   );
 
-      const dataInputReminderSettingsEdit = {
-        ...ReminderSettingsInputEdit,
-        watering_schedule: {
-          ...ReminderSettingsInputEdit.watering_schedule,
-          weather_condition: ConvertWeatherConditionsToString,
-          condition_description: ConvertConditionDescriptionToString,
-        },
-      };
-      dispatch(
-        FuncEditInputPlantInformation({
-          ...dataPlantEdit,
-          ...dataInputReminderSettingsEdit,
-        })
-      );
-      dispatch(FuncNextStep());
-    }
+    // const dataInputReminderSettingsEdit = {
+    //   ...ReminderSettingsInputEdit,
+    //   watering_schedule: {
+    //     ...ReminderSettingsInputEdit.watering_schedule,
+    //     weather_condition: ConvertWeatherConditionsToString,
+    //     condition_description: ConvertConditionDescriptionToString,
+    //   },
+    // };
+    // dispatch(
+    //   FuncEditInputPlantInformation({
+    //     ...dataPlantEdit,
+    //     ...dataInputReminderSettingsEdit,
+    //   })
+    // );
+    // }
+    dispatch(FuncNextStepEdit());
   };
 
   return (

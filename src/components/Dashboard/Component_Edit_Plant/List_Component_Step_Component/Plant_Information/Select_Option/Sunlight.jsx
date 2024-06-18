@@ -16,14 +16,24 @@ const variants = {
   },
 };
 export default function Sunlight() {
-  const { PlantInformationInputEdit, dataPlantEdit } = useSelector(
+  const { dataPlantEditFullField, dataPlantNewEdit } = useSelector(
     (state) => state.editplant
   );
   const [open, setOpen] = useState(false);
   const arrDataSunlight = ["Fullsun", "Partsun", "Shade"];
-  const [valueSunlight, valueSunlightSet] = useState("");
   const dispatch = useDispatch();
-
+  useEffect(() => {
+    if (dataPlantEditFullField.data) {
+      dispatch(
+        FuncPlantInformationInputEdit({
+          name: "sunlight",
+          value: dataPlantNewEdit.sunlight
+            ? dataPlantNewEdit.sunlight
+            : dataPlantEditFullField.data.sunlight,
+        })
+      );
+    }
+  }, [dataPlantEditFullField]);
   return (
     <section className="w-full">
       <label htmlFor="" className="font-nunito-bold text-sm pb-1">
@@ -34,11 +44,7 @@ export default function Sunlight() {
           className="px-3 py-[14px] flex w-full justify-between items-center border rounded-lg cursor-pointer"
           onClick={() => setOpen(!open)}
         >
-          {/* <p>
-            {PlantInformationInputEdit.sunlight
-              ? `${PlantInformationInputEdit.sunlight}`
-              : "Conditions..."}
-          </p> ga kepanggil sunlightnya*/}
+          <p>{dataPlantNewEdit.sunlight && `${dataPlantNewEdit.sunlight}`}</p>
           <IoIosArrowDown />
         </div>
         <motion.div

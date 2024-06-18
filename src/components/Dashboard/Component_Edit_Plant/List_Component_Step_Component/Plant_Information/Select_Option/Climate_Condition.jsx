@@ -3,7 +3,7 @@ import { CiSearch } from "react-icons/ci";
 import { IoIosArrowDown } from "react-icons/io";
 import { motion } from "framer-motion";
 import { useDispatch, useSelector } from "react-redux";
-// import { FuncPlantInformationInput } from "../../../../../../libs/redux/Slice/AddPlantSlice";
+
 import { FuncPlantInformationInputEdit } from "../../../../../../libs/redux/Slice/EditPlantSlice";
 
 const variants = {
@@ -17,13 +17,24 @@ const variants = {
   },
 };
 export default function Climate_Condition() {
-  const { PlantInformationInputEdit, dataPlantEdit } = useSelector(
+  const { dataPlantEditFullField, dataPlantNewEdit } = useSelector(
     (state) => state.editplant
   );
   const [open, setOpen] = useState(false);
   const arrDataClimateCondition = ["Dry", "Wet"];
   const dispatch = useDispatch();
-
+  useEffect(() => {
+    if (dataPlantEditFullField.data) {
+      dispatch(
+        FuncPlantInformationInputEdit({
+          name: "climate_condition",
+          value: dataPlantNewEdit.climate_condition
+            ? dataPlantNewEdit.climate_condition
+            : dataPlantEditFullField.data.climate_condition,
+        })
+      );
+    }
+  }, [dataPlantEditFullField]);
   return (
     <section className="basis-[23%] w-full">
       <label htmlFor="" className="font-nunito-bold text-sm pb-1">
@@ -34,13 +45,11 @@ export default function Climate_Condition() {
           className="px-3 py-[14px] flex w-full justify-between items-center border rounded-lg cursor-pointer"
           onClick={() => setOpen(!open)}
         >
-          {/* <p>
-            {PlantInformationInputEdit.climate_condition
-              ? `${PlantInformationInputEdit.climate_condition}`
-              : "Conditions"}
+          <p>
+            {dataPlantNewEdit.climate_condition &&
+              `${dataPlantNewEdit.climate_condition}`}
           </p>
-          
-          ga kepanggil climate_conditionnya*/}
+
           <IoIosArrowDown />
         </div>
         <motion.div

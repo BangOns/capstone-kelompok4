@@ -4,11 +4,11 @@ import Header_edit_plant from "./Component_Edit_Plant/Component_Header/header_ed
 import List_Component_Step from "./Component_Edit_Plant/List_Component_Step";
 
 export default function EditPlant() {
-  const { indexStep } = useSelector((state) => state.dashboard);
+  const { indexStepEdit } = useSelector((state) => state.dashboard);
   return (
     <>
-      <Header_edit_plant pages={indexStep}/>
-      <List_Component_Step pages={indexStep} />
+      <Header_edit_plant pages={indexStepEdit} />
+      <List_Component_Step pages={indexStepEdit} />
     </>
   );
 }
