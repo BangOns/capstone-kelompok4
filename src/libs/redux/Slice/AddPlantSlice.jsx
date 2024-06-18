@@ -58,10 +58,9 @@ const initialState = {
 
 export const PostDataPlantsNew = createAsyncThunk(
   "addPlant/PostDataPlantsNew",
-  async (data, thunkAPI) => {
+  async ({ data }, thunkAPI) => {
     try {
       let formData = new FormData();
-
       // Tambahkan data sederhana
       formData.append("name", data.name);
       formData.append("description", data.description);
@@ -72,7 +71,6 @@ export const PostDataPlantsNew = createAsyncThunk(
       formData.append("planting_time", data.planting_time);
       formData.append("is_toxic", data.is_toxic);
       formData.append("additional_tips", data.additional_tips);
-
       // Tambahkan plant_characteristic
       for (let key in data.plant_characteristic) {
         formData.append(
@@ -80,7 +78,6 @@ export const PostDataPlantsNew = createAsyncThunk(
           data.plant_characteristic[key]
         );
       }
-
       // Tambahkan watering_schedule
       for (let key in data.watering_schedule) {
         formData.append(
@@ -88,14 +85,12 @@ export const PostDataPlantsNew = createAsyncThunk(
           data.watering_schedule[key]
         );
       }
-
       // Fungsi untuk mengkonversi URL blob ke objek File
       async function urlToFile(url, filename, mimeType) {
         const response = await fetch(url);
         const blob = await response.blob();
         return new File([blob], filename, { type: mimeType });
       }
-
       // Tambahkan plant_instructions dengan gambar terkait
       for (let i = 0; i < data.plant_instructions.length; i++) {
         const instruction = data.plant_instructions[i];
@@ -112,14 +107,12 @@ export const PostDataPlantsNew = createAsyncThunk(
           }
         }
       }
-
       // Tambahkan plant_faqs
       for (let i = 0; i < data.plant_faqs.length; i++) {
         const faq = data.plant_faqs[i];
         formData.append(`plant_faqs.question`, faq.question);
         formData.append(`plant_faqs.answer`, faq.answer);
       }
-
       // Tambahkan plant_images
       for (let i = 0; i < data.plant_images.length; i++) {
         const image = data.plant_images[i];
@@ -131,7 +124,6 @@ export const PostDataPlantsNew = createAsyncThunk(
         formData.append("plant_images", file);
         formData.append("plant_images.is_primary", image.is_primary);
       }
-
       const response = await axios.post(
         `${process.env.NEXT_PUBLIC_API_BASE_URL}/admin/plants`,
         formData,
@@ -141,7 +133,6 @@ export const PostDataPlantsNew = createAsyncThunk(
           },
         }
       );
-
       return response.data;
     } catch (error) {
       console.log(error);

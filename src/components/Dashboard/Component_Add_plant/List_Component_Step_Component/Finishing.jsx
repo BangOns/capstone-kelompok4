@@ -24,17 +24,26 @@ export default function Finishing() {
   const { dataPlantNew, PostDataMessageSuccess, PostDataMessageLoading } =
     useSelector((state) => state.addplant);
   const dispatch = useDispatch();
+  const getCookie = (name) => {
+    const cookieValue = document.cookie.match(
+      "(^|;)\\s*" + name + "\\s*=\\s*([^;]+)"
+    );
+    return cookieValue ? cookieValue.pop() : "";
+  };
   function handleClickPrev() {
     dispatch(FuncPrevStep());
   }
   async function handleClickNext(e) {
     e.preventDefault();
     try {
-      if (dataPlantNew) {
+      const token = getCookie("token");
+      if (!token) {
+        dispatch(FuncMessagePlantError(true));
+      } else {
         const DataPlantNews = {
           ...dataPlantNew,
         };
-        dispatch(PostDataPlantsNew(DataPlantNews));
+        dispatch(PostDataPlantsNew({ data: DataPlantNews, token }));
       }
     } catch (error) {
       console.log(error);
@@ -73,9 +82,7 @@ export default function Finishing() {
         </div>
       </article>
       <Message_Error
-        message={
-          "Uh oh! You need to fill out the data first before move on to next step~"
-        }
+        message={"Uh oh! There wan an error while fetching data"}
       />
     </Fragment>
   );

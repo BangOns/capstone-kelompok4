@@ -26,13 +26,13 @@ export default function Alert_DeletePlant() {
     try {
       const token = getCookie("token");
       if (!token) {
-        throw new Error("Token not found in cookies");
+        dispatch(FuncMessagePlantError(true));
       } else {
         const response = await axios.delete(
           `${process.env.NEXT_PUBLIC_API_BASE_URL}/admin/plants/${idToDeletePlant}`,
           {
             headers: {
-              Authorization: `Bearer ${token}`,
+              Authorization: `Bearer ${process.env.NEXT_PUBLIC_API_TOKEN_KEY}`,
             },
           }
         );

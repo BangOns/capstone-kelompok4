@@ -5,10 +5,33 @@ import { IconsImport } from "@/utils/IconsImport";
 import TablePlantInformation from "./PlantInformation";
 import { useDispatch, useSelector } from "react-redux";
 import Loading_Table from "../../../../utils/Component-Loading/Loading_Table";
-import { FetchDataAllPlants } from "../../../../libs/redux/Slice/AddPlantSlice";
 import { FetchDataTable } from "../../../../utils/Function-FetchAPI/GetDataAllTable";
 
-export default function TablePlant({ dataAllPlantsWithAPI }) {
+export default function TablePlant({
+  dataAllPlantsWithAPI,
+  dataAllPlantsWithAPISet,
+}) {
+  function HandleSortDataTable(nameSort) {
+    if (nameSort === "plantName") {
+      const sortPlantName = [...dataAllPlantsWithAPI].sort((a, b) =>
+        a.name.localeCompare(b.name)
+      );
+      dataAllPlantsWithAPISet(sortPlantName);
+    } else if (nameSort === "addedDate") {
+      // menguurutkan data dari tanggal yang paling terbaru
+      const sortedPlantDate = [...dataAllPlantsWithAPI].sort(
+        (a, b) => new Date(a.created_at) - new Date(b.created_at)
+      );
+      dataAllPlantsWithAPISet(sortedPlantDate);
+    } else if (nameSort === "category") {
+      // mengurutkan data dari alfavbet seperti plant name
+      const sortCategoryName = [...dataAllPlantsWithAPI].sort((a, b) =>
+        a.plant_category.name.localeCompare(b.plant_category.name)
+      );
+      dataAllPlantsWithAPISet(sortCategoryName);
+    }
+  }
+
   return (
     <table className="table border ">
       {/* head */}
@@ -20,7 +43,9 @@ export default function TablePlant({ dataAllPlantsWithAPI }) {
             <Image
               src={IconsImport.IconsDropdown}
               alt="dropdown"
+              disabled={!dataAllPlantsWithAPI?.length ? true : false}
               className="cursor-pointer"
+              onClick={() => HandleSortDataTable("plantName")}
             />
           </th>
           <th>
@@ -29,7 +54,9 @@ export default function TablePlant({ dataAllPlantsWithAPI }) {
               <Image
                 src={IconsImport.IconsDropdown}
                 alt="dropdown"
+                disabled={!dataAllPlantsWithAPI?.length ? true : false}
                 className="cursor-pointer"
+                onClick={() => HandleSortDataTable("addedDate")}
               />
             </div>
           </th>
@@ -41,6 +68,7 @@ export default function TablePlant({ dataAllPlantsWithAPI }) {
                 src={IconsImport.IconsDropdown}
                 alt="dropdown"
                 className="cursor-pointer"
+                onClick={() => HandleSortDataTable("category")}
               />
             </div>
           </th>
@@ -50,8 +78,8 @@ export default function TablePlant({ dataAllPlantsWithAPI }) {
         </tr>
       </thead>
       <tbody>
-        {dataAllPlantsWithAPI?.plants ? (
-          dataAllPlantsWithAPI.plants?.map((items, index) => (
+        {dataAllPlantsWithAPI?.length !== 0 ? (
+          dataAllPlantsWithAPI?.map((items, index) => (
             <TablePlantInformation key={index} dataPlant={items} />
           ))
         ) : (
