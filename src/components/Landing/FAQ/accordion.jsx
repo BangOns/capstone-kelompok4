@@ -51,7 +51,7 @@ const Accordion = ({ number, title, answer, open, toggle }) => {
         ref={contentRef}
         className="transition-max-height duration-300 ease-in-out overflow-hidden max-h-0"
       >
-        <p className="font-nunito text-xs md:text-base lg:text-xl leading-normal font-medium lg:font-semibold text-gray-100 opacity-90 max-w-[750px] ml-10 md:ml-[92px] lg:ml-[150px] mt-3 md:mt-5 lg:mt-9">
+        <p className="font-nunito text-xs md:text-base lg:text-xl leading-normal font-medium lg:font-nunito-semibold text-[#FAFAFCE5] opacity-90 max-w-[750px] ml-10 md:ml-[92px] lg:ml-[150px] mt-3 md:mt-5 lg:mt-9">
           {answer}
         </p>
       </div>

@@ -25,6 +25,10 @@ body {
   font-family: "nunito-italic";
   src: url("../fonts/Nunito-Regular-Italic.ttf");
 }
+@font-face {
+  font-family: "nunito-semibold";
+  src: url("../fonts/Nunito-SemiBold.ttf");
+}
 .checkbox-custom:checked {
   @apply bg-emerald-500 border-emerald-500;
 }

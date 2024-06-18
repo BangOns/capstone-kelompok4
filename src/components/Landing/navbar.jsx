@@ -57,7 +57,7 @@ export default function NavbarLanding({ refNavbar }) {
               className="h-5 w-5"
               fill="none"
               viewBox="0 0 24 24"
-              stroke="currentColor"
+              stroke="black"
             >
               <path
                 strokeLinecap="round"
@@ -69,7 +69,7 @@ export default function NavbarLanding({ refNavbar }) {
           </div>
           <ul
             tabIndex={0}
-            className="menu menu-sm dropdown-content p-2 shadow bg-base-100 rounded-box w-56 right-4"
+            className="menu menu-sm dropdown-content p-2 shadow bg-neutral-50 rounded-box w-56 right-4"
           >
             <ScrollLink
               to="home"

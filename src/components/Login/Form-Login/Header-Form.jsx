@@ -1,6 +1,6 @@
 export default function HeaderForm(){
     return(
-        <div className="w-auto">
+        <div className="w-auto text-black">
             <p className="font-nunito-bold text-[32px] leading-[44px]">Hi, PlantMin! <br />
                 Welcome Back! 🙌
             </p>
