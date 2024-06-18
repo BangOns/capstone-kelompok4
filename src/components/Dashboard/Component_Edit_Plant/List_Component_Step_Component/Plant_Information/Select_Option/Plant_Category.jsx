@@ -21,32 +21,35 @@ const variants = {
   },
 };
 export default function Plant_Category() {
-  const { PlantInformationInputEdit, dataPlantEdit } = useSelector(
+  const { dataPlantNewEdit, dataPlantEditFullField } = useSelector(
     (state) => state.editplant
   );
   const [inputValue, inputValueSet] = useState("");
-  const [chooseCategory, chooseCategorySet] = useState("");
   const [open, setOpen] = useState(false);
   const [allPlantCategories, allPlantCategoriesSet] = useState([]);
   const dispatch = useDispatch();
-
+  const FindCategoriesById =
+    allPlantCategories.length !== 0 &&
+    allPlantCategories.find(
+      (items) => items.id === dataPlantNewEdit.plant_category_id
+    );
   useEffect(() => {
     getPlantCategories((items) => {
       allPlantCategoriesSet(items);
     });
   }, []);
-  // useEffect(() => {
-  //   if (PlantInformationInputEdit.plant_category_id !== 0) {
-  //     GetPlantCAtegoriesById(
-  //       PlantInformationInputEdit.plant_category_id,
-  //       (items) => {
-  //         chooseCategorySet(items.name);
-  //       }
-  //     );
-  //   }
-  // }, [PlantInformationInputEdit.plant_category_id]);
-
-  // plant_category_id ga kepanggil
+  useEffect(() => {
+    if (dataPlantEditFullField.data) {
+      dispatch(
+        FuncPlantInformationInputEdit({
+          name: "plant_category_id",
+          value: dataPlantNewEdit.plant_category_id
+            ? dataPlantNewEdit.plant_category_id
+            : dataPlantEditFullField.data.plant_category.id,
+        })
+      );
+    }
+  }, [dataPlantEditFullField]);
   return (
     <section className="basis-[23%] w-full">
       <label htmlFor="" className="font-nunito-bold text-sm pb-1">
@@ -57,7 +60,7 @@ export default function Plant_Category() {
           className="px-3 py-[14px] flex w-full justify-between items-center border rounded-lg cursor-pointer"
           onClick={() => setOpen(!open)}
         >
-          <p>{chooseCategory ? `${chooseCategory}` : "Select Category"}</p>
+          <p>{FindCategoriesById && `${FindCategoriesById.name}`}</p>
           <IoIosArrowDown />
         </div>
         <motion.div

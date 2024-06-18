@@ -6,20 +6,21 @@ import { useDispatch, useSelector } from "react-redux";
 //   FuncDeleteImagePlantInformation,
 //   FuncPlantInformationInputImage,
 // } from "../../../../../libs/redux/Slice/AddPlantSlice";
-import { FuncDeleteImagePlantInformationEdit, FuncPlantInformationInputImageEdit } from "../../../../../libs/redux/Slice/EditPlantSlice";
+import {
+  FuncDeleteImagePlantInformationEdit,
+  FuncPlantInformationInputImageEdit,
+} from "../../../../../libs/redux/Slice/EditPlantSlice";
 
 export default function Upload_Image_Plant() {
-  const { PlantInformationInputEdit } = useSelector((state) => state.editplant);
+  const { dataPlantEditFullField, dataPlantNewEdit } = useSelector(
+    (state) => state.editplant
+  );
   const dispatch = useDispatch();
-  const GetImageThumbnails =
-    // PlantInformationInputEdit.plant_images.length !== 0
-      // ? PlantInformationInputEdit.plant_images.filter(
-      //     (items) => items.is_primary === 1
-      //   ): 
 
-      // gabisa manggil plant_images
-      [];
   const [imageThumb, imageThumbSet] = useState("");
+  const GetImageThumbnails = dataPlantNewEdit.plant_images
+    ? dataPlantNewEdit.plant_images?.filter((items) => items.is_primary === 1)
+    : [];
   function handleChangeFileThumbnails(e) {
     const { files } = e.target;
     const imgUrl = URL.createObjectURL(files[0]);
@@ -36,6 +37,7 @@ export default function Upload_Image_Plant() {
 
     imageThumbSet(URL.createObjectURL(files[0]));
   }
+
   useEffect(() => {
     if (GetImageThumbnails.length !== 0) {
       imageThumbSet(GetImageThumbnails[0].file_name);
@@ -43,6 +45,18 @@ export default function Upload_Image_Plant() {
       imageThumbSet("");
     }
   }, [GetImageThumbnails]);
+  useEffect(() => {
+    if (dataPlantEditFullField.data) {
+      dispatch(
+        FuncPlantInformationInputImageEdit({
+          name: "plant_images",
+          value: dataPlantNewEdit.plant_images
+            ? dataPlantNewEdit.plant_images
+            : dataPlantEditFullField.data.plant_images,
+        })
+      );
+    }
+  }, [dataPlantEditFullField]);
   return (
     <section className="flex w-full  h-full">
       {GetImageThumbnails.length !== 0 ? (

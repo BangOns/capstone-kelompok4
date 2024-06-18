@@ -12,6 +12,8 @@ const initialState = {
   messagePlantError: false,
   messagePlantDelete: false,
   messageErrorPlantName: false,
+  // Edit Page
+  indexStepEdit: 1,
 };
 
 const DashboardSlice = createSlice({
@@ -77,6 +79,21 @@ const DashboardSlice = createSlice({
         state.indexStepTable -= 1;
       }
     },
+    // Index Step Edit
+    FuncNextStepEdit: (state) => {
+      if (state.indexStep >= 6) {
+        state.indexStepEdit = 6;
+      } else {
+        state.indexStepEdit += 1;
+      }
+    },
+    FuncPrevStepEdit: (state) => {
+      if (state.indexStep <= 0) {
+        state.indexStepEdit = 1;
+      } else {
+        state.indexStepEdit -= 1;
+      }
+    },
   },
 });
 
@@ -94,7 +111,9 @@ export const {
   FuncReminderSettings,
   FuncMessageErrorPlantName,
   FuncNextStepTable,
-  FuncPrevStepTable
+  FuncPrevStepTable,
+  FuncNextStepEdit,
+  FuncPrevStepEdit,
 } = DashboardSlice.actions;
 
 export default DashboardSlice.reducer;

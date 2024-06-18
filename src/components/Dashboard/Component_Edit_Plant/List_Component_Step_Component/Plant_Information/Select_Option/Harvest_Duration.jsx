@@ -17,7 +17,9 @@ const variants = {
   },
 };
 export default function Harvest_Duration() {
-  const { PlantInformationInputEdit } = useSelector((state) => state.editplant);
+  const { dataPlantEditFullField, dataPlantNewEdit } = useSelector(
+    (state) => state.editplant
+  );
   const [open, setOpen] = useState(false);
   const arrDataHarvestDuration = [
     "1 Month",
@@ -27,7 +29,18 @@ export default function Harvest_Duration() {
     "12 Months",
   ];
   const dispatch = useDispatch();
-
+  useEffect(() => {
+    if (dataPlantEditFullField.data) {
+      dispatch(
+        FuncPlantInformationInputEdit({
+          name: "harvest_duration",
+          value: dataPlantNewEdit.harvest_duration
+            ? dataPlantNewEdit.harvest_duration
+            : dataPlantEditFullField.data.harvest_duration,
+        })
+      );
+    }
+  }, [dataPlantEditFullField]);
   return (
     <section className="basis-[23%] w-full">
       <label htmlFor="" className="font-nunito-bold text-sm pb-1">
@@ -39,11 +52,8 @@ export default function Harvest_Duration() {
           onClick={() => setOpen(!open)}
         >
           <p>
-            {/* {PlantInformationInputEdit.harvest_duration
-              ? `${PlantInformationInputEdit.harvest_duration} month`
-              : "Month"} */}
-
-            {/* harvest_duration ga kepanggil */}
+            {dataPlantNewEdit.harvest_duration &&
+              `${dataPlantNewEdit.harvest_duration} month`}
           </p>
           <IoIosArrowDown />
         </div>

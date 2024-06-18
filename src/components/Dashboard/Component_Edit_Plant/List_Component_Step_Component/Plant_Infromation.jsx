@@ -16,35 +16,36 @@ import {
   FuncMessagePlantError,
   FuncPlantInformationStep2,
 } from "../../../../libs/redux/Slice/DashboardSlice";
-import { FuncEditInputPlantInformation, FuncPlantInformationInputEdit } from "../../../../libs/redux/Slice/EditPlantSlice";
+import {
+  FuncEditInputPlantInformation,
+  FuncPlantInformationInputEdit,
+} from "../../../../libs/redux/Slice/EditPlantSlice";
 // import { FuncAddInputPlantInformation } from "../../../../libs/redux/Slice/AddPlantSlice";
 import Upload_Image_Plant from "./Plant_Information/Upload_Image_Plant";
 import { ValidateInformation } from "../../../../utils/Validate_AddPlant/Validate_PlantInformation";
-export default function Plant_Infromation() {
+export default function Plant_Infromation({ DataPlantEdit }) {
   const dispatch = useDispatch();
   const { plantInformationStep2 } = useSelector((state) => state.dashboard);
-  const { PlantInformationInputEdit, dataPlantEdit } = useSelector(
+  const { dataPlantNewEdit, dataPlantEditFullField } = useSelector(
     (state) => state.editplant
   );
-  const [value, setValue] = useState("");
 
   const regex = /^[^-]+-[^-]+$/;
-
   function handleClickNext() {
-    const checkValidate = ValidateInformation(PlantInformationInputEdit);
-    if (!checkValidate || !regex.test(PlantInformationInputEdit.name)) {
-      if (!regex.test(PlantInformationInputEdit.name)) {
+    const checkValidate = ValidateInformation(dataPlantNewEdit);
+    if (!checkValidate || !regex.test(dataPlantNewEdit.name)) {
+      if (!regex.test(dataPlantNewEdit.name)) {
         dispatch(FuncMessageErrorPlantName(true));
       }
       dispatch(FuncMessagePlantError(true));
     } else {
       const dataInPlantInformation = {
-        ...PlantInformationInputEdit,
+        ...dataPlantNewEdit,
       };
 
       dispatch(
         FuncEditInputPlantInformation({
-          ...dataPlantEdit,
+          ...dataPlantEditFullField,
           ...dataInPlantInformation,
         })
       );
@@ -85,7 +86,7 @@ export default function Plant_Infromation() {
                   </section>
                 </article>
               </section>
-              <Plant_Descriptions value={value} setValue={setValue} />
+              <Plant_Descriptions />
             </article>
             <Plant_Input />
             <Plant_Input_RadioButton />

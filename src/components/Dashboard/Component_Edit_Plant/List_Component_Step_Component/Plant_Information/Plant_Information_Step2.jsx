@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   FuncMessagePlantError,
   FuncNextStep,
+  FuncNextStepEdit,
   FuncPlantInformationStep2,
 } from "../../../../../libs/redux/Slice/DashboardSlice";
 import Message_Error from "../../../../Component_Message/Message_Error";
@@ -21,27 +22,18 @@ import Data_Plant_Information_Step1 from "./Plant_Information_Step2/Data_Plant_I
 import { FuncEditInputPlantInformation } from "../../../../../libs/redux/Slice/EditPlantSlice";
 import { ValidateInformation2 } from "../../../../../utils/Validate_AddPlant/Validate_PlantInformation";
 export default function Plant_Information_Step2() {
-  const { PlantInformationInputEdit, dataPlantEdit } = useSelector(
+  const { dataPlantNewEdit, dataPlantEditFullField } = useSelector(
     (state) => state.editplant
   );
   const dispatch = useDispatch();
   function handleClickNext() {
     const checkValidatePlantInformation2 = ValidateInformation2(
-      PlantInformationInputEdit.plant_characteristic
+      dataPlantNewEdit.plant_characteristic
     );
     if (!checkValidatePlantInformation2) {
       dispatch(FuncMessagePlantError(true));
     } else {
-      const dataPlantInformation2 = {
-        ...PlantInformationInputEdit,
-      };
-      dispatch(
-        FuncEditInputPlantInformation({
-          ...dataPlantEdit,
-          ...dataPlantInformation2,
-        })
-      );
-      dispatch(FuncNextStep());
+      dispatch(FuncNextStepEdit());
     }
   }
   function handleClickPrev() {

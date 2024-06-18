@@ -16,7 +16,10 @@ import {
   FuncPrevStep,
   FuncDeletePlant,
 } from "../../../../libs/redux/Slice/DashboardSlice";
-import { FuncEditInputPlantInformation, FuncPlantingInstructionsEdit } from "../../../../libs/redux/Slice/EditPlantSlice";
+import {
+  FuncEditInputPlantInformation,
+  FuncPlantingInstructionsEdit,
+} from "../../../../libs/redux/Slice/EditPlantSlice";
 // import {
 //   FuncAddInputPlantInformation,
 //   FuncPlantingInstructions,
@@ -28,9 +31,11 @@ import Alert_DeletePlantInstructions from "../Component-Alert/Alert_Delete_Plant
 
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 
-export default function Planting_Instructions() {
+export default function Planting_Instructions({ DataPlantEdit }) {
   const dispatch = useDispatch();
-  const count = useSelector((state) => state.editplant.PlantingInstructionsEdit);
+  const count = useSelector(
+    (state) => state.editplant.PlantingInstructionsEdit
+  );
   const { dataPlantEdit } = useSelector((state) => state.editplant);
   const fileInputRef = useRef(null);
   const [data, setData] = useState(count);

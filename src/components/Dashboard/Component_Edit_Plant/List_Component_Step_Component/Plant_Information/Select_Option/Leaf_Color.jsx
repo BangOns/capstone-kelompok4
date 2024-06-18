@@ -1,10 +1,11 @@
-import { CiSearch } from "react-icons/ci";
 import { IoIosArrowDown } from "react-icons/io";
 import { motion } from "framer-motion";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-// import { FuncPlantCharateristic } from "../../../../../../libs/redux/Slice/AddPlantSlice";
-import { FuncPlantCharateristicEdit } from "../../../../../../libs/redux/Slice/EditPlantSlice";
+import {
+  FuncPlantCharateristicEdit,
+  FuncPlantInformationInputEdit,
+} from "../../../../../../libs/redux/Slice/EditPlantSlice";
 
 const variants = {
   hidden: {
@@ -17,12 +18,24 @@ const variants = {
   },
 };
 export default function Leaf_Color() {
-  const { plant_characteristicEdit } = useSelector(
-    (state) => state.editplant.PlantInformationInputEdit
+  const { dataPlantNewEdit, dataPlantEditFullField } = useSelector(
+    (state) => state.editplant
   );
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
   const arrDataLeafColor = ["Yellow", "Green", "Red", "White"];
+  useEffect(() => {
+    if (dataPlantEditFullField.data) {
+      dispatch(
+        FuncPlantInformationInputEdit({
+          name: "plant_characteristic",
+          value: dataPlantNewEdit.plant_characteristic
+            ? dataPlantNewEdit.plant_characteristic
+            : dataPlantEditFullField.data.plant_characteristic,
+        })
+      );
+    }
+  }, [dataPlantEditFullField]);
   return (
     <section className="w-full">
       <label htmlFor="" className="font-nunito-bold text-sm pb-1">
@@ -34,8 +47,8 @@ export default function Leaf_Color() {
           onClick={() => setOpen(!open)}
         >
           <p>
-            {plant_characteristicEdit.leaf_color
-              ? `${plant_characteristicEdit.leaf_color}`
+            {dataPlantNewEdit.plant_characteristic?.leaf_color
+              ? `${dataPlantNewEdit.plant_characteristic.leaf_color}`
               : "Colors"}
           </p>
           <IoIosArrowDown />

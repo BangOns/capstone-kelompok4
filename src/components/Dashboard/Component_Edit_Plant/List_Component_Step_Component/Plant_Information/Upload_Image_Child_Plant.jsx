@@ -2,36 +2,46 @@ import { IconsImport } from "@/utils/IconsImport";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-// import {
-//   FuncDeleteImagePlantInformation,
-//   FuncPlantInformationInputImage,
-// } from "../../../../../libs/redux/Slice/AddPlantSlice";
-import { FuncDeleteImagePlantInformationEdit, FuncPlantInformationInputImageEdit } from "../../../../../libs/redux/Slice/EditPlantSlice";
-import PlantInformation from "../../../Component_ManagePlant/Table-Plant/PlantInformation";
+
+import {
+  FuncDeleteImagePlantInformationEdit,
+  FuncPlantInformationInputImageEdit,
+} from "../../../../../libs/redux/Slice/EditPlantSlice";
 
 export default function Upload_Image_Child_Plant({ ids }) {
-  const { PlantInformationInputEdit } = useSelector((state) => state.editplant);
+  const { dataPlantEditFullField, dataPlantNewEdit } = useSelector(
+    (state) => state.editplant
+  );
   const [imageChild, imageChildSet] = useState("");
   const dispatch = useDispatch();
+  useEffect(() => {
+    if (dataPlantEditFullField.data) {
+      dispatch(
+        FuncPlantInformationInputImageEdit({
+          name: "plant_images",
+          value: dataPlantNewEdit.plant_images
+            ? dataPlantNewEdit.plant_images
+            : dataPlantEditFullField.data.plant_images,
+        })
+      );
+    }
+  }, [dataPlantEditFullField]);
+  useEffect(() => {
+    if (dataPlantNewEdit.plant_images) {
+      const dataFilter = dataPlantNewEdit.plant_images
+        .filter((items) => items.is_primary !== 1)
+        .find(
+          (items) =>
+            items.file_name === dataPlantNewEdit.plant_images[ids]?.file_name
+        );
+      if (dataFilter) {
+        imageChildSet(dataFilter.file_name);
+      } else {
+        imageChildSet("");
+      }
+    }
+  }, [dataPlantNewEdit]);
 
-  // useEffect(() => {
-  //   if (PlantInformationInputEdit.plant_images.length !== 0) {
-  //     const dataFilter = PlantInformationInputEdit.plant_images
-  //       .filter((items) => items.is_primary !== 1)
-  //       .find(
-  //         (items) =>
-  //           items.file_name ===
-  //           PlantInformationInputEdit.plant_images[ids]?.file_name
-  //       );
-  //     if (dataFilter) {
-  //       imageChildSet(dataFilter.file_name);
-  //     } else {
-  //       imageChildSet("");
-  //     }
-  //   }
-  // }, [PlantInformationInputEdit]);
-
-  // ga kepanggil pllant images nya
   function handleChangeFileThumbnails(e) {
     e.preventDefault();
     const { files } = e.target;
@@ -97,21 +107,12 @@ export default function Upload_Image_Child_Plant({ ids }) {
       ) : (
         <div
           className="w-full h-full grid place-items-center"
-          onClick={() =>
-            document
-              .getElementById(
-                // `image-${PlantInformationInputEdit.plant_images.length}`
-                // error di plant_images
-              )
-              .click()
-          }
+          onClick={() => document.getElementById(`image-${ids}`).click()}
         >
           <Image src={IconsImport.IconsImageUploadChildren} alt="uploadImage" />
           <input
             type="file"
-            // id={`image-${PlantInformationInputEdit.plant_images.length}`}
-            // error di plant_images
-          
+            id={`image-${ids}`}
             accept="image/*"
             className="hidden"
             onChange={handleChangeFileThumbnails}

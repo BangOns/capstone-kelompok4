@@ -17,10 +17,13 @@ import {
 //   FuncAddInputPlantInformation,
 //   FuncPlantCaringInput,
 // } from "../../../../libs/redux/Slice/AddPlantSlice";
-import { FuncEditInputPlantInformation, FuncPlantCaringInputEdit } from "../../../../libs/redux/Slice/EditPlantSlice";
+import {
+  FuncEditInputPlantInformation,
+  FuncPlantCaringInputEdit,
+} from "../../../../libs/redux/Slice/EditPlantSlice";
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 
-export default function Plant_Caring() {
+export default function Plant_Caring({ DataPlantEdit }) {
   const [value, setValue] = useState("");
   const { PlantCaringInputEdit, dataPlantEdit } = useSelector(
     (state) => state.editplant
