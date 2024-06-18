@@ -69,33 +69,33 @@ export default function NavbarLanding({ refNavbar }) {
           </div>
           <ul
             tabIndex={0}
-            className="menu menu-sm dropdown-content p-2 shadow bg-base-100 rounded-box w-36 right-4"
+            className="menu menu-sm dropdown-content p-2 shadow bg-base-100 rounded-box w-56 right-4"
           >
             <ScrollLink
               to="home"
               smooth={true}
-              className="font-nunito-bold text-base leading-[22px] text-black hover:text-emerald-600 cursor-pointer"
+              className="font-nunito-bold text-lg leading-[22px] py-3 text-black hover:text-emerald-600 cursor-pointer"
             >
               Home
             </ScrollLink>
             <ScrollLink
               to="features"
               smooth={true}
-              className="font-nunito-bold text-base leading-[22px] text-black hover:text-emerald-600 cursor-pointer"
+              className="font-nunito-bold text-lg leading-[22px] py-3 text-black hover:text-emerald-600 cursor-pointer"
             >
               Features
             </ScrollLink>
             <ScrollLink
               to="about"
               smooth={true}
-              className="font-nunito-bold text-base leading-[22px] text-black hover:text-emerald-600 cursor-pointer"
+              className="font-nunito-bold text-lg leading-[22px] py-3 text-black hover:text-emerald-600 cursor-pointer"
             >
               About us
             </ScrollLink>
             <ScrollLink
               to="faq"
               smooth={true}
-              className="font-nunito-bold text-base leading-[22px] text-black hover:text-emerald-600 cursor-pointer"
+              className="font-nunito-bold text-lg leading-[22px] py-3 text-black hover:text-emerald-600 cursor-pointer"
             >
               FAQ
             </ScrollLink>
