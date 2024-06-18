@@ -61,6 +61,11 @@ input[type="number"] {
   }
 }
 
+input[type="time"]::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+  color: black;
+}
+
 .text-stroke-3 {
   background-image: linear-gradient(#10b981, #10b981);
   background-clip: text;
