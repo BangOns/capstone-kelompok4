@@ -229,7 +229,7 @@ const WF_Form = () => {
             )
           }
           placeholder="00:00"
-          className="border border-[#D1D5DB] rounded-lg py-[14px] px-3 block w-full placeholder:text-[#6B7280] resize-webkit-time-picker-indicator"
+          className="border border-[#D1D5DB] rounded-lg py-[14px] px-3 block w-full placeholder:text-[#6B7280] resize-webkit-time-picker-indicator bg-white"
           // icon time picker ga muncul, jadi warna putih
         />
       </div>

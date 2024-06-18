@@ -65,7 +65,7 @@ mt-2 p-3"
           </div>
         </section>
         <section className="basis-1/2 w-full ">
-          <h2 className="font-nunito-bold text-sm">Asnwer</h2>
+          <h2 className="font-nunito-bold text-sm">Answer</h2>
           <div
             className="border border-gray-200 rounded-md
 mt-2 p-3"

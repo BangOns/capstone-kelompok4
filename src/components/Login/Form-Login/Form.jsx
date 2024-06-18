@@ -60,7 +60,7 @@ export default function Form() {
             <Image src={IconsImport.IconsEmail} alt="Email Icon" />
             <input
               type="email"
-              className="grow"
+              className="grow text-black"
               placeholder="example@mail.com"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
@@ -74,7 +74,7 @@ export default function Form() {
             <Image src={IconsImport.IconsPassword} alt="Password Icon" />
             <input
               type={showPassword ? "text" : "password"}
-              className="grow"
+              className="grow text-black"
               placeholder="********"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
