@@ -10,7 +10,7 @@ export default function Component_Planting_Steps({ dataPlants }) {
         a.instruction_category.step_number - b.instruction_category.step_number
     );
   return (
-    <section className="w-full mt-6">
+    <section className="w-full mt-6 text-black">
       <header className="w-full py-[12.5px] flex justify-between">
         <h1 className="font-nunito-bold text-xl">Planting Steps</h1>
       </header>

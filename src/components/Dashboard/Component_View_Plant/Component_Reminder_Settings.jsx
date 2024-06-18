@@ -5,7 +5,7 @@ import Image from "next/image";
 
 export default function Component_Reminder_Settings({ dataPlants }) {
   return (
-    <section className="w-full mt-6 ">
+    <section className="w-full mt-6 text-black ">
       <header className="w-full flex justify-between py-[12.5px]">
         <h1 className="font-nunito-bold text-xl">Reminder Settings</h1>
       </header>

@@ -25,7 +25,7 @@ export default function Plant_Wide() {
           type="number"
           value={plant_characteristic.wide}
           placeholder="0"
-          className="text-center outline-none border-0"
+          className="text-center outline-none border-0 bg-white"
           onChange={(e) => {
             dispatch(
               FuncPlantCharateristic({

@@ -55,7 +55,7 @@ export default function ContentManagePlant() {
           )}
         </section>
         <section className="w-full h-[52px] flex items-center justify-between">
-          <p className="text-sm font-nunito">
+          <p className="text-sm font-nunito text-neutral-500">
             Showing {indexStepTable} to 10 of 100 entries
           </p>
           <div className="flex gap-4">

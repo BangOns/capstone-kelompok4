@@ -35,16 +35,16 @@ export default function Alert_Congratulations() {
             animate="visible"
             transition={{ duration: 0.5, type: "spring", stiffness: 100 }}
             exit="hidden"
-            className="p-4 w-[303px] rounded-2xl bg-white border border-gray-950"
+            className="p-4 w-[303px] rounded-2xl bg-white text-black border border-gray-950"
           >
             <figure className="w-full flex justify-center">
               <Image src={ImageImport.ImageCongrats} alt="human" />
             </figure>
             <div className="mt-8">
-              <p className="text-center text-2xl font-nunito-bold">
+              <p className="text-center text-2xl font-nunito-bold text-black">
                 Congratulations!
               </p>
-              <p className="font-nunito text-center">
+              <p className="font-nunito text-center text-black">
                 You've successfully added a new plant data to your collection
               </p>
             </div>

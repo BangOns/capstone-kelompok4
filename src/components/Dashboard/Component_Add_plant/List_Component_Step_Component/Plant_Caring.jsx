@@ -50,7 +50,7 @@ export default function Plant_Caring() {
       <div className="mt-6 p-4 border rounded-[10px]">
         <div className="border rounded-md border-neutral-200 p-4">
           <div className="flex flex-row gap-2 mb-6 items-center">
-            <p className="text-xl font-nunito-bold">
+            <p className="text-xl font-nunito-bold text-black">
               Additional Planting Instructions Tips{" "}
             </p>
             <p className="font-nunito-italic text-slate-500">
