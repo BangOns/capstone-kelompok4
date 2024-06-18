@@ -1,5 +1,4 @@
 "use client";
-import { GetStepsLength } from "@/utils/getStepsLength";
 
 export default function Header_add_plant({ pages }) {
   const data = [
