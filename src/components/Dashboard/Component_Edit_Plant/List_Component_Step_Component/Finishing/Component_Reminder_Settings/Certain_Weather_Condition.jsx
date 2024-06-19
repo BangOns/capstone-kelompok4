@@ -2,12 +2,12 @@ import React from "react";
 import { useSelector } from "react-redux";
 
 export default function Certain_Weather_Condition() {
-  const { dataPlantEdit } = useSelector((state) => state.editplant);
+  const { dataPlantNewEdit } = useSelector((state) => state.editplant);
 
   const weatherCondition =
-    dataPlantEdit?.watering_schedule.weather_condition.split(",") || [];
+    dataPlantNewEdit?.watering_schedule.weather_condition.split(",") || [];
   const conditionDescription =
-    dataPlantEdit?.watering_schedule.condition_description.split(",") || [];
+    dataPlantNewEdit?.watering_schedule.condition_description.split(",") || [];
   return (
     <section>
       {weatherCondition.map((condition, index) => (

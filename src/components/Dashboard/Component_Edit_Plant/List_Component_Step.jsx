@@ -28,7 +28,14 @@ export default function List_Component_Step({ pages }) {
   useEffect(() => {
     dispatch(
       FuncStoreReminderSettingsEdit({
-        ...dataPlantEditFullField?.data?.watering_schedule,
+        each: dataPlantEditFullField?.data?.watering_schedule.each,
+        unit: dataPlantEditFullField?.data?.watering_schedule.unit,
+        watering_amount:
+          dataPlantEditFullField?.data?.watering_schedule.watering_amount,
+        watering_frequency:
+          dataPlantEditFullField?.data?.watering_schedule.watering_frequency,
+        watering_time:
+          dataPlantEditFullField?.data?.watering_schedule.watering_time,
         weather_condition:
           dataPlantEditFullField?.data?.watering_schedule.weather_condition.split(
             ","
