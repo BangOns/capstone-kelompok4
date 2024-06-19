@@ -46,9 +46,12 @@ const CWC_Form = () => {
   }, [condition, dispatch]);
 
   useEffect(() => {
-    if (dataPlantNewEdit.watering_schedule) {
+    if (
+      typeof dataPlantNewEdit.watering_schedule.condition_description !==
+      "string"
+    ) {
       const newCondition =
-        dataPlantNewEdit.watering_schedule.weather_condition.map(
+        dataPlantNewEdit.watering_schedule.weather_condition?.map(
           (item, index) => ({
             weatherCondition: item,
             conditionDescription:
@@ -57,7 +60,7 @@ const CWC_Form = () => {
         );
 
       const newWeatherConditionDisplay =
-        dataPlantNewEdit.watering_schedule.weather_condition.map((item) => {
+        dataPlantNewEdit.watering_schedule.weather_condition?.map((item) => {
           const weather = WEATHERS.find((weather) => weather.title === item);
           return weather ? (
             <span className="flex items-center gap-2">

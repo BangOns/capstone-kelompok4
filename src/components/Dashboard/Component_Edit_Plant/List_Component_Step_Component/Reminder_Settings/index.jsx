@@ -1,6 +1,6 @@
 "use client";
 
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { FuncMessagePlantError } from "@/libs/redux/Slice/DashboardSlice";
@@ -24,6 +24,35 @@ const Reminder_Settings = () => {
   const handleClickPrev = () => {
     dispatch(FuncPrevStepEdit());
   };
+
+  useEffect(() => {
+    if (
+      typeof dataPlantNewEdit.watering_schedule.condition_description ===
+      "string"
+    ) {
+      const ConvertConditionDescriptionToArray =
+        dataPlantNewEdit.watering_schedule.condition_description.split(",");
+      dispatch(
+        FuncReminderSettingsInputEdit({
+          name: "condition_description",
+          value: ConvertConditionDescriptionToArray,
+        })
+      );
+    }
+
+    if (
+      typeof dataPlantNewEdit.watering_schedule.weather_condition === "string"
+    ) {
+      const ConvertWeatherConditionsToArray =
+        dataPlantNewEdit.watering_schedule.weather_condition.split(",");
+      dispatch(
+        FuncReminderSettingsInputEdit({
+          name: "weather_condition",
+          value: ConvertWeatherConditionsToArray,
+        })
+      );
+    }
+  }, []);
 
   const handleClickNext = () => {
     const checkValidateReminderSettings = ValidateReminderSettings(
