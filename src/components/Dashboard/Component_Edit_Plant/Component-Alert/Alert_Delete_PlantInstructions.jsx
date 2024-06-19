@@ -7,57 +7,17 @@ import Image from "next/image";
 import {
   FuncDeletePlant,
   FuncMessagePlantDelete,
-  FuncMessagePlantError,
 } from "../../../../libs/redux/Slice/DashboardSlice";
-import { useRouter } from "next/navigation";
-import { FuncDataAllPlants } from "../../../../libs/redux/Slice/AddPlantSlice";
-import axios from "axios";
 
 const variants = {
   hidden: { opacity: 0, scale: 0 },
   visible: { opacity: 1, scale: 1 },
 };
-export default function Alert_DeletePlant() {
-  const dispatch = useDispatch();
+export default function Alert_DeletePlantInstructions({ onCLickDeleteStep }) {
   const { deletePlant, idToDeletePlant } = useSelector(
     (state) => state.dashboard
   );
-  async function DeletePlantById() {
-    try {
-      const token = getCookie("token");
-      if (!token) {
-        dispatch(FuncMessagePlantError(true));
-      } else {
-        const response = await axios.delete(
-          `${process.env.NEXT_PUBLIC_API_BASE_URL}/admin/plants/${idToDeletePlant}`,
-          {
-            headers: {
-              Authorization: `Bearer ${process.env.NEXT_PUBLIC_API_TOKEN_KEY}`,
-            },
-          }
-        );
-
-        if (response.status === 200) {
-          dispatch(FuncMessagePlantDelete(true));
-          dispatch(FuncDeletePlant(false));
-          window.location.reload();
-        } else {
-          dispatch(FuncMessagePlantError(true));
-          dispatch(FuncDeletePlant(false));
-        }
-      }
-    } catch (error) {
-      console.log(error);
-      dispatch(FuncMessagePlantError(true));
-      dispatch(FuncDeletePlant(false));
-    }
-  }
-  const getCookie = (name) => {
-    const cookieValue = document.cookie.match(
-      "(^|;)\\s*" + name + "\\s*=\\s*([^;]+)"
-    );
-    return cookieValue ? cookieValue.pop() : "";
-  };
+  const dispatch = useDispatch();
   return (
     <>
       <AnimatePresence>
@@ -84,15 +44,27 @@ export default function Alert_DeletePlant() {
               </div>
               <div className="mt-8 font-nunito-bold flex w-full gap-2 justify-between">
                 <button
-                  onClick={() =>
-                    dispatch(FuncDeletePlant({ popUp: false, id: 0 }))
-                  }
+                  onClick={() => {
+                    onCLickDeleteStep({
+                      confirmation: false,
+                      id: idToDeletePlant,
+                    });
+
+                    dispatch(FuncDeletePlant({ popUp: false }));
+                  }}
                   className="basis-1/2 text-emerald-500 w-full p-[14px] rounded-md bg-white"
                 >
                   Cancel
                 </button>
                 <button
-                  onClick={DeletePlantById}
+                  onClick={() => {
+                    dispatch(FuncMessagePlantDelete(true));
+                    dispatch(FuncDeletePlant({ popUp: false, id: 0 }));
+                    onCLickDeleteStep({
+                      confirmation: true,
+                      id: idToDeletePlant,
+                    });
+                  }}
                   className=" text-white basis-1/2 w-full p-[14px] rounded-md bg-red-500"
                 >
                   Delete

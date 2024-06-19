@@ -1,9 +1,11 @@
-import { CiSearch } from "react-icons/ci";
 import { IoIosArrowDown } from "react-icons/io";
 import { motion } from "framer-motion";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { FuncPlantCharateristic } from "../../../../../../libs/redux/Slice/AddPlantSlice";
+import {
+  FuncPlantCharateristicEdit,
+  FuncPlantInformationInputEdit,
+} from "../../../../../../libs/redux/Slice/EditPlantSlice";
 
 const variants = {
   hidden: {
@@ -16,12 +18,24 @@ const variants = {
   },
 };
 export default function Leaf_Color() {
-  const { plant_characteristic } = useSelector(
-    (state) => state.addplant.PlantInformationInput
+  const { dataPlantNewEdit, dataPlantEditFullField } = useSelector(
+    (state) => state.editplant
   );
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
   const arrDataLeafColor = ["Yellow", "Green", "Red", "White"];
+  useEffect(() => {
+    if (dataPlantEditFullField.data) {
+      dispatch(
+        FuncPlantInformationInputEdit({
+          name: "plant_characteristic",
+          value: dataPlantNewEdit.plant_characteristic
+            ? dataPlantNewEdit.plant_characteristic
+            : dataPlantEditFullField.data.plant_characteristic,
+        })
+      );
+    }
+  }, [dataPlantEditFullField]);
   return (
     <section className="w-full">
       <label htmlFor="" className="font-nunito-bold text-sm pb-1">
@@ -33,8 +47,8 @@ export default function Leaf_Color() {
           onClick={() => setOpen(!open)}
         >
           <p>
-            {plant_characteristic.leaf_color
-              ? `${plant_characteristic.leaf_color}`
+            {dataPlantNewEdit.plant_characteristic?.leaf_color
+              ? `${dataPlantNewEdit.plant_characteristic.leaf_color}`
               : "Colors"}
           </p>
           <IoIosArrowDown />
@@ -54,7 +68,7 @@ export default function Leaf_Color() {
                 onClick={() => {
                   setOpen(false);
                   dispatch(
-                    FuncPlantCharateristic({
+                    FuncPlantCharateristicEdit({
                       name: "leaf_color",
                       value: items,
                     })

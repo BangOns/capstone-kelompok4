@@ -11,7 +11,6 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   FuncFinishAddPlant,
   FuncMessagePlantError,
-  FuncMessagePlantSuccess,
   FuncPrevStep,
 } from "../../../../libs/redux/Slice/DashboardSlice";
 import Message_Error from "../../../Component_Message/Message_Error";

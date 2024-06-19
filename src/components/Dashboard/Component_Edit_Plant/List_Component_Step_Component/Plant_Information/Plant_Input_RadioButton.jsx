@@ -2,18 +2,31 @@ import React, { useEffect } from "react";
 import Sunlight from "./Select_Option/Sunlight";
 import Planting_Time from "./Select_Option/Planting_Time";
 import { useDispatch, useSelector } from "react-redux";
-import { FuncPlantInformationInput } from "../../../../../libs/redux/Slice/AddPlantSlice";
+import { FuncPlantInformationInputEdit } from "../../../../../libs/redux/Slice/EditPlantSlice";
 
 export default function Plant_Input_RadioButton() {
-  const { PlantInformationInput, dataPlantNew } = useSelector(
-    (state) => state.addplant
+  const { dataPlantEditFullField, dataPlantNewEdit } = useSelector(
+    (state) => state.editplant
   );
   const dispatch = useDispatch();
   const arrDataInputRadioButton = [
     { label: "Non-Toxic Plant", id_toxic: "non-toxic" },
     { label: "Toxic Plant", id_toxic: "toxic" },
   ];
-
+  const findToxicPlant =
+    dataPlantNewEdit && (dataPlantNewEdit.is_toxic ? "toxic" : "non-toxic");
+  useEffect(() => {
+    if (dataPlantEditFullField.data) {
+      dispatch(
+        FuncPlantInformationInputEdit({
+          name: "is_toxic",
+          value: dataPlantNewEdit.is_toxic
+            ? dataPlantNewEdit.is_toxic
+            : dataPlantEditFullField.data.is_toxic,
+        })
+      );
+    }
+  }, [dataPlantEditFullField]);
   return (
     <article className="w-full pt-6 flex justify-between gap-6    ">
       <div className="basis-1/2 items-center flex gap-2 w-full">
@@ -22,12 +35,13 @@ export default function Plant_Input_RadioButton() {
             <input
               type="radio"
               name="plants"
-              value={items.id_toxic}
+              defaultChecked={findToxicPlant !== items.id_toxic ? true : false}
+              value={dataPlantNewEdit.is_toxic ? "toxic" : "non-toxic"}
               id={items.id_toxic}
               onChange={(e) => {
                 const value = e.target.value;
                 dispatch(
-                  FuncPlantInformationInput({
+                  FuncPlantInformationInputEdit({
                     name: "is_toxic",
                     value: value === "toxic" ? true : false,
                   })

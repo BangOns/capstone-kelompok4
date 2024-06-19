@@ -88,10 +88,15 @@ export default function Planting_Instructions() {
     if (field === "step_image_url") {
       const file = value.target.files[0];
       if (file) {
-        const imageUrl = URL.createObjectURL(file);
-        newData[index] = { ...newData[index], [field]: imageUrl };
-        const dataNew = newData;
-        setData(dataNew);
+        const fileSizeMB = file.size / (1024 * 1024);
+        if (fileSizeMB > 2) {
+          dispatch(FuncMessagePlantError(true));
+        } else {
+          const imageUrl = URL.createObjectURL(file);
+          newData[index] = { ...newData[index], [field]: imageUrl };
+          const dataNew = newData;
+          setData(dataNew);
+        }
       }
     } else {
       newData[index] = { ...newData[index], [field]: value };
@@ -145,7 +150,7 @@ export default function Planting_Instructions() {
             data?.map((e, i) => (
               <div
                 key={i}
-                className="border-2 md:border-2 md:rounded-lg md:mx-10 mb-10"
+                className="border-2 md:border-2 md:rounded-lg md:mx-10 mb-10 pb-4"
               >
                 <div className={`${hide == i ? "hidden" : "md:flex"}`}>
                   <div className="grid justify-items-end mx-5">
@@ -184,7 +189,9 @@ export default function Planting_Instructions() {
                 </div>
                 <div className={`${hide == i ? "" : "hidden"}`}>
                   <div className="xl:flex">
-                    <p className="mx-[16px] my-5 font-bold">Step {i + 1}</p>
+                    <p className="mx-[16px] my-5 font-bold">
+                      Step {e.step_number}
+                    </p>
                     <div className="flex ml-auto">
                       <Image
                         className="m-[16px] max-md:mx-auto cursor-pointer"
@@ -202,38 +209,74 @@ export default function Planting_Instructions() {
                       />
                     </div>
                   </div>
-                  <div className="xl:flex">
-                    <div className="relative">
-                      <Image
-                        src={
-                          e.step_image_url == ""
-                            ? ImageImport.ImageTest
-                            : e.step_image_url
-                        }
-                        className="max-xl:m-auto"
-                        height={237}
-                        width={237}
-                        alt="profile"
-                      />
-                      <div className="absolute bg-[#10B981] p-3 border rounded-lg w-fit h-fit top-0 right-0">
+                  <div className="xl:flex px-4 pb-4">
+                    {e.step_image_url ? (
+                      <div className="relative">
+                        <Image
+                          src={
+                            e.step_image_url == ""
+                              ? ImageImport.ImageTest
+                              : e.step_image_url
+                          }
+                          className="max-xl:m-auto object-cover "
+                          height={237}
+                          width={237}
+                          alt="image-step"
+                        />
+                        <div className="absolute bg-[#10B981] p-3 border rounded-lg w-fit h-fit top-0 right-0">
+                          <input
+                            type="file"
+                            className="hidden"
+                            id={`image-url-${i}`}
+                            onChange={(event) =>
+                              updateField(i, "step_image_url", event)
+                            }
+                          />
+                          <Image
+                            src={IconsImport.IconsEdit}
+                            className="max-xl:m-auto cursor-pointer"
+                            alt="profile"
+                            onClick={() =>
+                              document.getElementById(`image-url-${i}`).click()
+                            }
+                          />
+                        </div>
+                      </div>
+                    ) : (
+                      <div className="relative ">
                         <input
                           type="file"
+                          name=""
+                          accept="image/*"
+                          id="image-step"
                           className="hidden"
-                          id={`image-url-${i}`}
                           onChange={(event) =>
                             updateField(i, "step_image_url", event)
                           }
                         />
-                        <Image
-                          src={IconsImport.IconsEdit}
-                          className="max-xl:m-auto cursor-pointer"
-                          alt="profile"
+                        <div
+                          className="p-4 rounded-2xl border-2 w-[237px] h-[215px] border-dashed flex justify-center items-center border-gray-300  cursor-pointer"
                           onClick={() =>
-                            document.getElementById(`image-url-${i}`).click()
+                            document.getElementById("image-step").click()
                           }
-                        />
+                        >
+                          <figure className="w-full flex flex-col items-center justify-center">
+                            <Image
+                              src={IconsImport.IconsImageUpload}
+                              alt="uploadImage"
+                            />
+                            <figcaption className="text-sm text-center font-nunito text-gray-500">
+                              <p>
+                                Upload Thumbnail Image{" "}
+                                <span className="text-red-500">*</span>
+                              </p>
+                              <p>(max. 2 MB)</p>
+                            </figcaption>
+                          </figure>
+                        </div>
                       </div>
-                    </div>
+                    )}
+
                     <div className="w-full">
                       <div className="xl:flex m-5 ">
                         <div className=" w-full">
@@ -244,6 +287,7 @@ export default function Planting_Instructions() {
                             <input
                               className="p-2 border rounded-lg border-gray-300 max-xl:w-full xl:w-[90%] pr-10"
                               type="text"
+                              placeholder="Title..."
                               name=""
                               id=""
                               value={e.step_title}
@@ -275,11 +319,12 @@ export default function Planting_Instructions() {
                       <ReactQuill
                         className="flex-col-reverse flex  m-5 border-2 rounded-lg  h-[50%]"
                         theme="snow"
+                        placeholder="Description..."
                         value={e.step_description}
                         onChange={(value) =>
                           updateField(i, "step_description", value)
                         }
-                      ></ReactQuill>
+                      />
                     </div>
                   </div>
                 </div>

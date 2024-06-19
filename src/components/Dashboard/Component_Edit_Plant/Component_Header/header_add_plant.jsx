@@ -1,5 +1,4 @@
 "use client";
-import { GetStepsLength } from "@/utils/getStepsLength";
 
 export default function Header_add_plant({ pages }) {
   const data = [
@@ -54,6 +53,21 @@ export default function Header_add_plant({ pages }) {
           >
             {e}
           </p>
+          {/* {i < data.length && (
+            <div
+              className={`${
+                i == 0
+                  ? "left-[50%]"
+                  : i == data.length - 1
+                  ? "right-[50%] w-1/2"
+                  : ""
+              } z-0 absolute top-[25%]  transform -translate-y-[50%] w-full h-px ${
+                pages - 1 >= i
+                  ? "bg-[#10B981] text-white"
+                  : "bg-gray-100 text-neutral-500"
+              }`}
+            ></div>
+          )} */}
         </div>
       ))}
     </div>
