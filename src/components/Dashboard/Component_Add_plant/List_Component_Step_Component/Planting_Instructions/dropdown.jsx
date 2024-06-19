@@ -4,13 +4,26 @@ import { IconsImport } from "@/utils/IconsImport";
 import Image from "next/image";
 import { useDispatch } from "react-redux";
 
-export default function DropdownSearch({ items, onButtonClick, setCategory }) {
+export default function DropdownSearch({ dataCategory, setCategory }) {
   const [searchTerm, setSearchTerm] = useState("");
   const [isOpen, setIsOpen] = useState(false);
   const [allIsntructionsCategories, allIsntructionsCategoriesSet] = useState(
     []
   );
   const dispatch = useDispatch();
+  const FindInstructionsCategoriesById =
+    allIsntructionsCategories.length !== 0 &&
+    dataCategory.hasOwnProperty("instruction_category_id") &&
+    allIsntructionsCategories.find(
+      (items) => items.id === dataCategory.instruction_category_id
+    );
+  useEffect(() => {
+    if (FindInstructionsCategoriesById) {
+      setSearchTerm(FindInstructionsCategoriesById.name);
+    } else {
+      setSearchTerm("");
+    }
+  }, [FindInstructionsCategoriesById]);
   async function getInstructionsCategories() {
     try {
       const response = await fetch(
@@ -36,7 +49,7 @@ export default function DropdownSearch({ items, onButtonClick, setCategory }) {
           className="text-left text-[16px] font-[400] flex w-full px-4 py-2 text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none"
           onClick={() => setIsOpen(!isOpen)}
         >
-          {searchTerm ? searchTerm : "Soil Preparation"}{" "}
+          {searchTerm ? searchTerm : "Choose Spell Category"}{" "}
           <Image
             className="ml-auto"
             src={IconsImport.IconsDropdown}

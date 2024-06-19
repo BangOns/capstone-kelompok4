@@ -10,27 +10,27 @@ import { GetPlantCAtegoriesById } from "../../../../../utils/Function-FetchAPI/G
 export default function Component_Plant_Information() {
   const dispatch = useDispatch();
   const [imageThumb, imageThumbSet] = useState("");
-  const { dataPlantEdit } = useSelector((state) => state.editplant);
+  const { dataPlantNewEdit } = useSelector((state) => state.editplant);
   const [chooseCategory, chooseCategorySet] = useState("");
-  const plantName = dataPlantNew.name.split("-")[0];
-  const FamilyName = dataPlantNew.name.split("-")[1];
+  const plantName = dataPlantNewEdit.name.split("-")[0];
+  const FamilyName = dataPlantNewEdit.name.split("-")[1];
   const GetImageThumbnails =
-    dataPlantNew.plant_images.length !== 0
-      ? dataPlantNew.plant_images.filter((items) => items.is_primary === 1)
+    dataPlantNewEdit.plant_images.length !== 0
+      ? dataPlantNewEdit.plant_images.filter((items) => items.is_primary === 1)
       : [];
 
   useEffect(() => {
     if (GetImageThumbnails.length !== 0) {
       imageThumbSet(GetImageThumbnails[0].file_name);
     }
-  }, [GetImageThumbnails, dataPlantNew]);
+  }, [GetImageThumbnails, dataPlantNewEdit]);
   useEffect(() => {
-    if (dataPlantNew.plant_category_id !== 0) {
-      GetPlantCAtegoriesById(dataPlantNew.plant_category_id, (items) => {
+    if (dataPlantNewEdit.plant_category_id !== 0) {
+      GetPlantCAtegoriesById(dataPlantNewEdit.plant_category_id, (items) => {
         chooseCategorySet(items.name);
       });
     }
-  }, [dataPlantNew.plant_category_id]);
+  }, [dataPlantNewEdit.plant_category_id]);
   return (
     <section className="w-full">
       <header className="w-full flex justify-between py-[12.5px]">
@@ -71,21 +71,23 @@ export default function Component_Plant_Information() {
           <section>
             <h4 className="text-sm font-nunito text-slate-500">Toxicity</h4>
             <p className="font-nunito-bold ">
-              {dataPlantNew.is_toxic ? "Toxic Plant" : " Non-Toxic Plant"}
+              {dataPlantNewEdit.is_toxic ? "Toxic Plant" : " Non-Toxic Plant"}
             </p>
           </section>
           <section>
             <h4 className="text-sm font-nunito text-slate-500">
               Harvest Duration
             </h4>
-            <p className="font-nunito-bold ">{dataPlantNew.harvest_duration}</p>
+            <p className="font-nunito-bold ">
+              {dataPlantNewEdit.harvest_duration}
+            </p>
           </section>
           <section>
             <h4 className="text-sm font-nunito text-slate-500">
               Climate Condition
             </h4>
             <p className="font-nunito-bold ">
-              {dataPlantNew.climate_condition}
+              {dataPlantNewEdit.climate_condition}
             </p>
           </section>
         </article>

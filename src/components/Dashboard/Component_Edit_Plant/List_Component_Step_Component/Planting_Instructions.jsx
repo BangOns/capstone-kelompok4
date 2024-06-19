@@ -12,18 +12,12 @@ import PreviousButtonPlant from "../Component_Buttons/previous_buton_plant";
 import { useDispatch, useSelector } from "react-redux";
 import {
   FuncMessagePlantError,
-  FuncNextStep,
-  FuncPrevStep,
   FuncDeletePlant,
+  FuncNextStepEdit,
+  FuncPrevStepEdit,
 } from "../../../../libs/redux/Slice/DashboardSlice";
-import {
-  FuncEditInputPlantInformation,
-  FuncPlantingInstructionsEdit,
-} from "../../../../libs/redux/Slice/EditPlantSlice";
-// import {
-//   FuncAddInputPlantInformation,
-//   FuncPlantingInstructions,
-// } from "../../../../libs/redux/Slice/AddPlantSlice";
+import { FuncPlantingInstructionsEdit } from "../../../../libs/redux/Slice/EditPlantSlice";
+
 import Message_Error from "../../../Component_Message/Message_Error";
 import { IconsEdit } from "../../../../utils/Component-Icons-Reminder-settings";
 import DropdownSearch from "./Planting_Instructions/dropdown";
@@ -31,35 +25,76 @@ import Alert_DeletePlantInstructions from "../Component-Alert/Alert_Delete_Plant
 
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 
-export default function Planting_Instructions({ DataPlantEdit }) {
+export default function Planting_Instructions() {
   const dispatch = useDispatch();
-  const count = useSelector(
-    (state) => state.editplant.PlantingInstructionsEdit
+
+  const { dataPlantEditFullField, dataPlantNewEdit } = useSelector(
+    (state) => state.editplant
   );
-  const { dataPlantEdit } = useSelector((state) => state.editplant);
-  const fileInputRef = useRef(null);
-  const [data, setData] = useState(count);
+  const [data, setData] = useState([]);
   const [hide, setHide] = useState();
   const [index, setIndex] = useState();
-
   function handleClickPrev() {
-    dispatch(FuncPrevStep());
-    dispatch(FuncPlantingInstructionsEdit(data));
-  }
-
-  function handleClickNext() {
     if (data.length === 0) {
       dispatch(FuncMessagePlantError(true));
     } else {
-      const plant_instructions = [...data];
+      let propsDataInstructions = [...data];
+
+      let plant_instructions = propsDataInstructions.map((item) => {
+        let newItem = { ...item };
+        if (newItem.hasOwnProperty("instruction_category")) {
+          newItem.instruction_category_id = newItem.instruction_category.id;
+          delete newItem.instruction_category;
+          delete newItem.plant_id;
+          delete newItem.id;
+        }
+        return newItem;
+      });
       dispatch(
-        FuncEditInputPlantInformation({
-          ...dataPlantEdit,
-          plant_instructions,
+        FuncPlantingInstructionsEdit({
+          name: "plant_instructions",
+          value: plant_instructions,
         })
       );
-      dispatch(FuncEditInputPlantInformation(data));
-      dispatch(FuncNextStep());
+      dispatch(FuncPrevStepEdit());
+    }
+  }
+
+  function handleClickNext() {
+    const validateData =
+      data &&
+      data.every(
+        (value) =>
+          value.instruction_category_id !== 0 && value.step_title !== ""
+      );
+    const validateDescription = data.some(
+      (value) =>
+        value.step_description === "" ||
+        value.step_description.replace(/<(.|\n)*?>/g, "").trim().length === 0
+    );
+    if (!validateData || data.length <= 0 || validateDescription) {
+      dispatch(FuncMessagePlantError(true));
+    } else {
+      let propsDataInstructions = [...data];
+
+      let plant_instructions = propsDataInstructions.map((item) => {
+        let newItem = { ...item };
+        if (newItem.hasOwnProperty("instruction_category")) {
+          newItem.instruction_category_id = newItem.instruction_category.id;
+          delete newItem.instruction_category;
+          delete newItem.plant_id;
+          delete newItem.id;
+        }
+        return newItem;
+      });
+
+      dispatch(
+        FuncPlantingInstructionsEdit({
+          name: "plant_instructions",
+          value: plant_instructions,
+        })
+      );
+      dispatch(FuncNextStepEdit());
     }
   }
 
@@ -94,11 +129,17 @@ export default function Planting_Instructions({ DataPlantEdit }) {
     const newData = [...data];
     if (field === "step_image_url") {
       const file = value.target.files[0];
+
       if (file) {
-        const imageUrl = URL.createObjectURL(file);
-        newData[index] = { ...newData[index], [field]: imageUrl };
-        const dataNew = newData;
-        setData(dataNew);
+        const fileSizeMB = file.size / (1024 * 1024);
+        if (fileSizeMB > 2) {
+          dispatch(FuncMessagePlantError(true));
+        } else {
+          const imageUrl = URL.createObjectURL(file);
+          newData[index] = { ...newData[index], [field]: imageUrl };
+          const dataNew = newData;
+          setData(dataNew);
+        }
       }
     } else {
       newData[index] = { ...newData[index], [field]: value };
@@ -123,6 +164,16 @@ export default function Planting_Instructions({ DataPlantEdit }) {
       setData(updateData);
     }
   }
+
+  useEffect(() => {
+    if (dataPlantEditFullField.data) {
+      setData(
+        dataPlantNewEdit.plant_instructions
+          ? dataPlantNewEdit.plant_instructions
+          : dataPlantEditFullField.data.plant_instructions
+      );
+    }
+  }, [dataPlantEditFullField]);
   return (
     <Fragment>
       <div className="mt-6 p-4 border rounded-[10px]">
@@ -209,38 +260,73 @@ export default function Planting_Instructions({ DataPlantEdit }) {
                       />
                     </div>
                   </div>
-                  <div className="xl:flex">
-                    <div className="relative">
-                      <Image
-                        src={
-                          e.step_image_url == ""
-                            ? ImageImport.ImageTest
-                            : e.step_image_url
-                        }
-                        className="max-xl:m-auto"
-                        height={237}
-                        width={237}
-                        alt="profile"
-                      />
-                      <div className="absolute bg-[#10B981] p-3 border rounded-lg w-fit h-fit top-0 right-0">
+                  <div className="xl:flex px-4 pb-4 items-center">
+                    {e.step_image_url ? (
+                      <div className="relative">
+                        <Image
+                          src={
+                            e.step_image_url == ""
+                              ? ImageImport.ImageTest
+                              : e.step_image_url
+                          }
+                          className="max-xl:m-auto object-cover "
+                          height={237}
+                          width={237}
+                          alt="image-step"
+                        />
+                        <div className="absolute bg-[#10B981] p-3 border rounded-lg w-fit h-fit top-0 right-0">
+                          <input
+                            type="file"
+                            className="hidden"
+                            id={`image-url-${i}`}
+                            onChange={(event) =>
+                              updateField(i, "step_image_url", event)
+                            }
+                          />
+                          <Image
+                            src={IconsImport.IconsEdit}
+                            className="max-xl:m-auto cursor-pointer"
+                            alt="profile"
+                            onClick={() =>
+                              document.getElementById(`image-url-${i}`).click()
+                            }
+                          />
+                        </div>
+                      </div>
+                    ) : (
+                      <div className="relative ">
                         <input
                           type="file"
+                          name=""
+                          accept="image/*"
+                          id="image-step"
                           className="hidden"
-                          id={`image-url-${i}`}
                           onChange={(event) =>
                             updateField(i, "step_image_url", event)
                           }
                         />
-                        <Image
-                          src={IconsImport.IconsEdit}
-                          className="max-xl:m-auto cursor-pointer"
-                          alt="profile"
+                        <div
+                          className="p-4 rounded-2xl border-2 w-[237px] h-[215px] border-dashed flex justify-center items-center border-gray-300  cursor-pointer"
                           onClick={() =>
-                            document.getElementById(`image-url-${i}`).click()
+                            document.getElementById("image-step").click()
                           }
-                        />
+                        >
+                          <figure className="w-full flex flex-col items-center justify-center">
+                            <Image
+                              src={IconsImport.IconsImageUpload}
+                              alt="uploadImage"
+                            />
+                            <figcaption className="text-sm text-center font-nunito text-gray-500">
+                              <p>
+                                Upload Thumbnail Image{" "}
+                                <span className="text-red-500">*</span>
+                              </p>
+                              <p>(max. 2 MB)</p>
+                            </figcaption>
+                          </figure>
+                        </div>
                       </div>
-                    </div>
+                    )}
                     <div className="w-full">
                       <div className="xl:flex m-5 ">
                         <div className=" w-full">
@@ -252,6 +338,7 @@ export default function Planting_Instructions({ DataPlantEdit }) {
                               className="p-2 border rounded-lg border-gray-300 max-xl:w-full xl:w-[90%] pr-10"
                               type="text"
                               name=""
+                              placeholder="Title"
                               id=""
                               value={e.step_title}
                               onChange={(event) =>
@@ -269,6 +356,7 @@ export default function Planting_Instructions({ DataPlantEdit }) {
                             <span className="text-red-500">*</span>
                           </p>
                           <DropdownSearch
+                            dataEdit={e}
                             setCategory={(category) =>
                               updateField(
                                 i,
@@ -280,8 +368,9 @@ export default function Planting_Instructions({ DataPlantEdit }) {
                         </div>
                       </div>
                       <ReactQuill
-                        className="flex-col-reverse flex  m-5 border-2 rounded-lg  h-[50%]"
+                        className="flex-col-reverse flex  m-5 border-2 rounded-lg  overflow-y-auto h-[180px]"
                         theme="snow"
+                        placeholder="description"
                         value={e.step_description}
                         onChange={(value) =>
                           updateField(i, "step_description", value)

@@ -10,45 +10,44 @@ import dynamic from "next/dynamic";
 import Message_Error from "../../../Component_Message/Message_Error";
 import {
   FuncMessagePlantError,
-  FuncNextStep,
-  FuncPrevStep,
+  FuncNextStepEdit,
+  FuncPrevStepEdit,
 } from "../../../../libs/redux/Slice/DashboardSlice";
-// import {
-//   FuncAddInputPlantInformation,
-//   FuncPlantCaringInput,
-// } from "../../../../libs/redux/Slice/AddPlantSlice";
+
 import {
-  FuncEditInputPlantInformation,
   FuncPlantCaringInputEdit,
+  FuncPlantInformationInputEdit,
 } from "../../../../libs/redux/Slice/EditPlantSlice";
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 
-export default function Plant_Caring({ DataPlantEdit }) {
+export default function Plant_Caring() {
   const [value, setValue] = useState("");
-  const { PlantCaringInputEdit, dataPlantEdit } = useSelector(
+  const { dataPlantEditFullField, dataPlantNewEdit } = useSelector(
     (state) => state.editplant
   );
   const dispatch = useDispatch();
   function handleClickPrev() {
-    dispatch(FuncPrevStep());
+    dispatch(FuncPrevStepEdit());
   }
   function handleClickNext() {
-    if (PlantCaringInputEdit.additional_tips === "") {
+    if (dataPlantNewEdit.additional_tips === "") {
       dispatch(FuncMessagePlantError(true));
     } else {
-      const dataInpPlantCaring = {
-        ...PlantCaringInputEdit,
-      };
-      dispatch(
-        FuncEditInputPlantInformation({
-          ...dataPlantEdit,
-          ...dataInpPlantCaring,
-        })
-      );
-      dispatch(FuncNextStep());
+      dispatch(FuncNextStepEdit());
     }
   }
-
+  useEffect(() => {
+    if (dataPlantEditFullField.data) {
+      dispatch(
+        FuncPlantInformationInputEdit({
+          name: "additional_tips",
+          value: dataPlantNewEdit.additional_tips
+            ? dataPlantNewEdit.additional_tips
+            : dataPlantEditFullField.data.additional_tips,
+        })
+      );
+    }
+  }, [dataPlantEditFullField]);
   return (
     <Fragment>
       <div className="mt-6 p-4 border rounded-[10px]">
@@ -65,7 +64,7 @@ export default function Plant_Caring({ DataPlantEdit }) {
           <ReactQuill
             className="w-full h-[249px] text-neutral-950 border border-neutral-300 text-[14px] flex-col-reverse flex rounded-md"
             theme="snow"
-            value={PlantCaringInputEdit.additional_tips || value}
+            value={dataPlantNewEdit.additional_tips || value}
             onChange={(e) => {
               setValue(e);
               dispatch(
