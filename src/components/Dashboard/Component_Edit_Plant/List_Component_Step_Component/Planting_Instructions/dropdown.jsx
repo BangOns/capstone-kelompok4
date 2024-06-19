@@ -1,12 +1,33 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { IconsImport } from "@/utils/IconsImport";
 import Image from "next/image";
+import { useDispatch } from "react-redux";
 
 export default function DropdownSearch({ items, onButtonClick, setCategory }) {
   const [searchTerm, setSearchTerm] = useState("");
   const [isOpen, setIsOpen] = useState(false);
-
+  const [allIsntructionsCategories, allIsntructionsCategoriesSet] = useState(
+    []
+  );
+  const dispatch = useDispatch();
+  async function getInstructionsCategories() {
+    try {
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/plants/instructions/categories`,
+        {
+          method: "GET",
+        }
+      );
+      const allResponse = await response.json();
+      allIsntructionsCategoriesSet(allResponse.data);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  useEffect(() => {
+    getInstructionsCategories();
+  }, []);
   return (
     <div className="relative inline-block text-left w-full">
       <div>
@@ -26,63 +47,24 @@ export default function DropdownSearch({ items, onButtonClick, setCategory }) {
 
       {isOpen && (
         <div className="w-full absolute right-0 z-10 mt-2  origin-top-right bg-white border border-gray-300 rounded-md shadow-lg">
-          <div className="p-2">
-            <input
-              type="text"
-              placeholder="Search..."
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none"
-            />
-          </div>
           <div className="max-h-60 overflow-auto">
-            <button
-              onClick={() => {
-                setSearchTerm("Planting Seeds");
-                setIsOpen(false);
-                setCategory("Planting Seeds");
-              }}
-              className="block w-full px-4 py-2 text-left text-sm text-gray-700 hover:bg-gray-100"
-            >
-              Planting Seeds
-            </button>
-            <button
-              onClick={() => {
-                setSearchTerm("Planting Seeds");
-                setIsOpen(false);
-                setCategory("Planting Seeds");
-              }}
-              className="block w-full px-4 py-2 text-left text-sm text-gray-700 hover:bg-gray-100"
-            >
-              Planting Seeds
-            </button>
-            <button
-              onClick={() => {
-                setSearchTerm("Plant Care");
-                setIsOpen(false);
-                setCategory("Plant Care");
-              }}
-              className="block w-full px-4 py-2 text-left text-sm text-gray-700 hover:bg-gray-100"
-            >
-              Plant Care
-            </button>
-            <button
-              onClick={() => {
-                setSearchTerm("Harvest");
-                setIsOpen(false);
-                setCategory("Harvest");
-              }}
-              className="block w-full px-4 py-2 text-left text-sm text-gray-700 hover:bg-gray-100"
-            >
-              Harvest
-            </button>
-          </div>
-          <div className="py-2">
-            <button
-              onClick={onButtonClick}
-              className="w-full text-left flex items-center justify-start  px-4 py-2 text-sm text-[#0EA5E9] rounded-md"
-            >
-              <span className="text-[30px] mr-2 my-auto">+ </span>{" "}
-              <span className="mt-1 my-auto">Add other category</span>
-            </button>
+            {allIsntructionsCategories ? (
+              allIsntructionsCategories.map((items, i) => (
+                <button
+                  key={i}
+                  onClick={() => {
+                    setSearchTerm(items.name);
+                    setIsOpen(false);
+                    setCategory(items.id);
+                  }}
+                  className="block w-full px-4 py-2 text-left text-sm text-gray-700 hover:bg-gray-100"
+                >
+                  {items.name}
+                </button>
+              ))
+            ) : (
+              <p>Loading...</p>
+            )}
           </div>
         </div>
       )}

@@ -6,8 +6,8 @@ import { useDispatch, useSelector } from "react-redux";
 
 export default function Component_Additional_Planting_Tips() {
   const dispatch = useDispatch();
-  const { dataPlantNew } = useSelector((state) => state.addplant);
-  const additionalPlantTips = dataPlantNew?.additional_tips || "";
+  const { dataPlantEdit } = useSelector((state) => state.editplant);
+  const additionalPlantTips = dataPlantEdit?.additional_tips || "";
 
   return (
     <section className="mt-6">

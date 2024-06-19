@@ -5,11 +5,13 @@ import { ImageImport } from "../../../../../utils/ImageImport";
 import { IconsImport } from "../../../../../utils/IconsImport";
 import { FuncToIndex } from "../../../../../libs/redux/Slice/DashboardSlice";
 import { useDispatch, useSelector } from "react-redux";
+import { GetPlantCAtegoriesById } from "../../../../../utils/Function-FetchAPI/GetDataCategories";
 
 export default function Component_Plant_Information() {
   const dispatch = useDispatch();
   const [imageThumb, imageThumbSet] = useState("");
-  const { dataPlantNew } = useSelector((state) => state.addplant);
+  const { dataPlantEdit } = useSelector((state) => state.editplant);
+  const [chooseCategory, chooseCategorySet] = useState("");
   const plantName = dataPlantNew.name.split("-")[0];
   const FamilyName = dataPlantNew.name.split("-")[1];
   const GetImageThumbnails =
@@ -22,6 +24,13 @@ export default function Component_Plant_Information() {
       imageThumbSet(GetImageThumbnails[0].file_name);
     }
   }, [GetImageThumbnails, dataPlantNew]);
+  useEffect(() => {
+    if (dataPlantNew.plant_category_id !== 0) {
+      GetPlantCAtegoriesById(dataPlantNew.plant_category_id, (items) => {
+        chooseCategorySet(items.name);
+      });
+    }
+  }, [dataPlantNew.plant_category_id]);
   return (
     <section className="w-full">
       <header className="w-full flex justify-between py-[12.5px]">
@@ -57,9 +66,7 @@ export default function Component_Plant_Information() {
             <h4 className="text-sm font-nunito text-slate-500">
               Plant Category
             </h4>
-            <p className="font-nunito-bold ">
-              {dataPlantNew?.plant_category.name}
-            </p>
+            <p className="font-nunito-bold ">{chooseCategory}</p>
           </section>
           <section>
             <h4 className="text-sm font-nunito text-slate-500">Toxicity</h4>

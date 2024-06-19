@@ -1,8 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { IoIosArrowDown } from "react-icons/io";
 import { motion } from "framer-motion";
 import { useDispatch, useSelector } from "react-redux";
-import { FuncPlantCharateristic } from "../../../../../../libs/redux/Slice/AddPlantSlice";
+// import { FuncPlantCharateristic } from "../../../../../../libs/redux/Slice/AddPlantSlice";
+import {
+  FuncPlantCharateristicEdit,
+  FuncPlantInformationInputEdit,
+} from "../../../../../../libs/redux/Slice/EditPlantSlice";
 const variants = {
   hidden: {
     opacity: 0,
@@ -14,12 +18,24 @@ const variants = {
   },
 };
 export default function Unit() {
-  const { plant_characteristic } = useSelector(
-    (state) => state.addplant.PlantInformationInput
+  const { dataPlantEditFullField, dataPlantNewEdit } = useSelector(
+    (state) => state.editplant
   );
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
   const arrDataUnit = ["Meter", "Centimeter"];
+  useEffect(() => {
+    if (dataPlantEditFullField.data) {
+      dispatch(
+        FuncPlantInformationInputEdit({
+          name: "height-unit",
+          value: dataPlantNewEdit.plant_characteristic
+            ? dataPlantNewEdit.plant_characteristic
+            : dataPlantEditFullField.data.plant_characteristic,
+        })
+      );
+    }
+  }, [dataPlantEditFullField]);
   return (
     <section className="w-[211px] xl:w-1/2">
       <label htmlFor="" className="font-nunito-bold text-sm pb-1">
@@ -31,8 +47,8 @@ export default function Unit() {
           onClick={() => setOpen(!open)}
         >
           <p>
-            {plant_characteristic.height_unit
-              ? `${plant_characteristic.height_unit}`
+            {dataPlantNewEdit.plant_characteristic?.height_unit
+              ? `${dataPlantNewEdit.plant_characteristic.height_unit}`
               : "Unit..."}
           </p>
           <IoIosArrowDown />
@@ -52,7 +68,7 @@ export default function Unit() {
                 onClick={() => {
                   setOpen(false);
                   dispatch(
-                    FuncPlantCharateristic({
+                    FuncPlantCharateristicEdit({
                       name: "height_unit",
                       value: items,
                     })

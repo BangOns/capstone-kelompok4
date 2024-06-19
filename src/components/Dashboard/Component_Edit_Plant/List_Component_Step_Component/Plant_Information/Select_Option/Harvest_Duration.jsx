@@ -3,7 +3,8 @@ import { CiSearch } from "react-icons/ci";
 import { IoIosArrowDown } from "react-icons/io";
 import { motion } from "framer-motion";
 import { useDispatch, useSelector } from "react-redux";
-import { FuncPlantInformationInput } from "../../../../../../libs/redux/Slice/AddPlantSlice";
+// import { FuncPlantInformationInput } from "../../../../../../libs/redux/Slice/AddPlantSlice";
+import { FuncPlantInformationInputEdit } from "../../../../../../libs/redux/Slice/EditPlantSlice";
 
 const variants = {
   hidden: {
@@ -16,8 +17,8 @@ const variants = {
   },
 };
 export default function Harvest_Duration() {
-  const { PlantInformationInput, dataPlantNew } = useSelector(
-    (state) => state.addplant
+  const { dataPlantEditFullField, dataPlantNewEdit } = useSelector(
+    (state) => state.editplant
   );
   const [open, setOpen] = useState(false);
   const arrDataHarvestDuration = [
@@ -28,7 +29,18 @@ export default function Harvest_Duration() {
     "12 Months",
   ];
   const dispatch = useDispatch();
-
+  useEffect(() => {
+    if (dataPlantEditFullField.data) {
+      dispatch(
+        FuncPlantInformationInputEdit({
+          name: "harvest_duration",
+          value: dataPlantNewEdit.harvest_duration
+            ? dataPlantNewEdit.harvest_duration
+            : dataPlantEditFullField.data.harvest_duration,
+        })
+      );
+    }
+  }, [dataPlantEditFullField]);
   return (
     <section className="basis-[23%] w-full">
       <label htmlFor="" className="font-nunito-bold text-sm pb-1">
@@ -40,9 +52,8 @@ export default function Harvest_Duration() {
           onClick={() => setOpen(!open)}
         >
           <p>
-            {PlantInformationInput.harvest_duration
-              ? `${PlantInformationInput.harvest_duration}`
-              : "Month"}
+            {dataPlantNewEdit.harvest_duration &&
+              `${dataPlantNewEdit.harvest_duration} month`}
           </p>
           <IoIosArrowDown />
         </div>
@@ -60,9 +71,9 @@ export default function Harvest_Duration() {
                 className="w-full px-3 group py-[14px] hover:bg-emerald-500"
                 onClick={() => {
                   dispatch(
-                    FuncPlantInformationInput({
+                    FuncPlantInformationInputEdit({
                       name: "harvest_duration",
-                      value: items,
+                      value: parseInt(items.split(" ")[0]),
                     })
                   );
                   setOpen(false);

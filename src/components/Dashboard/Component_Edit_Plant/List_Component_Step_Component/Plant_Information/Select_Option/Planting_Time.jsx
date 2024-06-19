@@ -3,7 +3,8 @@ import { CiSearch } from "react-icons/ci";
 import { IoIosArrowDown } from "react-icons/io";
 import { motion } from "framer-motion";
 import { useDispatch, useSelector } from "react-redux";
-import { FuncPlantInformationInput } from "../../../../../../libs/redux/Slice/AddPlantSlice";
+// import { FuncPlantInformationInput } from "../../../../../../libs/redux/Slice/AddPlantSlice";
+import { FuncPlantInformationInputEdit } from "../../../../../../libs/redux/Slice/EditPlantSlice";
 
 const variants = {
   hidden: {
@@ -16,13 +17,24 @@ const variants = {
   },
 };
 export default function Planting_Time() {
-  const { PlantInformationInput, dataPlantNew } = useSelector(
-    (state) => state.addplant
+  const { dataPlantEditFullField, dataPlantNewEdit } = useSelector(
+    (state) => state.editplant
   );
   const [open, setOpen] = useState(false);
   const arrDataPlantingTime = ["Summer", "Autumn", "Spring", "Winter"];
   const dispatch = useDispatch();
-
+  useEffect(() => {
+    if (dataPlantEditFullField.data) {
+      dispatch(
+        FuncPlantInformationInputEdit({
+          name: "planting_time",
+          value: dataPlantNewEdit.planting_time
+            ? dataPlantNewEdit.planting_time
+            : dataPlantEditFullField.data.planting_time,
+        })
+      );
+    }
+  }, [dataPlantEditFullField]);
   return (
     <section className="w-full">
       <label htmlFor="" className="font-nunito-bold text-sm pb-1">
@@ -34,10 +46,10 @@ export default function Planting_Time() {
           onClick={() => setOpen(!open)}
         >
           <p>
-            {PlantInformationInput.planting_time
-              ? `${PlantInformationInput.planting_time}`
-              : "Conditions"}
+            {dataPlantNewEdit.planting_time &&
+              `${dataPlantNewEdit.planting_time}`}
           </p>
+
           <IoIosArrowDown />
         </div>
         <motion.div
@@ -55,7 +67,7 @@ export default function Planting_Time() {
                 onClick={() => {
                   setOpen(false);
                   dispatch(
-                    FuncPlantInformationInput({
+                    FuncPlantInformationInputEdit({
                       name: "planting_time",
                       value: items,
                     })

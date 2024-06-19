@@ -2,7 +2,7 @@ import Image from "next/image";
 import { ImageImport } from "../../../utils/ImageImport";
 export default function Mitra() {
   return (
-    <div className="w-full text-center my-32">
+    <div className="w-full text-center my-32 px-[25px]">
       <p className="py-5 font-[700] text-[16px] text-[#030712] font-nunito-bold">
         Our Partners :
       </p>

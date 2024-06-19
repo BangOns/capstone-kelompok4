@@ -16,54 +16,37 @@ import {
   FuncMessagePlantError,
   FuncPlantInformationStep2,
 } from "../../../../libs/redux/Slice/DashboardSlice";
-import { FuncEditInputPlantInformation } from "../../../../libs/redux/Slice/EditPlantSlice";
+import {
+  FuncEditInputPlantInformation,
+  FuncPlantInformationInputEdit,
+} from "../../../../libs/redux/Slice/EditPlantSlice";
 // import { FuncAddInputPlantInformation } from "../../../../libs/redux/Slice/AddPlantSlice";
 import Upload_Image_Plant from "./Plant_Information/Upload_Image_Plant";
 import { ValidateInformation } from "../../../../utils/Validate_AddPlant/Validate_PlantInformation";
-export default function Plant_Infromation() {
+export default function Plant_Infromation({ DataPlantEdit }) {
   const dispatch = useDispatch();
   const { plantInformationStep2 } = useSelector((state) => state.dashboard);
-  const { dataPlantEdit } = useSelector((state) => state.editplant);
-
-  const PlantInformation = {
-    name: dataPlantEdit.name,
-    description: dataPlantEdit.description,
-    category: dataPlantEdit.category,
-    harvestDuration: dataPlantEdit.harvestDuration,
-    climateCondition: dataPlantEdit.climateCondition,
-    type: dataPlantEdit.type,
-    sunlight: dataPlantEdit.sunlight,
-    plantingTime: dataPlantEdit.plantingTime,
-    plant_image: dataPlantEdit.plant_image,
-  };
-  const [value, setValue] = useState("");
+  const { dataPlantNewEdit, dataPlantEditFullField } = useSelector(
+    (state) => state.editplant
+  );
 
   const regex = /^[^-]+-[^-]+$/;
-
-  function handleChangeImageChild(e) {
-    const { name, files } = e.target;
-    imageChildSet((prev) => ({
-      ...prev,
-      [name]: URL.createObjectURL(files[0]),
-    }));
-  }
-
   function handleClickNext() {
-    const checkValidate = ValidateInformation(PlantInformationInputEdit);
-    if (!checkValidate || !regex.test(PlantInformationInputEdit.name)) {
-      if (!regex.test(PlantInformationInputEdit.name)) {
+    const checkValidate = ValidateInformation(dataPlantNewEdit);
+    if (!checkValidate || !regex.test(dataPlantNewEdit.name)) {
+      if (!regex.test(dataPlantNewEdit.name)) {
         dispatch(FuncMessageErrorPlantName(true));
       }
       dispatch(FuncMessagePlantError(true));
     } else {
-      const dataInPlantInformationEdit = {
-        ...PlantInformationInputEdit,
+      const dataInPlantInformation = {
+        ...dataPlantNewEdit,
       };
 
       dispatch(
         FuncEditInputPlantInformation({
-          ...dataPlantEdit,
-          ...dataInPlantInformationEdit,
+          ...dataPlantEditFullField,
+          ...dataInPlantInformation,
         })
       );
       dispatch(FuncPlantInformationStep2(true));
@@ -86,12 +69,12 @@ export default function Plant_Infromation() {
                   <Upload_Image_Plant />
                   <section className="w-5/6">
                     <div className="w-full flex items-start justify-between">
-                      {Array(1, 2, 3, 4).map((item, index) => (
+                      {[1, 2, 3, 4].map((item, index) => (
                         <Upload_Image_Child_Plant key={index} ids={item} />
                       ))}
                     </div>
                     <div className="w-full flex items-start justify-between pt-2">
-                      {Array(5, 6, 7, 8).map((item, index) => (
+                      {[5, 6, 7, 8].map((item, index) => (
                         <Upload_Image_Child_Plant key={index} ids={item} />
                       ))}
                     </div>
@@ -103,7 +86,7 @@ export default function Plant_Infromation() {
                   </section>
                 </article>
               </section>
-              <Plant_Descriptions value={value} setValue={setValue} />
+              <Plant_Descriptions />
             </article>
             <Plant_Input />
             <Plant_Input_RadioButton />

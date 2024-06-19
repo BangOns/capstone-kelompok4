@@ -2,7 +2,8 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { FuncReminderSettingsInput } from "@/libs/redux/Slice/AddPlantSlice";
+// import { FuncReminderSettingsInput } from "@/libs/redux/Slice/AddPlantSlice";
+import { FuncReminderSettingsInputEdit } from "../../../../../libs/redux/Slice/EditPlantSlice";
 import {
   IconsMinus,
   IconChevronDown,
@@ -23,7 +24,7 @@ const WF_Form = () => {
 
   const handleIncrementFrequency = () => {
     dispatch(
-      FuncReminderSettingsInput({
+      FuncReminderSettingsInputEdit({
         name: "watering_frequency",
         operator: "plus",
       })
@@ -31,7 +32,7 @@ const WF_Form = () => {
   };
   const handleDecrementFrequency = () => {
     dispatch(
-      FuncReminderSettingsInput({
+      FuncReminderSettingsInputEdit({
         name: "watering_frequency",
         operator: "minus",
       })
@@ -39,21 +40,21 @@ const WF_Form = () => {
   };
   const handleIncrementAmount = () => {
     dispatch(
-      FuncReminderSettingsInput({ name: "watering_amount", operator: "plus" })
+      FuncReminderSettingsInputEdit({ name: "watering_amount", operator: "plus" })
     );
   };
 
   const handleDecrementAmount = () => {
     dispatch(
-      FuncReminderSettingsInput({ name: "watering_amount", operator: "minus" })
+      FuncReminderSettingsInputEdit({ name: "watering_amount", operator: "minus" })
     );
   };
 
   const handleEachChange = (value) => {
-    dispatch(FuncReminderSettingsInput({ name: "each", value }));
+    dispatch(FuncReminderSettingsInputEdit({ name: "each", value }));
   };
   const handleUnitChange = (value) => {
-    dispatch(FuncReminderSettingsInput({ name: "unit", value }));
+    dispatch(FuncReminderSettingsInputEdit({ name: "unit", value }));
   };
 
   const handleOpenEach = (value) => {
@@ -148,7 +149,7 @@ const WF_Form = () => {
               value={watering_amount}
               onChange={(e) =>
                 dispatch(
-                  FuncReminderSettingsInput({
+                  FuncReminderSettingsInputEdit({
                     name: "watering_amount",
                     value: parseInt(e.target.value, 10) || 0,
                   })
@@ -222,7 +223,7 @@ const WF_Form = () => {
           value={watering_time}
           onChange={(e) =>
             dispatch(
-              FuncReminderSettingsInput({
+              FuncReminderSettingsInputEdit({
                 name: "watering_time",
                 value: e.target.value,
               })
