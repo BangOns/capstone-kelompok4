@@ -67,29 +67,23 @@ export const EditPlantSlice = createSlice({
     },
 
     FuncReminderSettingsInputEdit: (state, action) => {
-      const { operator } = action.payload;
-      switch (operator) {
-        case "plus":
-          state.dataPlantNewEdit.watering_schedule[action.payload.name] =
-            state.dataPlantNewEdit.watering_schedule[action.payload.name] + 1;
-          state.dataPlantEdit.watering_schedule[action.payload.name] =
-            state.dataPlantEdit.watering_schedule[action.payload.name] + 1;
-          break;
-        case "minus":
-          if (state.dataPlantEdit.watering_schedule[action.payload.name] > 0) {
-            state.dataPlantNewEdit.watering_schedule[action.payload.name] =
-              state.dataPlantNewEdit.watering_schedule[action.payload.name] - 1;
-            state.dataPlantEdit.watering_schedule[action.payload.name] =
-              state.dataPlantEdit.watering_schedule[action.payload.name] - 1;
-          }
-          break;
-        default:
-          state.dataPlantNewEdit.watering_schedule[action.payload.name] =
-            action.payload.value;
-          state.dataPlantEdit.watering_schedule[action.payload.name] =
-            action.payload.value;
-          break;
+      if (action.payload.operator === "plus") {
+        state.dataPlantNewEdit.watering_schedule[action.payload.name] += 1;
+      } else if (action.payload.operator === "minus") {
+        if (
+          state.dataPlantNewEdit.watering_schedule[action.payload.name] <= 0
+        ) {
+          state.dataPlantNewEdit.watering_schedule[action.payload.name] = 0;
+        } else {
+          state.dataPlantNewEdit.watering_schedule[action.payload.name] -= 1;
+        }
+      } else {
+        state.dataPlantNewEdit.watering_schedule[action.payload.name] =
+          action.payload.value;
       }
+    },
+    FuncStoreReminderSettingsEdit: (state, action) => {
+      state.dataPlantNewEdit.watering_schedule = action.payload;
     },
     FuncFaQInputEdit: (state, action) => {
       state.dataPlantNewEdit[action.payload.name] = action.payload.value;
@@ -168,5 +162,6 @@ export const {
   FuncEditDataPlants,
   FuncDeleteImagePlantInformationEdit,
   FuncPlantInformationInputImageEdit,
+  FuncStoreReminderSettingsEdit,
 } = EditPlantSlice.actions;
 export default EditPlantSlice.reducer;
