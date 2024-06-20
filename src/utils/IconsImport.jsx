@@ -25,6 +25,8 @@ import IconsHuman from "@/assets/icons/Icons-Human.svg";
 import IconsGooglePlay from "@/assets/icons/Icons-Google-Play.svg";
 import IconsMaximize from "@/assets/icons/Icons-Maximize.svg";
 import IconsLogoLight from "@/assets/icons/Icons-Logo-Plantopia-Light.svg";
+import IconsPlant from "@/assets/icons/Icons-plant.svg";
+import IconsPlantV2 from "@/assets/icons/Icons-Plant-V2.svg";
 
 export const IconsImport = {
   // masukkan icon di sini
@@ -55,4 +57,6 @@ export const IconsImport = {
   IconsEditImage,
   IconsEdit,
   IconsLogoLight,
+  IconsPlant,
+  IconsPlantV2,
 };
