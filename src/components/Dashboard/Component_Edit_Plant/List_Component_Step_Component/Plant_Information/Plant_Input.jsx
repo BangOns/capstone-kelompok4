@@ -53,7 +53,7 @@ export default function Plant_Input() {
             type="text"
             value={dataPlantNewEdit.name && dataPlantNewEdit.name}
             placeholder="Plant name - Family name"
-            className="w-full border-0 focus:ring-0 outline-none text-base font-nunito"
+            className="w-full border-0 focus:ring-0 outline-none text-base font-nunito bg-white"
             onChange={validateName}
           />
         </div>

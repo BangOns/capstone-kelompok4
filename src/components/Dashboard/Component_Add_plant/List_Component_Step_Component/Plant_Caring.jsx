@@ -59,7 +59,7 @@ export default function Plant_Caring() {
             </p>
           </div>
           <ReactQuill
-            className="w-full h-[249px] text-neutral-950 border border-neutral-300 text-[14px] flex-col-reverse flex rounded-md"
+            className="w-full h-[249px] text-neutral-950 border border-neutral-300 text-[14px] flex-col-reverse flex rounded-md overflow-y-auto"
             theme="snow"
             value={PlantCaringInput.additional_tips || value}
             onChange={(e) => {

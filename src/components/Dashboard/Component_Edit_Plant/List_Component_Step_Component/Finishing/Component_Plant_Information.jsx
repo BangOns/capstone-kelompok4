@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { ImageImport } from "../../../../../utils/ImageImport";
 import { IconsImport } from "../../../../../utils/IconsImport";
-import { FuncToIndex } from "../../../../../libs/redux/Slice/DashboardSlice";
+import { FuncToIndexEdit } from "../../../../../libs/redux/Slice/DashboardSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { GetPlantCAtegoriesById } from "../../../../../utils/Function-FetchAPI/GetDataCategories";
 
@@ -39,7 +39,7 @@ export default function Component_Plant_Information() {
           src={IconsImport.IconsEditFinishing}
           alt="edit"
           className="cursor-pointer"
-          onClick={() => dispatch(FuncToIndex(1))}
+          onClick={() => dispatch(FuncToIndexEdit(1))}
         />
       </header>
       <section className="w-full p-4 border-slate-200 border rounded-[10px] flex gap-6">

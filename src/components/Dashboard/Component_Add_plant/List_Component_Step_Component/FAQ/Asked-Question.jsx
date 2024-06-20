@@ -29,7 +29,7 @@ export default function AskedQuestion({
       <div
         className={`${
           mini ? "hidden" : ""
-        } w-full border border-neutral-500 rounded-xl pb-4`}
+        } w-full border border-neutral-300 rounded-xl pb-4`}
       >
         <div className="flex justify-between items-center p-4">
           <div className="text-[#030712] font-nunito-bold text-[14px]">
@@ -76,7 +76,7 @@ export default function AskedQuestion({
       <div
         className={` ${
           mini ? "" : "hidden"
-        } rounded-lg border border-[#D1D5DB] my-5 max-w-full h-[88px] flex justify-between items-center px-4`}
+        } rounded-lg border border-neutral-300 my-5 max-w-full h-[88px] flex justify-between items-center px-4`}
       >
         <div>
           <div className="text-[#030712] font-nunito-bold text-[14px] my-1">

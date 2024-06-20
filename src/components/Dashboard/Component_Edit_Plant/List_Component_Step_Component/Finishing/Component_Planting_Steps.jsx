@@ -3,7 +3,7 @@ import React from "react";
 import Component_Steps from "./Component_Planting_Steps/Component_Steps";
 import Image from "next/image";
 import { IconsImport } from "../../../../../utils/IconsImport";
-import { FuncToIndex } from "../../../../../libs/redux/Slice/DashboardSlice";
+import { FuncToIndexEdit } from "../../../../../libs/redux/Slice/DashboardSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 export default function Component_Planting_Steps() {
@@ -17,7 +17,7 @@ export default function Component_Planting_Steps() {
           src={IconsImport.IconsEditFinishing}
           alt="edit"
           className="cursor-pointer"
-          onClick={() => dispatch(FuncToIndex(3))}
+          onClick={() => dispatch(FuncToIndexEdit(3))}
         />
       </header>
       <article className="w-11/12">

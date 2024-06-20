@@ -176,7 +176,7 @@ export default function Planting_Instructions() {
   }, [dataPlantEditFullField]);
   return (
     <Fragment>
-      <div className="mt-6 p-4 border rounded-[10px]">
+      <div className="mt-6 p-4 border rounded-[10px] text-black">
         <div className="rounded-lg border-2 mt-10">
           <div className="md:flex  m-[16px] mx-10 ">
             <div className="w-full ">
@@ -335,7 +335,7 @@ export default function Planting_Instructions() {
                           </p>
                           <div className="relative w-full">
                             <input
-                              className="p-2 border rounded-lg border-gray-300 max-xl:w-full xl:w-[90%] pr-10"
+                              className="p-2 border rounded-lg border-gray-300 max-xl:w-full xl:w-[90%] pr-10 bg-white"
                               type="text"
                               name=""
                               placeholder="Title"

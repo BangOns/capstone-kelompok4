@@ -50,7 +50,7 @@ export default function Plant_Caring() {
   }, [dataPlantEditFullField]);
   return (
     <Fragment>
-      <div className="mt-6 p-4 border rounded-[10px]">
+      <div className="mt-6 p-4 border rounded-[10px] text-black">
         <div className="border rounded-md border-neutral-200 p-4">
           <div className="flex flex-row gap-2 mb-6 items-center">
             <p className="text-xl font-nunito-bold">
@@ -62,7 +62,7 @@ export default function Plant_Caring() {
             </p>
           </div>
           <ReactQuill
-            className="w-full h-[249px] text-neutral-950 border border-neutral-300 text-[14px] flex-col-reverse flex rounded-md"
+            className="w-full h-[249px] text-neutral-950 border border-neutral-300 text-[14px] flex-col-reverse flex rounded-md overflow-y-auto"
             theme="snow"
             value={dataPlantNewEdit.additional_tips || value}
             onChange={(e) => {

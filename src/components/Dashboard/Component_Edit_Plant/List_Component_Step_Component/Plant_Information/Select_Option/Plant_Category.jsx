@@ -77,7 +77,7 @@ export default function Plant_Category() {
               placeholder="Search Category"
               value={inputValue}
               onChange={(e) => inputValueSet(e.target.value)}
-              className="w-full   p-2 text-sm font-nunito border-0  focus:ring-0 outline-none"
+              className="w-full bg-white p-2 text-sm font-nunito border-0  focus:ring-0 outline-none"
             />
           </div>
           <ul className="w-full bg-white ">

@@ -80,6 +80,9 @@ const DashboardSlice = createSlice({
       }
     },
     // Index Step Edit
+    FuncToIndexEdit: (state, action) => {
+      state.indexStepEdit = action.payload;
+    },
     FuncNextStepEdit: (state) => {
       if (state.indexStep >= 6) {
         state.indexStepEdit = 6;
@@ -114,6 +117,7 @@ export const {
   FuncPrevStepTable,
   FuncNextStepEdit,
   FuncPrevStepEdit,
+  FuncToIndexEdit
 } = DashboardSlice.actions;
 
 export default DashboardSlice.reducer;
