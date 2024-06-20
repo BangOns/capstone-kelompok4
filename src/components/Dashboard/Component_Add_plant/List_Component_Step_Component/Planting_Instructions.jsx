@@ -31,8 +31,7 @@ export default function Planting_Instructions() {
   const dispatch = useDispatch();
   const count = useSelector((state) => state.addplant.PlantingInstructions);
   const { dataPlantNew } = useSelector((state) => state.addplant);
-  const fileInputRef = useRef(null);
-  const [data, setData] = useState(count);
+  const [data, setData] = useState([]);
   const [hide, setHide] = useState();
   const [index, setIndex] = useState();
 
@@ -42,7 +41,18 @@ export default function Planting_Instructions() {
   }
 
   function handleClickNext() {
-    if (data.length === 0) {
+    const validateData =
+      data &&
+      data.every(
+        (value) =>
+          value.instruction_category_id !== 0 && value.step_title !== ""
+      );
+    const validateDescription = data.some(
+      (value) =>
+        value.step_description === "" ||
+        value.step_description.replace(/<(.|\n)*?>/g, "").trim().length === 0
+    );
+    if (!validateData || data.length <= 0 || validateDescription) {
       dispatch(FuncMessagePlantError(true));
     } else {
       const plant_instructions = [...data];
@@ -121,6 +131,11 @@ export default function Planting_Instructions() {
       setData(updateData);
     }
   }
+  useEffect(() => {
+    if (count) {
+      setData(count);
+    }
+  }, [count]);
   return (
     <Fragment>
       <div className="mt-6 p-4 border rounded-[10px] text-black">
@@ -145,7 +160,9 @@ export default function Planting_Instructions() {
           </div>
 
           {data.length == 0 ? (
-            <div className="border-2 md:border-2 md:rounded-lg md:mx-10 mb-10 text-center h-32"></div>
+            <div className="border-2 md:border-2 md:rounded-lg md:mx-10 mb-10 text-center h-32 grid place-items-center">
+              <p className="text-3xl font-nunito font-bold">Please Add Steps</p>
+            </div>
           ) : (
             data?.map((e, i) => (
               <div
@@ -306,6 +323,7 @@ export default function Planting_Instructions() {
                             <span className="text-red-500">*</span>
                           </p>
                           <DropdownSearch
+                            dataCategory={e}
                             setCategory={(category) =>
                               updateField(
                                 i,

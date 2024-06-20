@@ -1,8 +1,6 @@
 "use client";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-
-// import { FuncReminderSettingsInput } from "@/libs/redux/Slice/AddPlantSlice";
 import { FuncReminderSettingsInputEdit } from "../../../../../libs/redux/Slice/EditPlantSlice";
 import {
   IconsMinus,
@@ -13,14 +11,13 @@ import { EACHS, UNITS } from "./config";
 
 const WF_Form = () => {
   const dispatch = useDispatch();
+  const { dataPlantNewEdit } = useSelector((state) => state.editplant);
 
   const [openEach, setOpenEach] = useState(false);
   const [openUnit, setOpenUnit] = useState(false);
 
   const { watering_frequency, each, watering_amount, unit, watering_time } =
-    useSelector(
-      (state) => state.addplant.ReminderSettingsInput.watering_schedule
-    );
+    dataPlantNewEdit.watering_schedule;
 
   const handleIncrementFrequency = () => {
     dispatch(
@@ -38,21 +35,29 @@ const WF_Form = () => {
       })
     );
   };
+
   const handleIncrementAmount = () => {
     dispatch(
-      FuncReminderSettingsInputEdit({ name: "watering_amount", operator: "plus" })
+      FuncReminderSettingsInputEdit({
+        name: "watering_amount",
+        operator: "plus",
+      })
     );
   };
 
   const handleDecrementAmount = () => {
     dispatch(
-      FuncReminderSettingsInputEdit({ name: "watering_amount", operator: "minus" })
+      FuncReminderSettingsInputEdit({
+        name: "watering_amount",
+        operator: "minus",
+      })
     );
   };
 
   const handleEachChange = (value) => {
     dispatch(FuncReminderSettingsInputEdit({ name: "each", value }));
   };
+
   const handleUnitChange = (value) => {
     dispatch(FuncReminderSettingsInputEdit({ name: "unit", value }));
   };

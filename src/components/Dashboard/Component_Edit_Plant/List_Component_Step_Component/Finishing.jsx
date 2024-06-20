@@ -13,29 +13,32 @@ import {
   FuncMessagePlantError,
   FuncMessagePlantSuccess,
   FuncPrevStep,
+  FuncPrevStepEdit,
 } from "../../../../libs/redux/Slice/DashboardSlice";
 import Message_Error from "../../../Component_Message/Message_Error";
-// import {
-//   FuncAddNewDataPlants,
-//   PostDataPlantsNew,
-// } from "../../../../libs/redux/Slice/AddPlantSlice";
-// belum menambahkan import buat edit
+import { useParams } from "next/navigation";
+import { PostDataPlantsEdit } from "../../../../libs/redux/Slice/EditPlantSlice";
+import Loading_PostAndPutData from "../../../../utils/Component-Loading/Loading_PostAndPutData";
 
 export default function Finishing() {
-  const { dataPlantNew, PostDataMessageSuccess, PostDataMessageLoading } =
-    useSelector((state) => state.editplant);
+  const {
+    dataPlantNewEdit,
+    PostDataMessageSuccessEdit,
+    PostDataMessageLoadingEdit,
+  } = useSelector((state) => state.editplant);
   const dispatch = useDispatch();
+  const params = useParams();
   function handleClickPrev() {
-    dispatch(FuncPrevStep());
+    dispatch(FuncPrevStepEdit());
   }
   async function handleClickNext(e) {
     e.preventDefault();
     try {
-      if (dataPlantNew) {
+      if (dataPlantNewEdit) {
         const DataPlantEdits = {
-          ...dataPlantEdit,
+          ...dataPlantNewEdit,
         };
-        dispatch(PostDataPlantsNew(DataPlantNews));
+        dispatch(PostDataPlantsEdit({ data: DataPlantEdits, id: params.id }));
       }
     } catch (error) {
       console.log(error);
@@ -43,13 +46,12 @@ export default function Finishing() {
     }
   }
   useEffect(() => {
-    if (PostDataMessageSuccess) {
-      if (PostDataMessageSuccess.status === "success") {
+    if (PostDataMessageSuccessEdit) {
+      if (PostDataMessageSuccessEdit.status === "success") {
         dispatch(FuncFinishAddPlant(true));
-        // belom keubah ke edit karena clueless
       }
     }
-  }, [PostDataMessageSuccess]);
+  }, [PostDataMessageSuccessEdit]);
 
   return (
     <Fragment>
@@ -67,7 +69,7 @@ export default function Finishing() {
               disableOn={false}
             />
             <NextButtonPlant
-              disabledOn={PostDataMessageLoading ? true : false}
+              disabledOn={PostDataMessageLoadingEdit ? true : false}
               finish={true}
               handleClick={handleClickNext}
             />

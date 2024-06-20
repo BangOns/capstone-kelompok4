@@ -2,14 +2,16 @@ import React from "react";
 import { useSelector } from "react-redux";
 
 export default function Watering_Frequency() {
-  const { dataPlantEdit } = useSelector((state) => state.editplant);
+  const { dataPlantNewEdit } = useSelector((state) => state.editplant);
 
   const wateringFrequency =
-    dataPlantEdit?.watering_schedule.watering_frequency || 0;
-  const each = dataPlantEdit?.watering_schedule.each || "";
-  const wateringTime = dataPlantEdit?.watering_schedule.watering_time || "N/A";
-  const wateringAmount = dataPlantEdit?.watering_schedule.watering_amount || 0;
-  const unit = dataPlantEdit?.watering_schedule.unit || "";
+    dataPlantNewEdit?.watering_schedule.watering_frequency || 0;
+  const each = dataPlantNewEdit?.watering_schedule.each || "";
+  const wateringTime =
+    dataPlantNewEdit?.watering_schedule.watering_time || "N/A";
+  const wateringAmount =
+    dataPlantNewEdit?.watering_schedule.watering_amount || 0;
+  const unit = dataPlantNewEdit?.watering_schedule.unit || "";
 
   return (
     <article>

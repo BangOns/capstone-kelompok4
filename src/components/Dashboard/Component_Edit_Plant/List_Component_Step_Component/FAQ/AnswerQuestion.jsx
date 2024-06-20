@@ -11,12 +11,11 @@ const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 export default function Answer({ name, redux, value, id, onUpdate }) {
   const dispatch = useDispatch();
 
-  // const handleChange = (e) => {
-  //   onChange(e); // Memanggil fungsi onChange dari props untuk memperbarui state di komponen induk
-  //   dispatch(FuncFaQInput({ name: redux, value: e })); // Memperbarui Redux store
+  const handleChange = (e) => {
+    onChange(e); // Memanggil fungsi onChange dari props untuk memperbarui state di komponen induk
 
-  //   onUpdate(id, { [redux]: e });
-  // };
+    onUpdate(id, { [redux]: e });
+  };
 
   return (
     <div className="w-full basis-1/2">

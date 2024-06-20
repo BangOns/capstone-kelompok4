@@ -1,7 +1,8 @@
-import React, { useContext, useEffect } from "react";
-import { useDispatch } from "react-redux";
+"use client";
 
-import { FuncReminderSettingsInput } from "@/libs/redux/Slice/AddPlantSlice";
+import React, { useContext, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+
 import {
   IconChevronDown,
   IconsEdit,
@@ -9,9 +10,11 @@ import {
   IconsPlusAdd,
 } from "@/utils/Component-Icons-Reminder-settings";
 import { WEATHERS } from "./config";
-import { AddPlantsContext } from "../../../../../hook/add-plants-providers";
+import { EditPlantsContext } from "../../../../../hook/edit-plants-providers";
+import { FuncReminderSettingsInputEdit } from "../../../../../libs/redux/Slice/EditPlantSlice";
 
 const CWC_Form = () => {
+  const { dataPlantNewEdit } = useSelector((state) => state.editplant);
   const dispatch = useDispatch();
 
   const {
@@ -25,7 +28,60 @@ const CWC_Form = () => {
     setWeatherConditionDisplay,
     isWeatherOpen,
     setIsWeatherOpen,
-  } = useContext(AddPlantsContext);
+  } = useContext(EditPlantsContext);
+
+  useEffect(() => {
+    dispatch(
+      FuncReminderSettingsInputEdit({
+        name: "weather_condition",
+        value: weatherCondition,
+      })
+    );
+    dispatch(
+      FuncReminderSettingsInputEdit({
+        name: "condition_description",
+        value: conditionDescription,
+      })
+    );
+  }, [condition, dispatch]);
+
+  useEffect(() => {
+    if (
+      typeof dataPlantNewEdit.watering_schedule.condition_description !==
+      "string"
+    ) {
+      const newCondition =
+        dataPlantNewEdit.watering_schedule.weather_condition?.map(
+          (item, index) => ({
+            weatherCondition: item,
+            conditionDescription:
+              dataPlantNewEdit.watering_schedule.condition_description[index],
+          })
+        );
+
+      const newWeatherConditionDisplay =
+        dataPlantNewEdit.watering_schedule.weather_condition?.map((item) => {
+          const weather = WEATHERS.find((weather) => weather.title === item);
+          return weather ? (
+            <span className="flex items-center gap-2">
+              {weather.icons}
+              {weather.title}
+            </span>
+          ) : null;
+        });
+
+      const newConditionDescription =
+        dataPlantNewEdit.watering_schedule.condition_description;
+
+      const newWeatherCondition =
+        dataPlantNewEdit.watering_schedule.weather_condition;
+
+      setCondition(newCondition);
+      setWeatherConditionDisplay(newWeatherConditionDisplay);
+      setConditionDescription(newConditionDescription);
+      setWeatherCondition(newWeatherCondition);
+    }
+  }, []);
 
   const handleConditionChange = (index, weather, description) => {
     const newCondition = [...condition];
@@ -76,21 +132,6 @@ const CWC_Form = () => {
       return newState;
     });
   };
-
-  useEffect(() => {
-    dispatch(
-      FuncReminderSettingsInput({
-        name: "weather_condition",
-        value: weatherCondition,
-      })
-    );
-    dispatch(
-      FuncReminderSettingsInput({
-        name: "condition_description",
-        value: conditionDescription,
-      })
-    );
-  }, [condition, dispatch]);
 
   return (
     <div className="h-full border border-[#E5E7EB] rounded-md p-4">

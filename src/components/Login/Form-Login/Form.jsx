@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import Image from "next/image";
 import { IconsImport } from "@/utils/IconsImport";
 import { useRouter } from "next/navigation";
+import { toast } from "react-toastify";
 
 export default function Form() {
   const [email, setEmail] = useState("");
@@ -23,7 +24,8 @@ export default function Form() {
     setError("");
 
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/admin/login`,
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/admin/login`,
         {
           method: "POST",
           headers: {
@@ -43,7 +45,8 @@ export default function Form() {
         throw new Error(data.message || "Something went wrong!");
       }
       document.cookie = `token=${data.data.token}; path=/`;
-      
+
+      toast.success("Login successful!");
       router.push("/dashboard");
     } catch (error) {
       setLoading(false);

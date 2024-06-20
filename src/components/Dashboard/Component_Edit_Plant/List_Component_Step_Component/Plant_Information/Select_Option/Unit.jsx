@@ -28,7 +28,7 @@ export default function Unit() {
     if (dataPlantEditFullField.data) {
       dispatch(
         FuncPlantInformationInputEdit({
-          name: "height-unit",
+          name: "plant_characteristic",
           value: dataPlantNewEdit.plant_characteristic
             ? dataPlantNewEdit.plant_characteristic
             : dataPlantEditFullField.data.plant_characteristic,

@@ -18,13 +18,10 @@ import Each from "./Select_Option/Each";
 import Plant_Height from "./Plant_Information_Step2/Plant_Height";
 import Plant_Wide from "./Plant_Information_Step2/Plant_Wide";
 import Data_Plant_Information_Step1 from "./Plant_Information_Step2/Data_Plant_Information_Step1";
-// import { FuncAddInputPlantInformation } from "../../../../../libs/redux/Slice/AddPlantSlice";
 import { FuncEditInputPlantInformation } from "../../../../../libs/redux/Slice/EditPlantSlice";
 import { ValidateInformation2 } from "../../../../../utils/Validate_AddPlant/Validate_PlantInformation";
 export default function Plant_Information_Step2() {
-  const { dataPlantNewEdit, dataPlantEditFullField } = useSelector(
-    (state) => state.editplant
-  );
+  const { dataPlantNewEdit } = useSelector((state) => state.editplant);
   const dispatch = useDispatch();
   function handleClickNext() {
     const checkValidatePlantInformation2 = ValidateInformation2(
@@ -33,6 +30,18 @@ export default function Plant_Information_Step2() {
     if (!checkValidatePlantInformation2) {
       dispatch(FuncMessagePlantError(true));
     } else {
+      let { plant_characteristic, ...rest } = dataPlantNewEdit;
+      let updatedPlantCharacteristic = { ...plant_characteristic };
+      delete updatedPlantCharacteristic.id;
+      let PropsDataPlantInformation = {
+        ...dataPlantNewEdit,
+        plant_characteristic: updatedPlantCharacteristic,
+      };
+      dispatch(
+        FuncEditInputPlantInformation({
+          ...PropsDataPlantInformation,
+        })
+      );
       dispatch(FuncNextStepEdit());
     }
   }
