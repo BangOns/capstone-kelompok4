@@ -55,7 +55,7 @@ export default function Finishing() {
 
   return (
     <Fragment>
-      <article className="w-full mt-6 ">
+      <article className="w-full mt-6 text-black">
         <Component_Plant_Information />
         <Component_Reminder_Settings />
         <Component_Planting_Steps />

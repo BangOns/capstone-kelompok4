@@ -16,7 +16,7 @@ export default function page() {
 
       <section className="w-full pt-2">
         <header className="">
-          <h1 className="text-[28px] font-nunito-bold pb-6">Edit Plant</h1>
+          <h1 className="text-[28px] font-nunito-bold pb-6 text-black">Edit Plant</h1>
         </header>
         <article className="w-full ">
           <EditPlant />

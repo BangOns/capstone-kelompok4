@@ -59,7 +59,7 @@ export default function Plant_Infromation() {
   return (
     <Fragment>
       {!plantInformationStep2 ? (
-        <div className="mt-6 p-4 border rounded-[10px]">
+        <div className="mt-6 p-4 border rounded-[10px] text-black">
           <form className="w-full ">
             <article className="w-full flex justify-between gap-6 ">
               <section className="basis-1/2 h-full">

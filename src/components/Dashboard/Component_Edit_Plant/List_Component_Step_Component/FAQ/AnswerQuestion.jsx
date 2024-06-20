@@ -24,7 +24,7 @@ export default function Answer({ name, redux, value, id, onUpdate }) {
       </div>
       <div className="w-full basis-1/2">
         <ReactQuill
-          className="w-full h-[148px] text-neutral-950 border border-neutral-400 text-[14px] flex-col-reverse flex rounded-md"
+          className="w-full h-[148px] text-neutral-950 border border-neutral-300 text-[14px] flex-col-reverse flex rounded-md"
           value={value}
           onChange={(e) => onUpdate(id, redux, e)}
           placeholder={`${name}...`}

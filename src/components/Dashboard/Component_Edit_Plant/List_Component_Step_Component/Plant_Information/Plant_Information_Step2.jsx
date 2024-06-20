@@ -50,7 +50,7 @@ export default function Plant_Information_Step2() {
   }
   return (
     <>
-      <article className="mt-6  ">
+      <article className="mt-6 text-black ">
         <header className="">
           <h1 className="font-nunito-bold text-xl">Plant Information</h1>
         </header>
