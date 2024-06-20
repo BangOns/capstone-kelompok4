@@ -36,9 +36,9 @@ export default function TablePlant({
     <table className="table border ">
       {/* head */}
       <thead className="bg-base-200 ">
-        <tr className="font-nunito-bold text-black text-base text-center">
+        <tr className="font-nunito-bold text-black text-base text-center bg-neutral-200 border-none">
           <th>Image</th>
-          <th className="flex gap-1 justify-center">
+          <th className="flex gap-1 justify-center border-none">
             Plant Name
             <Image
               src={IconsImport.IconsDropdown}

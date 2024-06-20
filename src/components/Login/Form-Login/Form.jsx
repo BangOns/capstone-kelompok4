@@ -58,12 +58,12 @@ export default function Form() {
     <div className="form mt-10">
       <form onSubmit={handleSubmit}>
         <div className="flex flex-col gap-1 mb-6">
-          <p className="font-nunito-bold text-sm leading-[19px]">Email</p>
-          <label className="input input-bordered border-black flex items-center gap-2">
+          <p className="font-nunito-bold text-sm leading-[19px] text-black">Email</p>
+          <label className="input input-bordered border-black flex items-center gap-2 bg-white">
             <Image src={IconsImport.IconsEmail} alt="Email Icon" />
             <input
               type="email"
-              className="grow"
+              className="grow text-black"
               placeholder="example@mail.com"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
@@ -72,12 +72,12 @@ export default function Form() {
           </label>
         </div>
         <div className="flex flex-col gap-1">
-          <p className="font-nunito-bold text-sm leading-[19px]">Password</p>
-          <label className="input input-bordered border-black flex items-center gap-2">
+          <p className="font-nunito-bold text-sm leading-[19px] text-black">Password</p>
+          <label className="input input-bordered border-black flex items-center gap-2 bg-white">
             <Image src={IconsImport.IconsPassword} alt="Password Icon" />
             <input
               type={showPassword ? "text" : "password"}
-              className="grow"
+              className="grow text-black"
               placeholder="********"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
@@ -103,7 +103,7 @@ export default function Form() {
               className="checkbox-custom peer relative h-[15px] w-[15px] shrink-0 appearance-none rounded-sm
                             border focus:outline-none hover:ring hover:ring-emerald-500"
             />
-            <span className="font-nunito text-sm leading-[22px]">
+            <span className="font-nunito text-sm leading-[22px] text-black">
               Remember me
             </span>
           </label>

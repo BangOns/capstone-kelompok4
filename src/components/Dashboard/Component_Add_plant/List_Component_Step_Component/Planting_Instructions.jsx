@@ -138,7 +138,7 @@ export default function Planting_Instructions() {
   }, [count]);
   return (
     <Fragment>
-      <div className="mt-6 p-4 border rounded-[10px]">
+      <div className="mt-6 p-4 border rounded-[10px] text-black">
         <div className="rounded-lg border-2 mt-10">
           <div className="md:flex  m-[16px] mx-10 ">
             <div className="w-full ">
@@ -302,7 +302,7 @@ export default function Planting_Instructions() {
                           </p>
                           <div className="relative w-full">
                             <input
-                              className="p-2 border rounded-lg border-gray-300 max-xl:w-full xl:w-[90%] pr-10"
+                              className="p-2 border rounded-lg border-gray-300 max-xl:w-full xl:w-[90%] pr-10 bg-white"
                               type="text"
                               placeholder="Title..."
                               name=""
@@ -335,7 +335,7 @@ export default function Planting_Instructions() {
                         </div>
                       </div>
                       <ReactQuill
-                        className="flex-col-reverse flex  m-5 border-2 rounded-lg  h-[50%]"
+                        className="flex-col-reverse flex  m-5 border-2 rounded-lg  h-[50%] overflow-y-auto"
                         theme="snow"
                         placeholder="Description..."
                         value={e.step_description}

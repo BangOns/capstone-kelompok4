@@ -7,14 +7,14 @@ import React from "react";
 export default function SearchManagePlant({ searchValue, searchValueSet }) {
   return (
     <header className="">
-      <h1 className="text-[28px] font-nunito-bold pb-6">Manage Plant</h1>
+      <h1 className="text-[28px] font-nunito-bold pb-6 text-black">Manage Plant</h1>
       <div className="flex justify-between">
         <div className="w-[286px] border rounded-lg flex items-center px-[14px] py-3 gap-2">
           <Image src={IconsImport.IconsSearch} alt="search" />
           <input
             type="text"
             placeholder="Search Plants..."
-            className="w-full border-0 focus:ring-0 outline-none text-sm font-poppins"
+            className="w-full border-0 focus:ring-0 outline-none text-sm font-poppins bg-white"
             value={searchValue}
             onChange={(e) => searchValueSet(e.target.value)}
           />

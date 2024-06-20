@@ -25,7 +25,7 @@ export default function Component_Steps({ dataPlantNew }) {
   const dispatch = useDispatch();
 
   return (
-    <section className="w-full border border-gray-500 rounded-md p-4 mb-4">
+    <section className="w-full border border-neutral-300 rounded-md p-4 mb-4">
       <header className="w-full flex justify-between items-center">
         <figure className="flex gap-4 items-center">
           <motion.div

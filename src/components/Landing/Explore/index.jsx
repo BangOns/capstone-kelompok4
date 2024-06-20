@@ -13,7 +13,7 @@ export default function Explore() {
           </span>{" "}
           App
         </p>
-        <p className="font-[600] text-[16px] text-[#9CA3AF] font-nunito-bold">
+        <p className="font-[600] text-[16px] text-[#9CA3AF] font-nunito-semibold">
           Discover a range of innovative features designed to assist you in
           cultivating plants and contributing to a greener world
         </p>
@@ -23,8 +23,8 @@ export default function Explore() {
           <div className="m-5 p-5 rounded-lg flex lg:w-[400px] xl:w-[550px] max-[430px]:h-auto h-[265px] bg-[#F9FAFB] hover:bg-[#ECFDF5] overflow-hidden">
             <div className="max-[430px]:z-10 relative w-[303px] font-nunito-bold flex flex-row justify-start items-center">
               <div>
-                <p className="font-bold text-2xl">Planting Instruction</p>
-                <p className="font-semibold text-sm text-gray-600 font-nunito-light">
+                <p className="font-nunito-bold text-2xl text-black">Planting Instruction</p>
+                <p className="font-nunito-semibold text-base text-gray-600 ">
                   You can learn step-by-step planting tailored to the specific
                   plants you want to grow. This ensures each plant thrives and
                   flourishes beautifully.
@@ -51,8 +51,8 @@ export default function Explore() {
           <div className="m-5 p-5 rounded-lg flex lg:w-[400px] xl:w-[550px] max-[430px]:h-auto  h-[265px] bg-[#F9FAFB] hover:bg-[#ECFDF5] overflow-hidden">
             <div className="relative w-[303px] font-nunito-bold flex flex-row justify-start items-center">
               <div>
-                <p className="font-bold text-2xl">Organize Your Plants</p>
-                <p className="font-semibold text-sm text-gray-600 font-nunito-light">
+                <p className="font-nunito-bold text-2xl text-black">Organize Your Plants</p>
+                <p className="font-nunito-semibold text-sm text-gray-600">
                   You can organize the plants you own and have added to the app.
                   This way, you'll find it easier to care for your plants.
                 </p>
@@ -80,8 +80,8 @@ export default function Explore() {
           <div className="m-5 p-5 rounded-lg flex lg:w-[400px] xl:w-[550px] max-[430px]:h-auto h-[265px] bg-[#F9FAFB] hover:bg-[#ECFDF5] overflow-hidden">
             <div className=" max-[430px]:z-10 relative w-[303px] font-nunito-bold flex flex-row justify-start items-center">
               <div>
-                <p className="font-bold text-2xl">Watering Reminder</p>
-                <p className="font-semibold text-sm text-gray-600 font-nunito-light">
+                <p className="font-nunito-bold text-black text-2xl">Watering Reminder</p>
+                <p className="font-nunito-semibold text-sm text-gray-600">
                   You will receive notifications to remind you to water your
                   plants. Additionally, you can manually adjust and customize
                   these watering notifications to suit your schedule.
@@ -108,8 +108,8 @@ export default function Explore() {
           <div className="m-5 p-5 rounded-lg flex lg:w-[400px] xl:w-[550px] max-[430px]:h-auto  h-[265px] bg-[#F9FAFB] hover:bg-[#ECFDF5] overflow-hidden">
             <div className="max-[430px]:z-10 relative w-[303px] font-nunito-bold flex flex-row justify-start items-center">
               <div>
-                <p className="font-bold text-2xl">Planting Instruction</p>
-                <p className="font-semibold text-sm text-gray-600 font-nunito-light">
+                <p className="font-nunito-bold text-black text-2xl">Planting Instruction</p>
+                <p className="font-nunito-semibold text-sm text-gray-600">
                   You can learn step-by-step planting tailored to the specific
                   plants you want to grow. This ensures each plant thrives and
                   flourishes beautifully.

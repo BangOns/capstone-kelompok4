@@ -5,7 +5,7 @@ export default function Header_edit_plant({ pages }) {
     "Plant Information",
     "Reminder Settings",
     "Planting Instructions",
-    "Plan Caring Tips",
+    "Plant Caring Tips",
     "FAQ",
     "Finishing",
   ];

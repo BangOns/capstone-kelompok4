@@ -18,7 +18,7 @@ export default function Component_Plant_Information({ dataPlants }) {
     }
   }, [GetImageThumbnails, dataPlants]);
   return (
-    <section className="w-full">
+    <section className="w-full text-black">
       <header className="w-full flex justify-between py-[12.5px]">
         <h1 className="font-nunito-bold text-xl">Plant Information</h1>
       </header>

@@ -25,14 +25,14 @@ export default function Article_About() {
           <section className="w-full h-4/5 flex items-center ">
             <div>
               <header className="pb-10">
-                <h1 className="font-nunito-bold text-2xl md:text-4xl ">
+                <h1 className="font-nunito-bold text-2xl md:text-4xl text-black">
                   Start <span className="text-emerald-500">Gardening</span> and
                   Make The World{" "}
                   <span className="text-emerald-500">Greener</span>!
                 </h1>
               </header>
               <article>
-                <p className="text-base sm:text-lg font-nunito text-gray-400">
+                <p className="text-base sm:text-lg font-nunito-semibold text-gray-400">
                   Plantopia is an agricultural application that makes it easy
                   for both experienced and novice gardeners to plant. Moreover,
                   Plantopia also assists you in taking care of your plants, such

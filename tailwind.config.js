@@ -19,6 +19,7 @@ module.exports = {
       "nunito-light": ["nunito-light", "sans-serif"],
       "nunito-bold": ["nunito-bold", "sans-serif"],
       "nunito-italic": ["nunito-italic", "sans-serif"],
+      "nunito-semibold": ["nunito-semibold", "sans-serif"],
     },
   },
   plugins: [

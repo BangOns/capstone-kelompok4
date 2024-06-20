@@ -24,7 +24,7 @@ export default function TablePlantInformation({ dataPlant }) {
     }
   }, [GetImageThumbnails, dataPlant]);
   return (
-    <tr className="text-center">
+    <tr className="text-center text-black">
       <td className="flex justify-center">
         <figure className="w-[60px] h-[60px] rounded-xl border flex items-end justify-center bg-gray-200 overflow-hidden bg-gradient-to-b from-50% from-white to-gray-200/60">
           <Image

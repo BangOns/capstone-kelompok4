@@ -154,7 +154,7 @@ const WF_Form = () => {
                   })
                 )
               }
-              className={`text-center w-full focus:outline-none placeholder:text-[#6B7280] ${
+              className={`text-center w-full focus:outline-none placeholder:text-[#6B7280] bg-white ${
                 watering_amount === 0 ? "text-[#6B7280]" : "text-[#030712]"
               }`}
               placeholder="0"
@@ -229,7 +229,8 @@ const WF_Form = () => {
             )
           }
           placeholder="00:00"
-          className="border border-[#D1D5DB] rounded-lg py-[14px] px-3 block w-full placeholder:text-[#6B7280] resize-webkit-time-picker-indicator"
+          className="border border-[#D1D5DB] rounded-lg py-[14px] px-3 block w-full placeholder:text-[#6B7280] resize-webkit-time-picker-indicator bg-white"
+          // icon time picker ga muncul, jadi warna putih
         />
       </div>
 
