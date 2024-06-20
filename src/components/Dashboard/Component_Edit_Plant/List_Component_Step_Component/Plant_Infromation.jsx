@@ -20,16 +20,14 @@ import {
   FuncEditInputPlantInformation,
   FuncPlantInformationInputEdit,
 } from "../../../../libs/redux/Slice/EditPlantSlice";
-// import { FuncAddInputPlantInformation } from "../../../../libs/redux/Slice/AddPlantSlice";
 import Upload_Image_Plant from "./Plant_Information/Upload_Image_Plant";
 import { ValidateInformation } from "../../../../utils/Validate_AddPlant/Validate_PlantInformation";
-export default function Plant_Infromation({ DataPlantEdit }) {
+export default function Plant_Infromation() {
   const dispatch = useDispatch();
   const { plantInformationStep2 } = useSelector((state) => state.dashboard);
   const { dataPlantNewEdit, dataPlantEditFullField } = useSelector(
     (state) => state.editplant
   );
-
   const regex = /^[^-]+-[^-]+$/;
   function handleClickNext() {
     const checkValidate = ValidateInformation(dataPlantNewEdit);
@@ -39,14 +37,19 @@ export default function Plant_Infromation({ DataPlantEdit }) {
       }
       dispatch(FuncMessagePlantError(true));
     } else {
-      const dataInPlantInformation = {
+      let PropsDataPlantInformation = {
         ...dataPlantNewEdit,
+        plant_images: dataPlantNewEdit.plant_images.map((items) => {
+          let newItem = { ...items };
+          delete newItem.plant_id;
+          delete newItem.id;
+          return newItem;
+        }),
       };
 
       dispatch(
         FuncEditInputPlantInformation({
-          ...dataPlantEditFullField,
-          ...dataInPlantInformation,
+          ...PropsDataPlantInformation,
         })
       );
       dispatch(FuncPlantInformationStep2(true));

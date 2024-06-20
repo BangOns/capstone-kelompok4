@@ -6,7 +6,7 @@ import { FuncToIndex } from "../../../../../libs/redux/Slice/DashboardSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 export default function Component_FaQ() {
-  const { dataPlantEdit } = useSelector((state) => state.editplant);
+  const { dataPlantNewEdit } = useSelector((state) => state.editplant);
   const dispatch = useDispatch();
   return (
     <section className="-full mt-6">
@@ -20,7 +20,7 @@ export default function Component_FaQ() {
         />
       </header>
       <article className="w-11/12 mb-6">
-        {dataPlantNew.plant_faqs?.map((items, i) => (
+        {dataPlantNewEdit.plant_faqs?.map((items, i) => (
           <Asked_And_Answer key={i} dataPlants={items} />
         ))}
       </article>

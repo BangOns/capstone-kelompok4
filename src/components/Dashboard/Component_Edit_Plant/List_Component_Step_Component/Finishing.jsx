@@ -13,49 +13,46 @@ import {
   FuncMessagePlantError,
   FuncMessagePlantSuccess,
   FuncPrevStep,
+  FuncPrevStepEdit,
 } from "../../../../libs/redux/Slice/DashboardSlice";
 import Message_Error from "../../../Component_Message/Message_Error";
-// import {
-//   FuncAddNewDataPlants,
-//   PostDataPlantsNew,
-// } from "../../../../libs/redux/Slice/AddPlantSlice";
-// belum menambahkan import buat edit
 
 export default function Finishing() {
-  const { dataPlantNew, PostDataMessageSuccess, PostDataMessageLoading } =
+  const { dataPlantNewEdit, PostDataMessageSuccess, PostDataMessageLoading } =
     useSelector((state) => state.editplant);
   const dispatch = useDispatch();
   function handleClickPrev() {
-    dispatch(FuncPrevStep());
+    dispatch(FuncPrevStepEdit());
   }
   async function handleClickNext(e) {
     e.preventDefault();
-    try {
-      if (dataPlantNew) {
-        const DataPlantEdits = {
-          ...dataPlantEdit,
-        };
-        dispatch(PostDataPlantsNew(DataPlantNews));
-      }
-    } catch (error) {
-      console.log(error);
-      dispatch(FuncMessagePlantError(true));
-    }
+    console.log(dataPlantNewEdit);
+    // try {
+    //   if (dataPlantNewEdit) {
+    //     const DataPlantEdits = {
+    //       ...dataPlantNewEdit,
+    //     };
+    //     dispatch(PostDataPlantsNew(DataPlantEdits));
+    //   }
+    // } catch (error) {
+    //   console.log(error);
+    //   dispatch(FuncMessagePlantError(true));
+    // }
   }
-  useEffect(() => {
-    if (PostDataMessageSuccess) {
-      if (PostDataMessageSuccess.status === "success") {
-        dispatch(FuncFinishAddPlant(true));
-        // belom keubah ke edit karena clueless
-      }
-    }
-  }, [PostDataMessageSuccess]);
+  // useEffect(() => {
+  //   if (PostDataMessageSuccess) {
+  //     if (PostDataMessageSuccess.status === "success") {
+  //       dispatch(FuncFinishAddPlant(true));
+  //       // belom keubah ke edit karena clueless
+  //     }
+  //   }
+  // }, [PostDataMessageSuccess]);
 
   return (
     <Fragment>
       <article className="w-full mt-6 ">
         <Component_Plant_Information />
-        <Component_Reminder_Settings />
+        {/* <Component_Reminder_Settings /> */}
         <Component_Planting_Steps />
         <Component_Additional_Planting_Tips />
         <Component_FaQ />

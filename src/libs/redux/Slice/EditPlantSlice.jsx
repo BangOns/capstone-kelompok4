@@ -63,7 +63,6 @@ export const EditPlantSlice = createSlice({
     },
     FuncPlantCaringInputEdit: (state, action) => {
       state.dataPlantNewEdit[action.payload.name] = action.payload.value;
-      state.dataPlantEdit[action.payload.name] = action.payload.value;
     },
 
     FuncReminderSettingsInputEdit: (state, action) => {
@@ -94,11 +93,10 @@ export const EditPlantSlice = createSlice({
       state.dataPlantEdit.faq_plants = action.payload;
     },
     FuncEditInputPlantInformation: (state, action) => {
-      state.dataPlantEditFullField = action.payload;
+      state.dataPlantNewEdit = action.payload;
     },
     FuncPlantingInstructionsEdit: (state, action) => {
-      state.dataPlantNewEdit[action.payload.name] = action.payload;
-      state.dataPlantEdit[action.payload.name] = action.payload;
+      state.dataPlantNewEdit[action.payload.name] = action.payload.value;
     },
     FuncDeleteImagePlantInformationEdit: (state, action) => {
       state.dataPlantNewEdit.plant_images =

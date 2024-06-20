@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 export default function Component_Planting_Steps() {
   const dispatch = useDispatch();
-  const { dataPlantEdit } = useSelector((state) => state.editplant);
+  const { dataPlantNewEdit } = useSelector((state) => state.editplant);
   return (
     <section className="w-full mt-6">
       <header className="w-full py-[12.5px] flex justify-between">
@@ -21,7 +21,7 @@ export default function Component_Planting_Steps() {
         />
       </header>
       <article className="w-11/12">
-        {dataPlantNew.plant_instructions?.map((items, i) => (
+        {dataPlantNewEdit.plant_instructions?.map((items, i) => (
           <Component_Steps dataPlantNew={items} key={i} />
         ))}
       </article>
