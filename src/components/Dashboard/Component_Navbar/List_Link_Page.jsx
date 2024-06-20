@@ -67,7 +67,7 @@ export default function List_Link_Page({ isMinimized }) {
           )}
         </Link>
       </li>
-      <li className="p-4">
+      {/* <li className="p-4">
         <Link
           href="#"
           className="flex gap-2 items-center"
@@ -93,7 +93,7 @@ export default function List_Link_Page({ isMinimized }) {
             </p>
           )}
         </Link>
-      </li>
+      </li> */}
     </ul>
   );
 }

@@ -40,7 +40,7 @@ export default function List_Option({ isMinimized, toggleMinimize }) {
           )}
         </button>
       </li>
-      <li className="p-4">
+      {/* <li className="p-4">
         <button
           className="w-full flex gap-2 items-start"
           onMouseMove={() => linkHoverSet("settings")}
@@ -59,7 +59,7 @@ export default function List_Option({ isMinimized, toggleMinimize }) {
             </p>
           )}
         </button>
-      </li>
+      </li> */}
       <li className="p-4">
         <button
           className="w-full flex gap-2 items-start"

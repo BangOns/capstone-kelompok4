@@ -1,6 +1,6 @@
-"use client"
+"use client";
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 import Label_header from "./Component_Header/label_header";
 import Notifications from "./Component_Header/Notifications";
 import Profile_header from "./Component_Header/Profile_header";
@@ -16,7 +16,8 @@ export default function Header() {
           throw new Error("Token not found in cookies");
         }
 
-        const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/admin/profile`,
+        const response = await fetch(
+          `${process.env.NEXT_PUBLIC_API_BASE_URL}/admin/profile`,
           {
             method: "GET",
             headers: {
@@ -30,19 +31,20 @@ export default function Header() {
         if (!response.ok) {
           throw new Error(data.message || "Failed to fetch admin profile");
         }
-        setUserName(data.data.name.split(' ')[0]);
-
+        setUserName(data.data.name.split(" ")[0]);
       } catch (error) {
         console.error("Error fetching admin profile:", error.message);
       }
     };
 
     fetchAdminProfile();
-  }, []); 
+  }, []);
 
   const getCookie = (name) => {
-    const cookieValue = document.cookie.match('(^|;)\\s*' + name + '\\s*=\\s*([^;]+)');
-    return cookieValue ? cookieValue.pop() : '';
+    const cookieValue = document.cookie.match(
+      "(^|;)\\s*" + name + "\\s*=\\s*([^;]+)"
+    );
+    return cookieValue ? cookieValue.pop() : "";
   };
 
   return (
@@ -54,7 +56,6 @@ export default function Header() {
           />
         </div>
         <div className="flex justify-end  ">
-          <Notifications className={"px-4"} />
           <Profile_header name={userName} />
         </div>
       </div>

@@ -12,6 +12,7 @@ const initialState = {
   messagePlantError: false,
   messagePlantDelete: false,
   messageErrorPlantName: false,
+  isMinimizeds: false,
   // Edit Page
   indexStepEdit: 1,
 };
@@ -36,6 +37,9 @@ const DashboardSlice = createSlice({
       } else {
         state.indexStep -= 1;
       }
+    },
+    FuncMinimized: (state) => {
+      state.isMinimizeds = !state.isMinimizeds;
     },
     FuncToIndex: (state, action) => {
       state.indexStep = action.payload;
@@ -117,7 +121,8 @@ export const {
   FuncPrevStepTable,
   FuncNextStepEdit,
   FuncPrevStepEdit,
-  FuncToIndexEdit
+  FuncToIndexEdit,
+  FuncMinimized,
 } = DashboardSlice.actions;
 
 export default DashboardSlice.reducer;
