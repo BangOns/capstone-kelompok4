@@ -16,37 +16,42 @@ import {
   FuncPrevStepEdit,
 } from "../../../../libs/redux/Slice/DashboardSlice";
 import Message_Error from "../../../Component_Message/Message_Error";
+import { useParams } from "next/navigation";
+import { PostDataPlantsEdit } from "../../../../libs/redux/Slice/EditPlantSlice";
+import Loading_PostAndPutData from "../../../../utils/Component-Loading/Loading_PostAndPutData";
 
 export default function Finishing() {
-  const { dataPlantNewEdit, PostDataMessageSuccess, PostDataMessageLoading } =
-    useSelector((state) => state.editplant);
+  const {
+    dataPlantNewEdit,
+    PostDataMessageSuccessEdit,
+    PostDataMessageLoadingEdit,
+  } = useSelector((state) => state.editplant);
   const dispatch = useDispatch();
+  const params = useParams();
   function handleClickPrev() {
     dispatch(FuncPrevStepEdit());
   }
   async function handleClickNext(e) {
     e.preventDefault();
-    console.log(dataPlantNewEdit);
-    // try {
-    //   if (dataPlantNewEdit) {
-    //     const DataPlantEdits = {
-    //       ...dataPlantNewEdit,
-    //     };
-    //     dispatch(PostDataPlantsNew(DataPlantEdits));
-    //   }
-    // } catch (error) {
-    //   console.log(error);
-    //   dispatch(FuncMessagePlantError(true));
-    // }
+    try {
+      if (dataPlantNewEdit) {
+        const DataPlantEdits = {
+          ...dataPlantNewEdit,
+        };
+        dispatch(PostDataPlantsEdit({ data: DataPlantEdits, id: params.id }));
+      }
+    } catch (error) {
+      console.log(error);
+      dispatch(FuncMessagePlantError(true));
+    }
   }
-  // useEffect(() => {
-  //   if (PostDataMessageSuccess) {
-  //     if (PostDataMessageSuccess.status === "success") {
-  //       dispatch(FuncFinishAddPlant(true));
-  //       // belom keubah ke edit karena clueless
-  //     }
-  //   }
-  // }, [PostDataMessageSuccess]);
+  useEffect(() => {
+    if (PostDataMessageSuccessEdit) {
+      if (PostDataMessageSuccessEdit.status === "success") {
+        dispatch(FuncFinishAddPlant(true));
+      }
+    }
+  }, [PostDataMessageSuccessEdit]);
 
   return (
     <Fragment>
@@ -64,7 +69,7 @@ export default function Finishing() {
               disableOn={false}
             />
             <NextButtonPlant
-              disabledOn={PostDataMessageLoading ? true : false}
+              disabledOn={PostDataMessageLoadingEdit ? true : false}
               finish={true}
               handleClick={handleClickNext}
             />

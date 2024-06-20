@@ -18,6 +18,7 @@ import {
   FuncAddNewDataPlants,
   PostDataPlantsNew,
 } from "../../../../libs/redux/Slice/AddPlantSlice";
+import Loading_PostAndPutData from "../../../../utils/Component-Loading/Loading_PostAndPutData";
 
 export default function Finishing() {
   const { dataPlantNew, PostDataMessageSuccess, PostDataMessageLoading } =
@@ -80,6 +81,7 @@ export default function Finishing() {
           </div>
         </div>
       </article>
+
       <Message_Error
         message={"Uh oh! There wan an error while fetching data"}
       />

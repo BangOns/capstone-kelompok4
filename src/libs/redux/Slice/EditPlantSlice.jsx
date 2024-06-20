@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import axios from "axios";
 
 const initialState = {
   dataPlantEditFullField: {},
@@ -6,7 +7,96 @@ const initialState = {
   dataPlantEditError: false,
 
   dataPlantNewEdit: {},
+  //
+  PostDataMessageSuccessEdit: {},
+  PostDataMessageLoadingEdit: false,
+  PostDataMessageErrorEdit: false,
 };
+
+export const PostDataPlantsEdit = createAsyncThunk(
+  "addPlant/PostDataPlantsNew",
+  async ({ data, id }, thunkAPI) => {
+    try {
+      let formData = new FormData();
+      // Tambahkan data sederhana
+      formData.append("name", data.name);
+      formData.append("description", data.description);
+      formData.append("plant_category_id", data.plant_category_id);
+      formData.append("harvest_duration", data.harvest_duration);
+      formData.append("climate_condition", data.climate_condition);
+      formData.append("sunlight", data.sunlight);
+      formData.append("planting_time", data.planting_time);
+      formData.append("is_toxic", data.is_toxic);
+      formData.append("additional_tips", data.additional_tips);
+      // Tambahkan plant_characteristic
+      for (let key in data.plant_characteristic) {
+        formData.append(
+          `plant_characteristic.${key}`,
+          data.plant_characteristic[key]
+        );
+      }
+      // Tambahkan watering_schedule
+      for (let key in data.watering_schedule) {
+        formData.append(
+          `watering_schedule.${key}`,
+          data.watering_schedule[key]
+        );
+      }
+      // Fungsi untuk mengkonversi URL blob ke objek File
+      async function urlToFile(url, filename, mimeType) {
+        const response = await fetch(url);
+        const blob = await response.blob();
+        return new File([blob], filename, { type: mimeType });
+      }
+      // Tambahkan plant_instructions dengan gambar terkait
+      for (let i = 0; i < data.plant_instructions.length; i++) {
+        const instruction = data.plant_instructions[i];
+        for (let key in instruction) {
+          if (key === "step_image_url" && instruction[key]) {
+            const file = await urlToFile(
+              instruction[key],
+              `instruction_image_${i}.png`,
+              "image/png"
+            );
+            formData.append(`plant_instructions.${key}`, file);
+          } else {
+            formData.append(`plant_instructions.${key}`, instruction[key]);
+          }
+        }
+      }
+      // Tambahkan plant_faqs
+      for (let i = 0; i < data.plant_faqs.length; i++) {
+        const faq = data.plant_faqs[i];
+        formData.append(`plant_faqs.question`, faq.question);
+        formData.append(`plant_faqs.answer`, faq.answer);
+      }
+      // Tambahkan plant_images
+      for (let i = 0; i < data.plant_images.length; i++) {
+        const image = data.plant_images[i];
+        const file = await urlToFile(
+          image.file_name,
+          `image_${i}.png`,
+          "image/png"
+        );
+        formData.append("plant_images", file);
+        formData.append("plant_images.is_primary", image.is_primary);
+      }
+      const response = await axios.put(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/admin/plants/${parseInt(id)}`,
+        formData,
+        {
+          headers: {
+            Authorization: `Bearer ${process.env.NEXT_PUBLIC_API_TOKEN_KEY}`,
+          },
+        }
+      );
+      return response.data;
+    } catch (error) {
+      console.log(error);
+      return new Error(error);
+    }
+  }
+);
 
 export const FetchDataPlantsEditByID = createAsyncThunk(
   "editPlant/FetchDataPlantsByID",
@@ -144,6 +234,20 @@ export const EditPlantSlice = createSlice({
       .addCase(FetchDataPlantsEditByID.rejected, (state) => {
         state.dataPlantEditLoading = false;
         state.dataPlantEditError = true;
+      });
+    builder
+      .addCase(PostDataPlantsEdit.fulfilled, (state, action) => {
+        state.PostDataMessageSuccessEdit = action.payload;
+        state.PostDataMessageLoadingEdit = false;
+        state.PostDataMessageErrorEdit = false;
+      })
+      .addCase(PostDataPlantsEdit.pending, (state) => {
+        state.PostDataMessageLoadingEdit = true;
+        state.PostDataMessageErrorEdit = false;
+      })
+      .addCase(PostDataPlantsEdit.rejected, (state) => {
+        state.PostDataMessageLoadingEdit = false;
+        state.PostDataMessageErrorEdit = true;
       });
   },
 });
