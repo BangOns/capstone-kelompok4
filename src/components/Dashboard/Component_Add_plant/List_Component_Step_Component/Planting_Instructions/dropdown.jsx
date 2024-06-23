@@ -54,6 +54,8 @@ export default function DropdownSearch({ dataCategory, setCategory }) {
             className="ml-auto"
             src={IconsImport.IconsDropdown}
             alt="image"
+            width={24}
+            height={24}
           />
         </button>
       </div>

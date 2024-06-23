@@ -1,4 +1,3 @@
-// Roni
 
 import React, { Fragment } from "react";
 

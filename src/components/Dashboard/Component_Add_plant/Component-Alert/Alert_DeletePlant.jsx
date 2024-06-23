@@ -72,7 +72,12 @@ export default function Alert_DeletePlant() {
               className="p-4 w-[303px] rounded-2xl bg-white border border-gray-950"
             >
               <figure className="w-full flex justify-center">
-                <Image src={IconsImport.IconsHuman} alt="human" />
+                <Image
+                  src={IconsImport.IconsHuman}
+                  alt="human"
+                  width={205}
+                  height={221}
+                />
               </figure>
               <div className="mt-8">
                 <p className="text-center text-2xl font-nunito-bold">

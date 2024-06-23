@@ -27,6 +27,8 @@ export default function Navbar() {
           <Image
             src={IconsImport.IconsLogoPlantopia}
             alt="logo"
+            width={40}
+            height={40}
             className={`transition-all duration-300 ${
               isMinimizeds ? "w-10 h-10 mx-auto mb-2" : "mb-2"
             }`}

@@ -16,7 +16,7 @@ const variants = {
   hidden: { opacity: 0, scale: 0 },
   visible: { opacity: 1, scale: 1 },
 };
-export default function Alert_Congratulations() {
+export default function Alert_Congratulations_Edit() {
   const dispatch = useDispatch();
   const { finishAddPlant } = useSelector((state) => state.dashboard);
   const route = useRouter();
@@ -45,7 +45,7 @@ export default function Alert_Congratulations() {
                 Congratulations!
               </p>
               <p className="font-nunito text-center text-black">
-                You've successfully added a new plant data to your collection
+                You've successfully Edit a new plant data to your collection
               </p>
             </div>
             <div className="mt-8 font-nunito-bold flex w-full gap-2 justify-between">
@@ -53,7 +53,7 @@ export default function Alert_Congratulations() {
                 onClick={handleClickCongrats}
                 className=" text-white  w-full p-[14px] rounded-md bg-emerald-500"
               >
-                View Added Plants
+                View Edit Plants
               </button>
             </div>
           </motion.div>

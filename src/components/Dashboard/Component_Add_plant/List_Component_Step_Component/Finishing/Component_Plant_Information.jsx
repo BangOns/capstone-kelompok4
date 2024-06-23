@@ -40,6 +40,8 @@ export default function Component_Plant_Information() {
           alt="edit"
           className="cursor-pointer"
           onClick={() => dispatch(FuncToIndex(1))}
+          height={24}
+          width={24}
         />
       </header>
       <section className="w-full p-4 border-slate-200 border rounded-[10px] flex gap-6">

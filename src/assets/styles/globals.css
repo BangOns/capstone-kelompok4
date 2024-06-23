@@ -100,6 +100,20 @@ input[type="time"]::-webkit-calendar-picker-indicator {
   background: #10b981bd;
 }
 
+iframe::-webkit-scrollbar {
+  width: 18px;
+}
+
+iframe::-webkit-scrollbar-thumb {
+  background: #10b981;
+  border-radius: 50px;
+  border: 5px solid #ffff;
+}
+
+iframe::-webkit-scrollbar-thumb:hover {
+  background: #10b981bd;
+}
+
 .custom-scrollbar::-webkit-scrollbar {
   width: 18px;
 }

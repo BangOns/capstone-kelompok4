@@ -107,7 +107,12 @@ export default function Upload_Image_Child_Plant({ ids }) {
               .click()
           }
         >
-          <Image src={IconsImport.IconsImageUploadChildren} alt="uploadImage" />
+          <Image
+            src={IconsImport.IconsImageUploadChildren}
+            alt="uploadImage"
+            width={16}
+            height={16}
+          />
           <input
             type="file"
             id={`image-${PlantInformationInput.plant_images.length}`}

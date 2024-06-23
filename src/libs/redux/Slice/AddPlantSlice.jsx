@@ -1,9 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { dataDummyPlant } from "../../../utils/DataDummy";
 import axios from "axios";
 
 const initialState = {
-  DataAllPlants: [...dataDummyPlant],
   PlantInformationInput: {
     name: "",
     description: "",

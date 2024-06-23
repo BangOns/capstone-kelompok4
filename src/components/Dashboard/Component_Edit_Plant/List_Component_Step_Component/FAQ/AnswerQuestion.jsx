@@ -3,7 +3,6 @@
 import dynamic from "next/dynamic";
 import "react-quill/dist/quill.snow.css";
 import { useDispatch, useSelector } from "react-redux";
-// import { FuncFaQInput } from "../../../../../libs/redux/Slice/AddPlantSlice";
 import { FuncFaQInputEdit } from "../../../../../libs/redux/Slice/EditPlantSlice";
 
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
@@ -12,7 +11,7 @@ export default function Answer({ name, redux, value, id, onUpdate }) {
   const dispatch = useDispatch();
 
   const handleChange = (e) => {
-    onChange(e); // Memanggil fungsi onChange dari props untuk memperbarui state di komponen induk
+    onChange(e); 
 
     onUpdate(id, { [redux]: e });
   };

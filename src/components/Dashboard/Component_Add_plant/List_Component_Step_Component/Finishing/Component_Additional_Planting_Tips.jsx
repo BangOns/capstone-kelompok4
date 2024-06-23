@@ -17,6 +17,8 @@ export default function Component_Additional_Planting_Tips() {
           src={IconsImport.IconsEditFinishing}
           alt="edit"
           className="cursor-pointer"
+          height={24}
+          width={24}
           onClick={() => dispatch(FuncToIndex(4))}
         />
       </header>

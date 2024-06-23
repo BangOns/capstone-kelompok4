@@ -18,6 +18,8 @@ export default function Component_Planting_Steps() {
           alt="edit"
           className="cursor-pointer"
           onClick={() => dispatch(FuncToIndex(3))}
+          height={24}
+          width={24}
         />
       </header>
       <article className="w-11/12">

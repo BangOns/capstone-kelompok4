@@ -1,7 +1,6 @@
 import dynamic from "next/dynamic";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-// import { FuncPlantInformationInput } from "../../../../../libs/redux/Slice/AddPlantSlice";
 import { FuncPlantInformationInputEdit } from "../../../../../libs/redux/Slice/EditPlantSlice";
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 

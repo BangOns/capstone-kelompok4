@@ -11,14 +11,6 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <head>
-        <link
-          rel="icon"
-          href="/_next/static/media/Icons-Logo-Plantopia.a8d56328.svg"
-          type="image/png"
-          sizes="32x32"
-        />
-      </head>
       <body>
         <ReduxProvider>{children}</ReduxProvider>
       </body>

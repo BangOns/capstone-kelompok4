@@ -1,11 +1,9 @@
-// Roni
 "use client";
 import IconsMinimize from "@/utils/Component-Icons-Navbar/IconsMinimize";
 import IconsMaximize from "@/utils/Component-Icons-Navbar/IconsMaximize";
 import IconsSettings from "@/utils/Component-Icons-Navbar/IconsSettings";
 import IconsSignOut from "@/utils/Component-Icons-Navbar/IconsSignOut";
 import React, { useState } from "react";
-// Almas
 import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
 
@@ -40,26 +38,7 @@ export default function List_Option({ isMinimized, toggleMinimize }) {
           )}
         </button>
       </li>
-      {/* <li className="p-4">
-        <button
-          className="w-full flex gap-2 items-start"
-          onMouseMove={() => linkHoverSet("settings")}
-          onMouseLeave={() => linkHoverSet("")}
-        >
-          <IconsSettings active={linkHover.includes("settings")} />
-          {!isMinimized && (
-            <p
-              className={`text-base font-nunito transition duration-300 ${
-                linkHover.includes("settings")
-                  ? "text-emerald-500 font-nunito-bold"
-                  : "text-gray-400 font-nunito"
-              }`}
-            >
-              Settings
-            </p>
-          )}
-        </button>
-      </li> */}
+
       <li className="p-4">
         <button
           className="w-full flex gap-2 items-start"

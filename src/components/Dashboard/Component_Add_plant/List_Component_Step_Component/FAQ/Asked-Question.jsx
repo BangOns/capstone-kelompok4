@@ -17,7 +17,7 @@ export default function AskedQuestion({
   function handleMinimize() {
     setMini(!mini);
   }
-  
+
   function stripHtmlTags(str) {
     if (str === null || str === "") return false;
     else str = str.toString();
@@ -41,6 +41,8 @@ export default function AskedQuestion({
                 className=""
                 src={IconsImport.IconsDeletePlants}
                 alt="delete"
+                height={24}
+                width={24}
               />
             </div>
             <div className="cursor-pointer" onClick={handleMinimize}>
@@ -50,6 +52,8 @@ export default function AskedQuestion({
                 }`}
                 src={IconsImport.IconsDropdown}
                 alt="minimize"
+                height={24}
+                width={24}
               />
             </div>
           </div>
@@ -83,8 +87,7 @@ export default function AskedQuestion({
             Q: {stripHtmlTags(question)}
           </div>
           <div className="text-[#030712] text-[14px] font-nunito my-1">
-            <span className="font-nunito-bold">A:</span>{" "}
-            {stripHtmlTags(answer)}
+            <span className="font-nunito-bold">A:</span> {stripHtmlTags(answer)}
           </div>
         </div>
         <div className="flex items-center justify-center gap-5">
@@ -93,6 +96,8 @@ export default function AskedQuestion({
               className=""
               src={IconsImport.IconsDeletePlants}
               alt="delete"
+              height={24}
+              width={24}
             />
           </div>
           <div className="cursor-pointer" onClick={handleMinimize}>
@@ -102,6 +107,8 @@ export default function AskedQuestion({
               }`}
               src={IconsImport.IconsDropdown}
               alt="minimize"
+              height={24}
+              width={24}
             />
           </div>
         </div>

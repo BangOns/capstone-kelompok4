@@ -2,10 +2,7 @@ import { IconsImport } from "@/utils/IconsImport";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-// import {
-//   FuncDeleteImagePlantInformation,
-//   FuncPlantInformationInputImage,
-// } from "../../../../../libs/redux/Slice/AddPlantSlice";
+
 import {
   FuncDeleteImagePlantInformationEdit,
   FuncPlantInformationInputImageEdit,

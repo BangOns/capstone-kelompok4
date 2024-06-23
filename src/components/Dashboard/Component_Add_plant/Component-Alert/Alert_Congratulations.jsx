@@ -38,7 +38,12 @@ export default function Alert_Congratulations() {
             className="p-4 w-[303px] rounded-2xl bg-white border border-gray-950"
           >
             <figure className="w-full flex justify-center">
-              <Image src={ImageImport.ImageCongrats} alt="human" />
+              <Image
+                src={ImageImport.ImageCongrats}
+                alt="human"
+                width={314}
+                height={192}
+              />
             </figure>
             <div className="mt-8">
               <p className="text-center text-2xl font-nunito-bold">

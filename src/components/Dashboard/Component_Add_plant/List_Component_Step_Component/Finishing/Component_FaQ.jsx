@@ -17,6 +17,8 @@ export default function Component_FaQ() {
           alt="edit"
           className="cursor-pointer"
           onClick={() => dispatch(FuncToIndex(5))}
+          height={24}
+          width={24}
         />
       </header>
       <article className="w-11/12 mb-6">

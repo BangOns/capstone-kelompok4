@@ -124,7 +124,6 @@ export default function Planting_Instructions() {
       ]);
     }
   }
-  //belom keubah ke edit
   const updateField = (index, field, value) => {
     const newData = [...data];
     if (field === "step_image_url") {

@@ -17,6 +17,8 @@ export default function Component_Reminder_Settings() {
           alt="edit"
           className="cursor-pointer"
           onClick={() => dispatch(FuncToIndex(2))}
+          height={24}
+          width={24}
         />
       </header>
       <article className="flex w-full gap-4 justify-between">

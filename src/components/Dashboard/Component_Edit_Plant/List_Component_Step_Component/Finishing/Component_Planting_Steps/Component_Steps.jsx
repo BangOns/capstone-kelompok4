@@ -4,7 +4,7 @@ import { ImageImport } from "../../../../../../utils/ImageImport";
 import { motion } from "framer-motion";
 import { IconsImport } from "../../../../../../utils/IconsImport";
 import { useDispatch } from "react-redux";
-import { FuncToIndex } from "../../../../../../libs/redux/Slice/DashboardSlice";
+import { FuncToIndexEdit } from "../../../../../../libs/redux/Slice/DashboardSlice";
 const variants = {
   hidden: { opacity: 0 },
   visible: { opacity: 1 },
@@ -63,7 +63,7 @@ export default function Component_Steps({ dataPlantNew }) {
             src={IconsImport.IconsDeletePlant}
             alt="delete"
             className="m-4 cursor-pointer"
-            onClick={() => dispatch(FuncToIndex(3))}
+            onClick={() => dispatch(FuncToIndexEdit(3))}
           />
           <Image
             src={IconsImport.IconsDropdown}

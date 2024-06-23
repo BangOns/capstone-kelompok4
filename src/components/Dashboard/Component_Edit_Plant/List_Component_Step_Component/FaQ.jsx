@@ -16,10 +16,7 @@ import {
 } from "../../../../libs/redux/Slice/DashboardSlice";
 import { Fragment, useEffect, useState } from "react";
 import Message_Error from "../../../Component_Message/Message_Error";
-// import {
-//   FuncAddFAQList,
-//   FuncAddInputPlantInformation,
-// } from "../../../../libs/redux/Slice/AddPlantSlice";
+
 import {
   FuncEditInputPlantInformation,
   FuncPlantInformationInputEdit,

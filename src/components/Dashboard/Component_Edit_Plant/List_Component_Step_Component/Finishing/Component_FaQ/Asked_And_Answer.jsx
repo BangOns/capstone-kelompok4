@@ -3,12 +3,15 @@ import Image from "next/image";
 import React, { useState } from "react";
 import { IconsImport } from "../../../../../../utils/IconsImport";
 import { motion } from "framer-motion";
+import { FuncToIndexEdit } from "../../../../../../libs/redux/Slice/DashboardSlice";
+import { useDispatch } from "react-redux";
 const variants = {
   hidden: { opacity: 0, y: 75 },
   visible: { opacity: 1, y: 0 },
 };
 export default function Asked_And_Answer({ dataPlants }) {
   const [activeQuest, activeQuestSet] = useState(false);
+  const dispatch = useDispatch();
   function stripHtmlTags(str) {
     if (str === null || str === "") return false;
     else str = str.toString();
@@ -38,6 +41,7 @@ export default function Asked_And_Answer({ dataPlants }) {
             src={IconsImport.IconsDeletePlant}
             alt="delete"
             className="m-4 cursor-pointer"
+            onClick={() => dispatch(FuncToIndexEdit(5))}
           />
           <Image
             src={IconsImport.IconsDropdown}

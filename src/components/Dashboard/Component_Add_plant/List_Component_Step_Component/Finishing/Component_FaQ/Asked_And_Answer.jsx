@@ -38,11 +38,15 @@ export default function Asked_And_Answer({ dataPlants }) {
             src={IconsImport.IconsDeletePlant}
             alt="delete"
             className="m-4 cursor-pointer"
+            height={24}
+            width={24}
           />
           <Image
             src={IconsImport.IconsDropdown}
             alt="dropdown"
             className="m-4 cursor-pointer"
+            height={24}
+            width={24}
             onClick={() => {
               activeQuestSet(!activeQuest);
             }}

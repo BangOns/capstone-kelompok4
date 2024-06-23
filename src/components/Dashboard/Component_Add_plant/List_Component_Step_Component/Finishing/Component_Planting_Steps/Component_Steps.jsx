@@ -64,11 +64,15 @@ export default function Component_Steps({ dataPlantNew }) {
             alt="delete"
             className="m-4 cursor-pointer"
             onClick={() => dispatch(FuncToIndex(3))}
+            height={24}
+            width={24}
           />
           <Image
             src={IconsImport.IconsDropdown}
             alt="dropdown"
             className="m-4 cursor-pointer"
+            height={24}
+            width={24}
             onClick={() => {
               activeDescSet(!activeDesc);
             }}

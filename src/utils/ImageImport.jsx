@@ -2,6 +2,7 @@ import ImageTest from "@/assets/image/Image-Test.png";
 import ImagePlants from "@/assets/image/Image-Plants.png";
 import ImageProfile from "@/assets/image/Profile-Picture.png";
 import ImageMockup from "@/assets/image/Mockup.png";
+import ProfileUser from "@/assets/image/ProfileDummy.png";
 import ImageCongrats from "@/assets/image/Image-Congrats.png";
 import ImageHero from "@/assets/image/Image-Hero.png";
 import ImageFacebook from "@/assets/image/facebook.png";
@@ -42,4 +43,5 @@ export const ImageImport = {
   ImageAbout,
   ImageBgCTA,
   ImageHpCTA,
+  ProfileUser,
 };

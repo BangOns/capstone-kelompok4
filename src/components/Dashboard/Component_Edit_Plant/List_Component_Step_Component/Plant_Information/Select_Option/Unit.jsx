@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { IoIosArrowDown } from "react-icons/io";
 import { motion } from "framer-motion";
 import { useDispatch, useSelector } from "react-redux";
-// import { FuncPlantCharateristic } from "../../../../../../libs/redux/Slice/AddPlantSlice";
 import {
   FuncPlantCharateristicEdit,
   FuncPlantInformationInputEdit,

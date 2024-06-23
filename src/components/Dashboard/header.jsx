@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Label_header from "./Component_Header/label_header";
-import Notifications from "./Component_Header/Notifications";
+
 import Profile_header from "./Component_Header/Profile_header";
 
 export default function Header() {
