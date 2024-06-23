@@ -25,7 +25,7 @@ Plantopia adalah sebuah website yang memudahkan petani dan pecinta tanaman untuk
 
 ## Demo
 
-[Webiste Demo attendance](https://plantopia-eta.vercel.app/)
+[Webiste Demo Plantopia](https://plantopia-eta.vercel.app/)
 
 
 ## Feedback
