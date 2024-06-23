@@ -96,12 +96,12 @@ export default function Component_Steps({ dataPlantNew }) {
           <figcaption className="w-full">
             <div className="">
               <h4 className="text-sm font-nunito-bold pb-1">Title</h4>
-              <div className="w-full border border-gray-950 rounded-lg py-[14px] px-3">
+              <div className="w-full border border-neutral-300 rounded-lg py-[14px] px-3">
                 <p className="font-nunito-bold text-sm">
                   {dataPlantNew.step_title}
                 </p>
               </div>
-              <div className="w-full mt-2 border border-gray-950 rounded-lg py-[14px] px-3">
+              <div className="w-full mt-2 border border-neutral-300 rounded-lg py-[14px] px-3">
                 <div
                   className="prose"
                   dangerouslySetInnerHTML={{
